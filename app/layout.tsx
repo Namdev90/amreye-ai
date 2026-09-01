@@ -1,0 +1,35 @@
+import type { Metadata } from "next";
+import "./globals.css";
+
+export const metadata: Metadata = {
+  title: "AMR-Eye.AI — AI-Powered AST & Bio-Automation",
+  description: "Interactive prototype demo for AI-assisted antimicrobial susceptibility testing and modular laboratory automation.",
+  applicationName: "AMR-Eye.AI",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "AMR-Eye",
+    statusBarStyle: "black-translucent",
+  },
+  icons: {
+    icon: "/amr-eye-icon.png",
+    shortcut: "/amr-eye-icon.png",
+    apple: "/amr-eye-icon.png",
+  },
+};
+
+export default function RootLayout({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) {
+  return (
+    <html lang="en" className="dark">
+      <head>
+        <meta name="theme-color" content="#031018" />
+        <meta name="mobile-web-app-capable" content="yes" />
+      </head>
+      <body className="antialiased">{children}</body>
+    </html>
+  );
+}
