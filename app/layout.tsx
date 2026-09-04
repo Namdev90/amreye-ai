@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "AMR-Eye.AI — AI-Powered AST & Bio-Automation",
-  description: "Interactive prototype demo for AI-assisted antimicrobial susceptibility testing and modular laboratory automation.",
+  title: "AMR-Eye.AI — APEX XR Explorer & AST Demonstration",
+  description: "Explore 22 proposed subsystems, 20 use cases and a synthetic AST workflow, based on the September 2026 APEX XR dossier.",
   applicationName: "AMR-Eye.AI",
   manifest: "/manifest.webmanifest",
   appleWebApp: {
