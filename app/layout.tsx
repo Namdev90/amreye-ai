@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./fluid.css";
 import "./mobile.css";
+import "./workspace.css";
 
 export const metadata: Metadata = {
   title: "AMR-Eye.AI — APEX XR Explorer & AST Demonstration",
@@ -28,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="theme-color" content="#031018" />
+        <meta name="theme-color" content="#11121a" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="antialiased">{children}</body>

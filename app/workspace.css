@@ -1,0 +1,84 @@
+/* AMR-Eye workspace: editorial overview, focused laboratory tools. */
+:root { --background:#11121a; --foreground:#f4f3ee; --card:#1c1e2a; --card-foreground:#f4f3ee; --popover:#202230; --popover-foreground:#f4f3ee; --primary:#d3f66a; --primary-foreground:#171d0d; --secondary:#292c3c; --secondary-foreground:#eeedf4; --muted:#252837; --muted-foreground:#b7b9ca; --accent:#343b51; --accent-foreground:#f4f3ee; --border:#3c4054; --input:#494e64; --ring:#d3f66a; }
+html,body { background:#11121a; scroll-behavior:auto!important; }
+body { color:#f4f3ee; font-family:Inter,Arial,Helvetica,sans-serif; }
+body:before,.reading-progress { display:none; }
+main[data-workspace] { padding-left:224px; min-height:100dvh; padding-top:76px; }
+main[data-workspace]>section { display:none; }
+main[data-workspace=home]>.hero,main[data-workspace=home]>.launchpad,main[data-workspace=home]>.problem-section { display:grid; }
+main[data-workspace=demo]>.demo-section,main[data-workspace=hardware]>.hardware-section,main[data-workspace=console]>.console-section { display:block; }
+main[data-workspace=library]>.section:not(.problem-section):not(.demo-section):not(.hardware-section):not(.console-section) { display:block; }
+main[data-workspace]>footer { background:transparent; border-top:1px solid #323544; padding:26px 44px; display:flex; flex-wrap:wrap; gap:14px; }
+footer>p { font:12px/1.7 Arial,sans-serif!important; max-width:850px; color:#a4a9be!important; }
+.workspace-rail { position:fixed; inset:0 auto 0 0; width:224px; padding:30px 20px; z-index:60; border-right:1px solid #313343; background:#151620; display:flex; flex-direction:column; }
+.rail-brand { display:flex; align-items:center; gap:10px; font-size:22px; font-weight:700; letter-spacing:-.6px; }
+.rail-brand img { width:37px; height:37px; border-radius:11px; }
+.rail-brand>span>span { display:block; font-size:11px; font-weight:400; letter-spacing:0; color:#9d9fb2; margin-top:5px; }
+.rail-label { font-size:11px; letter-spacing:.17em; color:#9297ab; margin:55px 13px 16px; }
+.workspace-rail nav { display:grid; gap:8px; }
+.workspace-rail nav a { min-height:50px; padding:12px; border-radius:12px; display:flex; align-items:center; gap:13px; color:#b8bacc; font-size:14px; }
+.rail-number { color:#6f738b; font:11px monospace; }
+.workspace-rail nav a>svg { margin-left:auto; }
+.workspace-rail nav a[aria-current=page] { background:#d3f66a; color:#1e2711; font-weight:700; }
+.workspace-rail nav a[aria-current=page] .rail-number { color:#566c27; }
+.rail-foot { margin-top:auto; border:1px solid #3a3e4d; border-radius:14px; padding:15px; font-size:12px; }
+.rail-foot .live-dot { margin-right:7px; background:#d3f66a; box-shadow:none; }
+.rail-foot p { color:#a4a9bf; line-height:1.7; margin:12px 0; }
+.rail-foot a { display:flex; align-items:center; justify-content:space-between; color:#d3f66a; }
+.site-header { left:224px; height:76px; background:#11121aee; border-color:#303342; padding:0 44px; backdrop-filter:blur(14px); }
+.site-header .brand img { display:none; }.site-header .brand span { letter-spacing:.12em; font-size:12px; color:#9da3ba; }.site-header .brand i{color:#d3f66a;}
+.site-header>nav { display:none!important; }.header-actions { margin-left:auto; }
+.header-actions .console-button { background:#d3f66a!important; color:#202719!important; }
+.header-actions .pitch-button { background:#262938; border-color:#454b61; font-size:12px; text-transform:none; letter-spacing:0; min-height:40px; }
+.mobile-menu { display:inline-flex!important; }.mobile-sheet { background:#191c2a!important; }
+.hero { margin:28px 32px 0; padding:48px; min-height:560px; grid-template-columns:1.1fr 1fr; gap:18px; background:radial-gradient(ellipse at 85% 25%,#40446777,transparent 60%),#1c1e2b; border:1px solid #34374c; border-radius:24px; overflow:hidden; }
+.hero:before,.hero:after { display:none; }.hero-brand { font:12px/1.6 monospace; letter-spacing:.15em; color:#babcd0; margin:28px 0 18px; }
+.hero h1 { font-size:clamp(46px,5.7vw,86px); letter-spacing:-.065em; line-height:1.02; max-width:700px; font-weight:600; }
+.hero h1 span { color:#d3f66a; background:none; -webkit-text-fill-color:currentColor; text-shadow:none; animation:none; }
+.hero-copy>p { font-size:17px; line-height:1.7; color:#b4b8cc; max-width:500px; margin:25px 0; }
+.status-line { font-size:10px; line-height:1.6; border:0; padding:0; color:#bbbecf; background:transparent; letter-spacing:.08em; }
+.status-line .live-dot { background:#d3f66a; box-shadow:none; }
+.hero-visual { min-height:360px; transform:none!important; }
+.hardware-hero { border:0!important; background:transparent!important; box-shadow:none!important; }
+.hardware-hero img { border-radius:18px; }
+.hero .hero-disclaimer { font-size:12px; color:#9ca4b9; margin:17px 0 0; }
+.primary-action,.secondary-action { text-transform:none; font-size:14px; letter-spacing:0; font-weight:600; min-height:50px; border-radius:12px; padding:0 19px; }
+.primary-action { background:#d3f66a; color:#1c2412; box-shadow:none; }
+.secondary-action { background:#2c3042; border:1px solid #4a5067; color:#e8e9f0; }
+.launchpad { padding:24px 32px 38px; grid-template-columns:1fr 1fr 1fr; gap:16px; }
+.launch-card { border:1px solid #383b4e; background:#202330; border-radius:20px; padding:26px; display:flex; flex-direction:column; gap:18px; transition:transform .2s,border-color .2s; }
+.launch-card:hover { transform:translateY(-4px); border-color:#d3f66a; }.launch-analysis { background:#cfdcf3; color:#18233a; }
+.launch-card>div { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }.launch-card>div>span { font:11px monospace; letter-spacing:.1em; }.launch-card>div>svg:last-child { margin-left:auto; }
+.launch-card h2,.launch-card h3 { font-size:29px; font-weight:500; line-height:1.1; letter-spacing:-.04em; margin:0; }.launch-card h3{width:100%;margin-top:18px;}
+.launch-card p { font-size:14px; line-height:1.6; color:#b4b9cf; margin:0; }.launch-analysis p{color:#4f607e;}.launch-link{display:flex;align-items:center;gap:8px;font-size:13px;margin-top:auto;}.launch-link svg{width:15px;}
+.section { padding:48px 44px; background:#11121a!important; border-color:#303344; scroll-margin-top:76px!important; }
+.section-heading,.apex-heading { margin-bottom:30px; }.section-heading h2,.hardware-intro h2,.apex-heading h2 { font-size:clamp(34px,3.8vw,56px); line-height:1.08; font-weight:500; letter-spacing:-.045em; }
+.section-heading>p,.hardware-intro p,.apex-heading p { color:#aeb5cd; font-size:16px; line-height:1.7; }
+.section-kicker>span,.hardware-intro em,.apex-heading em { color:#d3f66a; }.section-kicker>span{font:12px/1.6 monospace;letter-spacing:.08em;}
+.glass-card,.console-card,.topic-card,.plate-record,.plate-timeline,.compare-card,.hardware-details,.network-metrics { background:#202331!important; border:1px solid #3b4056!important; border-radius:18px; box-shadow:none!important; backdrop-filter:none!important; }
+.card-head,.panel-label { color:#c4cadd; font-size:13px; letter-spacing:.04em; }.glass-card p,.console-card small { color:#b8bfd4; }
+.problem-section { grid-template-columns:1fr; }.problem-list div { background:#1e2130; border-color:#393e54; border-radius:12px; }.problem-list p{font-size:15px;}.problem-list span{color:#d3f66a;}
+.analysis-shell,.console-shell { border:1px solid #424960; border-radius:22px; overflow:hidden; background:#191d2b; }
+.analysis-toolbar,.console-topbar { background:#262c40; color:#c8cfe2; font-size:12px; border-color:#414a62; }.plate-panel { background:radial-gradient(circle,#263c48,#171d2c 72%); }.results-panel { background:#1d2332; }
+.results-table th,.results-table td { font-size:14px; }.results-table td small{font-size:12px;}.analysis-progress{background:#232c3e;}.review-card{background:#273247;border-color:#546079;}
+.console-grid { background:#11121a; gap:16px; padding:18px; }.console-card { min-height:220px; }.console-card strong { color:#f0f2fa; }.console-card [data-slot=slider-range]{background:#d3f66a;}.toggle-strip button.active{background:#d3f66a;color:#172313;}
+.hardware-stage { border:1px solid #444d64; border-radius:22px; background:#1c2232; }.hardware-stage-top,.hardware-stage-bottom{background:#242b3d;}.hardware-part-list button{background:#202738;border-color:#404a63;border-radius:12px;color:#c8cde0;}.hardware-part-list button.active{background:#d3f66a;color:#1c2812;border-color:#d3f66a;}.hardware-part-list button.active .part-index{color:#486429;}.hardware-details h3{color:#eef0fa;}.hardware-details p{color:#b9c0d7;}.hardware-details a{color:#d3f66a;}.three-controls{background:#202b3c;}
+.apex-shortcuts button,.explorer-search,.status-filter select,.source-grid a { background:#232a3d; border-color:#49526b; }.apex-shortcuts b{color:#d3f66a;}.explorer-tabs button[aria-pressed=true]{background:#d3f66a;color:#18250f;border-color:#d3f66a;}.topic-card h3{color:#f0f2fa;}.topic-card p{color:#b6bed3;}.topic-card>span{color:#d3f66a;}.apex-dialog,.tech-dialog,.architecture-dialog { background:#202638!important; border-color:#505b77!important; backdrop-filter:none; }
+.standard-fields b,.standard-fields small,.record-fields b,.record-fields small,.workflow-status b,.workflow-status small { font-size:14px; line-height:1.6; }.standard-fields>div{background:#293246;}.flow-unit span{font-size:12px;}.scope-tag{font-size:11px!important;line-height:1.4!important;}
+.mobile-dock>a { display:none; }.mobile-dock>.motion-toggle { position:fixed; bottom:18px; right:18px; background:#282e42; border-color:#525e7b; z-index:45; }
+[data-revealed=true],.topic-card { animation:none!important; }.part-detail-content{animation:none;}
+@media(max-width:1100px) and (min-width:851px) { .workspace-rail{width:180px;padding:24px 12px;} main[data-workspace]{padding-left:180px;}.site-header{left:180px;}.hero{grid-template-columns:1fr;padding:34px;}.hero-visual{min-height:250px;}.launchpad{grid-template-columns:1fr 1fr;}.launch-card:last-child{grid-column:1/-1;}.rail-brand{font-size:18px;} }
+@media(max-width:850px) {
+  .workspace-rail{display:none;} main[data-workspace]{padding-left:0;padding-top:64px;} body{padding-bottom:90px;}.site-header{left:0;height:64px;padding:0 18px;background:#151720f5;}.site-header .brand img{display:block;width:28px;height:28px;}.site-header .brand span{font-size:12px;}.header-actions .console-button{display:none!important;}.header-actions .pitch-button{min-height:38px;font-size:12px;}
+  .hero{margin:14px 14px 0;padding:25px 22px 12px;grid-template-columns:1fr;gap:8px;min-height:0;border-radius:22px;}.hero-brand{margin:21px 0 12px;font-size:11px;}.hero h1{font-size:clamp(42px,12.5vw,66px);line-height:1.02;}.hero-copy>p{font-size:16px;margin:18px 0;line-height:1.6;}.hero-actions{display:grid;grid-template-columns:1fr;gap:9px;}.hero-actions>*{min-height:48px;}.hero .hero-disclaimer{font-size:12px;margin:14px 0;}.hero-visual{min-height:0;max-height:300px;overflow:hidden;}.hardware-hero{max-width:100%;}.hero-visual img{max-height:210px;object-fit:contain;}.hardware-hero>p{font-size:11px;}.status-line{font-size:10px!important;}
+  .launchpad{padding:16px 14px 28px;grid-template-columns:1fr;gap:12px;}.launch-card{padding:23px;gap:15px;}.launch-card h2,.launch-card h3{font-size:30px;}.launch-card p{font-size:15px;}.launch-link{font-size:14px;}
+  .section{padding:30px 18px;scroll-margin-top:74px!important;}.section-heading h2,.hardware-intro h2,.apex-heading h2{font-size:35px;}.section-kicker>span{font-size:11px;}.section-heading>p{font-size:16px;}.hardware-intro{gap:12px;}.section-heading{margin-bottom:25px;}
+  .mobile-dock{position:fixed;left:10px;right:10px;bottom:max(9px,env(safe-area-inset-bottom));padding:5px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));background:#202535f5;border:1px solid #515a71;border-radius:20px;backdrop-filter:blur(12px);}.mobile-dock>a{display:flex;min-height:56px;font-size:11px;gap:6px;color:#b7c0d8;padding:6px 0;}.mobile-dock>.motion-toggle{position:fixed;right:16px;bottom:84px;min-height:32px;border:1px solid #515a71;border-radius:20px;padding:7px 10px;font-size:11px;display:flex;flex-direction:row;gap:6px;background:#252c3eea;}.mobile-dock>.motion-toggle svg{width:13px;height:13px;}
+  main[data-workspace=home] .mobile-dock>a[href="#home"],main[data-workspace=demo] .mobile-dock>a[href="#demo"],main[data-workspace=hardware] .mobile-dock>a[href="#hardware"],main[data-workspace=library] .mobile-dock>a[href="#apex"],main[data-workspace=console] .mobile-dock>a[href="#console"] { background:#d3f66a;color:#253417;border-radius:14px; }
+  .console-grid{padding:12px;gap:12px;}.console-card{padding:22px;min-height:0;}.console-card strong{font-size:29px;}.scope-tag{font-size:10px!important;}.hardware-stage-top{padding:16px 10px;}.hardware-stage-top [data-slot=tabs-trigger]{font-size:12px;}.hardware-stage-bottom{font-size:11px;}.results-table td{font-size:13px;}.results-table th{font-size:11px;}.stage-list span{font-size:14px;}
+  main[data-workspace]>footer{padding:24px 20px;}.problem-list{grid-template-columns:1fr;}.problem-section{padding-top:12px;}.hero-disclaimer{max-width:100%;}.three-motion-hint{font-size:12px!important;}
+}
+@media(prefers-reduced-motion:reduce){.launch-card{transition:none;}}
+.mobile-dock>.motion-toggle { left:auto; width:auto; }
+@media(min-width:851px) { .mobile-dock { display:contents; } }
+.hero { scroll-margin-top:104px; }

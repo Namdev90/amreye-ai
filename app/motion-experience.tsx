@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Box, Microscope, Pause, Play, SlidersHorizontal } from "lucide-react";
+import { Box, Microscope, Pause, Play, SlidersHorizontal, Home, BookOpen } from "lucide-react";
 
 export default function MotionExperience() {
   const [paused, setPaused] = useState(true);
@@ -105,9 +105,11 @@ export default function MotionExperience() {
   return <>
     <div className="reading-progress" aria-hidden="true" />
     <nav className="mobile-dock" aria-label="Quick access">
-      <a href="#demo"><Microscope size={19} /><span>AST demo</span></a>
+      <a href="#home"><Home size={19}/><span>Home</span></a>
+      <a href="#demo"><Microscope size={19} /><span>Analyze</span></a>
       <a href="#hardware"><Box size={19} /><span>Hardware</span></a>
-      <a href="#console"><SlidersHorizontal size={19} /><span>Lab console</span></a>
+      <a href="#apex"><BookOpen size={19}/><span>Library</span></a>
+      <a href="#console"><SlidersHorizontal size={19} /><span>Console</span></a>
     <button className="motion-toggle" type="button" onClick={() => setPaused(value => {
       const next = !value;
       try { sessionStorage.setItem("amr-motion", next ? "off" : "on"); } catch { /* Preference persistence is optional. */ }

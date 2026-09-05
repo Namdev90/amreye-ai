@@ -115,11 +115,41 @@ export default function Home() {
   const [installHelp,setInstallHelp] = useState(false);
   const install = async () => { if(!installPrompt){setInstallHelp(true);return;} const p = installPrompt as Event & { prompt?: () => Promise<void> }; if (p?.prompt) await p.prompt(); };
   const illuminationCopy = useMemo(() => ({ Trans: "Zone boundaries, silhouettes and quantitative measurement", Epi: "Surface appearance, pigmentation and visible morphology", Oblique: "Surface texture, colony edges and shadow-enhanced morphology", NIR: "Experimental 940 nm channel for difficult optical conditions" }[illumination]), [illumination]);
-  return <main className={pitchMode ? "pitch-active" : ""}>
+  const [workspace, setWorkspace] = useState("home");
+  useEffect(() => {
+    const sync = () => {
+      const hash = location.hash.slice(1);
+      const view = hash === "demo" ? "demo" : hash === "hardware" ? "hardware" : hash === "console" ? "console" : !hash || hash === "home" ? "home" : "library";
+      setWorkspace(view);
+      requestAnimationFrame(() => {
+        const target = document.getElementById(hash || "home");
+        if (!hash || hash === "home") window.scrollTo({top:0,behavior:"instant"});
+        else if (target) (hash === "console" ? target.closest("section") || target : target).scrollIntoView({behavior:"instant", block:"start"});
+        else window.scrollTo({top:0,behavior:"instant"});
+      });
+    };
+    sync(); window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+  return <main data-workspace={workspace} className={pitchMode ? "pitch-active" : ""}>
     <MotionExperience />
+    <aside className="workspace-rail" aria-label="Workspace navigation">
+      <a className="rail-brand" href="#home"><img src="/amr-eye-icon.png" alt=""/><span>AMR-Eye<span>Laboratory intelligence</span></span></a>
+      <span className="rail-label">WORKSPACE</span>
+      <nav>{[["home","Overview"],["demo","Analyze"],["hardware","Hardware"],["apex","Library"],["console","Console"]].map(([id,label],index)=><a key={id} href={`#${id}`} aria-current={workspace === (id === "apex" ? "library" : id) ? "page" : undefined}><span className="rail-number">0{index+1}</span><span>{label}</span><ChevronRight size={15}/></a>)}</nav>
+      <div className="rail-foot"><span className="live-dot"/><b>Research workspace</b><p>Synthetic demonstrations.<br/>Human review stays central.</p><a href="#about">About the project <ChevronRight size={14}/></a></div>
+    </aside>
     <header className="site-header"><a href="#home" className="brand"><img src="/amr-eye-icon.png" alt="AMR-Eye app icon" /><span><b>AMR-EYE</b><i>.AI</i></span></a><nav aria-label="Primary navigation">{navItems.map(([label, id]) => <a href={`#${id}`} key={id}>{label}</a>)}</nav><div className="header-actions"><button className="pitch-button" onClick={() => setPitchMode(true)}><Sparkles /> Pitch Mode</button><a className="console-button" href="#console">Launch Lab Console</a><Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger className="mobile-menu" aria-label="Open navigation"><Menu /></SheetTrigger><SheetContent className="mobile-sheet"><SheetHeader><SheetTitle>AMR-EYE.AI</SheetTitle></SheetHeader><nav>{navItems.map(([label,id]) => <a href={`#${id}`} key={id} onClick={()=>setMenuOpen(false)}>{label}<ChevronRight /></a>)}</nav></SheetContent></Sheet></div></header>
 
-    <section className="hero" id="home"><div className="hero-grid-bg" /><div className="hero-copy"><div className="status-line"><span className="live-dot" /> RESEARCH / PROTOTYPE DEMONSTRATION — NOT FOR CLINICAL USE</div><div className="hero-brand"><img src="/amr-eye-icon.png" alt="AMR-Eye Petri Eye logo" /><span>AMR-EYE.AI</span></div><h1>From Petri Dish to <span>Digital Intelligence.</span></h1><p>AI-assisted antimicrobial susceptibility testing and modular bio-automation for the laboratories of the future.</p><div className="hero-actions"><button className="primary-action" onClick={() => document.querySelector("#demo")?.scrollIntoView({ behavior: matchMedia("(max-width:850px)").matches || document.documentElement.dataset.motion === "off" || matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" })}><Play /> Launch Live Demo</button><a className="secondary-action" href="#technology">Explore Technology <ChevronRight /></a></div><div className="hero-proof"><span><b>AST-FIRST</b>Focused MVP</span><span><b>EDGE-CAPABLE</b>Offline pathway</span><span><b>HUMAN-IN-LOOP</b>Final control</span></div></div><div className="hero-visual"><HardwareHero /></div><div className="hero-flow"><Flow items={["Culture Plate", "Vision", "AI", "Standards", "Verified Result"]} /><p>AMR-Eye starts with AST. The architecture is designed to evolve into an AI-native laboratory operating system.</p></div></section>
+    <section className="hero" id="home">
+      <div className="hero-copy"><div className="status-line"><span className="live-dot"/> RESEARCH WORKSPACE · PROTOTYPE</div><div className="hero-brand">AMR-EYE / APEX XR</div><h1>Small plates.<br/><span>Deeper insight.</span></h1><p>A new perspective on microbiology. Explore AI-assisted plate analysis, modular hardware and the laboratory of tomorrow.</p><div className="hero-actions"><a className="primary-action" href="#demo"><Play/> Start an analysis</a><a className="secondary-action" href="#hardware">Meet the hardware <ChevronRight/></a></div><p className="hero-disclaimer">Synthetic demonstrations · Not for clinical use</p></div>
+      <div className="hero-visual"><HardwareHero/></div>
+    </section>
+    <section className="launchpad" aria-label="Explore the workspace">
+      <a href="#demo" className="launch-card launch-analysis"><div><Microscope/><span>01 / ANALYZE</span><ChevronRight/></div><h2>From image<br/>to measurement.</h2><p>Run a synthetic AST workflow and review each result.</p><span className="launch-link">Open analysis <ChevronRight/></span></a>
+      <a href="#hardware" className="launch-card"><div><Box/><span>02 / HARDWARE</span><ChevronRight/></div><h2>Every layer.<br/>Connected.</h2><p>Rotate, separate and explore six hardware components.</p><span className="launch-link">Explore in 3D <ChevronRight/></span></a>
+      <a href="#apex" className="launch-card"><div><Database/><span>03 / KNOWLEDGE</span><h3>83 topics.<br/>One clear picture.</h3></div><p>Open the architecture, use cases and evidence boundaries.</p><span className="launch-link">Browse the library <ChevronRight/></span></a>
+    </section>
 
     <section className="section problem-section"><SectionTitle eyebrow="01 · THE PROBLEM" title="A proven method. A fragmented workflow." copy="Kirby–Bauer AST remains scientifically useful. The opportunity is to make its measurement, traceability and review more consistent." /><div className="problem-grid"><div className="problem-list">{["Manual zone measurement", "Observer variability", "Fragmented equipment", "Delayed interpretation", "Manual documentation", "Limited continuous monitoring", "Disconnected lab systems"].map((x, i) => <div key={x}><span>0{i + 1}</span><p>{x}</p></div>)}</div><div className="compare-card"><div><small>TRADITIONAL WORKFLOW</small><Flow compact items={["Plate", "Manual ruler", "Lookup", "Paper report"]} /></div><div className="digital-flow"><small>AMR-EYE DIGITAL WORKFLOW</small><Flow compact items={["Calibrated image", "AI measure", "Rules engine", "Human verify", "Digital report"]} /></div><p><ShieldCheck /> Designed to assist validated microbiology—not bypass it.</p></div></div></section>
     <section className="section demo-section" id="demo"><SectionTitle eyebrow="02 · LIVE PRODUCT DEMO" title="See the plate become structured data." copy="A deterministic synthetic analysis built for a reliable live pitch." scope="Prototype demo" /><AnalysisDemo /></section>

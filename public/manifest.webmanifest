@@ -4,8 +4,8 @@
   "description": "AI-assisted antimicrobial susceptibility testing and modular bio-automation prototype.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#031018",
-  "theme_color": "#031018",
+  "background_color": "#11121a",
+  "theme_color": "#11121a",
   "orientation": "any",
   "icons": [
     {
