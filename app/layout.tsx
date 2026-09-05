@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./fluid.css";
+import "./mobile.css";
 
 export const metadata: Metadata = {
   title: "AMR-Eye.AI — APEX XR Explorer & AST Demonstration",

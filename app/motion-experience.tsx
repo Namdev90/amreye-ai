@@ -1,13 +1,17 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Pause, Play } from "lucide-react";
+import { Box, Microscope, Pause, Play, SlidersHorizontal } from "lucide-react";
 
 export default function MotionExperience() {
   const [paused, setPaused] = useState(true);
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const sync = () => setPaused(preference.matches);
+    const sync = () => {
+      let saved: string | null = null;
+      try { saved = sessionStorage.getItem("amr-motion"); } catch { /* Storage is optional. */ }
+      setPaused(preference.matches || saved === "off");
+    };
     sync();
     preference.addEventListener("change", sync);
     return () => preference.removeEventListener("change", sync);
@@ -16,10 +20,15 @@ export default function MotionExperience() {
   useEffect(() => {
     const root = document.documentElement;
     root.dataset.motion = paused ? "off" : "on";
-    if (paused) return;
+    const syncVisibility = () => { root.dataset.pageHidden = String(document.hidden); };
+    syncVisibility();
+    document.addEventListener("visibilitychange", syncVisibility);
+    if (paused) return () => document.removeEventListener("visibilitychange", syncVisibility);
     let frame = 0;
     let pointerFrame = 0;
     let current: HTMLElement | null = null;
+    let total = Math.max(1, root.scrollHeight - innerHeight);
+    const fine = matchMedia("(hover: hover) and (pointer: fine)");
     const reset = () => {
       if (!current) return;
       current.style.removeProperty("--tilt-x");
@@ -31,13 +40,12 @@ export default function MotionExperience() {
     const updateScroll = () => {
       cancelAnimationFrame(frame);
       frame = requestAnimationFrame(() => {
-        const total = Math.max(1, root.scrollHeight - innerHeight);
         root.style.setProperty("--page-progress", String(Math.min(1, scrollY / total)));
-        root.style.setProperty("--hero-drift", `${Math.min(scrollY * .13, 90)}px`);
+        if (fine.matches) root.style.setProperty("--hero-drift", `${Math.min(scrollY * .08, 45)}px`);
       });
     };
     const pointer = (event: PointerEvent) => {
-      if (event.pointerType !== "mouse") return;
+      if (!fine.matches || event.pointerType !== "mouse" || !(event.target instanceof Element)) return;
       const surface = (event.target as Element).closest<HTMLElement>("[data-tilt], .glass-card, .topic-card, .console-card");
       cancelAnimationFrame(pointerFrame);
       pointerFrame = requestAnimationFrame(() => {
@@ -71,6 +79,8 @@ export default function MotionExperience() {
       entries.forEach(entry => (entry.target as HTMLElement).dataset.inViewport = String(entry.isIntersecting));
     });
     document.querySelectorAll("main > section").forEach(element => visibility.observe(element));
+    const sizing = new ResizeObserver(() => { total = Math.max(1, root.scrollHeight - innerHeight); updateScroll(); });
+    sizing.observe(document.body);
     updateScroll();
     addEventListener("scroll", updateScroll, { passive: true });
     addEventListener("resize", updateScroll, { passive: true });
@@ -83,8 +93,10 @@ export default function MotionExperience() {
       removeEventListener("resize", updateScroll);
       document.removeEventListener("pointermove", pointer);
       document.removeEventListener("pointerleave", reset);
+      document.removeEventListener("visibilitychange", syncVisibility);
       reveal.disconnect();
       visibility.disconnect();
+      sizing.disconnect();
       reset();
       root.style.removeProperty("--hero-drift");
     };
@@ -92,8 +104,17 @@ export default function MotionExperience() {
 
   return <>
     <div className="reading-progress" aria-hidden="true" />
-    <button className="motion-toggle" type="button" onClick={() => setPaused(value => !value)} aria-pressed={!paused} aria-label={paused ? "Enable decorative motion" : "Pause decorative motion"}>
+    <nav className="mobile-dock" aria-label="Quick access">
+      <a href="#demo"><Microscope size={19} /><span>AST demo</span></a>
+      <a href="#hardware"><Box size={19} /><span>Hardware</span></a>
+      <a href="#console"><SlidersHorizontal size={19} /><span>Lab console</span></a>
+    <button className="motion-toggle" type="button" onClick={() => setPaused(value => {
+      const next = !value;
+      try { sessionStorage.setItem("amr-motion", next ? "off" : "on"); } catch { /* Preference persistence is optional. */ }
+      return next;
+    })} aria-pressed={!paused} aria-label={paused ? "Enable decorative motion" : "Pause decorative motion"}>
       {paused ? <Play size={14} /> : <Pause size={14} />}<span>{paused ? "Motion off" : "Motion on"}</span>
     </button>
+    </nav>
   </>;
 }

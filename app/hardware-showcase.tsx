@@ -4,6 +4,7 @@ import { useState } from "react";
 import type { CSSProperties } from "react";
 import { ArrowUpRight, Box, Camera, Cpu, Layers3, Lightbulb, Move, ShieldCheck, Thermometer } from "lucide-react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import Hardware3D from "./hardware-3d";
 
 const parts = [
   { name: "Camera & precision optics", short: "Optics", icon: Camera, purpose: "Capture the plate with controlled geometry.", description: "The proposed metrology path pairs an industrial camera with whole-plate telecentric optics. The final camera–lens combination needs calibration and measurement validation.", topic: "topic-20", category: "OPTICAL ACQUISITION", exploded: [50, 19], assembled: [51, 37] },
@@ -32,8 +33,8 @@ export default function HardwareShowcase() {
     <div className="hardware-intro"><div><div className="section-kicker"><span>APEX XR · INSIDE THE INSTRUMENT</span><span className="scope-tag scope-proposed">Proposed product</span></div><h2>Intelligence has<br /><em>a physical side.</em></h2></div><p>Explore the hardware layers behind the proposed platform. Select a component to see its role in the system.</p></div>
     <div className="hardware-layout">
       <Tabs value={view} onValueChange={setView} className="hardware-stage">
-        <div className="hardware-stage-top"><span><Layers3 size={17} /> APEX XR / CONCEPT STUDY</span><TabsList aria-label="Hardware view"><TabsTrigger value="assembled"><Box /> Assembled</TabsTrigger><TabsTrigger value="exploded"><Layers3 /> Exploded</TabsTrigger></TabsList></div>
-        <div className="hardware-model" data-tilt>
+        <div className="hardware-stage-top"><span><Layers3 size={17} /> APEX XR / CONCEPT STUDY</span><TabsList aria-label="Hardware view"><TabsTrigger value="assembled"><Box /> Assembled</TabsTrigger><TabsTrigger value="exploded"><Layers3 /> Exploded</TabsTrigger><TabsTrigger value="three"><Box /> Interactive 3D</TabsTrigger></TabsList></div>
+        <div className="hardware-model" data-view={view}>
           {(["assembled", "exploded"] as const).map(mode => <TabsContent forceMount value={mode} key={mode} aria-hidden={view !== mode} className={`hardware-view hardware-view-${mode}`}>
             <img src={mode === "assembled" ? "/hardware/apex-concept.webp" : "/hardware/apex-exploded.webp"} width={mode === "assembled" ? 1536 : 1254} height={mode === "assembled" ? 1024 : 1254} loading="lazy" alt={mode === "assembled" ? "Assembled conceptual plate-imaging instrument" : "Exploded concept assembly with camera, illumination ring, plate carrier, thermal stage and electronics"} />
             <div className="hardware-hotspots">
@@ -41,8 +42,9 @@ export default function HardwareShowcase() {
               <div className="hardware-focus" aria-hidden="true" style={{ "--focus-x": `${part[mode][0]}%`, "--focus-y": `${part[mode][1]}%` } as CSSProperties} />
             </div>
           </TabsContent>)}
+          <TabsContent value="three" className="hardware-view hardware-view-three">{view === "three" && <Hardware3D active={active} onSelect={setActive} />}</TabsContent>
         </div>
-        <div className="hardware-stage-bottom"><span><i className="live-dot" /> {view === "exploded" ? "EXPLODED ASSEMBLY" : "ENCLOSURE VIEW"}</span><span>SELECT A NUMBERED PART</span></div>
+        <div className="hardware-stage-bottom"><span><i className="live-dot" /> {view === "three" ? "INTERACTIVE SCHEMATIC" : view === "exploded" ? "EXPLODED ASSEMBLY" : "ENCLOSURE VIEW"}</span><span>{view === "three" ? "SIX SELECTABLE COMPONENTS" : "SELECT A NUMBERED PART"}</span></div>
       </Tabs>
       <div className="hardware-side">
         <div className="hardware-part-list" aria-label="Instrument components">{parts.map((item, index) => {
