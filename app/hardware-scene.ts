@@ -15,13 +15,15 @@ export function createHardwareScene(canvas: HTMLCanvasElement, select: (part: nu
   const renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: "low-power" });
   renderer.setClearColor(0x04131d, 0);
   renderer.outputColorSpace = THREE.SRGBColorSpace;
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.1;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(38, 1, .1, 80);
-  scene.add(new THREE.HemisphereLight(0xcafaff, 0x183d4c, 3.2));
-  const key = new THREE.DirectionalLight(0xffffff, 4.3);
+  scene.add(new THREE.HemisphereLight(0xcafaff, 0x183d4c, 1.7));
+  const key = new THREE.DirectionalLight(0xfff3e5, 3.2);
   key.position.set(3, 7, 5);
   scene.add(key);
-  const rim = new THREE.DirectionalLight(0x4cffe0, 2.6);
+  const rim = new THREE.DirectionalLight(0x4cffe0, 1.4);
   rim.position.set(-5, 3, -4);
   scene.add(rim);
 
@@ -37,7 +39,7 @@ export function createHardwareScene(canvas: HTMLCanvasElement, select: (part: nu
   const physicalHeights = [1.65, .85, .05, -.75, -1.48, -1.48];
   const mesh = (part: number, geometry: THREE.BufferGeometry, color: number, x = 0, y = 0, z = 0, opacity = 1) => {
     geometries.add(geometry);
-    const material = new THREE.MeshStandardMaterial({ color, roughness: .38, metalness: color === 0x132e35 ? .15 : .65, transparent: opacity < 1, opacity, depthWrite: opacity === 1 });
+    const material = new THREE.MeshStandardMaterial({ color, roughness: opacity < 1 ? .12 : .43, metalness: opacity < 1 ? .05 : .45, transparent: opacity < 1, opacity, depthWrite: opacity === 1 });
     materials.add(material);
     partMaterials[part].push(material);
     const object = new THREE.Mesh(geometry, material);
@@ -53,7 +55,7 @@ export function createHardwareScene(canvas: HTMLCanvasElement, select: (part: nu
     object.rotation.x = Math.PI / 2;
     return object;
   };
-  const silver = 0x8dabb9, graphite = 0x263a46, teal = 0x3fe8cb;
+  const silver = 0x71838c, graphite = 0x101b24, teal = 0x3fe8cb;
 
   // Industrial camera body, mounting rail and concentric optical barrel.
   box(0, 1.2, .45, .85, silver, 0, .55);
@@ -94,6 +96,15 @@ export function createHardwareScene(canvas: HTMLCanvasElement, select: (part: nu
   box(5, .75, .1, 1.9, 0x1b6d70, 1.18);
   box(5, .34, .12, .34, graphite, 1.18, .12, -.16);
   for (const z of [-.64, .43, .7]) box(5, .45, .17, .16, silver, 1.18, .13, z);
+
+  // Fast geometric detail: fasteners, cooling fins and board connectors.
+  for (const x of [-1.16, 1.16]) for (const z of [-.86, .86]) {
+    cylinder(2, .045, .03, graphite, x, .09, z);
+    cylinder(3, .055, .04, graphite, x, .27, z);
+  }
+  for (let i = 0; i < 8; i++) box(3, .08, .24, 1.8, silver, -.95 + i * .27, -.40);
+  for (let i = 0; i < 8; i++) box(5, .035, .04, .12, 0xc8aa60, .86 + i * .085, .09, -.86);
+  for (let i = 0; i < 5; i++) box(0, .055, .025, .62, graphite, -.4 + i * .2, .79);
 
   const grid = new THREE.GridHelper(9, 18, 0x215766, 0x12323e);
   grid.position.y = -2;

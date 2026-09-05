@@ -63,7 +63,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         if (event.key === "-" || event.key === "ArrowDown") scene.current?.zoom(1);
         if (event.key === "Home") scene.current?.reset();
       }} tabIndex={ready ? 0 : -1} />
-      {!ready && <div className="three-loading" role="status">{error ? <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly illustration" /><span>3D is unavailable on this device. The assembled and exploded views still work.</span><button type="button" onClick={() => setAttempt(value => value + 1)}>Retry 3D</button></> : <><LoaderCircle size={26} /><span>Opening the 3D assembly…</span></>}</div>}
+      {!ready && <div className="three-loading" role="status">{error ? <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly illustration" /><span>3D is unavailable on this device. The assembled and exploded views still work.</span><button type="button" onClick={() => setAttempt(value => value + 1)}>Retry 3D</button></> : <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly preview while the interactive model loads" /><LoaderCircle size={26} /><span>Opening the 3D assembly…</span></>}</div>}
       {ready && <div className="three-selection"><span>SELECTED PART</span><b>{names[active]}</b></div>}
       <span className="three-schematic-label">SCHEMATIC · NOT PRODUCTION CAD</span>
     </div>
@@ -77,6 +77,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         <button type="button" disabled={!ready} onClick={() => scene.current?.top()} aria-label="Toggle top view" title="Toggle top view"><ArrowUp /></button>
         <button type="button" disabled={!ready} onClick={() => { scene.current?.reset(); setExploded(true); setIsolated(false); setSpinning(false); }} aria-label="Reset 3D view" title="Reset 3D view"><RotateCcw /></button>
       </div>
+      {!motion && <p className="three-motion-hint">Enable Motion in quick access to use auto rotate.</p>}
       <p><Expand size={14} /> Drag sideways to rotate · Tap a part to select · Scroll vertically to continue</p>
     </div>
   </div>;
