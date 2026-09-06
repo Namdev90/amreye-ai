@@ -1,9 +1,17 @@
 "use client";
 import {useState,useEffect,useMemo} from 'react';
-import {Search,ArrowUpRight,ChevronRight,BookOpen,Download,Link as LinkIcon} from 'lucide-react';
+import {Search,ArrowUpRight,ChevronRight,BookOpen,Download,Link as LinkIcon,Trophy,FileText,Boxes,FlaskConical,ShieldCheck} from 'lucide-react';
 import {Dialog,DialogContent,DialogHeader,DialogTitle} from '@/components/ui/dialog';
 import data from './dossier.json';
 const categories=['All','Subsystems','Use cases','Architecture','Validation','Product & costs','Documentation'];
+const wins=[
+ {date:'03 SEP 2026',title:'APEX XR flagship dossier completed',copy:'A detailed engineering and product proposal covering 22 subsystems, 20 use cases, architecture, validation and evidence boundaries.',href:'#apex',action:'Browse 83 topics'},
+ {date:'03 SEP 2026',title:'GSF Round 2 pitch package prepared',copy:'A complete AMR-Eye pitch package was produced around the startup, problem, solution, business model, milestones and support request.',href:'#business',action:'Open business story'},
+ {date:'04 SEP 2026',title:'Interactive knowledge explorer launched',copy:'The full dossier became a searchable, filterable and exportable repository with topic links and a source register.',href:'#apex',action:'Search the library'},
+ {date:'05 SEP 2026',title:'3D hardware concept made interactive',copy:'Six conceptual hardware layers can be rotated, isolated and inspected with touch-aware controls and conservative product labels.',href:'#hardware',action:'Explore hardware'},
+ {date:'05 SEP 2026',title:'Synthetic AST review workflow completed',copy:'The seven-stage demonstration supports per-antibiotic selection, human approval, correction records and an exportable demo report.',href:'#demo',action:'Run analysis'},
+ {date:'06 SEP 2026',title:'Product ecosystem published',copy:'Product tiers, SaaS–BAHU, edge, cloud, connectivity, support, research and public-health concepts were organized into one interactive workspace.',href:'#products',action:'Explore products'},
+];
 export default function ApexExplorer(){
  const [limit,setLimit]=useState(9);
  const [query,setQuery]=useState('');const [category,setCategory]=useState('All');const [status,setStatus]=useState('All');const [topic,setTopic]=useState<string|null>(null);const [notice,setNotice]=useState('');
@@ -15,7 +23,14 @@ export default function ApexExplorer(){
  const sourceText=(s:string)=>s.split(/(\[S\d+(?:-S?\d+)?\])/g).map((part,i)=>/^\[S/.test(part)?<a key={i} href="#sources" onClick={()=>{select(null);const el=document.getElementById("sources") as HTMLDetailsElement;if(el)el.open=true}} className="source-ref">{part}</a>:part);
  const download=()=>{if(!selected)return;const blob=new Blob([`AMR-Eye APEX XR | Dossier 03 September 2026\n${selected.title}\n${selected.status}\n\n${selected.text.join('\n\n')}\n\n${selected.tables.map(t=>t.map(r=>r.join(' | ')).join('\n')).join('\n\n')}\n\nDesign proposal, not evidence of clinical validation.`],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=selected.id+'.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
  return <section className="section apex-section" id="apex">
- <div className="apex-heading"><div><span className="section-kicker">APEX XR · KNOWLEDGE EXPLORER</span><h2>The full platform.<br/><em>Open every layer.</em></h2><p>Explore the 03 September 2026 flagship dossier: the purpose, workflow, outputs and validation boundaries behind each proposed capability.</p></div><div className="apex-summary"><span className="scope-tag scope-proposed">Proposed product</span><p>Current work is at PoC / prototype stage. APEX XR is an engineering proposal. Simulations on this site do not operate laboratory hardware.</p><a href="#demo">Try the synthetic AST workflow <ChevronRight size={18}/></a></div></div>
+ <div className="apex-heading"><div><span className="section-kicker">AMR-EYE · PROJECT REPOSITORY</span><h2>Everything AMR-Eye.<br/><em>One living library.</em></h2><p>Explore the flagship dossier, product architecture, subsystems, use cases, validation boundaries, sources and completed project milestones.</p></div><div className="apex-summary"><span className="scope-tag scope-proposed">Living repository</span><p>Clinical claims remain separate from project progress. A completed document, interface or concept is a project win—not evidence of clinical validation.</p><a href="#project-wins">See project wins <ChevronRight size={18}/></a></div></div>
+ <div className="repository-index" aria-label="Repository contents">
+  <button onClick={()=>{setCategory('All');setQuery('');setStatus('All')}}><FileText/><b>83</b><span>Dossier topics</span><small>Complete APEX XR knowledge base</small></button>
+  <button onClick={()=>{setCategory('Subsystems');setQuery('');setStatus('All')}}><Boxes/><b>22</b><span>Subsystems</span><small>Hardware and platform layers</small></button>
+  <button onClick={()=>{setCategory('Use cases');setQuery('');setStatus('All')}}><FlaskConical/><b>20</b><span>Use cases</span><small>Laboratory and research contexts</small></button>
+  <button onClick={()=>{setCategory('Validation');setQuery('');setStatus('All')}}><ShieldCheck/><b>06</b><span>Validation stages</span><small>Evidence before deployment</small></button>
+ </div>
+ <section className="wins-panel" id="project-wins"><div className="wins-title"><Trophy/><div><small>VERIFIED PROJECT PROGRESS</small><h3>Project wins</h3></div><p>Completed AMR-Eye deliverables recorded by date. No clinical-performance claim is implied.</p></div><div className="wins-grid">{wins.map((win,index)=><a href={win.href} key={win.title}><span>{String(index+1).padStart(2,'0')}</span><small>{win.date}</small><h4>{win.title}</h4><p>{win.copy}</p><b>{win.action}<ArrowUpRight/></b></a>)}</div></section>
  <div className="apex-shortcuts">{[['Subsystems','22','Hardware subsystems'],['Use cases','20','Detailed use cases'],['Architecture','04','Software layers'],['Validation','→','Evidence & safety']].map(([cat,n,label])=><button key={cat} onClick={()=>{setCategory(cat);setQuery('');setStatus('All')}} aria-pressed={category===cat}><b>{n}</b><span>{label}</span><ArrowUpRight/></button>)}</div>
  <div className="explorer-controls"><label className="explorer-search"><Search size={20}/><input type="search" value={query} onChange={e=>setQuery(e.target.value)} placeholder="Search MIC, sensors, hospital workflows…" aria-label="Search APEX documentation"/></label><label className="status-filter">Maturity<select value={status} onChange={e=>setStatus(e.target.value)}><option>All</option><option>Proposed product</option><option>Future R&D</option></select></label></div>
  <div className="explorer-tabs" aria-label="Documentation categories">{categories.map(c=><button key={c} onClick={()=>setCategory(c)} aria-pressed={category===c}>{c}</button>)}</div>
