@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { ArrowUpRight, Bot, BrainCircuit, Building2, Cloud, Database, Globe2, GraduationCap, Layers3, Map, Network, RefreshCw, Server, ShieldCheck, Wrench } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import Product3D from "./product-3d";
 
 type Status = "Prototype demo" | "Proposed product" | "Future R&D";
 type Product = {
@@ -34,13 +35,15 @@ const groups = ["All", "Products", "Platform", "Intelligence", "Services"] as co
 export default function ProductShowcase() {
   const [group, setGroup] = useState<(typeof groups)[number]>("All");
   const [selected, setSelected] = useState<Product | null>(null);
+  const [visual, setVisual] = useState<Product>(products[0]);
   const visible = useMemo(() => group === "All" ? products : products.filter(item => item.group === group), [group]);
-  const activate = (item: Product) => item.href ? (window.location.hash = item.href.slice(1)) : setSelected(item);
+  const activate = (item: Product) => { setVisual(item); setSelected(item); };
   return <section className="section products-section" id="products">
     <div className="products-head"><div><span>02 / PRODUCT ECOSYSTEM</span><h2>One AMR operating layer.<br/><em>Built to scale by evidence.</em></h2></div><p>Explore hardware, software, services and governed intelligence—from a local health centre to a national AMR program.</p></div>
+    <Product3D productId={visual.id} name={visual.name} label={visual.label} />
     <div className="product-filters" role="toolbar" aria-label="Filter AMR-Eye products">{groups.map(item => <button key={item} aria-pressed={group === item} onClick={() => setGroup(item)}>{item}</button>)}</div>
-    <div className="product-grid">{visible.map((item, index) => { const Icon = item.icon; return <button className="product-card" key={item.id} onClick={() => activate(item)} aria-label={`${item.name}: ${item.action}`}><div className="product-card-top"><span>{String(index + 1).padStart(2,"0")}</span><Icon/><ArrowUpRight/></div><small>{item.label}</small><h3>{item.name}</h3><p>{item.summary}</p><div><span className={`product-status status-${item.status.toLowerCase().replaceAll(" ", "-")}`}>{item.status}</span><b>{item.action}</b></div></button>})}</div>
+    <div className="product-grid">{visible.map((item, index) => { const Icon = item.icon; return <button className={`product-card ${visual.id===item.id?"visual-active":""}`} key={item.id} onPointerEnter={()=>setVisual(item)} onFocus={()=>setVisual(item)} onClick={() => {setVisual(item);activate(item)}} aria-label={`${item.name}: ${item.action}`}><div className="product-card-top"><span>{String(index + 1).padStart(2,"0")}</span><Icon/><ArrowUpRight/></div><small>{item.label}</small><h3>{item.name}</h3><p>{item.summary}</p><div><span className={`product-status status-${item.status.toLowerCase().replaceAll(" ", "-")}`}>{item.status}</span><b>{item.action}</b></div></button>})}</div>
     <div className="evidence-boundary"><ShieldCheck/><p><b>Evidence boundary</b> Image AI can measure visible plate features. Strain, protein or genomic insight would require qualified assays or omics data and separate validation; the site does not present image-only inference as established capability.</p></div>
-    <Dialog open={!!selected} onOpenChange={open => !open && setSelected(null)}><DialogContent className="product-dialog"><DialogHeader><DialogTitle>{selected?.name}</DialogTitle></DialogHeader>{selected && <><span className="product-dialog-label">{selected.label} · {selected.group}</span><p>{selected.summary}</p><ul>{selected.points.map(point => <li key={point}>{point}</li>)}</ul><div className="product-dialog-foot"><span className={`product-status status-${selected.status.toLowerCase().replaceAll(" ", "-")}`}>{selected.status}</span><small>Concept scope may change as validation and partnerships develop.</small></div></>}</DialogContent></Dialog>
+    <Dialog open={!!selected} onOpenChange={open => !open && setSelected(null)}><DialogContent className="product-dialog"><DialogHeader><DialogTitle>{selected?.name}</DialogTitle></DialogHeader>{selected && <><span className="product-dialog-label">{selected.label} · {selected.group}</span><p>{selected.summary}</p><ul>{selected.points.map(point => <li key={point}>{point}</li>)}</ul>{selected.href&&<a className="primary-action product-dialog-action" href={selected.href} onClick={()=>setSelected(null)}>{selected.action}<ArrowUpRight/></a>}<div className="product-dialog-foot"><span className={`product-status status-${selected.status.toLowerCase().replaceAll(" ", "-")}`}>{selected.status}</span><small>Concept scope may change as validation and partnerships develop.</small></div></>}</DialogContent></Dialog>
   </section>;
 }
