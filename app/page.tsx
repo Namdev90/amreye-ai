@@ -5,10 +5,11 @@ import MobileSection from "./mobile-section";
 import ApexExplorer from "./apex-explorer";
 import MotionExperience from "./motion-experience";
 import HardwareShowcase, { HardwareHero } from "./hardware-showcase";
+import ProductShowcase from "./product-showcase";
 import type { CSSProperties, ReactNode } from "react";
 import {
-  Activity, BarChart3, Beaker, Bot, Box, BrainCircuit, Check, ChevronRight,
-  CircleGauge, Cloud, Database, FlaskConical, Gauge, HeartPulse, Menu,
+  Activity, ArrowLeft, ArrowRight, BarChart3, Beaker, Bot, Box, BrainCircuit, Check, ChevronRight,
+  CircleGauge, Cloud, Database, FlaskConical, Gauge, HeartPulse, Layers3, Menu,
   Microscope, Play, Radio, ScanLine, Server, ShieldCheck, Sparkles,
   Thermometer, UserCheck, WifiOff, X, Zap,
 } from "lucide-react";
@@ -109,6 +110,32 @@ function LabConsole() {
   </div></div>;
 }
 
+const pitchSlides = [
+  { kicker:"01 / THE SIGNAL", title:"Resistance is local. The response must connect.", copy:"AMR-Eye starts with traceable laboratory measurements, then proposes a governed path from individual plates to regional intelligence.", metric:"LOCAL → NATIONAL", note:"Research and product vision" },
+  { kicker:"02 / THE WEDGE", title:"Turn a plate into structured, reviewable data.", copy:"Calibrated imaging, computer-vision measurement, a versioned standards layer and qualified human review remain distinct steps.", metric:"IMAGE → MEASURE", note:"Synthetic prototype demo" },
+  { kicker:"03 / THE SYSTEM", title:"Hardware, edge AI and cloud services move as one.", copy:"A modular architecture can keep time-sensitive processing local while synchronizing governed records, updates and fleet operations when connected.", metric:"EDGE + CLOUD", note:"Proposed product architecture" },
+  { kicker:"04 / THE PLATFORM", title:"One ecosystem for every laboratory stage.", copy:"AMR-Eye Lite, Core and future Pro pathways connect through SaaS–BAHU, interoperability, maintenance and standards support.", metric:"5 PRODUCT PATHS", note:"Staged roadmap" },
+  { kicker:"05 / THE NETWORK", title:"From a local health centre to an AMR command map.", copy:"Validated, de-identified records could support hotspot, variation and trend views for research and public-health programs under country-specific governance.", metric:"LOCAL → GLOBAL", note:"Future R&D concept" },
+];
+
+function PitchExperience({ onExit, onNavigate }: { onExit: () => void; onNavigate: (hash: string) => void }) {
+  const [slide, setSlide] = useState(0);
+  const current = pitchSlides[slide];
+  useEffect(() => {
+    const key = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight" || event.key === "PageDown") setSlide(value => Math.min(pitchSlides.length - 1, value + 1));
+      if (event.key === "ArrowLeft" || event.key === "PageUp") setSlide(value => Math.max(0, value - 1));
+    };
+    window.addEventListener("keydown", key); return () => window.removeEventListener("keydown", key);
+  }, []);
+  return <div className="pitch-stage">
+    <div className="pitch-top"><a className="brand" href="#home" onClick={onExit}><img src="/amr-eye-icon.png" alt=""/><span><b>AMR-EYE</b><i>.AI</i></span></a><span><i className="live-dot"/> PITCH MODE · {String(slide + 1).padStart(2,"0")}/{String(pitchSlides.length).padStart(2,"0")}</span><button onClick={onExit}><X/> Exit</button></div>
+    <div className="pitch-slide" key={slide}><div className="pitch-copy"><small>{current.kicker}</small><h2>{current.title}</h2><p>{current.copy}</p><div className="pitch-metric"><b>{current.metric}</b><span>{current.note}</span></div></div><div className="pitch-visual" aria-hidden="true"><div className={`pitch-orbit pitch-orbit-${slide}`}><span>AMR</span>{["LAB","EDGE","BAHU","CLOUD","MAP"].map((item,index)=><i key={item} style={{"--i":index} as CSSProperties}>{item}</i>)}</div></div></div>
+    <div className="pitch-bottom"><div className="pitch-dots">{pitchSlides.map((_, index) => <button key={index} aria-label={`Go to slide ${index + 1}`} aria-current={slide === index ? "step" : undefined} onClick={() => setSlide(index)}/>)}</div><div className="pitch-nav"><button aria-label="Previous slide" onClick={() => setSlide(value => Math.max(0, value - 1))} disabled={slide === 0}><ArrowLeft/></button>{slide === pitchSlides.length - 1 ? <button className="pitch-open-products" onClick={() => onNavigate("products")}>Explore products <ArrowRight/></button> : <button className="pitch-next" onClick={() => setSlide(value => value + 1)}>Next <ArrowRight/></button>}</div></div>
+    <p className="pitch-disclaimer">Concept and synthetic demonstrations only · Not for clinical use</p>
+  </div>;
+}
+
 export default function Home() {
   const [menuOpen,setMenuOpen]=useState(false); const [pitchMode, setPitchMode] = useState(false); const [illumination, setIllumination] = useState<Illumination>("Trans"); const [selectedTech, setSelectedTech] = useState<string | null>(null); const [showArchitecture, setShowArchitecture] = useState(false); const [installPrompt, setInstallPrompt] = useState<Event | null>(null);
   useEffect(() => { if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined); const handler = (e: Event) => { e.preventDefault(); setInstallPrompt(e); }; window.addEventListener("beforeinstallprompt", handler); return () => window.removeEventListener("beforeinstallprompt", handler); }, []);
@@ -119,7 +146,7 @@ export default function Home() {
   useEffect(() => {
     const sync = () => {
       const hash = location.hash.slice(1);
-      const view = hash === "demo" ? "demo" : hash === "hardware" ? "hardware" : hash === "console" ? "console" : !hash || hash === "home" ? "home" : "library";
+      const view = hash === "products" ? "products" : hash === "demo" ? "demo" : hash === "hardware" ? "hardware" : hash === "console" ? "console" : !hash || hash === "home" ? "home" : "library";
       setWorkspace(view);
       requestAnimationFrame(() => {
         const target = document.getElementById(hash || "home");
@@ -136,7 +163,7 @@ export default function Home() {
     <aside className="workspace-rail" aria-label="Workspace navigation">
       <a className="rail-brand" href="#home"><img src="/amr-eye-icon.png" alt=""/><span>AMR-Eye<span>Laboratory intelligence</span></span></a>
       <span className="rail-label">WORKSPACE</span>
-      <nav>{[["home","Overview"],["demo","Analyze"],["hardware","Hardware"],["apex","Library"],["console","Console"]].map(([id,label],index)=><a key={id} href={`#${id}`} aria-current={workspace === (id === "apex" ? "library" : id) ? "page" : undefined}><span className="rail-number">0{index+1}</span><span>{label}</span><ChevronRight size={15}/></a>)}</nav>
+      <nav>{[["home","Overview"],["products","Products"],["demo","Analyze"],["hardware","Hardware"],["apex","Library"],["console","Console"]].map(([id,label],index)=><a key={id} href={`#${id}`} aria-current={workspace === (id === "apex" ? "library" : id) ? "page" : undefined}><span className="rail-number">0{index+1}</span><span>{label}</span><ChevronRight size={15}/></a>)}</nav>
       <div className="rail-foot"><span className="live-dot"/><b>Research workspace</b><p>Synthetic demonstrations.<br/>Human review stays central.</p><a href="#about">About the project <ChevronRight size={14}/></a></div>
     </aside>
     <header className="site-header"><a href="#home" className="brand"><img src="/amr-eye-icon.png" alt="AMR-Eye app icon" /><span><b>AMR-EYE</b><i>.AI</i></span></a><nav aria-label="Primary navigation">{navItems.map(([label, id]) => <a href={`#${id}`} key={id}>{label}</a>)}</nav><div className="header-actions"><button className="pitch-button" onClick={() => setPitchMode(true)}><Sparkles /> Pitch Mode</button><a className="console-button" href="#console">Launch Lab Console</a><Sheet open={menuOpen} onOpenChange={setMenuOpen}><SheetTrigger className="mobile-menu" aria-label="Open navigation"><Menu /></SheetTrigger><SheetContent className="mobile-sheet"><SheetHeader><SheetTitle>AMR-EYE.AI</SheetTitle></SheetHeader><nav>{navItems.map(([label,id]) => <a href={`#${id}`} key={id} onClick={()=>setMenuOpen(false)}>{label}<ChevronRight /></a>)}</nav></SheetContent></Sheet></div></header>
@@ -146,10 +173,13 @@ export default function Home() {
       <div className="hero-visual"><HardwareHero/></div>
     </section>
     <section className="launchpad" aria-label="Explore the workspace">
-      <a href="#demo" className="launch-card launch-analysis"><div><Microscope/><span>01 / ANALYZE</span><ChevronRight/></div><h2>From image<br/>to measurement.</h2><p>Run a synthetic AST workflow and review each result.</p><span className="launch-link">Open analysis <ChevronRight/></span></a>
-      <a href="#hardware" className="launch-card"><div><Box/><span>02 / HARDWARE</span><ChevronRight/></div><h2>Every layer.<br/>Connected.</h2><p>Rotate, separate and explore six hardware components.</p><span className="launch-link">Explore in 3D <ChevronRight/></span></a>
-      <a href="#apex" className="launch-card"><div><Database/><span>03 / KNOWLEDGE</span><h3>83 topics.<br/>One clear picture.</h3></div><p>Open the architecture, use cases and evidence boundaries.</p><span className="launch-link">Browse the library <ChevronRight/></span></a>
+      <a href="#products" className="launch-card launch-products"><div><Layers3/><span>01 / PRODUCTS</span><ChevronRight/></div><h2>One platform.<br/>Many paths.</h2><p>Explore product tiers, software, services and AMR intelligence.</p><span className="launch-link">Open ecosystem <ChevronRight/></span></a>
+      <a href="#demo" className="launch-card launch-analysis"><div><Microscope/><span>02 / ANALYZE</span><ChevronRight/></div><h2>From image<br/>to measurement.</h2><p>Run a synthetic AST workflow and review each result.</p><span className="launch-link">Open analysis <ChevronRight/></span></a>
+      <a href="#hardware" className="launch-card"><div><Box/><span>03 / HARDWARE</span><ChevronRight/></div><h2>Every layer.<br/>Connected.</h2><p>Rotate, separate and explore six hardware components.</p><span className="launch-link">Explore in 3D <ChevronRight/></span></a>
+      <a href="#apex" className="launch-card"><div><Database/><span>04 / KNOWLEDGE</span><h3>83 topics.<br/>One clear picture.</h3></div><p>Open the architecture, use cases and evidence boundaries.</p><span className="launch-link">Browse the library <ChevronRight/></span></a>
     </section>
+
+    <ProductShowcase />
 
     <section className="section problem-section"><SectionTitle eyebrow="01 · THE PROBLEM" title="A proven method. A fragmented workflow." copy="Kirby–Bauer AST remains scientifically useful. The opportunity is to make its measurement, traceability and review more consistent." /><div className="problem-grid"><div className="problem-list">{["Manual zone measurement", "Observer variability", "Fragmented equipment", "Delayed interpretation", "Manual documentation", "Limited continuous monitoring", "Disconnected lab systems"].map((x, i) => <div key={x}><span>0{i + 1}</span><p>{x}</p></div>)}</div><div className="compare-card"><div><small>TRADITIONAL WORKFLOW</small><Flow compact items={["Plate", "Manual ruler", "Lookup", "Paper report"]} /></div><div className="digital-flow"><small>AMR-EYE DIGITAL WORKFLOW</small><Flow compact items={["Calibrated image", "AI measure", "Rules engine", "Human verify", "Digital report"]} /></div><p><ShieldCheck /> Designed to assist validated microbiology—not bypass it.</p></div></div></section>
     <section className="section demo-section" id="demo"><SectionTitle eyebrow="02 · LIVE PRODUCT DEMO" title="See the plate become structured data." copy="A deterministic synthetic analysis built for a reliable live pitch." scope="Prototype demo" /><AnalysisDemo /></section>
@@ -194,7 +224,7 @@ export default function Home() {
 
     <footer><div className="footer-brand"><img src="/amr-eye-icon.png" alt=""/><b>AMR-EYE.AI</b><span>AI-Powered AST & Bio-Automation</span></div><p>AMR-Eye.AI is currently an R&D/prototype-stage platform. Demonstrated analyses and values are simulated or experimental and are not intended for clinical diagnosis or treatment decisions. Clinical deployment would require appropriate analytical, clinical and regulatory validation.</p><span>Research / Prototype Demonstration — Not for Clinical Use</span></footer>
 
-    <Dialog open={pitchMode} onOpenChange={setPitchMode}><DialogContent className="pitch-dialog" aria-describedby={undefined}><DialogTitle className="sr-only">AMR-Eye presentation mode</DialogTitle><div className="pitch-overlay"><div className="pitch-header"><a className="brand" href="#home"><img src="/amr-eye-icon.png" alt=""/><span><b>AMR-EYE</b><i>.AI</i></span></a><div><span className="pitch-live"><i className="live-dot"/> PITCH MODE</span><button onClick={()=>setPitchMode(false)}><X/> Exit</button></div></div><div className="pitch-intro"><div><small>JUDGE DEMONSTRATION · LOCAL / DETERMINISTIC</small><h2>From Petri Dish to Digital Intelligence.</h2></div><p>Research / Prototype Demonstration — Not for Clinical Use</p></div><AnalysisDemo pitch onArchitecture={()=>setShowArchitecture(true)} /></div></DialogContent></Dialog>
+    <Dialog open={pitchMode} onOpenChange={setPitchMode}><DialogContent className="pitch-dialog" aria-describedby={undefined}><DialogTitle className="sr-only">AMR-Eye presentation mode</DialogTitle><PitchExperience onExit={()=>setPitchMode(false)} onNavigate={(hash)=>{setPitchMode(false);location.hash=hash;}} /></DialogContent></Dialog>
     <Dialog open={!!selectedTech} onOpenChange={(open)=>!open&&setSelectedTech(null)}><DialogContent className="tech-dialog"><DialogHeader><DialogTitle>{selectedTech}</DialogTitle></DialogHeader><ScopeTag>{["NIR","VOC","LiDAR","Sensor Fusion","Robotics","AMR Heatmap","Custom Automation","RAST"].includes(selectedTech||"")?"Future R&D":"Proposed product"}</ScopeTag><p>{selectedTech ? techWall[selectedTech] : ""}</p><small>Capability status is shown conservatively. Clinical use would require dedicated validation.</small></DialogContent></Dialog>
     <Dialog open={showArchitecture} onOpenChange={setShowArchitecture}><DialogContent className="architecture-dialog"><DialogHeader><DialogTitle>AMR-Eye Platform Architecture</DialogTitle></DialogHeader><Flow items={["Human","BAHU","Edge AI","Instruments + Sensors","Verified Result"]}/><p>AST is the first use case. The long-term platform connects humans, AI, controlled hardware, data and biological workflows through one orchestration layer.</p><a href="#architecture" onClick={()=>{setShowArchitecture(false);setPitchMode(false)}} className="primary-action">Open Full Architecture <ChevronRight/></a></DialogContent></Dialog>
   </main>;
