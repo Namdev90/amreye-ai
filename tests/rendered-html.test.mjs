@@ -29,5 +29,6 @@ test("renders the AMR-Eye entry page with accessible navigation and concept labe
     /^text\/html\b/i,
   );
   const html=await response.text();
-  for(const text of ["main-content","Measure the plate.","Open site directory","Prototype stage","Connect the record."]) assert.ok(html.includes(text), text);
+  for(const text of ["main-content","Measure the plate.","Open site directory","Prototype project","Connect the record."]) assert.ok(html.includes(text), text);
 });
+

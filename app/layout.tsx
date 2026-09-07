@@ -6,7 +6,7 @@ import "./workspace.css";
 import "./atelier.css";
 
 export const metadata: Metadata = {
-  title: "AMR-Eye.AI — Instruments, Research & Project Library",
+  title: "AMR-Eye.AI  ·  Instruments, Research & Project Library",
   description: "Explore 22 proposed subsystems, 20 use cases and a synthetic AST workflow, based on the September 2026 APEX XR dossier.",
   applicationName: "AMR-Eye.AI",
   manifest: "/manifest.webmanifest",

@@ -5,7 +5,7 @@ import {Dialog,DialogContent,DialogHeader,DialogTitle} from '@/components/ui/dia
 import data from './dossier.json';
 const categories=['All','Subsystems','Use cases','Architecture','Validation','Product & costs','Documentation'];
 const wins=[
- {date:'03 SEP 2026',title:'APEX XR flagship dossier completed',copy:'A detailed engineering and product proposal covering 22 subsystems, 20 use cases, architecture, validation and evidence boundaries.',href:'#apex',action:'Browse 83 topics'},
+ {date:'03 SEP 2026',title:'APEX XR flagship dossier completed',copy:'A detailed engineering and product proposal covering 22 subsystems, 20 use cases, architecture, validation and evidence boundaries.',href:'#apex',action:'Browse 97 topics'},
  {date:'03 SEP 2026',title:'GSF Round 2 pitch package prepared',copy:'A complete AMR-Eye pitch package was produced around the startup, problem, solution, business model, milestones and support request.',href:'#business',action:'Open business story'},
  {date:'04 SEP 2026',title:'Interactive knowledge explorer launched',copy:'The full dossier became a searchable, filterable and linked repository with topic links and a source register.',href:'#apex',action:'Search the library'},
  {date:'05 SEP 2026',title:'3D hardware concept made interactive',copy:'Six conceptual hardware layers can be rotated, isolated and inspected with touch-aware controls and conservative product labels.',href:'#hardware',action:'Explore hardware'},
@@ -24,7 +24,7 @@ export default function ApexExplorer(){
  return <section className="section apex-section" id="apex">
  <div className="apex-heading"><div><span className="section-kicker">AMR-EYE · PROJECT REPOSITORY</span><h2>Everything AMR-Eye.<br/><em>One living library.</em></h2><p>Explore the flagship dossier, product architecture, subsystems, use cases, validation boundaries, sources and completed project milestones.</p></div><div className="apex-summary"><span className="scope-tag scope-proposed">Living repository</span><p>Begin with a summary, choose a subject, then open the full technical record and its sources.</p><a href="#recognition">Wins & recognition <ChevronRight size={18}/></a></div></div>
  <div className="repository-index" aria-label="Repository contents">
-  <button onClick={()=>{setCategory('All');setQuery('');setStatus('All')}}><FileText/><b>83</b><span>Dossier topics</span><small>Complete APEX XR knowledge base</small></button>
+  <button onClick={()=>{setCategory('All');setQuery('');setStatus('All')}}><FileText/><b>{data.topics.length}</b><span>Dossier topics</span><small>Complete APEX XR knowledge base</small></button>
   <button onClick={()=>{setCategory('Subsystems');setQuery('');setStatus('All')}}><Boxes/><b>22</b><span>Subsystems</span><small>Hardware and platform layers</small></button>
   <button onClick={()=>{setCategory('Use cases');setQuery('');setStatus('All')}}><FlaskConical/><b>20</b><span>Use cases</span><small>Laboratory and research contexts</small></button>
   <button onClick={()=>{setCategory('Validation');setQuery('');setStatus('All')}}><ShieldCheck/><b>06</b><span>Validation stages</span><small>Evidence before deployment</small></button>
