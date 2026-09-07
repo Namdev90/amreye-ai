@@ -71,3 +71,4 @@ main .repository-footer{display:block!important;padding:30px max(24px,calc((100v
 @media(max-width:850px){.pitch-stage-map{display:none}.research-grid{grid-template-columns:1fr}.repository-footer>div{align-items:start;flex-direction:column}.repository-footer nav{gap:18px}main .repository-footer{padding-bottom:110px!important}.reference-drawings>div{grid-template-columns:1fr}.reference-drawings{padding:18px}.audience-route-map{padding:18px}.research-grid>a{padding:21px}.offline-card{padding:24px 0}}
 @media(prefers-reduced-motion:reduce){.plate-scan{animation:none;transform:translateY(145px)}.research-grid>a{transition:none}}
 .metrology-table th:nth-child(2),.metrology-table td:nth-child(2){white-space:nowrap}.metrology-table th,.metrology-table td{padding-left:10px!important;padding-right:10px!important}
+.guided-pitch>footer{gap:6px!important}.guided-pitch>footer nav{flex-shrink:1}.guided-pitch>footer>button{flex-shrink:0}
