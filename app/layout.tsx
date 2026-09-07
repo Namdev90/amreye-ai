@@ -3,9 +3,10 @@ import "./globals.css";
 import "./fluid.css";
 import "./mobile.css";
 import "./workspace.css";
+import "./atelier.css";
 
 export const metadata: Metadata = {
-  title: "AMR-Eye.AI — APEX XR Explorer & AST Demonstration",
+  title: "AMR-Eye.AI — Instruments, Research & Project Library",
   description: "Explore 22 proposed subsystems, 20 use cases and a synthetic AST workflow, based on the September 2026 APEX XR dossier.",
   applicationName: "AMR-Eye.AI",
   manifest: "/manifest.webmanifest",
@@ -29,7 +30,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="theme-color" content="#11121a" />
+        <meta name="theme-color" content="#0b0c0e" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="antialiased">{children}</body>

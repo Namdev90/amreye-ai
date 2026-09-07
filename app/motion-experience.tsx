@@ -104,13 +104,6 @@ export default function MotionExperience() {
 
   return <>
     <div className="reading-progress" aria-hidden="true" />
-    <nav className="mobile-dock" aria-label="Quick access">
-      <a href="#home"><Home size={19}/><span>Home</span></a>
-      <a href="#products"><Layers3 size={19}/><span>Products</span></a>
-      <a href="#demo"><Microscope size={19} /><span>Analyze</span></a>
-      <a href="#hardware"><Box size={19} /><span>Hardware</span></a>
-      <a href="#apex"><BookOpen size={19}/><span>Library</span></a>
-      <a href="#console"><SlidersHorizontal size={19} /><span>Console</span></a>
     <button className="motion-toggle" type="button" onClick={() => setPaused(value => {
       const next = !value;
       try { sessionStorage.setItem("amr-motion", next ? "off" : "on"); } catch { /* Preference persistence is optional. */ }
@@ -118,6 +111,6 @@ export default function MotionExperience() {
     })} aria-pressed={!paused} aria-label={paused ? "Enable decorative motion" : "Pause decorative motion"}>
       {paused ? <Play size={14} /> : <Pause size={14} />}<span>{paused ? "Motion off" : "Motion on"}</span>
     </button>
-    </nav>
+
   </>;
 }

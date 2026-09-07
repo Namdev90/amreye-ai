@@ -10,6 +10,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
   const canvas = useRef<HTMLCanvasElement>(null);
   const scene = useRef<HardwareScene | null>(null);
   const selectRef = useRef(onSelect);
+  const [inspecting,setInspecting]=useState(false);
   const [ready, setReady] = useState(false);
   const [error, setError] = useState(false);
   const [attempt, setAttempt] = useState(0);
@@ -54,7 +55,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
   }, [attempt]);
 
   return <div className="hardware-3d">
-    <div className="three-canvas-wrap">
+    <div className="three-canvas-wrap" data-inspecting={inspecting}>
       <canvas key={attempt} ref={canvas} className="three-canvas" aria-label="Interactive schematic hardware assembly. Use the labeled controls and component list to explore the six parts." onKeyDown={event => {
         if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "+", "-", "Home"].includes(event.key)) event.preventDefault();
         if (event.key === "ArrowLeft") scene.current?.rotate(-1);
@@ -64,6 +65,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         if (event.key === "Home") scene.current?.reset();
       }} tabIndex={ready ? 0 : -1} />
       {!ready && <div className="three-loading" role="status">{error ? <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly illustration" /><span>3D is unavailable on this device. The assembled and exploded views still work.</span><button type="button" onClick={() => setAttempt(value => value + 1)}>Retry 3D</button></> : <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly preview while the interactive model loads" /><LoaderCircle size={26} /><span>Opening the 3D assembly…</span></>}</div>}
+      {ready && <button className="inspect-3d" onClick={()=>setInspecting(v=>!v)}>{inspecting?"Finish 3D interaction":"Tap to inspect 3D model"}</button>}
       {ready && <div className="three-selection"><span>SELECTED PART</span><b>{names[active]}</b></div>}
       <span className="three-schematic-label">SCHEMATIC · NOT PRODUCTION CAD</span>
     </div>
