@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState, lazy, Suspense } from "react";
 import {demoDiscs} from "./demo-rules.mjs";
+const NetworkExplorer=lazy(()=>import("./network-explorer"));
 const AnalysisWorkbench=lazy(()=>import("./analysis-workbench"));
 import MobileSection from "./mobile-section";
 const ApexExplorer=lazy(()=>import("./apex-explorer"));
@@ -154,7 +155,7 @@ export default function Home() {
 
     <MobileSection className="section applications-section" id="applications"><SectionTitle eyebrow="12 · ONE HEALTH" title="One platform architecture. Multiple biological contexts." copy="Potential expansion aligned with a One Health approach; each use case requires its own validation pathway." scope="Future R&D" /><div className="one-health-orbit"><div className="health-core"><img src="/amr-eye-icon.png" alt=""/><b>ONE HEALTH</b></div>{["Human Health","Animal Health","Food / Dairy","Water / Environment","Pharmaceutical QC"].map((x,i)=><span key={x} style={{"--i":i} as CSSProperties}>{x}</span>)}</div></MobileSection>
 
-    <MobileSection className="section network-section" id="network"><SectionTitle eyebrow="13 · AMR INTELLIGENCE NETWORK" title="From validated plates to governed intelligence." copy="Future AMR surveillance architecture  ·  concept demonstration." scope="Future R&D" /><div className="network-dashboard"><div className="india-map" aria-label="Stylized concept map of India"><div className="india-silhouette">INDIA<span className="map-point p1"/><span className="map-point p2"/><span className="map-point p3"/><span className="map-point p4"/><span className="map-point p5"/></div><div className="map-legend"><span><i className="low"/>Lower</span><span><i className="medium"/>Moderate</span><span><i className="high"/>Higher demo signal</span></div></div><div className="network-metrics">{[["Organism","E. coli · demo"],["Antibiotic","Ciprofloxacin"],["Region","West India"],["Resistance %","Synthetic 34%"],["Time trend","↑ 3.2% / demo year"]].map(([k,v])=><div key={k}><small>{k}</small><b>{v}</b></div>)}<MiniChart/><p>Anonymized validated AMR data could support regional trend analysis after governance, consent, quality controls and validation. AMR-Eye does not currently operate a surveillance network.</p></div></div></MobileSection>
+    <MobileSection className="section network-section" id="network"><SectionTitle eyebrow="13 · AMR INTELLIGENCE NETWORK" title="Explore an AMR data example." copy="India and global views with fixed synthetic counts." scope="Prototype demo" />{workspace==="network"&&<Suspense fallback={<p>Opening the map…</p>}><NetworkExplorer /></Suspense>}</MobileSection>
 
     <MobileSection className="section business-section" id="business"><SectionTitle eyebrow="14 · BUSINESS" title="Hardware opens the door. Recurring services compound value." copy="A system business · not a one-time device sale." /><div className="revenue-stack">{["Hardware / System Installation","Software Subscription","AI-as-a-Service","Automation-as-a-Service","Integration-as-a-Service","AMC / Calibration / Support","Enterprise SaaS"].map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b>{i>0&&<small>RECURRING</small>}</div>)}</div></MobileSection>
 

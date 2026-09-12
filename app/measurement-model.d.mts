@@ -1,0 +1,18 @@
+export type Measurement = {originalMm:number|null;correctedMm:number|null;verified:boolean;review:string};
+export type Correction = {runId:string|null;discCode:string;originalMm:number|null;beforeMm:number;afterMm:number;reason:string;timestamp:string;reviewer:string};
+export type Audit = {timestamp:string;reviewer:string;runId:string|null;action:string};
+export type ReviewState = {scenario:string;profile:string;status:string;generation:number;runId:string|null;records:Record<string,Measurement>;drafts:Record<string,{mm:string;reason:string}>;corrections:Correction[];audit:Audit[]};
+export type Comparison = {rows:{code:string;originalMm:number|null;mm:number|null;referenceMm:number;difference:number|null;category:string|null;referenceCategory:string|null;agreement:boolean|null}[];pairedCount:number;excludedCount:number;meanDifference:number|null;meanAbsoluteDifference:number|null;categoryAgreement:number|null};
+export type Report = {schemaVersion:string;type:string;timestamp:string;runId:string|null;reviewer:string;scenario:string;readability:string;outcome:string;profile:string;ruleVersion:string;referenceFixtureId:string;results:(Measurement & {code:string;name:string;potency:string;mm:number|null;interpretation:string|null;referenceMm:number;correctionEvents:Correction[]})[];comparison:Comparison;correctionEvents:Correction[];audit:Audit[];signature:string};
+export const REVIEWER:string;
+export const REFERENCE_ID:string;
+export const REFERENCES:Readonly<Record<string,number>>;
+export const SCENARIOS:Readonly<Record<string,string>>;
+export function validMm(mm:unknown):boolean;
+export function effectiveMm(record:Measurement|undefined):number|null;
+export function initialReview():ReviewState;
+export function readability(state:ReviewState):string;
+export function reviewReducer(state:ReviewState,action:{type:string;code?:string;value?:string|boolean;at?:string;generation?:number;patch?:{mm?:string;reason?:string}}):ReviewState;
+export function compareMeasurements(records:Record<string,Measurement>,profile:string):Comparison;
+export function captureReport(state:ReviewState,timestamp:string):Report;
+export function reportCsv(report:Report):string;

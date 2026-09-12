@@ -3432,7 +3432,8 @@
       "text": [
         "WHO GLASS provides a framework for AMR surveillance and its data requirements. Any AMR-Eye connection to a national programme would need agreed definitions, laboratory quality processes and responsible reporting. It is not an existing GLASS integration. [S25]",
         "A proposed pipeline should distinguish patient episodes, isolates, susceptibility records, duplicates and missing tests. Regional summaries need denominators and sampling context. Maps cannot be interpreted as representative population prevalence without an appropriate design.",
-        "Define local ownership, access, retention, de-identification and permitted aggregation before sharing. Cross-border deployment also needs country-specific agreements and validation. The website's map is an illustration."
+        "Define local ownership, access, retention, de-identification and permitted aggregation before sharing. Cross-border deployment also needs country-specific agreements and validation. The website's map is an illustration.",
+        "Implemented website simulation: the #network explorer provides India and global SVG views, equivalent selectable region lists, organism/antibiotic/period filters and fixed invented counts. Percentages are calculated from resistant and tested examples; empty selections explicitly show no example data. This is not live surveillance, prevalence evidence or a programme integration. Filters stay in the browser session only."
       ],
       "tables": []
     },
@@ -3469,7 +3470,8 @@
       "text": [
         "The September master specifies a proposed Validation Mode that compares a reference result with an AMR-Eye measurement. Each record should retain method, organism, antimicrobial, disc potency where relevant, standards version, category comparison, disagreement classification and reviewer decisions. This is a software roadmap requirement, not an existing validated instrument feature. [S29][S31]",
         "Dimensional measurement error and repeatability should be assessed separately from microbiological category agreement and clinical utility. The project calls for disagreement analysis, including major and very major errors where applicable, rather than treating computer-vision detection metrics as clinical accuracy. [S29]",
-        "A correction record should preserve the original automated value, the corrected value, reviewer identity, timestamp and override reason. The website currently demonstrates editable synthetic measurements and a session audit, but has no authenticated reviewer or clinical validation dataset. [S29]"
+        "A correction record should preserve the original automated value, the corrected value, reviewer identity, timestamp and override reason. The earlier website demonstration provided editable synthetic measurements and a session audit, but has no authenticated reviewer or clinical validation dataset. [S29]",
+        "Implemented website simulation: Validation comparison uses an independent, immutable synthetic fixture (CIP 24, AMC 23, MEM 28, GEN 18, SXT 26 and AMP 14 mm). It compares original and effective values with the reference and shows signed difference, mean difference, mean absolute difference and fictional category agreement. These are teaching comparisons, not clinical accuracy. Corrections require an explicit apply action and reason; successive events retain timestamps and a clearly labelled demo reviewer. Immutable report snapshots keep print, JSON and CSV consistent. No authenticated reviewer, clinical dataset or validated instrument capability is provided."
       ]
     },
     {
@@ -3481,7 +3483,8 @@
       "text": [
         "The proposed pipeline must be able to abstain when image quality, growth, condensation, plate geometry or inhibition-zone boundaries are unsuitable. The master defines NOT READABLE, REVIEW and RECAPTURE outcomes so a system is not forced to produce a measurement or susceptibility call. [S29]",
         "A future workflow should retain the source image and the reason for abstention, direct the operator to the appropriate review or recapture step, and prevent an unsuitable image from progressing as an accepted result. Qualified method-specific review remains necessary. [S29][S31]",
-        "The present website offers clean, overlapping-boundary and fuzzy-margin synthetic examples. Those scenarios explain review requirements; they do not establish real image-quality detection or an implemented abstention model. [S29]"
+        "The earlier website offered clean, overlapping-boundary and fuzzy-margin synthetic examples. Those scenarios explain review requirements; they do not establish real image-quality detection or an implemented abstention model. [S29]",
+        "Implemented website simulation: clean, overlapping, fuzzy and unreadable examples now explain review and recapture. The unreadable scenario produces no measurements, interpretations or approvals, while allowing an incomplete report. Changing scenarios cancels processing and requires another run. Rule-profile changes preserve measurements and correction history while clearing approvals. This is an invented scenario workflow, not real image-quality detection or an instrument abstention model."
       ]
     },
     {
