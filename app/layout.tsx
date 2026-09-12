@@ -6,9 +6,18 @@ import "./workspace.css";
 import "./atelier.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://amreye.in"),
+  alternates: { canonical: "/" },
   title: "AMR-Eye.AI  ·  Instruments, Research & Project Library",
   description: "Explore 22 proposed subsystems, 20 use cases and a synthetic AST workflow, based on the September 2026 APEX XR dossier.",
   applicationName: "AMR-Eye.AI",
+  openGraph: {
+    type: "website",
+    url: "https://amreye.in/",
+    siteName: "AMR-Eye.AI",
+    title: "AMR-Eye.AI · Instruments, Research & Project Library",
+    description: "Explore the AMR-Eye prototype, proposed instruments, research library and synthetic AST demonstration.",
+  },
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,

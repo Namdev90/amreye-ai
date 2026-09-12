@@ -3459,6 +3459,42 @@
         "Outputs could include a source-backed diagnostic-capacity study, a costed pilot plan and a sensitivity-tested preparedness scenario. These are planned research deliverables; no government partnership, funded programme or clinical outcome is implied."
       ],
       "tables": []
+    },
+    {
+      "id": "research-validation-mode",
+      "title": "Validation mode and correction provenance",
+      "category": "Validation",
+      "status": "Proposed product",
+      "tables": [],
+      "text": [
+        "The September master specifies a proposed Validation Mode that compares a reference result with an AMR-Eye measurement. Each record should retain method, organism, antimicrobial, disc potency where relevant, standards version, category comparison, disagreement classification and reviewer decisions. This is a software roadmap requirement, not an existing validated instrument feature. [S29][S31]",
+        "Dimensional measurement error and repeatability should be assessed separately from microbiological category agreement and clinical utility. The project calls for disagreement analysis, including major and very major errors where applicable, rather than treating computer-vision detection metrics as clinical accuracy. [S29]",
+        "A correction record should preserve the original automated value, the corrected value, reviewer identity, timestamp and override reason. The website currently demonstrates editable synthetic measurements and a session audit, but has no authenticated reviewer or clinical validation dataset. [S29]"
+      ]
+    },
+    {
+      "id": "research-readability",
+      "title": "Unreadable images, review and recapture",
+      "category": "Validation",
+      "status": "Proposed product",
+      "tables": [],
+      "text": [
+        "The proposed pipeline must be able to abstain when image quality, growth, condensation, plate geometry or inhibition-zone boundaries are unsuitable. The master defines NOT READABLE, REVIEW and RECAPTURE outcomes so a system is not forced to produce a measurement or susceptibility call. [S29]",
+        "A future workflow should retain the source image and the reason for abstention, direct the operator to the appropriate review or recapture step, and prevent an unsuitable image from progressing as an accepted result. Qualified method-specific review remains necessary. [S29][S31]",
+        "The present website offers clean, overlapping-boundary and fuzzy-margin synthetic examples. Those scenarios explain review requirements; they do not establish real image-quality detection or an implemented abstention model. [S29]"
+      ]
+    },
+    {
+      "id": "research-configurations",
+      "title": "Bio-Vault and APEX XR: separate configuration studies",
+      "category": "Architecture",
+      "status": "Proposed product",
+      "tables": [],
+      "text": [
+        "The September master describes a proposed three-zone Bio-Vault arrangement with Jetson Orin NX, Raspberry Pi 5 and BME688. The earlier APEX XR dossier explores a larger flagship architecture including Thor/T5000 and BME690. These are alternative configuration studies, not one final bill of materials or a confirmed manufactured instrument. [S29][S21]",
+        "Keep the imaging chamber, operator interface, power and thermal requirements associated with the source configuration. Component substitutions require their own interface, thermal, cost and validation review. The original drawings remain concept references. [S28][S29]",
+        "Product names, tiers, dimensions and component choices remain provisional. The first instrument should be chosen against a defined intended use and measured requirements; advanced research modules retain separate development and evidence gates. [S29][S31]"
+      ]
     }
   ],
   "sources": [
@@ -3601,6 +3637,21 @@
       "id": "S28",
       "title": "Three user-supplied enclosure concept drawings, received 7 September 2026",
       "url": ""
+    },
+    {
+      "id": "S29",
+      "title": "AMR-Eye.AI Master Technical Dossier & Compendium, updated 12 September 2026",
+      "url": "https://docs.google.com/document/d/1_GDrcfs4PoGkLJ3JrVwSJoetV6mWuBNfQTWHyytyTCY/edit"
+    },
+    {
+      "id": "S30",
+      "title": "AMR-Eye Comprehensive Manual, September 2026 update",
+      "url": "https://docs.google.com/document/d/1LWxRt19PgwuExdhtcgk7YbirPJU1OaaFzVuLIoSPQ6U/edit"
+    },
+    {
+      "id": "S31",
+      "title": "AMR-Eye Claim Validation & Evidence Register",
+      "url": "https://docs.google.com/document/d/1X2aFyjjfvw0bXTXfeECda5otxF0ObsfX5PjRQt0SCuQ/edit"
     }
   ]
 }

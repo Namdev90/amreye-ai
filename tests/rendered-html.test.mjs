@@ -30,5 +30,7 @@ test("renders the AMR-Eye entry page with accessible navigation and concept labe
   );
   const html=await response.text();
   for(const text of ["main-content","Measure the plate.","Open site directory","Prototype project","Connect the record."]) assert.ok(html.includes(text), text);
+  assert.equal((html.match(/id="main-content"/g)||[]).length,1,"Skip link must have one destination");
+  assert.match(html,/<link[^>]*rel="canonical"[^>]*href="https:\/\/amreye\.in\/"/);
 });
 

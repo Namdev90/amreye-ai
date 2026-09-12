@@ -114,7 +114,7 @@ export default function Home() {
     sync(); window.addEventListener("hashchange", sync);
     return () => window.removeEventListener("hashchange", sync);
   }, []);
-  return <main id="main-content" tabIndex={-1} data-workspace={workspace} data-active-section={workspace} className={pitchMode ? "pitch-active" : ""}>
+  return <main data-workspace={workspace} data-active-section={workspace} className={pitchMode ? "pitch-active" : ""}>
     <MotionExperience />
     <SiteNavigation active={workspace} onPitch={()=>setPitchMode(true)}/>
     <div id="main-content" tabIndex={-1}/>
