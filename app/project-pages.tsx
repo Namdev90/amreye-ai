@@ -17,7 +17,7 @@ export function Recognition(){return <section className="section editorial-page"
 
 const team=[
  ["NS","Namdev Tukaram Shirodkar","Overall lead · AMR strategy, software & AI","Leads AMR strategy, software development and artificial intelligence. Sets the overall direction and coordinates how the team’s work comes together."],
- ["TC","Tanish Chari","Co-founder · Hardware & technical lead","Leads hardware development, prototype architecture, system integration and technical feasibility. Coordinates the engineering work needed to turn the platform’s concepts into testable systems."],
+ ["TC","Tanishq Chari","Co-founder · Hardware & technical lead","Leads hardware development, prototype architecture, system integration and technical feasibility. Coordinates the engineering work needed to turn the platform’s concepts into testable systems."],
  ["MN","Mahima Naik","External relations lead · Spokesperson","Serves as the team’s primary spokesperson. Leads external meetings, builds relationships with prospective partners and institutions, and coordinates external communications."],
  ["HP","Heramb Prabhu Desai","Marketing & competition Q&A","Handles marketing and prepares the team for questions from judges and audiences. Leads Q&A responses during competitions, pitches and quizzes."],
  ["VM","Vishwajit Malik","Business operations & management lead","Coordinates business operations, people, administration and team support. Builds the management processes and internal organisation needed as the startup grows."]
