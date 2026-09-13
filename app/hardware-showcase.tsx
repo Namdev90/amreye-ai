@@ -18,7 +18,7 @@ const parts = [
 export function HardwareHero() {
   return <div className="hero-hardware" data-tilt>
     <div className="hardware-hero-label"><span className="live-dot" /> APEX XR <span>HARDWARE CONCEPT</span></div>
-    <div className="hero-product-frame"><img src="/hardware/apex-concept.webp" width={1536} height={1024} fetchPriority="high" alt="Concept render of a glass-fronted AMR-Eye plate-imaging instrument with camera, plate stage and lower electronics enclosure" /><div className="product-glint" aria-hidden="true" /></div>
+    <div className="hero-product-frame"><img src="/hardware/apex-concept.webp" width={1536} height={1024} fetchPriority="high" alt="Concept render of a glass-fronted AMReye.AI plate-imaging instrument with camera, plate stage and lower electronics enclosure" /><div className="product-glint" aria-hidden="true" /></div>
     <div className="hero-hardware-footer"><span>Imaging · Incubation · Edge intelligence</span><a href="#hardware">Explore the hardware <ArrowUpRight size={16} /></a></div>
     <p className="hardware-caption">Illustrative design concept · Proposed product</p>
   </div>;

@@ -2,11 +2,11 @@
   "topics": [
     {
       "id": "topic-2",
-      "title": "The AMREye starting point",
+      "title": "The AMReye.AI starting point",
       "category": "Overview",
       "status": "Current prototype",
       "text": [
-        "AMREye is developing a calibrated plate-reading workflow for endpoint disk diffusion. The present website demonstration uses synthetic measurements. Clinical performance has not been established."
+        "AMReye.AI is developing a calibrated plate-reading workflow for endpoint disk diffusion. The present website demonstration uses synthetic measurements. Clinical performance has not been established."
       ],
       "tables": [],
       "related": [

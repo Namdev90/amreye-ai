@@ -9,28 +9,28 @@ import "./connected.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),
   alternates: { canonical: "/" },
-  title: "AMREye  ·  Instruments, Research & Project Library",
+  title: "AMReye.AI  ·  Instruments, Research & Project Library",
   description: "Explore the plate-reader prototype, proposed laboratory platform, research pathways and a synthetic AST demonstration.",
-  applicationName: "AMREye",
+  applicationName: "AMReye.AI",
   openGraph: {
-    images: [{url:"/og.png",width:1730,height:909,alt:"AMREye: Measure the plate. Connect the record."}],
+    images: [{url:"/og.png",width:1200,height:630,alt:"AMReye.AI: Measure the plate. Connect the record."}],
     type: "website",
     url: "https://amreye.in/",
-    siteName: "AMREye",
-    title: "AMREye · Instruments, Research & Project Library",
-    description: "Explore the AMREye prototype, proposed instruments, research library and synthetic AST demonstration.",
+    siteName: "AMReye.AI",
+    title: "AMReye.AI · Instruments, Research & Project Library",
+    description: "Explore the AMReye.AI prototype, proposed instruments, research library and synthetic AST demonstration.",
   },
-  twitter: {card:"summary_large_image",title:"AMREye",description:"Measure the plate. Connect the record.",images:["/og.png"]},
+  twitter: {card:"summary_large_image",title:"AMReye.AI",description:"Measure the plate. Connect the record.",images:["/og.png"]},
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    title: "AMREye",
+    title: "AMReye.AI",
     statusBarStyle: "black-translucent",
   },
   icons: {
-    icon: "/amr-eye-icon.png",
+    icon: [{url:"/favicon.svg",type:"image/svg+xml"},{url:"/amr-eye-icon.png",sizes:"512x512",type:"image/png"}],
     shortcut: "/amr-eye-icon.png",
-    apple: "/amr-eye-icon.png",
+    apple: "/brand/icon-180.png",
   },
 };
 

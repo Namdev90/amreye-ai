@@ -1,1 +1,1 @@
-export default function NotFound(){return <main className="section"><h1>This page isn’t here.</h1><p>Find the topic in the connected AMREye library.</p><p><a href="/#apex">Open the library</a> · <a href="/">Return home</a></p></main>}
+export default function NotFound(){return <main className="section"><h1>This page isn’t here.</h1><p>Find the topic in the connected AMReye.AI library.</p><p><a href="/#apex">Open the library</a> · <a href="/">Return home</a></p></main>}

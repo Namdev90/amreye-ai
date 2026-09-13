@@ -1,4 +1,4 @@
-const CACHE='amreye-public-v6';
+const CACHE='amreye-public-v7';
 const OFFLINE=['/offline.html','/repository.json','/amr-eye-icon.png'];
 async function refresh(){const c=await caches.open(CACHE);await Promise.all(OFFLINE.map(async path=>{const r=await fetch(path);if(r.ok)await c.put(path,r)}))}
 self.addEventListener('install',e=>e.waitUntil(refresh().then(()=>self.skipWaiting())));
