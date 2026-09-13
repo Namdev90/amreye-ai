@@ -5,6 +5,8 @@ import "./mobile.css";
 import "./workspace.css";
 import "./atelier.css";
 import "./connected.css";
+import "./precision.css";
+import "./library.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),

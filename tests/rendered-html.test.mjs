@@ -5,7 +5,7 @@ import test from "node:test";
 
 test("renders the AMR-Eye entry page with accessible navigation and concept labelling", async () => {
   // Runtime headers and Cloudflare bindings must be tested in the actual worker runtime.
-  const response = await fetch(process.env.TEST_SITE_URL||'http://127.0.0.1:5173/',{headers:{accept:'text/html'}});
+  const response = await fetch(process.env.TEST_SITE_URL||'http://127.0.0.1:5179/',{headers:{accept:'text/html'}});
 
   assert.equal(response.status, 200);
   assert.match(
@@ -13,7 +13,7 @@ test("renders the AMR-Eye entry page with accessible navigation and concept labe
     /^text\/html\b/i,
   );
   const html=await response.text();
-  for(const text of ["main-content","Measure the plate.","Open site directory","Prototype project","Connect the record."]) assert.ok(html.includes(text), text);
+  for(const text of ["main-content","Small plate.","Open site directory","Prototype project","Bigger picture."]) assert.ok(html.includes(text), text);
   assert.equal((html.match(/id="main-content"/g)||[]).length,1,"Skip link must have one destination");
   assert.match(html,/<link[^>]*rel="canonical"[^>]*href="https:\/\/amreye\.in\/"/);
 });

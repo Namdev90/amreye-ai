@@ -28,6 +28,7 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    if(url.pathname==='/admin'||url.pathname.startsWith('/admin/')){const target=new URL('/',request.url);const topic=url.searchParams.get('topic');if(topic)target.searchParams.set('topic',topic);target.hash='apex';return Response.redirect(target,308);}
     const agent=request.headers.get('user-agent')||'';
     if(/GPTBot|ClaudeBot|CCBot|Bytespider|Amazonbot|meta-externalagent|Applebot-Extended/i.test(agent)){
       return new Response('Automated collection is not permitted.',{status:403,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});

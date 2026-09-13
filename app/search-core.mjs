@@ -24,7 +24,7 @@ export function searchTopics(topics,query){
  const direct=norm(query).split(' ').filter(t=>t&&!stop.has(t));
  if(!direct.length)return [];
  const terms=[...new Set(direct.flatMap(t=>[t,...(aliases[t]||[])]))];
- return topics.map(topic=>{const title=norm(topic.title),body=norm([topic.category,topic.status,...topic.text,...topic.tables.flat(2)].join(' '));const score=terms.reduce((n,t)=>n+(contains(title,t)?(direct.includes(t)?16:6):0)+(contains(body,t)?2:0),0)+(contains(title,query)?20:0);return{topic,score}}).filter(r=>r.score>0).sort((a,b)=>b.score-a.score||a.topic.title.localeCompare(b.topic.title));
+ return topics.map(topic=>{const title=norm(topic.title),body=norm([topic.category,topic.status,topic.searchText||'',...topic.text,...topic.tables.flat(2)].join(' '));const score=terms.reduce((n,t)=>n+(contains(title,t)?(direct.includes(t)?16:6):0)+(contains(body,t)?2:0),0)+(contains(title,query)?20:0);return{topic,score}}).filter(r=>r.score>0).sort((a,b)=>b.score-a.score||a.topic.title.localeCompare(b.topic.title));
 }
 export function relatedTopics(topics,topic){
  const explicit=topic.related||[];
