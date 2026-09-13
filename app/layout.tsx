@@ -4,24 +4,27 @@ import "./fluid.css";
 import "./mobile.css";
 import "./workspace.css";
 import "./atelier.css";
+import "./connected.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),
   alternates: { canonical: "/" },
-  title: "AMR-Eye.AI  ·  Instruments, Research & Project Library",
-  description: "Explore 22 proposed subsystems, 20 use cases and a synthetic AST workflow, based on the September 2026 APEX XR dossier.",
-  applicationName: "AMR-Eye.AI",
+  title: "AMREye  ·  Instruments, Research & Project Library",
+  description: "Explore the plate-reader prototype, proposed laboratory platform, research pathways and a synthetic AST demonstration.",
+  applicationName: "AMREye",
   openGraph: {
+    images: [{url:"/og.png",width:1730,height:909,alt:"AMREye: Measure the plate. Connect the record."}],
     type: "website",
     url: "https://amreye.in/",
-    siteName: "AMR-Eye.AI",
-    title: "AMR-Eye.AI · Instruments, Research & Project Library",
-    description: "Explore the AMR-Eye prototype, proposed instruments, research library and synthetic AST demonstration.",
+    siteName: "AMREye",
+    title: "AMREye · Instruments, Research & Project Library",
+    description: "Explore the AMREye prototype, proposed instruments, research library and synthetic AST demonstration.",
   },
+  twitter: {card:"summary_large_image",title:"AMREye",description:"Measure the plate. Connect the record.",images:["/og.png"]},
   manifest: "/manifest.webmanifest",
   appleWebApp: {
     capable: true,
-    title: "AMR-Eye",
+    title: "AMREye",
     statusBarStyle: "black-translucent",
   },
   icons: {

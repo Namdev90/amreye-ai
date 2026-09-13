@@ -1,18 +1,14 @@
-const CACHE = 'amr-eye-static-v5';
-const READER = '/offline.html';
-async function refreshReader(){
- const response=await fetch(READER,{cache:'no-cache'});
- if(response.ok&&response.headers.get('content-type')?.includes('text/html'))await(await caches.open(CACHE)).put(READER,response);
-}
-self.addEventListener('install', event => {event.waitUntil(refreshReader().then(()=>self.skipWaiting()));});
-self.addEventListener('activate', event => { event.waitUntil(caches.keys().then(keys => Promise.all(keys.filter(k => k.startsWith('amr-eye-') && k !== CACHE).map(k => caches.delete(k)))).then(() => self.clients.claim())); });
-self.addEventListener('fetch', event => {
- const url = new URL(event.request.url);
- if(event.request.method !== 'GET' || url.origin !== self.location.origin) return;
- // Refresh the saved reading edition when visitors return online.
- if(event.request.mode === 'navigate')event.waitUntil(refreshReader().catch(()=>undefined));
- // Always fetch pages from the server so publication and access changes take effect.
- if(event.request.mode === 'navigate') { event.respondWith(fetch(event.request).catch(async () => (await caches.match('/offline.html')) || new Response('<!doctype html><meta name="viewport" content="width=device-width"><title>AMR-Eye offline</title><body style="background:#031018;color:#edfffb;font:18px system-ui;padding:32px"><h1>You are offline</h1><p>Reconnect to load the latest AMR-Eye demonstration.</p><button onclick="location.reload()">Try again</button></body>', {status:503,headers:{'Content-Type':'text/html'}}))); return; }
- if(!/\.(png|jpe?g|webp|svg|woff2?)$/.test(url.pathname)) return;
- event.respondWith(fetch(event.request).then(response => { if(response.ok){const copy=response.clone();event.waitUntil(caches.open(CACHE).then(cache=>cache.put(event.request,copy)));}return response; }).catch(()=>caches.match(event.request).then(r=>r||Response.error())));
+const CACHE='amreye-public-v6';
+const OFFLINE=['/offline.html','/repository.json','/amr-eye-icon.png'];
+async function refresh(){const c=await caches.open(CACHE);await Promise.all(OFFLINE.map(async path=>{const r=await fetch(path);if(r.ok)await c.put(path,r)}))}
+self.addEventListener('install',e=>e.waitUntil(refresh().then(()=>self.skipWaiting())));
+self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('amr')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));
+self.addEventListener('fetch',e=>{
+ const u=new URL(e.request.url);
+ if(u.origin!==self.location.origin||e.request.method!=='GET'||u.pathname.startsWith('/admin')||u.pathname.startsWith('/api/'))return;
+ if(OFFLINE.includes(u.pathname))e.respondWith(fetch(e.request).then(async r=>{if(r.ok){const c=await caches.open(CACHE);await c.put(u.pathname,r.clone())}return r}).catch(()=>caches.match(u.pathname)));
+ else if(e.request.mode==='navigate'){
+   e.waitUntil(refresh().catch(()=>{}));
+   e.respondWith(fetch(e.request).catch(()=>caches.match('/offline.html')));
+ }
 });

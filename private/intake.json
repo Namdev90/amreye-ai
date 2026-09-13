@@ -1,0 +1,818 @@
+[
+  {
+    "id": "L001",
+    "url": "https://youtu.be/Y5rSSvXfL4g?si=3KnN285Z-Cekpap0",
+    "source_url": "https://youtu.be/Y5rSSvXfL4g?si=3KnN285Z-Cekpap0",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Self hosting and token savings",
+    "tool": "Ollama; 9Router; Headroom; Dify; OpenHands",
+    "evidence": "YouTube transcript",
+    "verdict": "Evaluate",
+    "action": "Existing Codex and Sites remain the working stack. Routing still uses provider quotas; local models require hardware. Prototype any selected provider in isolation.",
+    "official": [
+      "https://github.com/decolua/9router",
+      "https://github.com/chopratejas/headroom"
+    ]
+  },
+  {
+    "id": "L002",
+    "url": "https://amzn.in/d/02mjXa8I",
+    "source_url": "https://amzn.in/d/02mjXa8I",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Three-mode portable desk light",
+    "tool": "ARJ magnetic rechargeable lamp",
+    "evidence": "User title; retailer page unavailable",
+    "verdict": "Needs input",
+    "action": "Check the exact seller, battery runtime, charging connector, warranty and checkout price. Philips Orbit is a primary-source alternative; no purchase made.",
+    "official": [
+      "https://in.shop.lighting.philips.com/products/philips-orbit-desk-light"
+    ]
+  },
+  {
+    "id": "L003",
+    "url": "https://www.instagram.com/reel/DdEoYyrPTbF/",
+    "source_url": "https://www.instagram.com/reel/DdEoYyrPTbF/?stkn=MTBycDQzMDcwYnE4YQ==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Interactive globe and public feeds",
+    "tool": "God’s Eye View globe",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Reuse the existing synthetic AMR network visualization. Exact original repository unidentified; no personal tracking or live surveillance connected.",
+    "official": []
+  },
+  {
+    "id": "L004",
+    "url": "https://www.instagram.com/reel/DbqYVjazc5Q/",
+    "source_url": "https://www.instagram.com/reel/DbqYVjazc5Q/?stkn=MXZvdG5weWFyZDcxbg==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Website design resources",
+    "tool": "Watermelon UI; Motion Primitives; Manus; Haikei",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Adapted",
+    "action": "Use restrained motion, responsive cards and existing React components. Manus is a sponsored mention; no additional builder subscription needed.",
+    "official": [
+      "https://ui.watermelon.sh",
+      "https://motion-primitives.com",
+      "https://haikei.app"
+    ]
+  },
+  {
+    "id": "L005",
+    "url": "https://www.instagram.com/reel/DcdbfUBzmhn/",
+    "source_url": "https://www.instagram.com/reel/DcdbfUBzmhn/?stkn=cjF1Ymdwc3Y3NXQ5",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Routing, memory and multi-agent systems",
+    "tool": "OmniRoute; Headroom; claude-mem; The Council; Ruflo",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Evaluate",
+    "action": "OmniRoute and Headroom have identifiable repositories. Keep account quotas and private context protected. No global memory ingestion or extra agent framework installed.",
+    "official": [
+      "https://github.com/diegosouzapw/OmniRoute",
+      "https://github.com/chopratejas/headroom"
+    ]
+  },
+  {
+    "id": "L006",
+    "url": "https://www.instagram.com/reel/Daxj09yTmr_/",
+    "source_url": "https://www.instagram.com/reel/Daxj09yTmr_/?stkn=M2ZicDh4aTFqcWp6",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Claude-powered website design",
+    "tool": "UI UX Pro Max; 21st.dev; Framer Motion",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Apply coherent design and accessible native interactions. The wrapper repository is unidentified; do not install a guessed package.",
+    "official": [
+      "https://21st.dev"
+    ]
+  },
+  {
+    "id": "L007",
+    "url": "https://www.instagram.com/reel/DbyNa6Np-pz/",
+    "source_url": "https://www.instagram.com/reel/DbyNa6Np-pz/?stkn=c3JwM253MGdxbDUz",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Free model APIs",
+    "tool": "Bytez; NVIDIA NIM; OpenRouter",
+    "evidence": "Caption reviewed",
+    "verdict": "Evaluate",
+    "action": "Free tiers, model availability, data terms and rate limits need checking for a specific model before connection. No free-unlimited claim adopted.",
+    "official": []
+  },
+  {
+    "id": "L008",
+    "url": "https://www.instagram.com/reel/Dc0gZmUSMnN/",
+    "source_url": "https://www.instagram.com/reel/Dc0gZmUSMnN/?stkn=M21tYTZoYno1dnUz",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "3D and motion design tools",
+    "tool": "Vectary; Jitter; Magic UI; Threlte",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Retain React and existing concept imagery; Threlte is a Svelte choice and does not fit the current stack. Optional authored animation assets can be added later.",
+    "official": [
+      "https://magicui.design/docs"
+    ]
+  },
+  {
+    "id": "L009",
+    "url": "https://www.instagram.com/reel/DdEOEBLhXv7/",
+    "source_url": "https://www.instagram.com/reel/DdEOEBLhXv7/?stkn=ajU2cHk3MTVibG55",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Low-cost Claude gateway access",
+    "tool": "Experiential Labs; AgentRouter",
+    "evidence": "Video analysis and model page reviewed",
+    "verdict": "Deferred",
+    "action": "Live Experiential Labs pricing is metered. Screenshot reports AgentRouter pool failures. Neither service is needed for the present website; no keys or desktop configuration changed.",
+    "official": [
+      "https://platform.experientiallabs.ai/models"
+    ]
+  },
+  {
+    "id": "L010",
+    "url": "https://www.instagram.com/reel/DdBAtgISYlt/",
+    "source_url": "https://www.instagram.com/reel/DdBAtgISYlt/?stkn=ZzIwZjY0Njk3aTBy",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "WhatsApp automation",
+    "tool": "OpenWA; Antigravity",
+    "evidence": "Video analysis; official repository reviewed",
+    "verdict": "Deferred",
+    "action": "OpenWA is an unofficial linked-device gateway. Do not connect the personal WhatsApp account. Define a business workflow and use an approved integration if needed.",
+    "official": [
+      "https://github.com/rmyndharis/OpenWA"
+    ]
+  },
+  {
+    "id": "L011",
+    "url": "https://www.instagram.com/reel/DcaGyLfihM2/",
+    "source_url": "https://www.instagram.com/reel/DcaGyLfihM2/?stkn=ZnhrcXJ2MGQzam5p",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Multi-million daily free tokens",
+    "tool": "NaraRouter",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Evaluate",
+    "action": "Token allowance is a creator claim, not a verified entitlement. Require official model, quota, privacy and reliability checks before any API setup.",
+    "official": [
+      "https://router.bynara.id"
+    ]
+  },
+  {
+    "id": "L012",
+    "url": "https://www.instagram.com/reel/DZksdJCu5pr/",
+    "source_url": "https://www.instagram.com/reel/DZksdJCu5pr/?stkn=YTc0d3N1cWhzMnZ3",
+    "status": "Merged",
+    "creator": "",
+    "claim": "Open-source WhatsApp gateway",
+    "tool": "OpenWA",
+    "evidence": "Caption and official repository reviewed",
+    "verdict": "Merged",
+    "action": "Merged with L010. The official README identifies an unofficial integration and account-ban risk. No duplicate installation.",
+    "official": [
+      "https://github.com/rmyndharis/OpenWA"
+    ]
+  },
+  {
+    "id": "L013",
+    "url": "https://www.instagram.com/reel/DdEkRGZvWPT/",
+    "source_url": "https://www.instagram.com/reel/DdEkRGZvWPT/?stkn=anNiZ2R4c2ptZTQ3",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Android device automation via MCP",
+    "tool": "Google Artemis",
+    "evidence": "Caption and official repository reviewed",
+    "verdict": "Deferred",
+    "action": "Requires a specific authorized Android device or emulator, ADB and supporting tools. No device connection or global MCP change made.",
+    "official": [
+      "https://github.com/google/artemis"
+    ]
+  },
+  {
+    "id": "L014",
+    "url": "https://www.instagram.com/reel/DdHrArWITNE/",
+    "source_url": "https://www.instagram.com/reel/DdHrArWITNE/?stkn=MThrZzNjYjBtMXJ1OA==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Open video-generation tooling",
+    "tool": "OpenGenerativeAI; Higgsfield",
+    "evidence": "Caption reviewed",
+    "verdict": "Needs input",
+    "action": "The exact project and version require identification. Preserve this source alongside L047; do not assume a similarly named repository.",
+    "official": []
+  },
+  {
+    "id": "L015",
+    "url": "https://www.instagram.com/reel/DaNjH37Ojr8/",
+    "source_url": "https://www.instagram.com/reel/DaNjH37Ojr8/?stkn=MWRpMzU3aHloNnFqbA==",
+    "status": "Available alternative",
+    "creator": "",
+    "claim": "OCR for scanned documents",
+    "tool": "olmOCR",
+    "evidence": "Caption and official repository reviewed",
+    "verdict": "Available alternative",
+    "action": "The supplied PDF was readable with existing tools. Reserve olmOCR for a real scanned-document need and evaluate its model/hardware requirements then.",
+    "official": [
+      "https://github.com/allenai/olmocr"
+    ]
+  },
+  {
+    "id": "L016",
+    "url": "https://www.instagram.com/p/DdEUt_ljH65/",
+    "source_url": "https://www.instagram.com/p/DdEUt_ljH65/?stkn=MWY4d3g4bWFnYzIyMA==",
+    "status": "Merged candidate",
+    "creator": "",
+    "claim": "Hundreds of models through one gateway",
+    "tool": "FreeLLMAPI candidate",
+    "evidence": "Post caption reviewed",
+    "verdict": "Merged candidate",
+    "action": "Strong match to L028, but identity is inferred. Preserve this original link and do not treat promotional model counts as available capacity.",
+    "official": [
+      "https://github.com/tashfeenahmed/freellmapi"
+    ]
+  },
+  {
+    "id": "L017",
+    "url": "https://www.instagram.com/reel/DdG9R9oS-Y8/",
+    "source_url": "https://www.instagram.com/reel/DdG9R9oS-Y8/?stkn=MW9rOXUxZWtma3pxMA==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Free WhatsApp automation",
+    "tool": "WhatsApp automation, unidentified",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Need the tool name or a readable demonstration before deciding on implementation. No account connection made.",
+    "official": []
+  },
+  {
+    "id": "L018",
+    "url": "https://www.instagram.com/reel/DYPdtypAfjg/",
+    "source_url": "https://www.instagram.com/reel/DYPdtypAfjg/?stkn=N2ljdmVmNGg3YjNr",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Desktop agent with local memory",
+    "tool": "OpenHuman",
+    "evidence": "Caption; candidate official repository reviewed",
+    "verdict": "Deferred",
+    "action": "Broad desktop permissions and persistent memory need a concrete use case. Existing Codex is already available. Do not ingest private chat history automatically.",
+    "official": [
+      "https://github.com/tinyhumansai/OpenHuman"
+    ]
+  },
+  {
+    "id": "L019",
+    "url": "https://www.instagram.com/p/Dc_UHivjQZg/?img_index=2",
+    "source_url": "https://www.instagram.com/p/Dc_UHivjQZg/?img_index=2&stkn=c3BvbW81OXNvNnQ0",
+    "status": "Merged",
+    "creator": "",
+    "claim": "Model routing",
+    "tool": "FreeLLMAPI",
+    "evidence": "Post caption reviewed",
+    "verdict": "Merged",
+    "action": "Merged into L028; maintain a single evaluation lane.",
+    "official": [
+      "https://github.com/tashfeenahmed/freellmapi"
+    ]
+  },
+  {
+    "id": "L020",
+    "url": "https://www.instagram.com/reel/DXwnJp6BclD/",
+    "source_url": "https://www.instagram.com/reel/DXwnJp6BclD/?stkn=OWdibWRpODcxY252",
+    "status": "Adapted in part",
+    "creator": "",
+    "claim": "Human-sounding writing with intentional mistakes",
+    "tool": "Sinceerly",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted in part",
+    "action": "Adopt clear, direct website copy. Intentional spelling mistakes are inappropriate for research and investor material.",
+    "official": []
+  },
+  {
+    "id": "L021",
+    "url": "https://www.instagram.com/reel/DY9-WPYPB2y/",
+    "source_url": "https://www.instagram.com/reel/DY9-WPYPB2y/?stkn=MWx3N2YyZ2FsampicQ==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Visual styling inspiration",
+    "tool": "Liquid glass interaction design",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Extend the existing graphite and teal design with responsive cards, visible focus and reduced-motion behavior.",
+    "official": []
+  },
+  {
+    "id": "L022",
+    "url": "https://www.instagram.com/reel/DcscUaZSTlF/",
+    "source_url": "https://www.instagram.com/reel/DcscUaZSTlF/?stkn=aHB6ZHExOWR0eHJj",
+    "status": "Not selected",
+    "creator": "",
+    "claim": "Free third-level domains",
+    "tool": "DigitalPlat FreeDomain",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Not selected",
+    "action": "Keep the existing amreye.in identity. Additional third-level domains do not solve a current need.",
+    "official": [
+      "https://github.com/DigitalPlatDev/FreeDomain"
+    ]
+  },
+  {
+    "id": "L023",
+    "url": "https://www.instagram.com/p/Dcl0FNyDPaV/?img_index=2",
+    "source_url": "https://www.instagram.com/p/Dcl0FNyDPaV/?img_index=2&stkn=b3hxaW14bnhsY3R5",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Free access through many providers",
+    "tool": "Claude routing, unidentified",
+    "evidence": "Post caption only",
+    "verdict": "Needs input",
+    "action": "Exact tool is not established. Do not assume OmniRoute or promise free Claude.",
+    "official": []
+  },
+  {
+    "id": "L024",
+    "url": "https://www.instagram.com/reel/Dc9OuliqvJA/",
+    "source_url": "https://www.instagram.com/reel/Dc9OuliqvJA/?stkn=dmhpbjd5czg2a2Iw",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Caption does not identify a tool",
+    "tool": "Unidentified recommendation",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Need the tool name or relevant on-screen text. Preserve the link for review.",
+    "official": []
+  },
+  {
+    "id": "L025",
+    "url": "https://www.instagram.com/reel/Db3ENI5slqp/",
+    "source_url": "https://www.instagram.com/reel/Db3ENI5slqp/?stkn=Z2x2ZTIwc2RmZDZu",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Build apps faster with backends and templates",
+    "tool": "Appwrite; Supabase; Public APIs; n8n; starter repositories",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Adapted",
+    "action": "Use the existing Sites sign-in and D1 database for admin reviews. Avoid parallel databases or restarting the site from a starter template.",
+    "official": [
+      "https://appwrite.io",
+      "https://supabase.com",
+      "https://n8n.io"
+    ]
+  },
+  {
+    "id": "L026",
+    "url": "https://www.instagram.com/reel/DbVjOBPSZSq/",
+    "source_url": "https://www.instagram.com/reel/DbVjOBPSZSq/?stkn=MXZhd2Nnemt6bXZrcw==",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Presentation motion and video",
+    "tool": "PokoMotion",
+    "evidence": "Caption; primary site reviewed",
+    "verdict": "Evaluate",
+    "action": "Potential pitch-video tool when a concrete video is needed. Do not upload protected investor material to an unreviewed external service.",
+    "official": [
+      "https://poko.video"
+    ]
+  },
+  {
+    "id": "L027",
+    "url": "https://www.instagram.com/reel/DdKQOCfpLYQ/",
+    "source_url": "https://www.instagram.com/reel/DdKQOCfpLYQ/?stkn=eXB5NHFvZ2w2N3Bn",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Sponsored tool promotion",
+    "tool": "Manus sponsored recommendation",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "The specific feature is not visible in the caption. Need the named feature or demonstration before implementation.",
+    "official": []
+  },
+  {
+    "id": "L028",
+    "url": "https://www.instagram.com/reel/DdJslnFTnfL/",
+    "source_url": "https://www.instagram.com/reel/DdJslnFTnfL/?stkn=MWZyYnZsNGd0ZjF3MA==",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Aggregate free model APIs",
+    "tool": "FreeLLMAPI",
+    "evidence": "Caption and official repository reviewed",
+    "verdict": "Deferred",
+    "action": "Official repository describes personal experimentation. Keep it outside production clinical or investor data workflows.",
+    "official": [
+      "https://github.com/tashfeenahmed/freellmapi"
+    ]
+  },
+  {
+    "id": "L029",
+    "url": "https://www.instagram.com/reel/DbNANsqxWmL/",
+    "source_url": "https://www.instagram.com/reel/DbNANsqxWmL/?stkn=OGE5dTc0NTJ2dmtx",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Local avatar, image, voice and dictation tools",
+    "tool": "HeyGem; ComfyUI; OmniVoice; Handy",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Deferred",
+    "action": "Only add for a defined media or accessibility task. Confirm hardware, model licences and voice consent; sensational legal claims are unverified.",
+    "official": [
+      "https://github.com/Comfy-Org/ComfyUI",
+      "https://github.com/k2-fsa/OmniVoice",
+      "https://github.com/cjpais/Handy"
+    ]
+  },
+  {
+    "id": "L030",
+    "url": "https://www.instagram.com/reel/DWGudkbD2UF/",
+    "source_url": "https://www.instagram.com/reel/DWGudkbD2UF/?stkn=a2wybHJ5Ym00cjR5",
+    "status": "Available alternative",
+    "creator": "",
+    "claim": "Browser automation recipes",
+    "tool": "TinyFish; n8n",
+    "evidence": "Caption reviewed",
+    "verdict": "Available alternative",
+    "action": "Current browser and research tools cover this intake. No autonomous scraping workflow or anti-bot bypass configured.",
+    "official": []
+  },
+  {
+    "id": "L031",
+    "url": "https://www.instagram.com/reel/DW_eBE6ES_Q/",
+    "source_url": "https://www.instagram.com/reel/DW_eBE6ES_Q/?stkn=MXMyY3oxMGwyYzNi",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Persistent semantic memory",
+    "tool": "MemPalace",
+    "evidence": "Caption and official repository reviewed",
+    "verdict": "Deferred",
+    "action": "Do not import raw private chats into another memory system. Evaluate only with a scoped, non-sensitive corpus if a retrieval need remains.",
+    "official": [
+      "https://github.com/MemPalace/mempalace"
+    ]
+  },
+  {
+    "id": "L032",
+    "url": "https://www.instagram.com/reel/DdJ5ynbDxqS/",
+    "source_url": "https://www.instagram.com/reel/DdJ5ynbDxqS/?stkn=bnM5NGJyeTJ6dHZu",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Design critique, motion and browser checking",
+    "tool": "Impeccable; TasteSkill; Emil Kowalski; Figma MCP; Playwright",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Adapted",
+    "action": "Apply usable layout, keyboard behavior, reduced motion and browser verification in the current project. No extra design framework needed.",
+    "official": [
+      "https://tasteskill.dev",
+      "https://emilkowal.ski"
+    ]
+  },
+  {
+    "id": "L033",
+    "url": "https://www.instagram.com/reel/DdJzvhjKpj1/",
+    "source_url": "https://www.instagram.com/reel/DdJzvhjKpj1/?stkn=MWRna3ZmeWNmZmtlaA==",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Low-cost coding assistance",
+    "tool": "Cline; Cline Pass; NVIDIA model gateway",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Evaluate",
+    "action": "No evidence of unlimited capacity. Existing Codex continues; compare a named model and quota only if an additional coding provider is needed.",
+    "official": [
+      "https://github.com/cline/cline"
+    ]
+  },
+  {
+    "id": "L034",
+    "url": "https://www.instagram.com/reel/DdJ9v7AviGk/",
+    "source_url": "https://www.instagram.com/reel/DdJ9v7AviGk/?stkn=aHplMG5kbTYwcjBy",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "Prompt-based motion, sketch animation and localization",
+    "tool": "Higgsfield After Effects workflow",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Deferred",
+    "action": "Requires a confirmed plugin, compatible licensed editor and concrete video task. Automated analysis commentary about other model releases was not adopted.",
+    "official": []
+  },
+  {
+    "id": "L035",
+    "url": "https://www.instagram.com/reel/DaAs0hCi_f9/",
+    "source_url": "https://www.instagram.com/reel/DaAs0hCi_f9/?stkn=ZzN4dDJieHcza2c4",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Coding assistant configuration",
+    "tool": "Claude configuration trick, unidentified",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Need the actual setting or prompt. Do not alter global Claude configuration from an unidentified tip.",
+    "official": []
+  },
+  {
+    "id": "L036",
+    "url": "https://www.instagram.com/reel/Dc-pW6-Nybo/",
+    "source_url": "https://www.instagram.com/reel/Dc-pW6-Nybo/?stkn=MXh5ZDB6c3R0c25wMg==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Tool details missing",
+    "tool": "Unidentified Claude recommendation",
+    "evidence": "Caption refers to pinned comment",
+    "verdict": "Needs input",
+    "action": "Need the pinned tool name or readable screenshot. OmniRoute is only a guess and has not been assigned.",
+    "official": []
+  },
+  {
+    "id": "L037",
+    "url": "https://www.instagram.com/reel/DY6Y9vBJEE6/",
+    "source_url": "https://www.instagram.com/reel/DY6Y9vBJEE6/?stkn=MXViOWxka3hkYWhjYw==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "One billion free tokens",
+    "tool": "Unidentified token offer",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Provider and terms are missing. No account creation, key connection or quota claim.",
+    "official": []
+  },
+  {
+    "id": "L038",
+    "url": "https://www.instagram.com/reel/Dczh9kLOfb9/",
+    "source_url": "https://www.instagram.com/reel/Dczh9kLOfb9/?stkn=eHk4cHllZDcyaG4x",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Coding-assistant comparison",
+    "tool": "Unidentified Claude alternative",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Need a specific tool identity and workflow before implementation.",
+    "official": []
+  },
+  {
+    "id": "L039",
+    "url": "https://gemini.google/desktop/",
+    "source_url": "https://gemini.google/desktop/",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Desktop assistant",
+    "tool": "Gemini desktop",
+    "evidence": "Direct link supplied",
+    "verdict": "Evaluate",
+    "action": "Confirm the official download, supported operating system and required permissions before installation; existing browser access remains available.",
+    "official": [
+      "https://gemini.google/desktop/"
+    ]
+  },
+  {
+    "id": "L040",
+    "url": "https://www.instagram.com/reel/DdIPYHuxoDS/",
+    "source_url": "https://www.instagram.com/reel/DdIPYHuxoDS/?stkn=eHJmbHRhOXk3ZXF4",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Interactive WebGL storytelling",
+    "tool": "The Notturno Experience",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Adapted",
+    "action": "Use original concept art and restrained interaction in the current site. No third-party website or illustration copied.",
+    "official": []
+  },
+  {
+    "id": "L041",
+    "url": "https://www.instagram.com/reel/DZziUDZpwFC/",
+    "source_url": "https://www.instagram.com/reel/DZziUDZpwFC/?stkn=eDE0M3JybnJ2bzNq",
+    "status": "Not adopted",
+    "creator": "",
+    "claim": "Free-forever coding claim",
+    "tool": "Codex promotional claim",
+    "evidence": "Caption only",
+    "verdict": "Not adopted",
+    "action": "Available account usage is quota based. Do not present creator marketing as a verified free-unlimited entitlement.",
+    "official": []
+  },
+  {
+    "id": "L042",
+    "url": "https://www.instagram.com/p/DdEA_vZkr12/?img_index=6",
+    "source_url": "https://www.instagram.com/p/DdEA_vZkr12/?img_index=6&stkn=MTF5ZG5wcnc0dDd4eQ==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Developer resource collection",
+    "tool": "Developer design resources; Mobbin",
+    "evidence": "Post caption only; slides incomplete",
+    "verdict": "Needs input",
+    "action": "Mobbin is named in the caption, but the full carousel was not reviewed. Need the remaining tool names for complete mapping.",
+    "official": []
+  },
+  {
+    "id": "L043",
+    "url": "https://www.instagram.com/reel/DanYSO6MaCr/",
+    "source_url": "https://www.instagram.com/reel/DanYSO6MaCr/?stkn=bzV0cHRtYTZ4dmtj",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Content could not be inspected",
+    "tool": "Unavailable Instagram recommendation",
+    "evidence": "Page unavailable",
+    "verdict": "Needs input",
+    "action": "Need the creator tool name or pasted content. Availability failure is not evidence about the recommendation.",
+    "official": []
+  },
+  {
+    "id": "L044",
+    "url": "https://www.instagram.com/reel/DdEHUDaIEIq/",
+    "source_url": "https://www.instagram.com/reel/DdEHUDaIEIq/?stkn=MWE1emFoem11NWNuNQ==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Hosting, data and deployment services",
+    "tool": "Cloudflare development stack",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Existing Sites already uses Cloudflare-compatible hosting. Add only its native D1 binding for review records; do not imply all Cloudflare usage is unlimited or free.",
+    "official": []
+  },
+  {
+    "id": "L045",
+    "url": "https://www.instagram.com/reel/DchQYqaTtFX/",
+    "source_url": "https://www.instagram.com/reel/DchQYqaTtFX/?stkn=MWs0anZvb2k2OWV2bg==",
+    "status": "Not a feature",
+    "creator": "",
+    "claim": "Opinion about assistants",
+    "tool": "ChatGPT versus Claude comparison",
+    "evidence": "Caption reviewed",
+    "verdict": "Not a feature",
+    "action": "No distinct website implementation follows from a preference comparison. Retain as research context.",
+    "official": []
+  },
+  {
+    "id": "L046",
+    "url": "https://www.instagram.com/reel/DanT1aqMKNM/",
+    "source_url": "https://www.instagram.com/reel/DanT1aqMKNM/?stkn=MXRxYmlnMDhwZnY0cg==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Fix menus generated by AI",
+    "tool": "Mobile menu quality",
+    "evidence": "Caption reviewed",
+    "verdict": "Adapted",
+    "action": "Check opening, closing, focus, navigation, narrow-screen overflow and pitch controls in the existing menu.",
+    "official": []
+  },
+  {
+    "id": "L047",
+    "url": "https://www.instagram.com/p/Dc-wvDXkaJU/?img_index=1",
+    "source_url": "https://www.instagram.com/p/Dc-wvDXkaJU/?img_index=1&stkn=MWV6M3ljemZsY3gxdA==",
+    "status": "Evaluate; one entry unresolved",
+    "creator": "",
+    "claim": "Open-source tool roundup",
+    "tool": "OpenNotebook; No AI Slop; I Have ADHD; OpenSEO; BooktoSkill; OmniRoute; Strix; OpenGenerativeAI",
+    "evidence": "Post caption partly reviewed",
+    "verdict": "Evaluate; one entry unresolved",
+    "action": "Consolidate routing with L005. Use direct writing and searchable evidence. Remaining exact repositories and one missed carousel entry need identification before installation.",
+    "official": [
+      "https://github.com/petergyang/no-ai-slop"
+    ]
+  },
+  {
+    "id": "L048",
+    "url": "https://www.instagram.com/reel/DbdQQN3smX8/",
+    "source_url": "https://www.instagram.com/reel/DbdQQN3smX8/?stkn=eTVnbWl0dHozOXc3",
+    "status": "Adapted generically",
+    "creator": "",
+    "claim": "Website launch steps",
+    "tool": "Post-domain setup checklist",
+    "evidence": "Caption only",
+    "verdict": "Adapted generically",
+    "action": "Check favicon, metadata, social card, working links and custom 404. These are generic fixes, not a claimed transcription of hidden video steps.",
+    "official": []
+  },
+  {
+    "id": "L049",
+    "url": "https://www.instagram.com/reel/DdKWKlaSosL/",
+    "source_url": "https://www.instagram.com/reel/DdKWKlaSosL/?stkn=MW9qa3Bzc282cGo3OA==",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Server-only secrets, identity checks and session handling",
+    "tool": "Supabase authorization guidance",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Adapted",
+    "action": "Apply exact admin authorization to server routes and same-origin review writes. D1 is not Supabase, so do not claim RLS is configured.",
+    "official": []
+  },
+  {
+    "id": "L050",
+    "url": "https://www.instagram.com/reel/DdL4JD9N9CP/",
+    "source_url": "https://www.instagram.com/reel/DdL4JD9N9CP/?stkn=MXA2ejN0YTQybW91aw==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Website does not need more code",
+    "tool": "Website improvement recommendation, unidentified",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "The precise recommendation is not visible. Preserve the link; need the relevant on-screen guidance.",
+    "official": []
+  },
+  {
+    "id": "L051",
+    "url": "https://www.instagram.com/reel/DdL_UstSCMy/",
+    "source_url": "https://www.instagram.com/reel/DdL_UstSCMy/?stkn=cGY0cGliOG1sdG8=",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Minimal WhatsApp bot setup",
+    "tool": "Six-line WhatsApp bot, unidentified",
+    "evidence": "Caption only",
+    "verdict": "Needs input",
+    "action": "Need the actual library and authentication method; do not link a personal account.",
+    "official": []
+  },
+  {
+    "id": "L052",
+    "url": "https://www.instagram.com/reel/DdL_fcwjzy3/",
+    "source_url": "https://www.instagram.com/reel/DdL_fcwjzy3/?stkn=MWFpencxa3FuMXZ6bw==",
+    "status": "Merged and adapted",
+    "creator": "",
+    "claim": "Reusable design direction",
+    "tool": "Watermelon UI; Manus; Refero Styles",
+    "evidence": "Video analysis reviewed",
+    "verdict": "Merged and adapted",
+    "action": "Merge with L004. Keep one consistent design system and a reviewable implementation checklist.",
+    "official": [
+      "https://ui.watermelon.sh",
+      "https://styles.refero.design"
+    ]
+  },
+  {
+    "id": "L053",
+    "url": "https://www.instagram.com/p/Dcvc8SLjK3F/?img_index=1",
+    "source_url": "https://www.instagram.com/p/Dcvc8SLjK3F/?img_index=1&stkn=ajZlNGFweTd4a3di",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Developer repository collection",
+    "tool": "Public APIs; Awesome MCP Servers; OpenDesign; Awesome LLM Apps; Awesome; Scrapling; Free-for-dev; Ollama; Langflow; OpenHands",
+    "evidence": "Post caption reviewed",
+    "verdict": "Evaluate",
+    "action": "Catalog useful options once by capability. Current site does not need ten new frameworks; exact repositories, licences and selected workflows still require verification.",
+    "official": []
+  },
+  {
+    "id": "L054",
+    "url": "https://www.instagram.com/p/DdKMX1ZAWct/?img_index=3",
+    "source_url": "https://www.instagram.com/p/DdKMX1ZAWct/?img_index=3&stkn=MWM0cWNubDQ1Mmp4",
+    "status": "Adapted",
+    "creator": "",
+    "claim": "Improve assistant reasoning instructions",
+    "tool": "Uncertainty and pushback prompting",
+    "evidence": "Post caption reviewed",
+    "verdict": "Adapted",
+    "action": "The master prompt asks for evidence, explicit uncertainty and correction of unsupported claims. No global memory settings changed.",
+    "official": []
+  },
+  {
+    "id": "L055",
+    "url": "https://www.instagram.com/p/DdKBOKAjG_A/?img_index=11",
+    "source_url": "https://www.instagram.com/p/DdKBOKAjG_A/?img_index=11&stkn=bW52NWF1dHV6eDZq",
+    "status": "Evaluate",
+    "creator": "",
+    "claim": "Stitch; AI Studio; Antigravity; Pomelli; Flow; music tools; Opal; notebook claims",
+    "tool": "Google AI tool roundup",
+    "evidence": "Post caption reviewed; slides incomplete",
+    "verdict": "Evaluate",
+    "action": "Verify the current official product names, availability and specific workflow first. Model-version, rename and shutdown claims in the post remain unconfirmed.",
+    "official": []
+  },
+  {
+    "id": "L056",
+    "url": "https://www.instagram.com/reel/DdN-ExWjLcL/",
+    "source_url": "https://www.instagram.com/reel/DdN-ExWjLcL/?stkn=bTU0Z2dqZ2t0djFn",
+    "status": "Deferred",
+    "creator": "",
+    "claim": "WhatsApp scheduled replies through QR linking",
+    "tool": "WA-AKG",
+    "evidence": "Caption only",
+    "verdict": "Deferred",
+    "action": "Exact repository and permission model are unconfirmed. No QR linking or personal account automation.",
+    "official": []
+  },
+  {
+    "id": "L057",
+    "url": "https://www.instagram.com/p/Dc3vmYCEvpu/",
+    "source_url": "https://www.instagram.com/p/Dc3vmYCEvpu/?stkn=MW92MDlpemxvbWVhZw==",
+    "status": "Needs input",
+    "creator": "",
+    "claim": "Installable skills",
+    "tool": "OpenClaw skills collection",
+    "evidence": "Post caption only; images incomplete",
+    "verdict": "Needs input",
+    "action": "Need the actual skill names and source repositories. Do not execute unreviewed skills or import their instructions globally.",
+    "official": []
+  },
+  {
+    "id": "L058",
+    "url": "https://www.instagram.com/p/DdLboYaFOIm/",
+    "source_url": "https://www.instagram.com/p/DdLboYaFOIm/?stkn=MTRqMnY0dThtb3l2Mw==",
+    "status": "Evaluate; partial",
+    "creator": "",
+    "claim": "YC; Techstars; 500 Global; Antler; Sequoia Arc; SkyDeck; MassChallenge; HFO; OpenAI programs",
+    "tool": "Accelerator roundup",
+    "evidence": "Caption and one carousel slide reviewed",
+    "verdict": "Evaluate; partial",
+    "action": "Track as candidate opportunities. All 25 entries were not readable; verify each official program, eligibility, deadline and fit before applying. No applications submitted.",
+    "official": []
+  }
+]

@@ -28,6 +28,10 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    const agent=request.headers.get('user-agent')||'';
+    if(/GPTBot|ClaudeBot|CCBot|Bytespider|Amazonbot|meta-externalagent|Applebot-Extended/i.test(agent)){
+      return new Response('Automated collection is not permitted.',{status:403,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff'}});
+    }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
@@ -40,7 +44,17 @@ const worker = {
       }, allowedWidths);
     }
 
-    return handler.fetch(request, env, ctx);
+    const response=await handler.fetch(request, env, ctx);
+    const secured=new Response(response.body,response);
+    secured.headers.set('X-Content-Type-Options','nosniff');
+    secured.headers.set('Referrer-Policy','strict-origin-when-cross-origin');
+    if(url.pathname==='/admin'||url.pathname.startsWith('/admin/')||url.pathname.startsWith('/api/private/')){
+      secured.headers.set('Cache-Control','private, no-store, max-age=0');
+      secured.headers.set('X-Robots-Tag','noindex, nofollow, noarchive');
+      secured.headers.set('Vary','Cookie, oai-authenticated-user-email');
+      secured.headers.set('Content-Security-Policy',"frame-ancestors 'self'");
+    }
+    return secured;
   },
 };
 

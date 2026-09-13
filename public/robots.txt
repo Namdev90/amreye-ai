@@ -1,4 +1,14 @@
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: Google-Extended
+User-agent: CCBot
+User-agent: Bytespider
+User-agent: Amazonbot
+User-agent: meta-externalagent
+User-agent: Applebot-Extended
+Disallow: /
+
 User-agent: *
 Allow: /
-
-Sitemap: https://amreye.in/sitemap.xml
+Disallow: /admin
+Disallow: /api/

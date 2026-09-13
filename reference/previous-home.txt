@@ -1,0 +1,175 @@
+"use client";
+
+import { useEffect, useMemo, useState, lazy, Suspense } from "react";
+import {demoDiscs} from "./demo-rules.mjs";
+const NetworkExplorer=lazy(()=>import("./network-explorer"));
+const AnalysisWorkbench=lazy(()=>import("./analysis-workbench"));
+import MobileSection from "./mobile-section";
+const ApexExplorer=lazy(()=>import("./apex-explorer"));
+import MotionExperience from "./motion-experience";
+import HardwareShowcase, { HardwareHero } from "./hardware-showcase";
+import ProductShowcase from "./product-showcase";
+import {HomeDirectory,SiteNavigation,GuidedPitch,directory} from "./discovery";
+import ResearchPage from "./research-page";
+import {Pathways,Recognition,Team,Contact,ProjectGuide} from "./project-pages";
+import type { CSSProperties, ReactNode } from "react";
+import {
+  Activity, ArrowLeft, ArrowRight, ArrowUpRight, BarChart3, Beaker, Bot, Box, BrainCircuit, Check, ChevronRight,
+  CircleGauge, Cloud, Database, FlaskConical, Gauge, HeartPulse, Layers3, Menu,
+  Microscope, Play, Radio, ScanLine, Server, ShieldCheck, Sparkles,
+  Thermometer, UserCheck, WifiOff, X, Zap,
+} from "lucide-react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Progress } from "@/components/ui/progress";
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
+import { Slider } from "@/components/ui/slider";
+import { Switch } from "@/components/ui/switch";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
+
+type Scope = "Prototype demo" | "Proposed product" | "Future R&D";
+type Illumination = "Trans" | "Epi" | "Oblique" | "NIR";
+type Antibiotic = { code: string; name: string; mm: number; confidence: number; result: "S" | "I" | "R"; x: number; y: number; zone: number; };
+
+const antibiotics: Antibiotic[] = demoDiscs.map((d,i)=>({...d,confidence:95,result:i===5?"R":i===1||i===3?"I":"S",x:50+30*Math.cos((i*60-90)*Math.PI/180),y:50+30*Math.sin((i*60-90)*Math.PI/180),zone:d.mm}));
+
+const analysisStages = ["Detecting plate", "Calibrating plate diameter", "Detecting antibiotic discs", "Segmenting inhibition zones", "Measuring zone diameters", "Applying standards engine", "Generating output"];
+const navItems = [["Home", "home"], ["Hardware", "hardware"], ["APEX XR", "apex"], ["Technology", "technology"], ["Live Demo", "demo"], ["BAHU", "bahu"], ["Architecture", "architecture"], ["Applications", "applications"], ["Business", "business"], ["Roadmap", "roadmap"], ["About", "about"], ["Lab Console", "console"]];
+const techWall: Record<string, string> = {
+  RAST: "Rapid AST workflows are a future research and validation direction.",
+  MIC: "A proposed broth-microdilution module for direct minimum inhibitory concentration measurement.",
+  NIR: "An experimental 940 nm channel for difficult optical conditions, including condensation.",
+  VOC: "Auxiliary metabolic sensing; not a standalone organism identification method.",
+  LiDAR: "Coarse proximity and positioning only. Research-grade morphology requires a separate qualified profilometer.",
+  "Sensor Fusion": "Combines vision, kinetics, VOC and environmental context with confidence controls.",
+  "Digital Twin": "A traceable, time-stamped digital record for every plate.",
+  Robotics: "Future handling and workflow automation modules.",
+  "Edge AI": "Local vision processing for lower latency, privacy and offline operation.",
+  LIMS: "Laboratory Information Management System connectivity.", LIS: "Laboratory Information System connectivity.",
+  CLSI: "Clinical and Laboratory Standards Institute rule source.", EUCAST: "European Committee on Antimicrobial Susceptibility Testing rule source.",
+  "One Health": "Potential use across human, animal, food and environmental sectors.",
+  "AMR Heatmap": "A future anonymized, governed resistance-surveillance interface.",
+  SaaS: "Recurring software, standards, analytics and fleet-service layer.",
+  BAHU: "Bio-Automation & Human User Interface: the human-facing lab control layer.",
+  "Custom Automation": "Lab audit, SOP mapping and modular deployment around existing workflows.",
+  "Human-in-the-Loop": "A qualified laboratory professional validates or changes the system suggestion.",
+};
+
+function ScopeTag({ children }: { children: ReactNode }) {
+  const cls = children === "Prototype demo" ? "scope-current" : children === "Proposed product" ? "scope-proposed" : "scope-future";
+  return <span className={`scope-tag ${cls}`}>{children}</span>;
+}
+
+function SectionTitle({ eyebrow, title, copy, scope }: { eyebrow: string; title: string; copy?: string; scope?: Scope }) {
+  return <div className="section-heading"><div className="section-kicker"><span>{eyebrow}</span>{scope && <ScopeTag>{scope}</ScopeTag>}</div><h2>{title}</h2>{copy && <p>{copy}</p>}</div>;
+}
+
+function Flow({ items, compact = false }: { items: string[]; compact?: boolean }) {
+  return <div className={`flow ${compact ? "flow-compact" : ""}`}>{items.map((item, i) => <div className="flow-unit" key={item}><span>{item}</span>{i < items.length - 1 && <ChevronRight aria-hidden="true" />}</div>)}</div>;
+}
+
+function Plate({ analyzed, selected, mode, compact = false, onSelect }: { analyzed: boolean; selected: string; mode: string; compact?: boolean; onSelect?: (code: string) => void }) {
+  const [localSelected,setLocalSelected]=useState(selected);
+  return <div className={`plate-wrap ${compact ? "plate-compact" : ""}`}><div className={`plate mode-${mode.toLowerCase()}`} aria-label="Synthetic Kirby-Bauer antimicrobial susceptibility test plate"><div className="lawn-texture" />{antibiotics.map((a) => {
+    const active = (onSelect ? selected : localSelected) === a.code;
+    return <button onClick={() => onSelect ? onSelect(a.code) : setLocalSelected(a.code)} aria-label={`${a.code}, ${a.mm} millimetre inhibition zone`} className={`zone ${active ? "zone-active" : ""} ${analyzed ? "zone-analyzed" : ""}`} key={a.code} style={{ left: `${a.x}%`, top: `${a.y}%`, width: `${a.mm / 90 * 100}%`, aspectRatio: "1" }} type="button"><span className="disc" style={{ width: `${600 / a.mm}%`, height: `${600 / a.mm}%` }}>{a.code}</span>{analyzed && <><span className="diameter-line" /><span className="measure">{a.mm} mm</span></>}</button>;
+  })}{analyzed && <span className="plate-detected">PLATE Ø 90.0 MM · DETECTED</span>}<span className="scan-sweep" /></div><div className="plate-corners" aria-hidden="true"><i /><i /><i /><i /></div></div>;
+}
+
+function MiniChart() { return <svg className="voc-chart" viewBox="0 0 500 180" role="img" aria-label="Simulated volatile organic compound sensor response over time"><defs><linearGradient id="voc-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stopColor="#35f2df" stopOpacity=".38"/><stop offset="1" stopColor="#35f2df" stopOpacity="0"/></linearGradient></defs>{[30,70,110,150].map((y) => <line key={y} x1="35" x2="480" y1={y} y2={y} stroke="rgba(142,211,215,.14)" />)}<path d="M35 145 C75 145, 82 132, 118 134 S175 108, 208 115 S263 72, 301 88 S348 50, 385 64 S433 29, 480 41 L480 165 L35 165Z" fill="url(#voc-fill)" /><path d="M35 145 C75 145, 82 132, 118 134 S175 108, 208 115 S263 72, 301 88 S348 50, 385 64 S433 29, 480 41" fill="none" stroke="#35f2df" strokeWidth="3" /><text x="35" y="176">0h</text><text x="245" y="176">12h</text><text x="450" y="176">24h</text></svg>; }
+
+function LabConsole() {
+  const [temperature, setTemperature] = useState([35]); const [interval, setIntervalValue] = useState([5]); const [illumination, setIllumination] = useState<Illumination>("Trans");
+  return <div className="console-shell" id="lab-console"><div className="console-topbar"><div><span className="live-dot" /> DEVICE AMR-CORE-01</div><span>LOCAL EDGE MODE · SYNC READY</span></div><div className="console-grid">
+    <article className="console-card primary-console"><div className="card-head"><Thermometer /> INCUBATION CHAMBER <ScopeTag>Proposed product</ScopeTag></div><strong>{temperature[0].toFixed(1)} °C</strong><small>TARGET TEMPERATURE</small><Slider aria-label="Target incubation temperature" min={34} max={36} step={0.1} value={temperature} onValueChange={setTemperature} /><div className="metric-row"><span>Humidity <b>61%</b></span><span>Incubation <b className="ok">ACTIVE</b></span><span>Door <b>CLOSED</b></span></div></article>
+    <article className="console-card"><div className="card-head"><ScanLine /> VISION</div><strong>{illumination}</strong><small>ILLUMINATION MODE</small><div className="toggle-strip">{(["Trans", "Epi", "Oblique", "NIR"] as Illumination[]).map((x) => <button className={illumination === x ? "active" : ""} onClick={() => setIllumination(x)} key={x}>{x}</button>)}</div><div className="metric-row"><span>RGB <b className="ok">ON</b></span><span>Exposure <b>1/60</b></span></div></article>
+    <article className="console-card"><div className="card-head"><Microscope /> AST</div><strong>06</strong><small>DISCS DETECTED</small><div className="metric-row"><span>Plate <b className="ok">LOCKED</b></span><span>Status <b>READY</b></span></div><Progress value={82} /></article>
+    <article className="console-card"><div className="card-head"><Gauge /> SENSORS <ScopeTag>Future R&D</ScopeTag></div><div className="sensor-list"><span>Temperature <b>{temperature[0].toFixed(1)} °C</b></span><span>Humidity <b>61%</b></span><span>VOC <b>SIM</b></span><span>Depth <b>SIM</b></span><span>Device health <b className="ok">98%</b></span></div></article>
+    <article className="console-card"><div className="card-head"><BrainCircuit /> EDGE AI</div><strong>YOLO-CV · DEMO</strong><small>LOCAL MODEL PROFILE</small><div className="metric-row"><span>Queue <b>01</b></span><span>Mean confidence <b>97.6%</b></span></div></article>
+    <article className="console-card"><div className="card-head"><Database /> STANDARDS</div><strong>DEMO DB</strong><small>VERSION-CONTROLLED RULE LAYER</small><div className="metric-row"><span>CLSI <b>MOCK 2026</b></span><span>EUCAST <b>MOCK 16.0</b></span></div></article>
+    <article className="console-card wide"><div className="card-head"><Bot /> AUTOMATION <ScopeTag>Proposed product</ScopeTag></div><div className="workflow-status"><div><small>CURRENT WORKFLOW</small><b>AST time-lapse acquisition</b></div><div><small>NEXT OPERATION</small><b>Capture frame · 00:12:41</b></div><Progress value={64} /></div></article>
+    <article className="console-card wide"><div className="card-head"><CircleGauge /> CONTROL PARAMETERS</div><label>Imaging interval <b>{interval[0]} min</b></label><Slider aria-label="Imaging interval in minutes" min={5} max={60} step={5} value={interval} onValueChange={setIntervalValue} /><div className="switch-row"><label><Switch defaultChecked /> Auto-analysis</label><label><Switch defaultChecked /> QC flagging</label><label><Switch /> Cloud sync</label></div><small>All controls are simulated for product demonstration.</small></article>
+  </div></div>;
+}
+
+export default function Home() {
+  const [menuOpen,setMenuOpen]=useState(false); const [pitchMode, setPitchMode] = useState(false); const [illumination, setIllumination] = useState<Illumination>("Trans"); const [selectedTech, setSelectedTech] = useState<string | null>(null); const [showArchitecture, setShowArchitecture] = useState(false); const [installPrompt, setInstallPrompt] = useState<Event | null>(null);
+  useEffect(() => { if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => undefined); const handler = (e: Event) => { e.preventDefault(); setInstallPrompt(e); }; window.addEventListener("beforeinstallprompt", handler); return () => window.removeEventListener("beforeinstallprompt", handler); }, []);
+  const [installHelp,setInstallHelp] = useState(false);
+  const install = async () => { if(!installPrompt){setInstallHelp(true);return;} const p = installPrompt as Event & { prompt?: () => Promise<void> }; if (p?.prompt) await p.prompt(); };
+  const illuminationCopy = useMemo(() => ({ Trans: "Zone boundaries, silhouettes and quantitative measurement", Epi: "Surface appearance, pigmentation and visible morphology", Oblique: "Surface texture, colony edges and shadow-enhanced morphology", NIR: "Experimental 940 nm channel for difficult optical conditions" }[illumination]), [illumination]);
+  const [workspace, setWorkspace] = useState("home");
+  useEffect(() => {
+    const sync = () => {
+      const hash = location.hash.slice(1);
+      const known = directory.flatMap(group=>group.links.map(([,id])=>id));
+      const view = !hash ? "home" : hash === "project-wins" ? "recognition" : known.includes(hash) || hash==="problem" ? hash : "home";
+      setWorkspace(view);
+      requestAnimationFrame(() => {
+        const target = document.getElementById(view==="sources"||view==="project-progress" ? "apex" : view);
+        if (!hash || hash === "home") window.scrollTo({top:0,behavior:"instant"});
+        else if (target) (hash === "console" ? target.closest("section") || target : target).scrollIntoView({behavior:"instant", block:"start"});
+        else window.scrollTo({top:0,behavior:"instant"});
+      });
+    };
+    sync(); window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
+  return <main data-workspace={workspace} data-active-section={workspace} className={pitchMode ? "pitch-active" : ""}>
+    <MotionExperience />
+    <SiteNavigation active={workspace} onPitch={()=>setPitchMode(true)}/>
+    <div id="main-content" tabIndex={-1}/>
+    {workspace!=="home"&&<nav className="section-breadcrumb" aria-label="Breadcrumb"><a href="#home">AMR-Eye</a><ChevronRight size={14}/><span>{directory.flatMap(g=>g.links).find(([,id])=>id===workspace)?.[0]||"The problem"}</span><a href="#apex">Open library<ArrowRight size={14}/></a></nav>}
+    <HomeDirectory onPitch={()=>setPitchMode(true)}/>
+    {workspace==="pathways"&&<Pathways/>}{workspace==="recognition"&&<Recognition/>}{workspace==="team"&&<Team/>}{workspace==="guide"&&<ProjectGuide/>}
+    {workspace==="research"&&<ResearchPage/>}
+    {workspace==="products"&&<ProductShowcase />}
+
+    <section className="section problem-section" id="problem"><SectionTitle eyebrow="01 · THE PROBLEM" title="A proven method. A fragmented workflow." copy="Kirby–Bauer AST remains scientifically useful. The opportunity is to make its measurement, traceability and review more consistent." /><div className="problem-grid"><div className="problem-list">{["Manual zone measurement", "Observer variability", "Fragmented equipment", "Delayed interpretation", "Manual documentation", "Limited continuous monitoring", "Disconnected lab systems"].map((x, i) => <div key={x}><span>0{i + 1}</span><p>{x}</p></div>)}</div><div className="compare-card"><div><small>TRADITIONAL WORKFLOW</small><Flow compact items={["Plate", "Manual ruler", "Lookup", "Paper report"]} /></div><div className="digital-flow"><small>AMR-EYE DIGITAL WORKFLOW</small><Flow compact items={["Calibrated image", "AI measure", "Rules engine", "Human verify", "Digital report"]} /></div><p><ShieldCheck /> Designed to assist validated microbiology · not bypass it.</p></div></div></section>
+    <section className="section demo-section" id="demo"><SectionTitle eyebrow="02 · LIVE PRODUCT DEMO" title="Inspect a zone. Review the record." copy="Six-disc synthetic metrology with editable measurements, QC scenarios and traceable demonstration reports." scope="Prototype demo" />{workspace==="demo"&&<Suspense fallback={<p>Opening the workbench…</p>}><AnalysisWorkbench /></Suspense>}</section>
+
+    {workspace==="hardware"&&<HardwareShowcase />}
+    {["apex","sources","project-progress"].includes(workspace)&&<Suspense fallback={<p className="route-loading">Opening the project library…</p>}><ApexExplorer /></Suspense>}
+    <section className="section technology-section" id="technology"><SectionTitle eyebrow="03 · MEASURE → INTERPRET → VALIDATE" title="The AI does not invent breakpoints." copy="Optical measurement, structured rules and professional validation remain distinct." /><div className="standards-quote"><BrainCircuit /><span>“The AI measures. The standards engine interprets. The microbiologist validates.”</span></div><div className="technology-grid"><article className="glass-card sir-card"><div className="card-head"><ShieldCheck /> S / I / R EXPLAINED</div><Accordion type="single" collapsible defaultValue="S"><AccordionItem value="S"><AccordionTrigger><span className="sir sir-s">S</span> Susceptible</AccordionTrigger><AccordionContent>Likely inhibited by the antimicrobial at the exposure represented by the selected standard and test conditions.</AccordionContent></AccordionItem><AccordionItem value="I"><AccordionTrigger><span className="sir sir-i">I</span> Standard-dependent terminology</AccordionTrigger><AccordionContent><b>CLSI:</b> Intermediate. <b>EUCAST:</b> Susceptible, Increased Exposure. The interface must display the active standard and version.</AccordionContent></AccordionItem><AccordionItem value="R"><AccordionTrigger><span className="sir sir-r">R</span> Resistant</AccordionTrigger><AccordionContent>Not inhibited at the defined breakpoint under the selected standard and method.</AccordionContent></AccordionItem></Accordion><p>The computer-vision layer measures the optical result. Version-controlled rules perform the S/I/R mapping.</p></article><article className="glass-card standards-card"><div className="card-head"><Database /> STANDARDS ENGINE <ScopeTag>Proposed product</ScopeTag></div><div className="standard-fields">{[["Organism","E. coli · DEMO"],["Antibiotic","Ciprofloxacin"],["Method","Disk diffusion"],["Zone diameter","25.4 mm"],["MIC","Not measured"],["Standard","EUCAST / CLSI demo"],["Version","Mock 2026"],["Breakpoint","Interface only"],["Interpretation","S · suggested"],["QC status","Human review"]].map(([k,v]) => <div key={k}><small>{k}</small><b>{v}</b></div>)}</div><Flow compact items={["AI Measurement", "Structured Standards DB", "S/I/R Rule", "Human Verification"]} /></article></div></section>
+
+    <section className="section imaging-section" id="imaging"><SectionTitle eyebrow="04 · MULTI-MODE IMAGING" title="One plate. Multiple optical perspectives." copy="Mode switching below changes the synthetic optical view." scope="Proposed product" /><div className="imaging-grid"><div><Plate analyzed selected="CIP" mode={illumination} /></div><div className="mode-controls">{(["Trans","Epi","Oblique","NIR"] as Illumination[]).map((mode) => <button key={mode} onClick={() => setIllumination(mode)} className={illumination === mode ? "active" : ""}><span>{mode === "NIR" ? "940 NM" : `${mode.toUpperCase()}-ILLUMINATION`}</span><p>{{Trans:"Zone metrology",Epi:"Surface morphology",Oblique:"Texture + edges",NIR:"Fog vision · experimental"}[mode]}</p>{mode === "NIR" && <ScopeTag>Future R&D</ScopeTag>}</button>)}<div className="mode-detail"><ScanLine /><div><small>ACTIVE OPTICAL PURPOSE</small><b>{illuminationCopy}</b></div></div></div></div></section>
+
+    <section className="section modules-section" id="modules"><SectionTitle eyebrow="05 · MODULAR SCIENCE" title="Standardize first. Add sensing with evidence." copy="Advanced channels are separated from the AST demo and clearly marked as proposed or experimental." /><div className="module-grid"><article className="glass-card mic-card"><div className="card-head"><Beaker /> MIC MODULE <ScopeTag>Proposed product</ScopeTag></div><h3>Minimum Inhibitory Concentration</h3><p className="module-method">Proposed broth microdilution module</p><p>The lowest concentration of an antimicrobial that prevents visible microbial growth under defined test conditions.</p><div className="mic-wells">{["0.25","0.5","1","2","4","8"].map((x,i) => <div key={x} className={i < 3 ? "growth" : "clear"}><i /><b>{x}</b><small>{i < 3 ? "Growth" : "No growth"}</small></div>)}</div><div className="mic-output">SIMULATED OUTPUT <b>MIC = 2 µg/mL</b></div></article><article className="glass-card voc-card"><div className="card-head"><Radio /> AI NOSE / METABOLIC SENSING <ScopeTag>Future R&D</ScopeTag></div><p>Microbial metabolism can produce volatile organic compounds (VOCs). AMR-Eye explores VOC response as an auxiliary metabolic fingerprint · not as a standalone species identifier.</p><MiniChart /><Flow compact items={["Vision", "VOC", "Growth kinetics", "Environment", "Sensor fusion"]} /></article><article className="glass-card lidar-card"><div className="card-head"><Box /> LiDAR / DEPTH <ScopeTag>Future R&D</ScopeTag></div><div className="depth-viz"><span /><span /><span /><span /><span /></div><p>The proposed VL53L8CX channel supports coarse presence, proximity and plate positioning. Research-grade morphology requires a separate qualified 3D profilometer.</p><b>Not an independent bacterial identification method.</b></article><article className="glass-card nephelo-card"><div className="card-head"><Gauge /> NEPHELOMETER <ScopeTag>Proposed product</ScopeTag></div><div className="mc-gauge"><span style={{width:"72%"}} /><i>0.5 McFarland target</i></div><p>Standardized inoculum density matters because improper bacterial concentration can alter zone measurements.</p><blockquote>“We do not want AI to precisely measure a poorly standardized experiment.”</blockquote></article></div></section>
+
+    <section className="section twin-section" id="twin"><SectionTitle eyebrow="06 · PIMS" title="A digital twin for every plate." copy="Plate Information Management System  ·  one traceable record from inoculation to verification." scope="Proposed product" /><div className="twin-grid"><article className="plate-record"><div className="record-head"><div><small>PLATE ID</small><b>PLT-26-0901-017</b></div><div className="qr" aria-label="Decorative mock QR code">{Array.from({length:36}).map((_,i)=><i key={i} className={i%3===0||i%7===0?"on":""}/>)}</div></div><div className="record-fields">{[["Sample ID","SAM-2409-82"],["Media","Mueller–Hinton agar"],["Organism","E. coli · demo"],["Antibiotics","CIP · AMC · MEM · GEN · SXT · AMP"],["Inoculation","09:02 IST"],["Temperature","37.0 °C"],["Images","12 frames"],["AI confidence","97.6% mean"],["Standards","Demo EUCAST/CLSI"],["Rules version","Mock 2026"],["Example zone","CIP 25.4 mm · synthetic"],["Human review","Pending"],["Report","Draft"]].map(([k,v])=><span key={k}><small>{k}</small><b>{v}</b></span>)}</div></article><article className="plate-timeline"><div className="card-head"><Activity /> GROWTH TIMELINE</div>{[["00:00","Plate registered","Baseline captured"],["02:00","Early lawn","No measurable zones"],["08:00","Zone emergence","Confidence 72%"],["16:00","Stable boundaries","Confidence 94%"],["18:00","Endpoint ready","Human review queued"]].map(([t,a,b],i)=><div key={t} className={i===4?"current":""}><span>{t}</span><i /><p><b>{a}</b><small>{b}</small></p></div>)}</article></div></section>
+
+    <section className="section bahu-section" id="bahu"><SectionTitle eyebrow="07 · SaaS–BAHU" title="The laboratory’s unified human control layer." copy="BAHU  ·  Bio-Automation & Human User Interface  ·  connects people, AI, instruments and biological workflows without hiding professional responsibility." scope="Future R&D" /><div className="sop-flow">{[["01","Sample preparation","A qualified operator selects the assay SOP, prepares the inoculum and confirms the media and method."],["02","Plate registration","Connect the plate ID, sample metadata, disc content and preparation record."],["03","Optical measurement","Capture calibrated views and inspect proposed zone measurements. Ambiguous boundaries require review."],["04","Environmental record","Log the assay-specific temperature, timing and acquisition conditions alongside each image."],["05","Human review","Review measurements, apply a qualified standards version and retain a traceable decision before any release."]].map(([n,title,copy])=><article key={n}><span>{n}</span><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div></section>
+
+    <section className="section console-section" id="console"><SectionTitle eyebrow="08 · LAB CONTROL CONSOLE" title="Explore the proposed laboratory controls." copy="Adjust the simulated controls to explore the proposed operator experience." scope="Prototype demo" /><LabConsole /></section>
+
+    <section className="section architecture-section" id="architecture"><SectionTitle eyebrow="09 · SOFTWARE ARCHITECTURE" title="Four-layer system architecture" copy="Control, human interface, local intelligence and cloud coordination remain separable by design." scope="Proposed product" /><div className="quad-architecture">{[
+      ["01","HARDWARE CONTROL","Firmware / Real-Time Control","STM32 / RTOS",["Temperature","Lighting","Interlocks","Sensors","Timing-critical hardware"],"Zap"],
+      ["02","OPERATOR HMI","Human / UI Layer","Industrial HMI / SBC",["BAHU","Touchscreen","Sample management","Workflow control","Local UI"],"User"],
+      ["03","EDGE METROLOGY","Edge AI","NVIDIA Jetson",["Plate + disc detection","Zone segmentation","Growth tracking","Sensor fusion","Confidence scoring"],"Brain"],
+      ["04","FLEET & DATA","Cloud Intelligence","Connected services",["Multi-device analytics","Model updates","Enterprise dashboard","Remote monitoring","Fleet management"],"Cloud"]
+    ].map(([n,name,sub,hw,list,icon]) => <article key={name as string}><div className="layer-index">{n as string}</div><div>{icon==="Zap"?<Zap/>:icon==="User"?<UserCheck/>:icon==="Brain"?<BrainCircuit/>:<Cloud/>}<small>LAYER {n as string}</small><h3>{name as string}</h3><p>{sub as string}</p><b>{hw as string}</b><ul>{(list as string[]).map(x=><li key={x}>{x}</li>)}</ul></div></article>)}</div><div className="architecture-caption"><Flow items={["Hardware control", "Operator HMI", "Edge inference", "Fleet services"]} /></div><div className="edge-banner"><div><WifiOff /><span><small>EDGE AI</small><b>Camera → Local AI → Local result</b></span></div><p>Lower latency · Offline operation · Privacy · Reduced cloud dependence</p><div>Optional <ChevronRight /> <Cloud /> Cloud sync when connected</div></div></section>
+
+    <MobileSection className="section integration-section" id="integration"><SectionTitle eyebrow="10 · CONNECTED LAB" title="Designed to integrate · not become another silo." scope="Future R&D" /><div className="integration-flow"><div><img src="/amr-eye-icon.png" alt="" /><b>AMR-EYE</b></div><ChevronRight/><div><Database/><b>LIMS / LIS</b><small>Lab systems</small></div><ChevronRight/><div><Server/><b>HIS</b><small>Hospital system</small></div><ChevronRight/><div><HeartPulse/><b>CLINICIAN / ENTERPRISE</b><small>Verified information</small></div></div><p className="integration-note"><b>LIMS</b> Laboratory Information Management System · <b>LIS</b> Laboratory Information System · <b>HIS</b> Hospital Information System</p></MobileSection>
+
+    <MobileSection className="section automation-section" id="automation"><SectionTitle eyebrow="11 · CUSTOM LAB AUTOMATION" title="Adapt the platform to the laboratory." copy="AMR-Eye adapts to the laboratory rather than forcing the laboratory to adapt to AMR-Eye." scope="Future R&D" /><Flow items={["Lab audit","SOP mapping","Instrument mapping","Automation design","Hardware modules","Software config","AI config","BAHU deployment"]} /><div className="lab-types">{[["Small diagnostic lab","AST + imaging + smart incubation"],["Hospital laboratory","AST + MIC + LIS + QC + reporting"],["Research laboratory","Time-lapse + multimodal imaging + custom AI"],["Pharmaceutical QC","Environment monitoring + colony analysis + audit trail"]].map(([a,b])=><article key={a}><FlaskConical/><h3>{a}</h3><p>{b}</p></article>)}</div></MobileSection>
+
+    <MobileSection className="section applications-section" id="applications"><SectionTitle eyebrow="12 · ONE HEALTH" title="One platform architecture. Multiple biological contexts." copy="Potential expansion aligned with a One Health approach; each use case requires its own validation pathway." scope="Future R&D" /><div className="one-health-orbit"><div className="health-core"><img src="/amr-eye-icon.png" alt=""/><b>ONE HEALTH</b></div>{["Human Health","Animal Health","Food / Dairy","Water / Environment","Pharmaceutical QC"].map((x,i)=><span key={x} style={{"--i":i} as CSSProperties}>{x}</span>)}</div></MobileSection>
+
+    <MobileSection className="section network-section" id="network"><SectionTitle eyebrow="13 · AMR INTELLIGENCE NETWORK" title="Explore an AMR data example." copy="India and global views with fixed synthetic counts." scope="Prototype demo" />{workspace==="network"&&<Suspense fallback={<p>Opening the map…</p>}><NetworkExplorer /></Suspense>}</MobileSection>
+
+    <MobileSection className="section business-section" id="business"><SectionTitle eyebrow="14 · BUSINESS" title="Hardware opens the door. Recurring services compound value." copy="A system business · not a one-time device sale." /><div className="revenue-stack">{["Hardware / System Installation","Software Subscription","AI-as-a-Service","Automation-as-a-Service","Integration-as-a-Service","AMC / Calibration / Support","Enterprise SaaS"].map((x,i)=><div key={x}><span>0{i+1}</span><b>{x}</b>{i>0&&<small>RECURRING</small>}</div>)}</div></MobileSection>
+
+    <MobileSection className="section positioning-section" id="positioning"><SectionTitle eyebrow="15 · COMPETITIVE POSITIONING" title="Established systems validate the category." copy="AMR-Eye’s intended position is a staged, resource-conscious platform · not an unproven claim of superiority." /><div className="comparison-table-wrap"><Table><TableHeader><TableRow><TableHead>MARKET CATEGORY</TableHead><TableHead>VALIDATES</TableHead><TableHead>AMR-EYE INTENDED POSITION</TableHead></TableRow></TableHeader><TableBody>{[["Traditional manual AST","Accessible disk diffusion","Digitized measurement + traceability"],["Reshape Biotech","AI imaging + incubation","AMR-first, modular, edge-capable pathway"],["bioMérieux / VITEK","Integrated clinical ID/AST","Start with disk diffusion; build validation discipline"],["BD Phoenix","Automated ID/AST + expert rules","Resource-conscious staged architecture"],["WASPLab / Colibri","Microbiology automation","Future BAHU orchestration + modular automation"]].map(r=><TableRow key={r[0]}>{r.map(c=><TableCell key={c}>{c}</TableCell>)}</TableRow>)}</TableBody></Table></div></MobileSection>
+
+    <MobileSection className="section roadmap-section" id="roadmap"><SectionTitle eyebrow="16 · PRODUCT ROADMAP" title="Build evidence before breadth." copy="All product tiers below are roadmap concepts unless explicitly marked as the current demo." /><div className="tiers">{[["LITE","Portable imaging + ZOI analysis","Prototype direction"],["CORE","Smart incubation + automated imaging + AST","Proposed"],["PRO","Multimodal sensing + advanced analytics + integration","Future"],["CLINICAL","Validated AST / MIC / QC / standards / traceability","Future · regulated"],["AUTOMATION","Robotics + laboratory orchestration","Long-term"]].map(([n,d,t],i)=><article key={n} className={i===0?"featured":""}><small>AMR-EYE</small><h3>{n}</h3><p>{d}</p><span>{t}</span></article>)}</div><div className="validation-roadmap">{[["01","Synthetic images","Measurement proof"],["02","Reference plates","Manual agreement"],["03","Pilot lab","Error profile"],["04","Standards DB","Traceable S/I/R"],["05","Clinical protocol","Category agreement"],["06","Regulatory planning","Deployment readiness"]].map(([n,a,b])=><div key={n}><span>{n}</span><b>{a}</b><small>{b}</small></div>)}</div></MobileSection>
+
+    <section className="section wall-section" id="wall"><SectionTitle eyebrow="17 · ADVANCED TECHNOLOGY WALL" title="Explore the full vocabulary · without confusing the MVP." copy="Tap any module to explore its purpose and maturity." /><div className="tech-wall">{Object.keys(techWall).map(x=><button key={x} onClick={()=>setSelectedTech(x)}>{x}<ChevronRight/></button>)}</div></section>
+    <section className="section about-section" id="about"><div className="about-mark"><img src="/amr-eye-icon.png" alt="AMR-Eye app icon" /></div><div><SectionTitle eyebrow="18 · ABOUT AMR-EYE.AI" title="A better record starts with a closer look." copy="AMR-Eye.AI is an AI-assisted antimicrobial susceptibility testing and bio-automation project led by Namdev Shirodkar. The immediate objective is to convert a defensible computer-vision principle into a validated prototype, dataset and pilot workflow." /><div className="ask-strip"><span>THE NEXT MILESTONE</span><b>Prototype → Dataset → Validation → Pilot Lab → Scale</b></div><a className="text-link" href="#team">Meet the team <ArrowUpRight size={17}/></a><button className="secondary-action install-action" onClick={install}><Zap/> Install AMR-Eye App</button>{installHelp && <p role="status">On Android or desktop, open your browser menu and choose Install app when available. On iPhone, open in Safari, tap Share, then Add to Home Screen. The website remains a research demonstration.</p>}</div><Contact/></section>
+
+    <footer className="repository-footer"><div><a href="#home">AMR-Eye.AI</a><nav aria-label="Footer navigation"><a href="#apex">Library</a><a href="#research">Research</a><a href="#team">Team</a><a href="#about">Contact</a></nav></div><p>Research prototype. Simulated results are not for clinical use.</p></footer>
+
+    <Dialog open={pitchMode} onOpenChange={setPitchMode}><DialogContent className="pitch-dialog" showCloseButton={false} aria-describedby={undefined}><DialogTitle className="sr-only">AMR-Eye presentation mode</DialogTitle><GuidedPitch onExit={()=>setPitchMode(false)} onNavigate={(hash)=>{setPitchMode(false);location.hash=hash;}} /></DialogContent></Dialog>
+    <Dialog open={!!selectedTech} onOpenChange={(open)=>!open&&setSelectedTech(null)}><DialogContent className="tech-dialog"><DialogHeader><DialogTitle>{selectedTech}</DialogTitle></DialogHeader><ScopeTag>{["NIR","VOC","LiDAR","Sensor Fusion","Robotics","AMR Heatmap","Custom Automation","RAST"].includes(selectedTech||"")?"Future R&D":"Proposed product"}</ScopeTag><p>{selectedTech ? techWall[selectedTech] : ""}</p><small>Capability status is shown conservatively. Clinical use would require dedicated validation.</small></DialogContent></Dialog>
+    <Dialog open={showArchitecture} onOpenChange={setShowArchitecture}><DialogContent className="architecture-dialog"><DialogHeader><DialogTitle>AMR-Eye Platform Architecture</DialogTitle></DialogHeader><Flow items={["Human","BAHU","Edge AI","Instruments + Sensors","Verified Result"]}/><p>AST is the first use case. The long-term platform connects humans, AI, controlled hardware, data and biological workflows through one orchestration layer.</p><a href="#architecture" onClick={()=>{setShowArchitecture(false);setPitchMode(false)}} className="primary-action">Open Full Architecture <ChevronRight/></a></DialogContent></Dialog>
+  </main>;
+}

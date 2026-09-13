@@ -1,6 +1,6 @@
 {
-  "name": "AMR-Eye.AI",
-  "short_name": "AMR-Eye",
+  "name": "AMREye.AI",
+  "short_name": "AMREye",
   "description": "AI-assisted antimicrobial susceptibility testing and modular bio-automation prototype.",
   "start_url": "/",
   "display": "standalone",

@@ -4,24 +4,8 @@ import test from "node:test";
 
 
 test("renders the AMR-Eye entry page with accessible navigation and concept labelling", async () => {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  const response = await worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+  // Runtime headers and Cloudflare bindings must be tested in the actual worker runtime.
+  const response = await fetch(process.env.TEST_SITE_URL||'http://127.0.0.1:5173/',{headers:{accept:'text/html'}});
 
   assert.equal(response.status, 200);
   assert.match(
