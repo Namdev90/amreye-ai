@@ -19,3 +19,14 @@
 .library-search-input > input {
   outline: none;
 }
+
+.precision-copy .ai-accent {
+  color: #3be9d6;
+  font-weight: 800;
+}
+
+.precision-instrument figcaption small {
+  color: #91a4ac;
+  font-size: 12px;
+  letter-spacing: .04em;
+}

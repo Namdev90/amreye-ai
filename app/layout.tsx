@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),
   alternates: { canonical: "/" },
   title: "AMReye.AI  ·  Instruments, Research & Project Library",
-  description: "Explore the plate-reader prototype, proposed laboratory platform, research pathways and a synthetic AST demonstration.",
+  description: "Explore AMReye.AI's antimicrobial intelligence prototype, research pathways and synthetic AST demonstration.",
   applicationName: "AMReye.AI",
   openGraph: {
     images: [{url:"/og.png",width:1200,height:630,alt:"AMReye.AI: Measure the plate. Connect the record."}],
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     url: "https://amreye.in/",
     siteName: "AMReye.AI",
     title: "AMReye.AI · Instruments, Research & Project Library",
-    description: "Explore the AMReye.AI prototype, proposed instruments, research library and synthetic AST demonstration.",
+    description: "Explore the AMReye.AI antimicrobial intelligence prototype, research library and synthetic AST demonstration.",
   },
   twitter: {card:"summary_large_image",title:"AMReye.AI",description:"Measure the plate. Connect the record.",images:["/og.png"]},
   manifest: "/manifest.webmanifest",

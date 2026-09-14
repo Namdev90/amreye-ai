@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { BookOpen, Box, Microscope, Pause, Play, SlidersHorizontal, Home, Layers3 } from "lucide-react";
 
 export default function MotionExperience() {
   const [paused, setPaused] = useState(true);
@@ -102,15 +101,5 @@ export default function MotionExperience() {
     };
   }, [paused]);
 
-  return <>
-    <div className="reading-progress" aria-hidden="true" />
-    <button className="motion-toggle" type="button" onClick={() => setPaused(value => {
-      const next = !value;
-      try { sessionStorage.setItem("amr-motion", next ? "off" : "on"); } catch { /* Preference persistence is optional. */ }
-      return next;
-    })} aria-pressed={!paused} aria-label={paused ? "Enable decorative motion" : "Pause decorative motion"}>
-      {paused ? <Play size={14} /> : <Pause size={14} />}<span>{paused ? "Motion off" : "Motion on"}</span>
-    </button>
-
-  </>;
+  return <div className="reading-progress" aria-hidden="true" />;
 }
