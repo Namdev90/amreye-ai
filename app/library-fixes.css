@@ -1,0 +1,21 @@
+.explorer-search.library-search-control {
+  align-items: stretch;
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.library-search-control > span {
+  font-size: 14px;
+}
+
+.library-search-input:focus-within {
+  border-color: #7cdbd0;
+  box-shadow: 0 0 0 2px #7cdbd033;
+}
+
+.library-search-input > input {
+  outline: none;
+}
