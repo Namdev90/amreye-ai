@@ -79,7 +79,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         <button type="button" disabled={!ready} onClick={() => scene.current?.top()} aria-label="Toggle top view" title="Toggle top view"><ArrowUp /></button>
         <button type="button" disabled={!ready} onClick={() => { scene.current?.reset(); setExploded(true); setIsolated(false); setSpinning(false); }} aria-label="Reset 3D view" title="Reset 3D view"><RotateCcw /></button>
       </div>
-      {!motion && <p className="three-motion-hint">Enable Motion in quick access to use auto rotate.</p>}
+      {!motion && <p className="three-motion-hint">Auto rotate follows your device's reduced-motion preference. You can still rotate the model manually.</p>}
       <p><Expand size={14} /> Drag sideways to rotate · Tap a part to select · Scroll vertically to continue</p>
     </div>
   </div>;

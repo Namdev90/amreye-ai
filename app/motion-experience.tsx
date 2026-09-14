@@ -7,9 +7,7 @@ export default function MotionExperience() {
   useEffect(() => {
     const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
-      let saved: string | null = null;
-      try { saved = sessionStorage.getItem("amr-motion"); } catch { /* Storage is optional. */ }
-      setPaused(preference.matches || saved === "off");
+      setPaused(preference.matches);
     };
     sync();
     preference.addEventListener("change", sync);

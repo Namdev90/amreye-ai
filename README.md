@@ -1,4 +1,10 @@
-# vinext-starter
+# AMReye.AI
+
+Antimicrobial Intelligence: microbiology, frontier instrumentation and AI, with a current AST prototype pathway, proposed product configurations and future research kept distinct.
+
+See [brand language](docs/brand-language.md) for the landing-page copy, product naming and evidence boundaries. The public library is at `/library`; legacy `#apex` links remain supported.
+
+## Development foundation
 
 A clean full-stack starter running on
 [vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and

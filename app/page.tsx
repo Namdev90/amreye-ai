@@ -1,24 +1,2 @@
-"use client";
-import {useEffect,useState,lazy,Suspense} from 'react';
-import {Dialog,DialogContent,DialogTitle} from '@/components/ui/dialog';
-import {HomeDirectory,SiteNavigation,GuidedPitch,directory} from './discovery';
-const Pathways=lazy(()=>import('./project-pages').then(m=>({default:m.Pathways})));
-const Recognition=lazy(()=>import('./project-pages').then(m=>({default:m.Recognition})));
-const Team=lazy(()=>import('./project-pages').then(m=>({default:m.Team})));
-const Contact=lazy(()=>import('./project-pages').then(m=>({default:m.Contact})));
-const ProjectGuide=lazy(()=>import('./project-pages').then(m=>({default:m.ProjectGuide})));
-const LibraryView=lazy(()=>import('./library-screen'));
-import data from './route-summaries.json';
-const ProductShowcase=lazy(()=>import('./product-showcase'));
-import MotionExperience from './motion-experience';
-import ConceptReferences from './concept-references';
-const Analysis=lazy(()=>import('./analysis-workbench'));
-const Network=lazy(()=>import('./network-explorer'));
-const topicFor:Record<string,string>={problem:'reader-v1',hardware:'topic-75',technology:'topic-8',imaging:'reader-v1',modules:'topic-75',twin:'plate-provenance',bahu:'topic-39',architecture:'topic-45',integration:'interoperability',automation:'topic-70',applications:'topic-67',positioning:'topic-8',wall:'automation-glossary',sources:'topic-80','project-progress':'topic-80',business:'topic-40',roadmap:'topic-80',research:'cell-culture'};
-export default function Home(){const [active,setActive]=useState('home'),[pitch,setPitch]=useState(false);
- useEffect(()=>{const read=()=>{setActive(location.hash.slice(1)||'home');setPitch(new URLSearchParams(location.search).get('pitch')==='1')};read();addEventListener('hashchange',read);addEventListener('popstate',read);if('serviceWorker' in navigator)navigator.serviceWorker.register('/sw.js').catch(()=>{});return()=>{removeEventListener('hashchange',read);removeEventListener('popstate',read)}},[]);
- useEffect(()=>{window.scrollTo({top:0,behavior:'instant'})},[active]);
- const togglePitch=(v:boolean)=>{setPitch(v);const u=new URL(location.href);if(v)u.searchParams.set('pitch','1');else{u.searchParams.delete('pitch');u.searchParams.delete('slide')}history.replaceState({},'',u)};
- const t=data.topics.find(t=>t.id===topicFor[active]);const label=directory.flatMap(g=>g.links).find(l=>l[1]===active)?.[0]||'Explore AMReye.AI';
- return <><SiteNavigation active={active} onPitch={()=>togglePitch(true)}/><main id="main-content" tabIndex={-1}><Suspense fallback={<section className="section" role="status">Opening AMReye.AI…</section>}>{active==='home'?<HomeDirectory/>:active==='pathways'?<Pathways/>:active==='products'?<ProductShowcase/>:active==='team'?<Team/>:active==='recognition'?<Recognition/>:active==='references'?<ConceptReferences/>:active==='guide'?<ProjectGuide/>:active==='apex'?<LibraryView/>:active==='about'?<section id="about" className="section editorial-page"><h1>Let’s build the next step.</h1><Contact/></section>:active==='demo'||active==='console'?<section id={active} className="section"><h1>Synthetic plate review</h1><p>Explore measurement, correction and qualified review with fictional examples.</p><Suspense fallback={<p role="status">Opening synthetic demonstration…</p>}><Analysis/></Suspense></section>:active==='network'?<section id="network" className="section"><h1>AMR network concept</h1><p>Explore fixed synthetic examples. These are not live surveillance data.</p><Suspense fallback={<p role="status">Opening synthetic network…</p>}><Network/></Suspense></section>:<section id={active} className="section editorial-page"><span className="eyebrow">{t?.status||'AMReye.AI'}</span><h1>{label}</h1><h2>{t?.title||'Find your next question.'}</h2><p className="editorial-intro">{t?.text[0]||'Browse the connected library or return to the directory.'}</p><div className="atelier-actions"><a className="solid-link" href={t?'/?topic='+t.id+'#apex':'#apex'}>Explore connected topics ↗</a><a href="#demo">Simulate the working ↗</a></div>{active==='roadmap'&&<ol className="roadmap-steps"><li>Define the intended use and reference comparison.</li><li>Establish calibration, repeatability and unreadable-image handling.</li><li>Evaluate uncertainty and qualified review.</li><li>Agree a supervised pilot with a suitable partner.</li></ol>}</section>}</Suspense></main><footer className="public-footer"><a href="#home">AMReye.AI</a><a href="#apex">Library</a><a href="#guide">Project guide</a><a href="#about">Contact</a><small>© {new Date().getFullYear()} AMReye.AI · Startup project under incubation · Synthetic demonstrations</small></footer><MotionExperience/><Dialog open={pitch} onOpenChange={togglePitch}><DialogContent className="pitch-modal" aria-describedby={undefined}><DialogTitle className="sr-only">AMReye.AI quick pitch</DialogTitle><GuidedPitch onExit={()=>togglePitch(false)} onNavigate={id=>{togglePitch(false);location.hash=id}}/></DialogContent></Dialog></>
-}
+import SiteShell from './site-shell';
+export default function Home(){return <SiteShell/>}

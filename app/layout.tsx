@@ -8,11 +8,12 @@ import "./connected.css";
 import "./precision.css";
 import "./library.css";
 import "./library-fixes.css";
+import "./landing-refinements.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),
   alternates: { canonical: "/" },
-  title: "AMReye.AI  ·  Instruments, Research & Project Library",
+  title: "AMReye.AI · Antimicrobial Intelligence",
   description: "Explore AMReye.AI's antimicrobial intelligence prototype, research pathways and synthetic AST demonstration.",
   applicationName: "AMReye.AI",
   openGraph: {

@@ -1,2 +1,2 @@
 import {redirect} from 'next/navigation';
-export default async function LegacyLibrary({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){const p=await searchParams;redirect('/'+(typeof p.topic==='string'?'?topic='+encodeURIComponent(p.topic):'')+'#apex')}
+export default async function LegacyLibrary({searchParams}:{searchParams:Promise<Record<string,string|string[]|undefined>>}){const p=await searchParams;redirect('/library'+(typeof p.topic==='string'?'?topic='+encodeURIComponent(p.topic):''))}

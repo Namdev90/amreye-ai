@@ -1,0 +1,48 @@
+/* Landing-page hierarchy, readable product naming and narrow-screen resilience. */
+.precision-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.18fr); gap: 38px; }
+.precision-copy { min-width: 0; padding: 42px 0; }
+.precision-copy .hero-purpose { margin: 0; color: #c6dcdf; font-size: 17px; line-height: 1.4; }
+.precision-copy .hero-purpose .ai-accent { color: #3be9d6; font-size: 1.35em; font-weight: 800; }
+.precision-copy h1 { margin: 20px 0; font-size: clamp(52px, 5.3vw, 76px); }
+.precision-copy .hero-ambition { color: #dce7e9; font-size: 18px; line-height: 1.5; margin: 0 0 12px; }
+.precision-copy .hero-description { font-size: 16px; line-height: 1.65; margin: 0; max-width: 485px; }
+.hero-prototype { margin: 22px 0 0; padding-left: 13px; border-left: 2px solid #80dace; max-width: 440px; }
+.hero-prototype > span { color: #b5ebdf; font-size: 13px; font-weight: 600; }
+.hero-prototype p { margin: 5px 0 0; font-size: 13px; line-height: 1.6; color: #a7babf; }
+.precision-copy .atelier-actions { justify-content: flex-start; margin: 23px 0; }
+.hero-evidence { max-width: 440px; font-size: 13px; line-height: 1.65; }
+.hero-evidence strong { color: #d8eeee; font-weight: 500; }
+.hero-evidence > span { color: #9fb8bd; }
+.hero-evidence svg { flex-shrink: 0; }
+.precision-instrument figcaption { align-items: flex-end; margin-inline: 20px; gap: 20px; }
+.precision-instrument figcaption > .flagship-name { font-size: clamp(21px, 2vw, 28px); line-height: 1.25; letter-spacing: -.035em; white-space: normal; }
+.precision-instrument figcaption .flagship-name small { display: block; color: #a4eddf; font-size: 15px; letter-spacing: .04em; margin-top: 10px; }
+.precision-instrument figcaption > .flagship-stage { font-size: 11px; line-height: 1.6; letter-spacing: 0; flex-shrink: 0; }
+.home-branches > a > span { display: block; padding-right: 18px; font-size: 11px; line-height: 1.6; }
+.home-branches h2 { text-wrap: balance; }
+.precision-home a:focus-visible, .workflow-tabs button:focus-visible { outline: 2px solid #a4eddf; outline-offset: 5px; }
+.home-search input:focus { outline: none; box-shadow: none; }
+.home-search button { min-width: 44px; }
+@media (max-width: 1100px) { .precision-hero { gap: 24px; } .precision-instrument figcaption { flex-direction: column; align-items: flex-start; gap: 12px; margin-inline: 10px; } .precision-instrument figcaption > .flagship-stage { text-align: left; } }
+@media (max-width: 760px) {
+  .precision-hero { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .precision-copy { padding: 28px 0 20px; }
+  .precision-copy h1 { font-size: clamp(46px, 11vw, 70px); line-height: 1.05; }
+  .precision-copy .hero-purpose { font-size: 15px; }
+  .precision-copy .hero-ambition { font-size: 17px; }
+  .hero-evidence { flex-direction: column; gap: 4px; }
+  .precision-instrument figcaption { flex-direction: row; align-items: flex-end; gap: 14px; }
+  .precision-instrument figcaption > .flagship-name { font-size: 23px; }
+  .precision-instrument figcaption > .flagship-stage { text-align: right; max-width: 115px; flex-shrink: 1; }
+  .workflow-heading { align-items: flex-start; }
+  .workflow-heading > p { max-width: 190px; }
+  .workflow-heading br { display: initial; }
+  .workflow-panel > a { min-height: 44px; }
+}
+@media (max-width: 380px) {
+  .home-directory.precision-home { padding-inline: 20px !important; }
+  .precision-instrument figcaption { flex-direction: column; align-items: flex-start; }
+  .precision-instrument figcaption > .flagship-stage { text-align: left; max-width: none; }
+  .workflow-heading { flex-direction: column; gap: 10px; }
+  .workflow-tabs > button { gap: 4px; font-size: 12px; }
+}
