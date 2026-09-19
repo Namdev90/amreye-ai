@@ -6,6 +6,7 @@ import {Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger} from '@/comp
 import {directory} from './discovery';
 import {sectionHref} from './site-routes.mjs';
 import stats from './repository-stats.json';
+import ProjectAssistant from './project-assistant';
 
 const cards = [
   {title:'Platform',copy:'From prototype to product',icon:Layers3,href:'/#products'},
@@ -60,9 +61,9 @@ export function HomeDirectory(){
         <h1><span className="amr-title-line"><em>A</em>ntimicrobial <em>I</em>ntelligence</span><br/>by <em>AI.</em></h1>
         <p className="amr-hero-statement">Building a more resilient future<br/> against resistant diseases.</p>
       </div>
-      <a className="amr-concept-card" href="/#products"><ArrowUpRight aria-hidden="true"/><h2>AMRST Platform Concept</h2><p>AI-assisted AST measurement<br/>and in-depth analysis.</p><small>Proposed platform · Concept illustration</small></a>
     </div>
     <div className="amr-directory-body">
+      <div className="amr-hero-tools"><a className="amr-concept-card" href="/#products"><ArrowUpRight aria-hidden="true"/><h2>AMRST Platform Concept</h2><p>AI-assisted AST measurement and in-depth analysis.</p><small>Proposed platform · Concept illustration</small></a><ProjectAssistant/></div>
       <form className="amr-search" role="search" action="/library"><Search aria-hidden="true"/><input name="q" type="search" aria-label="Search topics, tools and use cases" placeholder="Search topics, tools and use cases." value={query} onChange={e=>setQuery(e.target.value)}/><button type="submit" aria-label="Search the knowledge library"><ArrowUpRight/></button></form>
       <nav className="amr-feature-cards" aria-label="Explore the project">{cards.map(({title,copy,icon:Icon,href})=><a href={href} key={title}><ArrowUpRight className="amr-card-arrow" aria-hidden="true"/>{title==='Platform'?<img className="amr-card-device" src="/visuals/platform-cutout.webp" width="108" height="72" loading="lazy" alt=""/>:<Icon className="amr-card-icon" aria-hidden="true"/>}<h2>{title}</h2><p>{copy}</p></a>)}</nav>
       <div className="amr-research-panel"><a className="amr-stat" href="/library"><FileText aria-hidden="true"/><strong>{stats.topics}</strong><span>project topics<br/>for AMReye.AI</span></a><a className="amr-research-link" href="/#research"><BookOpen aria-hidden="true"/><span><strong>Read about it in action.</strong><small>Explore the project</small></span><ArrowUpRight aria-hidden="true"/></a></div>

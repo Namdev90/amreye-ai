@@ -223,3 +223,46 @@
 @media (prefers-reduced-transparency: reduce) {
   .project-assistant-launcher, .project-assistant-panel { background: #08212c !important; backdrop-filter: none; }
 }
+
+/* Keep the artwork clear and give controls their own space at every viewport. */
+.amr-site > .amr-header, .amr-home { width: 100%; max-width: none; }
+.amr-hero-tools { display: flex; align-items: start; gap: 16px; padding-block: 12px; }
+.amr-hero-tools > .amr-concept-card { position: relative; inset: auto; width: auto; max-width: none; flex: 1; margin: 0; }
+.amr-hero-tools > .project-assistant { flex: 0 1 390px; }
+.project-assistant { min-width: 0; }
+.amr-site > .project-assistant { margin: 12px 28px; }
+.project-assistant-launcher { position: static; width: auto; min-height: 44px; margin-left: auto; padding: 10px 16px; }
+.project-assistant-launcher span { display: inline; }
+.project-assistant-panel { position: relative !important; inset: auto !important; width: 100% !important; max-width: 100% !important; height: 480px; max-height: none; margin-top: 10px; z-index: auto; }
+.project-assistant-panel [data-slot=dialog-header] { position: relative; }
+.project-assistant-close { position: absolute; top: 8px; right: 8px; display: grid; place-items: center; width: 36px; height: 36px; }
+.amr-policy-strip .policy-logo { width: 46px; height: 68px; }
+.amr-policy-strip .nap-policy-logo { width: 70px; height: 70px; }
+.amr-policy-strip .goa-policy-logo { width: 60px; height: 65px; }
+.amr-institution-row .amr-university:first-child img { width: 100%; max-width: 233px; height: auto; }
+.amr-institution-row .goa-university img { width: 100%; max-width: 210px; max-height: 94px; }
+.amr-center-brand { max-width: 200px; }
+.amr-center-brand img { width: 100%; }
+@media (min-width: 801px) {
+  .amr-site > .amr-header { padding-inline: 32px; }
+  .amr-hero { height: clamp(440px, 36vw, 650px); }
+  .amr-hero-art { width: 100%; height: 100%; object-fit: contain; object-position: right center; }
+}
+@media (max-width: 800px) {
+  .amr-policy-strip { grid-template-columns: 1fr 1.35fr 1fr; gap: 8px 0; }
+  .amr-policy-strip > a { flex-direction: column; text-align: center; gap: 5px; padding-inline: 4px; }
+  .amr-policy-strip .policy-logo { width: 40px; height: 58px; }
+  .amr-policy-strip .nap-policy-logo { width: 60px; height: 58px; }
+  .amr-policy-strip .goa-policy-logo { width: 54px; height: 58px; }
+  .amr-hero { height: 330px; }
+  .amr-hero-art { bottom: 0; height: 280px; }
+  .amr-hero-tools { flex-direction: column; gap: 8px; padding-block: 8px; }
+  .amr-hero-tools > .amr-concept-card, .amr-hero-tools > .project-assistant { flex: auto; width: 100%; }
+  .project-assistant-launcher { margin-left: auto; }
+  .amr-institution-row { grid-template-columns: 1fr 1fr; display: grid; gap: 18px 20px; align-items: center; }
+  .amr-institution-row > a { width: 100%; max-width: none; }
+  .amr-institution-row .amr-center-brand { grid-column: 1 / -1; grid-row: 2; max-width: 180px; justify-self: center; }
+  .amr-institution-row .amr-university:first-child img { min-height: 32px; width: 100%; }
+  .amr-institution-row .goa-university img { width: 100%; max-height: 80px; }
+  .amr-site > .project-assistant { margin-inline: 14px; }
+}

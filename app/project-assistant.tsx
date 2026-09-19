@@ -1,8 +1,7 @@
 "use client";
 
 import {useEffect, useRef, useState} from 'react';
-import {ArrowUpRight, MessageCircle, Send, RotateCcw} from 'lucide-react';
-import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger} from '@/components/ui/dialog';
+import {ArrowUpRight, MessageCircle, Send, RotateCcw, X} from 'lucide-react';
 import data from './public-knowledge.json';
 import {projectGuideReply} from './project-guide-core.mjs';
 
@@ -23,10 +22,10 @@ export default function ProjectAssistant() {
     setTurns(previous => [...previous.slice(-11), {id: Date.now(), question: query, reply: projectGuideReply(query, data)}]);
     setQuestion('');
   };
-  return <Dialog open={open} onOpenChange={setOpen} modal={false}>
-    <DialogTrigger className="project-assistant-launcher" aria-label="Ask the project guide"><MessageCircle aria-hidden="true"/><span>Ask AMReye</span></DialogTrigger>
-    <DialogContent className="project-assistant-panel" aria-describedby="project-assistant-description">
-      <DialogHeader><DialogTitle>AMReye project guide</DialogTitle><DialogDescription id="project-assistant-description">Source-linked search · Not generative AI</DialogDescription></DialogHeader>
+  return <div className="project-assistant">
+    <button className="project-assistant-launcher" aria-label="Ask the project guide" aria-expanded={open} aria-controls="project-assistant-panel" onClick={() => setOpen(!open)}><MessageCircle aria-hidden="true"/><span>Ask AMReye</span></button>
+    {open && <section id="project-assistant-panel" className="project-assistant-panel" aria-labelledby="project-assistant-title" onKeyDown={event => {if(event.key === 'Escape'){setOpen(false);event.currentTarget.parentElement?.querySelector<HTMLButtonElement>('.project-assistant-launcher')?.focus();}}}>
+      <header data-slot="dialog-header"><h2 id="project-assistant-title" data-slot="dialog-title">AMReye project guide</h2><p data-slot="dialog-description">Source-linked search · Not generative AI</p><button className="project-assistant-close" aria-label="Close project guide" onClick={() => {setOpen(false);document.querySelector<HTMLButtonElement>('.project-assistant-launcher')?.focus();}}><X size={20}/></button></header>
       <div className="project-assistant-conversation" role="log" aria-label="Project guide conversation" aria-live="polite" aria-relevant="additions">
         {!turns.length && <div className="project-assistant-welcome"><p>What would you like to understand?</p><p>Explore the prototype, research and proposed products using the public library.</p><div className="project-assistant-prompts">{prompts.map(prompt => <button key={prompt} onClick={() => ask(prompt)}>{prompt}<ArrowUpRight size={15} aria-hidden="true"/></button>)}</div></div>}
         {turns.map((turn, index) => <section className="project-assistant-turn" key={turn.id} ref={index === turns.length - 1 ? latest : undefined}>
@@ -36,6 +35,6 @@ export default function ProjectAssistant() {
       </div>
       <form className="project-assistant-form" onSubmit={event => {event.preventDefault();ask(question);}}><label className="sr-only" htmlFor="project-guide-question">Ask about AMReye</label><input id="project-guide-question" value={question} onChange={event => setQuestion(event.target.value)} maxLength={400} placeholder="Ask about the project…" autoComplete="off"/><button type="submit" disabled={!question.trim()} aria-label="Send question"><Send size={19}/></button></form>
       <div className="project-assistant-foot"><small>Stays in this tab. No patient data or medical advice.</small><button onClick={() => {setTurns([]);setQuestion('');}} disabled={!turns.length} aria-label="Clear conversation"><RotateCcw size={16}/></button></div>
-    </DialogContent>
-  </Dialog>;
+    </section>}
+  </div>;
 }
