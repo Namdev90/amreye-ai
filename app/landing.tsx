@@ -24,7 +24,7 @@ export function SiteNavigation({active,onPitch}:{active:string;onPitch:()=>void}
       <div className="amr-header-actions"><button className="amr-quick-pitch" onClick={onPitch}><Play aria-hidden="true"/><span>Quick pitch</span></button>
         <Sheet open={open} onOpenChange={setOpen}><SheetTrigger className="amr-menu-trigger" aria-label="Open site menu"><Menu/></SheetTrigger>
           <SheetContent className="atelier-menu amr-menu" aria-describedby={undefined}><SheetHeader><SheetTitle>Explore AMReye.AI</SheetTitle></SheetHeader>
-            <div className="menu-columns">{directory.map(group=><div key={group.title}><h3>{group.title}</h3><nav aria-label={group.title}>{group.links.filter(([,id])=>!['references','sources'].includes(id)).map(([label,id])=><a key={id} href={sectionHref(id)} onClick={()=>setOpen(false)}>{label.replace('Complete project library','Knowledge library')}<ArrowUpRight size={16}/></a>)}</nav></div>)}</div>
+            <div className="menu-columns">{directory.map((group,index)=><details key={group.title} open={index===0}><summary>{group.title}<span>{group.links.filter(([,id])=>!['references','sources'].includes(id)).length} sections</span></summary><nav aria-label={group.title}>{group.links.filter(([,id])=>!['references','sources'].includes(id)).map(([label,id])=><a key={id} href={sectionHref(id)} onClick={()=>setOpen(false)}>{label.replace('Complete project library','Knowledge library')}<ArrowUpRight size={16}/></a>)}</nav></details>)}</div>
           </SheetContent>
         </Sheet>
       </div>
@@ -41,15 +41,16 @@ export function HomeDirectory(){
   return <section id="home" className="amr-home">
     <div className="amr-policy-strip" aria-label="National AMR policy context">
       <p>Informed by<br/> national AMR priorities</p>
-      <a href="https://www.mohfw.gov.in/" target="_blank" rel="noopener noreferrer"><span className="policy-name">Government<br/>of India</span></a>
-      <a className="amr-nap" href="https://www.mohfw.gov.in/?q=en%2Fpressrelease-345" target="_blank" rel="noopener noreferrer"><span><strong>NAP-AMR 2.0</strong><small>National Action Plan on<br/>Antimicrobial Resistance<br/>(2025–2029)</small></span></a>
-      <a href="https://www.goa.gov.in/" target="_blank" rel="noopener noreferrer"><span className="policy-name">Government<br/>of Goa</span></a>
+      <a href="https://www.mohfw.gov.in/" target="_blank" rel="noopener noreferrer"><img className="policy-logo india-policy-logo" src="/brand/government-india.png" width="46" height="68" alt="State Emblem of India"/><span className="policy-name">Government<br/>of India</span></a>
+      <a className="amr-nap" href="https://www.mohfw.gov.in/?q=en%2Fpressrelease-345" target="_blank" rel="noopener noreferrer"><img className="policy-logo nap-policy-logo" src="/brand/nap-amr-official.png" width="70" height="70" alt="United in the Battle Against Antimicrobial Resistance, from the official NAP-AMR plan"/><span><strong>NAP-AMR 2.0</strong><small>National Action Plan on<br/>Antimicrobial Resistance<br/>(2025–2029)</small></span></a>
+      <a href="https://www.goa.gov.in/" target="_blank" rel="noopener noreferrer"><img className="policy-logo goa-policy-logo" src="/brand/government-goa.jpg" width="60" height="65" alt="Government of Goa emblem"/><span className="policy-name">Government<br/>of Goa</span></a>
     </div>
+    <p className="amr-policy-note">Official policy references. No government endorsement implied.</p>
     <div className="amr-hero">
       <img className="amr-hero-art" src="/visuals/amreye-hero.webp" width="1536" height="1024" fetchPriority="high" alt="AMReye.AI benchtop instrument concept with an illuminated plate chamber"/>
       <div className="amr-hero-copy"><p className="amr-eyebrow">AI AND ROBOTICS <span>—</span> THE FRONTIER OF SCIENCE</p>
         <h1><span className="amr-title-line"><em>A</em>ntimicrobial <em>I</em>ntelligence</span><br/>by <em>AI.</em></h1>
-        <p className="amr-hero-statement">Building a more resistant future<br/> against the future of resistant diseases.</p>
+        <p className="amr-hero-statement">Building a more resilient future<br/> against resistant diseases.</p>
       </div>
       <a className="amr-concept-card" href="/#products"><ArrowUpRight aria-hidden="true"/><h2>AMRST Platform Concept</h2><p>AI-assisted AST measurement<br/>and in-depth analysis.</p><small>Proposed platform · Concept illustration</small></a>
     </div>

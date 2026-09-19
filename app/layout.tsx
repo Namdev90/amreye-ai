@@ -12,6 +12,8 @@ import "./landing-refinements.css";
 import "./mockup.css";
 import "./knowledge.css";
 import "./interactive-visuals.css";
+import "./interior-theme.css";
+import "./mobile-app.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),
@@ -49,7 +51,8 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark">
       <head>
-        <meta name="theme-color" content="#0b0c0e" />
+        <meta name="theme-color" content="#001018" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
         <meta name="mobile-web-app-capable" content="yes" />
       </head>
       <body className="antialiased">{children}</body>
