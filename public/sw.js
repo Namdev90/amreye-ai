@@ -1,4 +1,4 @@
-const CACHE='amreye-mobile-theme-v10';
+const CACHE='amreye-responsive-glass-v11';
 const OFFLINE=['/offline.html','/amr-eye-icon.png'];
 async function refresh(){const c=await caches.open(CACHE);await Promise.all(OFFLINE.map(async path=>{const r=await fetch(path);if(r.ok)await c.put(path,r)}))}
 self.addEventListener('install',e=>e.waitUntil(refresh().then(()=>self.skipWaiting())));

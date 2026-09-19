@@ -1,0 +1,225 @@
+/* Shared material and typography. Compact phone layouts remain in mobile-app.css. */
+:root {
+  --interior-accent: #77dce2;
+  --interior-muted: #b3c7cc;
+  --interior-border: #29414b;
+  --amr-border: #29414b;
+  --glass-line: rgba(211, 241, 248, .22);
+}
+.amr-desktop-nav { display: none; }
+.amr-site { padding-bottom: 0; }
+.amr-home { padding-bottom: 0; background: none; }
+.amr-header, .amr-site > .amr-bottom-nav {
+  background: #071e29;
+  border-color: var(--glass-line);
+  box-shadow: inset 0 1px 0 #ffffff24, inset 0 -1px 0 #ffffff08, 0 6px 24px #0002;
+}
+@supports (backdrop-filter: blur(20px)) {
+  .amr-header, .amr-site > .amr-bottom-nav {
+    background: linear-gradient(120deg, #184352b8, #071923dc 52%, #102d38c4);
+    backdrop-filter: blur(22px) saturate(145%);
+    -webkit-backdrop-filter: blur(22px) saturate(145%);
+  }
+}
+.amr-quick-pitch { box-shadow: none; background: #ffffff09; border-color: #78909a; }
+.amr-hero::before {
+  content: ''; position: absolute; width: 48%; height: 72%; right: 2%; top: 12%;
+  border-radius: 50%; background: radial-gradient(ellipse, #79e3ee18, #79e3ee07 45%, transparent 70%);
+  pointer-events: none; z-index: -1;
+}
+.amr-eyebrow { text-transform: none; letter-spacing: .025em; color: #c4d8de; }
+.amr-search { border-color: #55727f; background: #071e29; box-shadow: none; border-radius: 12px; }
+.amr-feature-cards > a { border-color: #2c4c59; border-radius: 10px; background: #071c27; }
+.amr-feature-cards > a:hover, .collection-card:hover { box-shadow: none; border-color: #749aa7; }
+.amr-feature-cards > a:hover { background: #102c37; }
+.amr-card-icon { color: #7cced9; }
+.amr-card-device { border-radius: 0; background: none; }
+.amr-feature-cards h2, .amr-concept-card h2 { letter-spacing: -.02em; }
+.amr-concept-card { background: #092431eb; border-color: #73929c; border-radius: 12px; box-shadow: none; }
+.amr-research-panel { border: 0; border-block: 1px solid #29414b; border-radius: 0; background: none; }
+.amr-recognition-strip { border: 0; border-top: 1px solid #29414b; border-radius: 0; background: none; }
+.amr-institution-row .amr-university:first-child img { width: 85%; min-height: 0; }
+.amr-institution-row .goa-university img { width: 85%; max-height: 65px; }
+.amr-center-brand img { width: 85%; margin-inline: auto; }
+.amr-policy-note { padding: 10px 0 0; border: 0; background: none; text-align: left; color: #b3c7cc; font-size: 11px; line-height: 1.5; }
+.amr-bottom-nav [aria-current=page]::after { box-shadow: none; }
+#main-content :where(.editorial-page, .collection) { background: none; }
+.collection-card, .knowledge-areas button, .knowledge-topics > button { border-radius: 10px; box-shadow: none; }
+.knowledge-areas button { background: transparent; border: 0; border-top: 1px solid #34505a; border-radius: 0; }
+.knowledge-areas button:hover { background: #0b2630; }
+.knowledge-areas button[aria-pressed=true] { background: #10313c; outline: 1px solid #79cbd4; }
+.visual-explainer, .visual-pitch-scene, .demo-scenarios button { background: #08212b; box-shadow: none; border-color: #34505a; border-radius: 10px; }
+.visual-pitch-copy h2 { letter-spacing: -.025em; }
+.amr-menu details { border-radius: 8px; background: transparent; border-color: #34505a; }
+.amr-menu summary { font-size: 16px; }
+.amr-social { width: 30px; height: 30px; }
+.amr-social img { width: 21px; height: 21px; }
+
+/* Desktop gets top navigation and its own spacing, never the phone dock. */
+@media (min-width: 801px) {
+  html { scroll-padding-top: 88px; scroll-padding-bottom: 16px; }
+  .amr-site > .amr-header { position: sticky; top: 0; z-index: 35; max-width: 1240px; height: 76px; padding: 12px 28px; gap: 20px; }
+  .amr-brand { gap: 9px; flex-shrink: 0; }
+  .amr-brand .amr-brand-symbol { width: 38px; height: 38px; }
+  .amr-wordmark { font-size: 28px; }
+  .amr-desktop-nav { display: flex; align-items: center; justify-content: center; gap: 24px; margin-left: auto; }
+  .amr-desktop-nav a { position: relative; display: grid; align-items: center; min-height: 44px; color: #cadbe1; font-size: 14px; text-decoration: none; }
+  .amr-desktop-nav a:hover { color: white; }
+  .amr-desktop-nav [aria-current=page] { color: #9ee9ed; }
+  .amr-desktop-nav [aria-current=page]::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: #92dce4; }
+  .amr-header-actions { gap: 16px; }
+  .amr-quick-pitch { font-size: 14px; padding: 10px 14px; gap: 7px; min-height: 44px; }
+  .amr-quick-pitch svg { width: 19px; height: 19px; }
+  .amr-menu-trigger { width: 40px; height: 44px; }
+  .amr-menu-trigger svg { width: 27px; height: 27px; }
+  .amr-site > .amr-bottom-nav { display: none; }
+  .amr-home { max-width: 1180px; }
+  .amr-policy-strip { min-height: 90px; padding: 12px 28px; grid-template-columns: 1.1fr 1fr 1.45fr 1fr; border-color: #29414b; }
+  .amr-policy-strip > p { font-size: 13px; }
+  .amr-policy-strip > a { min-height: 54px; padding: 0 12px; gap: 10px; font-size: 12px; border-color: #34505a; }
+  .amr-policy-strip .policy-logo { width: 31px; height: 46px; }
+  .amr-policy-strip .nap-policy-logo { width: 40px; height: 40px; }
+  .amr-policy-strip .goa-policy-logo { width: 36px; height: 42px; }
+  .amr-nap strong { font-size: 15px; }
+  .amr-nap small { font-size: 11px; }
+  .amr-hero { height: 470px; }
+  .amr-hero-copy { padding: 36px 38px 0; }
+  .amr-eyebrow { font-size: 13px; margin-bottom: 22px; }
+  .amr-hero h1 { font-size: clamp(38px, 4vw, 52px); }
+  .amr-hero-statement { font-size: 21px; line-height: 1.4; max-width: 460px; margin-top: 20px; }
+  .amr-concept-card { left: 38px; bottom: 24px; padding: 16px 18px; width: 40%; }
+  .amr-concept-card h2 { font-size: 20px; margin-bottom: 8px; }
+  .amr-concept-card p { font-size: 16px; }
+  .amr-concept-card small { font-size: 12px; margin-top: 6px; }
+  .amr-concept-card > svg { width: 22px; height: 22px; }
+  .amr-directory-body { padding: 0 28px; }
+  .amr-search { width: 100%; min-width: 0; height: 54px; margin: 4px 0 18px; }
+  .amr-search input { font-size: 16px; }
+  .amr-search > svg { width: 23px; height: 23px; }
+  .amr-feature-cards { gap: 12px; }
+  .amr-feature-cards > a { min-height: 146px; padding: 18px 16px; }
+  .amr-card-icon, .amr-card-device { width: 34px; height: 34px; margin-bottom: 12px; }
+  .amr-card-device { width: 54px; object-fit: contain; }
+  .amr-card-arrow { width: 19px; height: 19px; }
+  .amr-feature-cards h2 { font-size: 18px; }
+  .amr-feature-cards p { font-size: 14px; line-height: 1.45; }
+  .amr-research-panel { min-height: 90px; padding: 16px 0; margin-top: 20px; }
+  .amr-stat strong { font-size: 36px; }
+  .amr-stat > svg { width: 34px; height: 34px; }
+  .amr-stat span { font-size: 14px; }
+  .amr-research-link strong { font-size: 18px; }
+  .amr-research-link small { font-size: 14px; }
+  .amr-research-link > svg:first-child { width: 25px; height: 25px; padding: 8px; background: #173945; }
+  .amr-recognition-strip { padding: 18px 0 4px; margin-top: 0; gap: 28px; }
+  .amr-recognition-strip h2 { font-size: 14px; margin-bottom: 14px; }
+  .amr-institution-row .amr-university:first-child img { width: 140px; }
+  .amr-center-brand { max-width: 150px; }
+  .amr-center-brand small, .amr-university > span, .goa-university > span { font-size: 11px; line-height: 1.4; }
+  .amr-milestone-note { font-size: 11px; margin-top: 12px; }
+  .amr-policy-note { padding-bottom: 12px; }
+  #main-content > .section, #main-content > .knowledge-library { width: calc(100% - 64px); max-width: 1180px; margin: 0 auto; padding: 32px 0 28px !important; }
+  #main-content > .section > h1, #main-content .collection-heading h1, #main-content .knowledge-heading h1 { font-size: clamp(32px, 3.2vw, 44px); line-height: 1.16; margin: 12px 0 14px; letter-spacing: -.025em; }
+  #main-content .collection-heading { margin-bottom: 24px; }
+  .knowledge-heading { max-width: 800px; }
+  .knowledge-heading p, .collection-heading p { font-size: 16px; line-height: 1.6; }
+  .knowledge-search { margin: 24px 0; }
+  .knowledge-areas button { padding: 18px 10px; }
+  .knowledge-areas button > span { font-size: 17px; }
+  .knowledge-areas p { font-size: 14px; margin: 10px 0 14px; }
+  .collection-controls { padding: 12px 0; background: none; border-block: 1px solid #29414b; align-items: center; }
+  .collection-card-copy { padding: 20px; min-height: 0; }
+  .collection-card h3 { font-size: 23px; }
+  .collection-card-copy p { font-size: 14px; line-height: 1.6; }
+  .workbench-banner { padding: 12px 18px; }
+  .demo-scenarios { margin: 14px 18px; gap: 10px; }
+  .demo-scenarios button { grid-template-columns: 25px 1fr; gap: 5px 10px; padding: 12px; }
+  .demo-scenarios svg { width: 23px; height: 23px; grid-row: 1/3; }
+  .demo-scenarios b { font-size: 15px; }
+  .demo-scenarios span { font-size: 12px; grid-column: 2; }
+  .demo-journey { padding: 12px 18px; gap: 12px; }
+  .workbench-controls { padding: 14px 18px; gap: 12px; }
+  .workbench-controls .run-note { font-size: 12px; line-height: 1.4; }
+  .workbench-visual { position: static; padding: 18px; }
+  .workbench-results { padding: 18px; }
+  .workbench-visual .metrology-plate { max-width: 320px; margin: 12px auto; }
+  .amr-site > .public-footer { width: calc(100% - 64px); max-width: 1180px; padding: 18px 0 !important; border-top: 1px solid #29414b; }
+  .visual-pitch-modal { max-height: calc(100dvh - 32px) !important; }
+}
+@media (min-width: 801px) and (max-width: 1050px) {
+  .amr-site > .amr-header { padding-inline: 20px; gap: 14px; }
+  .amr-desktop-nav { gap: 16px; }
+  .amr-wordmark { font-size: 24px; }
+  .amr-header-actions { gap: 8px; }
+  .amr-hero h1 { font-size: 40px; }
+  .amr-feature-cards > a { padding: 16px 12px; }
+  .amr-feature-cards h2 { font-size: 16px; }
+  .amr-feature-cards p { font-size: 13px; }
+}
+@media (max-width: 800px) {
+  /* Exactly the dock height, not a second footer spacer. */
+  .amr-site { padding-bottom: calc(68px + env(safe-area-inset-bottom, 0px)); }
+  .amr-home { padding-bottom: 0; }
+  .amr-site > .amr-bottom-nav { border-radius: 14px 14px 0 0; }
+  .amr-policy-strip .policy-logo { width: 22px; height: 34px; }
+  .amr-policy-strip .nap-policy-logo { width: 27px; height: 30px; }
+  .amr-policy-strip .goa-policy-logo { width: 27px; height: 33px; }
+  .amr-hero-copy { padding-top: 18px; }
+  .amr-eyebrow { margin-bottom: 16px; }
+  .amr-recognition-strip { padding: 12px 0 0; }
+  .amr-institution-row .amr-university:first-child img { min-height: 0; width: 85%; }
+  .amr-institution-row .goa-university img { width: 85%; max-height: 44px; }
+  .amr-center-brand img { width: 85%; }
+  .amr-social { width: 24px; height: 24px; }
+  .amr-social img { width: 17px; height: 17px; }
+  .amr-policy-note { padding-top: 8px; font-size: 10px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .amr-header, .amr-site > .amr-bottom-nav { background: #071e29; backdrop-filter: none; }
+}
+
+/* A small, source-linked conversation stays clear of the phone navigation. */
+.project-assistant-launcher { position: fixed; right: max(20px, env(safe-area-inset-right)); bottom: max(20px, env(safe-area-inset-bottom)); z-index: 42; min-height: 48px; display: flex; align-items: center; gap: 9px; padding: 12px 16px; border: 1px solid #b7e9f166; border-radius: 30px; color: #effcfd; background: #0b3443; box-shadow: inset 0 1px 0 #ffffff35, 0 5px 22px #0004; font-size: 14px; cursor: pointer; }
+.project-assistant-launcher svg { width: 21px; height: 21px; }
+.project-assistant-panel { inset: auto max(20px, env(safe-area-inset-right)) max(80px, env(safe-area-inset-bottom)) auto !important; transform: none !important; translate: none !important; width: 390px !important; max-width: calc(100vw - 32px) !important; height: min(580px, calc(100dvh - 100px)); max-height: calc(100dvh - 100px); display: grid !important; grid-template-rows: auto minmax(0, 1fr) auto auto; gap: 0 !important; padding: 0 !important; overflow: hidden; border: 1px solid #74929c !important; border-radius: 18px !important; background: #08212c !important; color: #eff7fa !important; box-shadow: 0 12px 40px #0006; z-index: 50; }
+.project-assistant-panel [data-slot=dialog-header] { padding: 18px 45px 14px 18px; border-bottom: 1px solid #34505a; text-align: left; }
+.project-assistant-panel [data-slot=dialog-title] { color: #f4fbfd; font-size: 17px; }
+.project-assistant-panel [data-slot=dialog-description] { color: #bdced5; font-size: 12px; line-height: 1.5; }
+.project-assistant-panel > [data-slot=dialog-close] { top: 10px; right: 9px; width: 36px; height: 36px; color: #e7f4fa; }
+.project-assistant-conversation { min-height: 0; overflow-y: auto; overscroll-behavior: contain; padding: 18px; background: #061a24; }
+.project-assistant-conversation p { margin: 0 0 12px; font-size: 14px; line-height: 1.6; color: #c3d4dc; overflow-wrap: anywhere; }
+.project-assistant-welcome > p:first-child { font-size: 18px; color: #f4fbfd; }
+.project-assistant-prompts { display: grid; gap: 10px; margin-top: 20px; }
+.project-assistant-prompts button { display: flex; justify-content: space-between; align-items: center; gap: 10px; text-align: left; padding: 12px; border: 1px solid #3b5c69; border-radius: 9px; background: #102c39; color: #e1f3f9; font-size: 13px; min-height: 44px; }
+.project-assistant-prompts svg { flex-shrink: 0; }
+.project-assistant-turn + .project-assistant-turn { margin-top: 24px; }
+.project-assistant-conversation .project-assistant-question { margin-left: 22px; padding: 10px 12px; border-radius: 10px 10px 0 10px; background: #1a3f50; color: white; }
+.project-assistant-answer article { padding: 14px 0; border-bottom: 1px solid #29414b; }
+.project-assistant-answer article small { color: #a5d3dc; font-size: 11px; }
+.project-assistant-answer h3 { margin: 5px 0 8px; color: #f1fafc; font-size: 16px; line-height: 1.4; }
+.project-assistant-answer a { display: flex; align-items: center; justify-content: space-between; gap: 8px; color: #a3e1ea; font-size: 13px; line-height: 1.5; padding: 6px 0; }
+.project-assistant-answer a svg { flex-shrink: 0; }
+.project-assistant-answer summary { font-size: 12px; color: #b8ced8; cursor: pointer; padding: 8px 0; }
+.project-assistant-form { display: flex; gap: 8px; padding: 12px; border-top: 1px solid #34505a; }
+.project-assistant-form input { width: 100%; min-width: 0; min-height: 44px; border: 1px solid #527481; border-radius: 8px; padding: 10px; background: #04161f; color: white; font-size: 16px; }
+.project-assistant-form button { width: 44px; flex-shrink: 0; border: 1px solid #719da9; border-radius: 8px; background: #14465a; display: grid; place-items: center; color: white; }
+.project-assistant-form button:disabled { opacity: .4; }
+.project-assistant-foot { display: flex; align-items: center; gap: 10px; padding: 0 12px 10px; }
+.project-assistant-foot small { font-size: 11px; line-height: 1.4; color: #b5cbd4; }
+.project-assistant-foot button { margin-left: auto; min-width: 36px; min-height: 32px; display: grid; place-items: center; }
+@supports (backdrop-filter: blur(20px)) {
+  .project-assistant-launcher { background: linear-gradient(125deg, #2a72889c, #0a2937d9); backdrop-filter: blur(20px) saturate(150%); -webkit-backdrop-filter: blur(20px) saturate(150%); }
+  .project-assistant-panel { background: #08212ce8 !important; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
+}
+@media (max-width: 800px) {
+  .project-assistant-launcher { bottom: calc(80px + env(safe-area-inset-bottom, 0px)); right: 12px; width: 44px; min-height: 44px; padding: 10px; justify-content: center; }
+  .project-assistant-launcher span { display: none; }
+  .project-assistant-panel { right: 10px !important; bottom: calc(132px + env(safe-area-inset-bottom, 0px)) !important; width: min(390px, calc(100vw - 20px)) !important; max-width: calc(100vw - 20px) !important; height: min(560px, calc(100dvh - 204px)); max-height: calc(100dvh - 204px); }
+  .project-assistant-conversation { padding: 14px; }
+}
+@media (max-height: 540px) {
+  .project-assistant-panel { top: 8px !important; bottom: auto !important; height: calc(100dvh - 88px); max-height: calc(100dvh - 88px); }
+  .project-assistant-panel [data-slot=dialog-header] { padding-block: 10px; }
+}
+@media (prefers-reduced-transparency: reduce) {
+  .project-assistant-launcher, .project-assistant-panel { background: #08212c !important; backdrop-filter: none; }
+}

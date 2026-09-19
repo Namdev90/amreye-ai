@@ -14,6 +14,7 @@ import "./knowledge.css";
 import "./interactive-visuals.css";
 import "./interior-theme.css";
 import "./mobile-app.css";
+import "./responsive-polish.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),

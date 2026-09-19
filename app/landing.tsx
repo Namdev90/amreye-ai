@@ -14,6 +14,12 @@ const cards = [
   {title:'Applications',copy:'Research, clinical and surveillance',icon:FlaskConical,href:'/#applications'},
   {title:'World Impact',copy:'Insights for real-world change',icon:Globe2,href:'/#network'},
 ];
+const socialProfiles = [
+  {name:'LinkedIn',href:'https://www.linkedin.com/in/carryminati-shirodkar-164692218'},
+  {name:'YouTube',href:'https://youtube.com/@pluspoints_2024'},
+  {name:'Instagram',href:'https://www.instagram.com/evil.shaktimaan/'},
+  {name:'GitHub',href:'https://github.com/Namdev90'},
+];
 
 export function SiteNavigation({active,onPitch}:{active:string;onPitch:()=>void}) {
   const [open,setOpen]=useState(false);
@@ -21,6 +27,9 @@ export function SiteNavigation({active,onPitch}:{active:string;onPitch:()=>void}
     <a className="skip-link" href="#main-content">Skip to content</a>
     <header className="amr-header">
       <a className="amr-brand" href="/#home" aria-label="AMReye.AI home"><img className="amr-brand-symbol" src="/brand/amreye-symbol-colour.svg" width="64" height="64" alt=""/><span className="amr-wordmark">AMReye.<em>AI</em></span></a>
+      <nav className="amr-desktop-nav" aria-label="Desktop navigation">
+        {[['Home','home'],['Products','products'],['Demo','demo'],['Library','library']].map(([label,id])=><a key={id} href={sectionHref(id)} aria-current={active===id?'page':undefined}>{label}</a>)}
+      </nav>
       <div className="amr-header-actions"><button className="amr-quick-pitch" onClick={onPitch}><Play aria-hidden="true"/><span>Quick pitch</span></button>
         <Sheet open={open} onOpenChange={setOpen}><SheetTrigger className="amr-menu-trigger" aria-label="Open site menu"><Menu/></SheetTrigger>
           <SheetContent className="atelier-menu amr-menu" aria-describedby={undefined}><SheetHeader><SheetTitle>Explore AMReye.AI</SheetTitle></SheetHeader>
@@ -45,10 +54,9 @@ export function HomeDirectory(){
       <a className="amr-nap" href="https://www.mohfw.gov.in/?q=en%2Fpressrelease-345" target="_blank" rel="noopener noreferrer"><img className="policy-logo nap-policy-logo" src="/brand/nap-amr-official.png" width="70" height="70" alt="United in the Battle Against Antimicrobial Resistance, from the official NAP-AMR plan"/><span><strong>NAP-AMR 2.0</strong><small>National Action Plan on<br/>Antimicrobial Resistance<br/>(2025–2029)</small></span></a>
       <a href="https://www.goa.gov.in/" target="_blank" rel="noopener noreferrer"><img className="policy-logo goa-policy-logo" src="/brand/government-goa.jpg" width="60" height="65" alt="Government of Goa emblem"/><span className="policy-name">Government<br/>of Goa</span></a>
     </div>
-    <p className="amr-policy-note">Official policy references. No government endorsement implied.</p>
     <div className="amr-hero">
       <img className="amr-hero-art" src="/visuals/amreye-hero.webp" width="1536" height="1024" fetchPriority="high" alt="AMReye.AI benchtop instrument concept with an illuminated plate chamber"/>
-      <div className="amr-hero-copy"><p className="amr-eyebrow">AI AND ROBOTICS <span>—</span> THE FRONTIER OF SCIENCE</p>
+      <div className="amr-hero-copy"><p className="amr-eyebrow">Antibiotic testing · Research in progress</p>
         <h1><span className="amr-title-line"><em>A</em>ntimicrobial <em>I</em>ntelligence</span><br/>by <em>AI.</em></h1>
         <p className="amr-hero-statement">Building a more resilient future<br/> against resistant diseases.</p>
       </div>
@@ -56,11 +64,12 @@ export function HomeDirectory(){
     </div>
     <div className="amr-directory-body">
       <form className="amr-search" role="search" action="/library"><Search aria-hidden="true"/><input name="q" type="search" aria-label="Search topics, tools and use cases" placeholder="Search topics, tools and use cases." value={query} onChange={e=>setQuery(e.target.value)}/><button type="submit" aria-label="Search the knowledge library"><ArrowUpRight/></button></form>
-      <nav className="amr-feature-cards" aria-label="Explore the project">{cards.map(({title,copy,icon:Icon,href})=><a href={href} key={title}><ArrowUpRight className="amr-card-arrow" aria-hidden="true"/>{title==='Platform'?<img className="amr-card-device" src="/visuals/flagship.webp" width="108" height="72" loading="lazy" alt=""/>:<Icon className="amr-card-icon" aria-hidden="true"/>}<h2>{title}</h2><p>{copy}</p></a>)}</nav>
+      <nav className="amr-feature-cards" aria-label="Explore the project">{cards.map(({title,copy,icon:Icon,href})=><a href={href} key={title}><ArrowUpRight className="amr-card-arrow" aria-hidden="true"/>{title==='Platform'?<img className="amr-card-device" src="/visuals/platform-cutout.webp" width="108" height="72" loading="lazy" alt=""/>:<Icon className="amr-card-icon" aria-hidden="true"/>}<h2>{title}</h2><p>{copy}</p></a>)}</nav>
       <div className="amr-research-panel"><a className="amr-stat" href="/library"><FileText aria-hidden="true"/><strong>{stats.topics}</strong><span>project topics<br/>for AMReye.AI</span></a><a className="amr-research-link" href="/#research"><BookOpen aria-hidden="true"/><span><strong>Read about it in action.</strong><small>Explore the project</small></span><ArrowUpRight aria-hidden="true"/></a></div>
       <section className="amr-recognition-strip" aria-labelledby="recognition-strip-title"><div className="amr-institutions"><h2 id="recognition-strip-title">Project milestones + recognition</h2><div className="amr-institution-row"><a href="/#recognition" className="amr-university"><img src="/brand/parul-goa.svg" alt="Parul University Goa" width="233" height="26"/><span>PU EPIC selection</span></a><a href="/#team" className="amr-center-brand"><img src="/brand/amreye-logo-white.svg" width="200" height="48" alt="AMReye.AI"/><small>Research • People • Impact</small></a><a href="/#recognition" className="amr-university goa-university"><img src="/brand/goa-university.png" alt="Goa University" width="250" height="111"/><span>Bio-InnoQuest · Second place</span></a></div><small className="amr-milestone-note">Project-reported milestones. Institutional endorsement is not implied.</small></div>
-        <div className="amr-socials"><h2>Our socials</h2><div>{['LinkedIn','YouTube','Instagram','GitHub'].map((name,i)=><span key={name} className={'amr-social social-'+i} title={`${name}: official profile link to be confirmed`}><img src={'/brand/'+name.toLowerCase()+'.svg'} width="26" height="26" alt=""/><span className="sr-only">{name}: profile link to be confirmed</span></span>)}</div><small>Profile links being confirmed</small></div>
+        <div className="amr-socials"><h2>Socials</h2><div>{socialProfiles.map(({name,href},i)=><a key={name} className={'amr-social social-'+i} href={href} target="_blank" rel="noopener noreferrer" aria-label={`${name} profile (opens in a new tab)`} title={`${name} profile`}><img src={'/brand/'+name.toLowerCase()+'.svg'} width="26" height="26" alt=""/></a>)}</div><small>Personal profiles</small></div>
       </section>
+      <p className="amr-policy-note">Official policy references. No government endorsement implied.</p>
     </div>
   </section>;
 }
