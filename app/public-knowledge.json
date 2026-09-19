@@ -1,0 +1,3585 @@
+{
+  "areas": [
+    {
+      "id": "ast",
+      "title": "Antibiotic testing",
+      "description": "How a plate test becomes a measurement a person can review."
+    },
+    {
+      "id": "imaging",
+      "title": "Imaging & measurement",
+      "description": "Cameras, light, scale and the limits of what an image can tell us."
+    },
+    {
+      "id": "ai",
+      "title": "AI & computer vision",
+      "description": "How software may assist, and how its reliability must be tested."
+    },
+    {
+      "id": "standards",
+      "title": "Validation & standards",
+      "description": "Reference methods, human review, safety and clinical evidence."
+    },
+    {
+      "id": "hardware",
+      "title": "Instruments & engineering",
+      "description": "The proposed reader, sensors, controls and instrument family."
+    },
+    {
+      "id": "data",
+      "title": "Data & connected records",
+      "description": "Traceability, privacy, software interfaces and digital models."
+    },
+    {
+      "id": "applications",
+      "title": "Microbiology & public health",
+      "description": "A range of research questions and possible future uses."
+    },
+    {
+      "id": "development",
+      "title": "People & development",
+      "description": "The project, service ideas, costs and staged development."
+    }
+  ],
+  "topics": [
+    {
+      "id": "compendium-011-015",
+      "title": "Reader V1 and the laboratory workflow",
+      "category": "ast",
+      "status": "Development research",
+      "text": [
+        "A plate reader would photograph an antibiotic test and help a laboratory professional measure and review it. The first goal is a clearer record of a familiar laboratory method."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-016-019",
+        "compendium-020-022",
+        "compendium-023-027",
+        "compendium-028-034"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R06"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 11–15: Reader V1 and the laboratory workflow. Internal project reference."
+    },
+    {
+      "id": "compendium-001-010",
+      "title": "Reading guide and maturity language",
+      "category": "development",
+      "status": "Reference guide",
+      "text": [
+        "A guide to the difference between an idea, an early prototype and a tested product. It helps readers understand how strong each project claim is."
+      ],
+      "tables": [],
+      "related": [],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 1–10: Reading guide and maturity language. Internal project reference."
+    },
+    {
+      "id": "compendium-016-019",
+      "title": "Instrument research families",
+      "category": "hardware",
+      "status": "Development research",
+      "text": [
+        "Different instruments suit different jobs. This research compares a simple plate reader with more complex future systems for imaging, sensing and automation."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-011-015",
+        "compendium-020-022",
+        "compendium-023-027",
+        "compendium-028-034"
+      ],
+      "sourceIds": [
+        "R11"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 16–19: Instrument research families. Internal project reference."
+    },
+    {
+      "id": "compendium-020-022",
+      "title": "PIMS, analysis and laboratory connectivity",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "The proposed Plate Information Management System would keep images, measurements and review decisions together, then share them with other laboratory software."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-011-015",
+        "compendium-016-019",
+        "compendium-023-027",
+        "compendium-028-034"
+      ],
+      "sourceIds": [
+        "R21",
+        "R22"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 20–22: PIMS, analysis and laboratory connectivity. Internal project reference."
+    },
+    {
+      "id": "compendium-023-027",
+      "title": "Laboratory and research services",
+      "category": "applications",
+      "status": "Development research",
+      "text": [
+        "A useful laboratory system also needs installation, training, maintenance and support. These service ideas are being considered alongside the instrument itself."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-011-015",
+        "compendium-016-019",
+        "compendium-020-022",
+        "compendium-028-034"
+      ],
+      "sourceIds": [
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 23–27: Laboratory and research services. Internal project reference."
+    },
+    {
+      "id": "compendium-028-034",
+      "title": "Partner perspectives and portfolio development",
+      "category": "development",
+      "status": "Development research",
+      "text": [
+        "Laboratories, researchers, institutions and investors have different needs. This area explores those needs and how they could shape development."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-011-015",
+        "compendium-016-019",
+        "compendium-020-022",
+        "compendium-023-027"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 28–34: Partner perspectives and portfolio development. Internal project reference."
+    },
+    {
+      "id": "compendium-035-042",
+      "title": "Measurement architecture and sensor selection",
+      "category": "imaging",
+      "status": "Development research",
+      "text": [
+        "A sensor is useful only if it measures the right thing reliably. This area compares measurement needs before choosing cameras or other hardware."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-043-052",
+        "compendium-053-062",
+        "compendium-063-072",
+        "compendium-073-082"
+      ],
+      "sourceIds": [
+        "R14",
+        "R15",
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 35–42: Measurement architecture and sensor selection. Internal project reference."
+    },
+    {
+      "id": "compendium-043-052",
+      "title": "Imaging and spectral sensing",
+      "category": "imaging",
+      "status": "Development research",
+      "text": [
+        "Different colours and wavelengths of light can reveal different features in a sample. Research is needed to determine which signals add useful information."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-035-042",
+        "compendium-053-062",
+        "compendium-063-072",
+        "compendium-073-082"
+      ],
+      "sourceIds": [
+        "R03",
+        "R14",
+        "R44",
+        "R55",
+        "R56"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 43–52: Imaging and spectral sensing. Internal project reference."
+    },
+    {
+      "id": "compendium-053-062",
+      "title": "Optical, thermal and impedance sensing",
+      "category": "imaging",
+      "status": "Development research",
+      "text": [
+        "Light, temperature and electrical measurements are possible ways to study a sample. Each would need its own calibration and comparison with a trusted method."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-035-042",
+        "compendium-043-052",
+        "compendium-063-072",
+        "compendium-073-082"
+      ],
+      "sourceIds": [
+        "R03",
+        "R38",
+        "R40",
+        "R41",
+        "R42",
+        "R43",
+        "R45",
+        "R57"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 53–62: Optical, thermal and impedance sensing. Internal project reference."
+    },
+    {
+      "id": "compendium-063-072",
+      "title": "Chemical, gas and acoustic sensing",
+      "category": "hardware",
+      "status": "Development research",
+      "text": [
+        "Gas, chemical and sound sensors may provide supporting information. None should be treated as proof of the organism’s identity without suitable evidence."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-035-042",
+        "compendium-043-052",
+        "compendium-053-062",
+        "compendium-073-082"
+      ],
+      "sourceIds": [
+        "R17",
+        "R18"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 63–72: Chemical, gas and acoustic sensing. Internal project reference."
+    },
+    {
+      "id": "compendium-073-082",
+      "title": "Environment, motion and instrument monitoring",
+      "category": "hardware",
+      "status": "Development research",
+      "text": [
+        "Temperature, humidity, movement and instrument condition can affect measurements. Monitoring these factors would help explain unexpected results."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-035-042",
+        "compendium-043-052",
+        "compendium-053-062",
+        "compendium-063-072"
+      ],
+      "sourceIds": [
+        "R19",
+        "R20"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 73–82: Environment, motion and instrument monitoring. Internal project reference."
+    },
+    {
+      "id": "compendium-083-091",
+      "title": "Software, records, data and genomic provenance",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "Laboratory data need a clear history: where they came from, what changed and who reviewed them. Linking genetic results would require separate, qualified laboratory tests."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-092-102",
+        "compendium-103-112",
+        "compendium-113-122",
+        "compendium-123-132"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R16",
+        "R21",
+        "R24",
+        "R25"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 83–91: Software, records, data and genomic provenance. Internal project reference."
+    },
+    {
+      "id": "compendium-092-102",
+      "title": "AI for acquisition, identity and zone boundaries",
+      "category": "ai",
+      "status": "Development research",
+      "text": [
+        "Computer vision may help locate plates, read identifiers and outline clear zones around antibiotic discs. Unclear images must remain visible to a reviewer."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-083-091",
+        "compendium-103-112",
+        "compendium-113-122",
+        "compendium-123-132"
+      ],
+      "sourceIds": [
+        "R03",
+        "R21",
+        "R23"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 92–102: AI for acquisition, identity and zone boundaries. Internal project reference."
+    },
+    {
+      "id": "compendium-103-112",
+      "title": "AI for measurement, growth and early AST research",
+      "category": "ai",
+      "status": "Development research",
+      "text": [
+        "AI could help measure visible features or follow growth over time. Predicting an earlier antibiotic result is a separate research question that needs validation."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-083-091",
+        "compendium-092-102",
+        "compendium-113-122",
+        "compendium-123-132"
+      ],
+      "sourceIds": [
+        "R03",
+        "R07",
+        "R08",
+        "R11",
+        "R16",
+        "R38"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 103–112: AI for measurement, growth and early AST research. Internal project reference."
+    },
+    {
+      "id": "compendium-113-122",
+      "title": "AI for multimodal learning and model quality",
+      "category": "ai",
+      "status": "Development research",
+      "text": [
+        "Combining several types of measurement may help only if the model is tested on representative data. More inputs do not automatically make an answer better."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-083-091",
+        "compendium-092-102",
+        "compendium-103-112",
+        "compendium-123-132"
+      ],
+      "sourceIds": [
+        "R24",
+        "R25",
+        "R21",
+        "R23"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 113–122: AI for multimodal learning and model quality. Internal project reference."
+    },
+    {
+      "id": "compendium-123-132",
+      "title": "AI for review, operations and assistance",
+      "category": "ai",
+      "status": "Development research",
+      "text": [
+        "AI assistance could help people find records and review warnings. A qualified person remains responsible for accepting laboratory results."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-083-091",
+        "compendium-092-102",
+        "compendium-103-112",
+        "compendium-113-122"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R04",
+        "R05",
+        "R22",
+        "R23",
+        "R24",
+        "R25"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 123–132: AI for review, operations and assistance. Internal project reference."
+    },
+    {
+      "id": "compendium-133-142",
+      "title": "Digital plate records and computational models",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "A digital plate record brings images and measurements together. A predictive digital twin goes further and remains a research goal, not a demonstrated biological forecast."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-143-152",
+        "compendium-153-164"
+      ],
+      "sourceIds": [
+        "R59"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 133–142: Digital plate records and computational models. Internal project reference."
+    },
+    {
+      "id": "compendium-143-152",
+      "title": "Prediction, uncertainty and observation continuity",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "A missing observation and a prediction are not the same as a measurement. The project explores how to make these differences and their uncertainty easy to see."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-133-142",
+        "compendium-153-164"
+      ],
+      "sourceIds": [
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 143–152: Prediction, uncertainty and observation continuity. Internal project reference."
+    },
+    {
+      "id": "compendium-153-164",
+      "title": "Simulation, validation and predictive twin research gates",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "Simulations can test software and ideas before real laboratory work. They cannot establish that an instrument or biological prediction works in practice."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-133-142",
+        "compendium-143-152"
+      ],
+      "sourceIds": [
+        "R58"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 153–164: Simulation, validation and predictive twin research gates. Internal project reference."
+    },
+    {
+      "id": "compendium-165-170",
+      "title": "Clinical workflow applications",
+      "category": "applications",
+      "status": "Development research",
+      "text": [
+        "Potential clinical workflows include antibiotic testing and review. Each use would need a defined purpose, appropriate studies and any required clearance."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-171-178",
+        "compendium-179-188",
+        "compendium-189-196"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R62"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 165–170: Clinical workflow applications. Internal project reference."
+    },
+    {
+      "id": "compendium-171-178",
+      "title": "Heteroresistance research",
+      "category": "applications",
+      "status": "Development research",
+      "text": [
+        "A small group of bacteria may respond differently from the rest of a sample. Studying this variation requires suitable experiments, not a conclusion from one attractive image."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-165-170",
+        "compendium-179-188",
+        "compendium-189-196"
+      ],
+      "sourceIds": [
+        "R03",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R60",
+        "R61"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 171–178: Heteroresistance research. Internal project reference."
+    },
+    {
+      "id": "compendium-179-188",
+      "title": "Molecular, industrial and teaching applications",
+      "category": "development",
+      "status": "Development research",
+      "text": [
+        "Possible future uses extend to molecular research, industrial quality checks and teaching. Their methods and validation needs differ from routine plate reading."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-165-170",
+        "compendium-171-178",
+        "compendium-189-196"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R11",
+        "R24",
+        "R25",
+        "R60",
+        "R63"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 179–188: Molecular, industrial and teaching applications. Internal project reference."
+    },
+    {
+      "id": "compendium-189-196",
+      "title": "Stewardship, public health and equitable access",
+      "category": "applications",
+      "status": "Development research",
+      "text": [
+        "Antibiotic stewardship means using antibiotics responsibly. Reliable laboratory records may support that work and public-health research after suitable validation and governance."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-165-170",
+        "compendium-171-178",
+        "compendium-179-188"
+      ],
+      "sourceIds": [
+        "R33",
+        "R34",
+        "R35",
+        "R37",
+        "R65"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 189–196: Stewardship, public health and equitable access. Internal project reference."
+    },
+    {
+      "id": "compendium-197-204",
+      "title": "Measurement validation and study design",
+      "category": "standards",
+      "status": "Development research",
+      "text": [
+        "Validation asks how closely a new measurement agrees with a suitable reference, and when it fails. Studies must include difficult and unreadable cases."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-205-215",
+        "compendium-216-224",
+        "compendium-225-228"
+      ],
+      "sourceIds": [
+        "R26",
+        "R35",
+        "R51"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 197–204: Measurement validation and study design. Internal project reference."
+    },
+    {
+      "id": "compendium-205-215",
+      "title": "Interpretation, usability and software validation",
+      "category": "standards",
+      "status": "Development research",
+      "text": [
+        "A useful result must be interpreted correctly and presented clearly. This includes checking the software, the applicable rules and how people use the interface."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-197-204",
+        "compendium-216-224",
+        "compendium-225-228"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R04",
+        "R05",
+        "R52"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 205–215: Interpretation, usability and software validation. Internal project reference."
+    },
+    {
+      "id": "compendium-216-224",
+      "title": "Privacy, security and AI assurance",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "Laboratory records can be sensitive. Proposed protections include controlled access, change history and checks on AI reliability."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-197-204",
+        "compendium-205-215",
+        "compendium-225-228"
+      ],
+      "sourceIds": [
+        "R21",
+        "R23",
+        "R49",
+        "R53",
+        "R54"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 216–224: Privacy, security and AI assurance. Internal project reference."
+    },
+    {
+      "id": "compendium-225-228",
+      "title": "Clinical study preparation and release gates",
+      "category": "standards",
+      "status": "Development research",
+      "text": [
+        "Moving toward clinical use requires a study plan, safety evidence and clear acceptance criteria. A polished demonstration alone does not meet those requirements."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-197-204",
+        "compendium-205-215",
+        "compendium-216-224"
+      ],
+      "sourceIds": [
+        "R26",
+        "R35",
+        "R50",
+        "R51",
+        "R64"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 225–228: Clinical study preparation and release gates. Internal project reference."
+    },
+    {
+      "id": "compendium-229-238",
+      "title": "Scientific evidence for measurement and biological research",
+      "category": "standards",
+      "status": "Development research",
+      "text": [
+        "Scientific literature helps explain measurement methods and biological limits. Evidence for a published method is not proof that AMReye.AI has achieved the same result."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-239-248"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R59",
+        "R60",
+        "R61",
+        "R66",
+        "R67",
+        "R74"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 229–238: Scientific evidence for measurement and biological research. Internal project reference."
+    },
+    {
+      "id": "compendium-239-248",
+      "title": "AI evidence, comparators and unresolved propositions",
+      "category": "standards",
+      "status": "Development research",
+      "text": [
+        "Existing products and AI research provide useful comparisons. Open questions and differences in study conditions must remain visible."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-229-238"
+      ],
+      "sourceIds": [
+        "R04",
+        "R05",
+        "R08",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32",
+        "R38",
+        "R40",
+        "R42",
+        "R44",
+        "R45",
+        "R49",
+        "R52",
+        "R53",
+        "R61",
+        "R66",
+        "R68",
+        "R69",
+        "R70",
+        "R71",
+        "R72",
+        "R73",
+        "R75"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 239–248: AI evidence, comparators and unresolved propositions. Internal project reference."
+    },
+    {
+      "id": "compendium-249-258",
+      "title": "Reader V1 engineering and dataset development",
+      "category": "ast",
+      "status": "Development research",
+      "text": [
+        "Early development focuses on the plate reader, representative images and repeatable measurements. A reliable dataset is as important as the interface."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-259-266",
+        "compendium-267-270"
+      ],
+      "sourceIds": [
+        "R15",
+        "R21",
+        "R23",
+        "R67"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 249–258: Reader V1 engineering and dataset development. Internal project reference."
+    },
+    {
+      "id": "compendium-259-266",
+      "title": "Manufacture, installation and service delivery",
+      "category": "development",
+      "status": "Development research",
+      "text": [
+        "A laboratory product needs more than a working prototype. Manufacturing, installation, calibration, repairs and training all affect whether it can be used reliably."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-249-258",
+        "compendium-267-270"
+      ],
+      "sourceIds": [
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 259–266: Manufacture, installation and service delivery. Internal project reference."
+    },
+    {
+      "id": "compendium-267-270",
+      "title": "Custom electronics, silicon and technology transfer",
+      "category": "hardware",
+      "status": "Development research",
+      "text": [
+        "Custom electronics may become useful once measurement requirements are stable. Designing a custom chip too early can add cost without solving the main problem."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-249-258",
+        "compendium-259-266"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 267–270: Custom electronics, silicon and technology transfer. Internal project reference."
+    },
+    {
+      "id": "compendium-271-279",
+      "title": "Record interfaces and field dictionaries",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "A shared record format defines what fields mean. This helps prevent information from changing meaning when it moves between systems."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-280-282",
+        "compendium-283-286",
+        "compendium-287-292",
+        "compendium-293-300"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R04"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 271–279: Record interfaces and field dictionaries. Internal project reference."
+    },
+    {
+      "id": "compendium-280-282",
+      "title": "Worked record and recovery examples",
+      "category": "data",
+      "status": "Development research",
+      "text": [
+        "Fictional examples show what happens when a result is corrected, a step fails or a connection is interrupted. They illustrate software behaviour, not clinical performance."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-271-279",
+        "compendium-283-286",
+        "compendium-287-292",
+        "compendium-293-300"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 280–282: Worked record and recovery examples. Internal project reference."
+    },
+    {
+      "id": "compendium-283-286",
+      "title": "Glossary and cross-reference index",
+      "category": "development",
+      "status": "Reference guide",
+      "text": [
+        "Plain definitions help readers follow terms from microbiology, engineering and AI. Similar-sounding terms do not always describe the same thing."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-271-279",
+        "compendium-280-282",
+        "compendium-287-292",
+        "compendium-293-300"
+      ],
+      "sourceIds": [
+        "R10",
+        "R16",
+        "R65"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 283–286: Glossary and cross-reference index. Internal project reference."
+    },
+    {
+      "id": "compendium-287-292",
+      "title": "Linked scientific and supplier bibliography",
+      "category": "development",
+      "status": "Reference guide",
+      "text": [
+        "Scientific publications and supplier information provide background for project decisions. References should be read with their purpose, date and limitations in mind."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-271-279",
+        "compendium-280-282",
+        "compendium-283-286",
+        "compendium-293-300"
+      ],
+      "sourceIds": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "R01",
+        "R02",
+        "R03",
+        "R04",
+        "R05",
+        "R06",
+        "R07",
+        "R08",
+        "R09",
+        "R10",
+        "R11",
+        "R12",
+        "R13",
+        "R14",
+        "R15",
+        "R16",
+        "R17",
+        "R18",
+        "R19",
+        "R20",
+        "R21",
+        "R22",
+        "R23",
+        "R24",
+        "R25",
+        "R26",
+        "R27",
+        "R28",
+        "R29",
+        "R30",
+        "R31",
+        "R32",
+        "R33",
+        "R34",
+        "R35",
+        "R37",
+        "R38",
+        "R39",
+        "R40",
+        "R41",
+        "R42",
+        "R43",
+        "R44",
+        "R45",
+        "R46",
+        "R47",
+        "R48",
+        "R49",
+        "R50",
+        "R51",
+        "R52",
+        "R53",
+        "R54",
+        "R55",
+        "R56",
+        "R57",
+        "R58",
+        "R59",
+        "R60",
+        "R61",
+        "R62",
+        "R63",
+        "R64",
+        "R65",
+        "R66",
+        "R67",
+        "R68",
+        "R69",
+        "R70",
+        "R71",
+        "R72",
+        "R73",
+        "R74",
+        "R75"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 287–292: Linked scientific and supplier bibliography. Internal project reference."
+    },
+    {
+      "id": "compendium-293-300",
+      "title": "Reader V1 development bill of materials",
+      "category": "ast",
+      "status": "Development research",
+      "text": [
+        "A development parts list helps plan a prototype. Supplier prices, compatibility and availability need checking before any purchase."
+      ],
+      "tables": [],
+      "related": [
+        "compendium-271-279",
+        "compendium-280-282",
+        "compendium-283-286",
+        "compendium-287-292"
+      ],
+      "sourceIds": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "B05",
+        "B06",
+        "B07",
+        "B08",
+        "B09",
+        "B10",
+        "B11",
+        "B12",
+        "B13",
+        "B14",
+        "R46",
+        "R47",
+        "R48"
+      ],
+      "referenceLabel": "AMReye.AI Product and Research Compendium, pages 293–300: Reader V1 development bill of materials. Internal project reference."
+    },
+    {
+      "id": "topic-2",
+      "title": "Executive summary",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "AMReye.AI explores AI-assisted antibiotic-test reading and a broader family of laboratory tools. The advanced workstation is a proposed direction, not an integrated clinical product."
+      ],
+      "tables": [],
+      "related": [
+        "topic-3",
+        "topic-5",
+        "topic-6"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-2: Executive summary. Internal project reference."
+    },
+    {
+      "id": "topic-3",
+      "title": "What the flagship is · and is not",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The flagship is a long-term instrument concept. It should not be confused with the smaller first prototype or the synthetic website demonstration."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-5",
+        "topic-6"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-3: What the flagship is - and is not. Internal project reference."
+    },
+    {
+      "id": "topic-5",
+      "title": "Positioning",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The project starts with antibiotic susceptibility testing and explores wider laboratory automation. Other companies already work in imaging and automated testing."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-6"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-5: Positioning. Internal project reference."
+    },
+    {
+      "id": "topic-6",
+      "title": "Why a flagship is necessary",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A larger instrument concept helps examine how cameras, biology, software and safety could fit together. It is a way to plan development, not proof that every part already works."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-6: Why a flagship is necessary. Internal project reference."
+    },
+    {
+      "id": "topic-7",
+      "title": "Design principles",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Good design keeps measurements understandable, failures visible and people in control. These principles guide the proposed system."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-7: Design principles. Internal project reference."
+    },
+    {
+      "id": "topic-8",
+      "title": "Current PoC, proposed flagship and future R&D",
+      "category": "development",
+      "status": "Project context",
+      "text": [
+        "The current work is an early proof of concept. Proposed instruments and future research are labelled separately so visitors can see what still needs to be built and tested."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-8: Current PoC, proposed flagship and future R&D. Internal project reference."
+    },
+    {
+      "id": "topic-9",
+      "title": "Full flagship architecture",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The proposed system separates sample handling, measurement and computing. That separation would help keep heat, faults and software problems from affecting the sample."
+      ],
+      "tables": [],
+      "related": [
+        "topic-10",
+        "topic-11",
+        "topic-12"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-9: Full flagship architecture. Internal project reference."
+    },
+    {
+      "id": "topic-10",
+      "title": "System architecture · editable block diagram",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A system diagram shows how the instrument’s parts would connect. The connections describe a planned architecture, not a completed installation."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-11",
+        "topic-12"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-10: System architecture - editable block diagram. Internal project reference."
+    },
+    {
+      "id": "topic-11",
+      "title": "Data and control flow",
+      "category": "data",
+      "status": "Proposed product",
+      "text": [
+        "Data would move from image capture through measurement and review. Each step should preserve enough history to explain how a result was reached."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-12"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-11: Data and control flow. Internal project reference."
+    },
+    {
+      "id": "topic-12",
+      "title": "Dual imaging architecture",
+      "category": "imaging",
+      "status": "Proposed product",
+      "text": [
+        "One imaging path may be optimised for accurate measurement and another for exploratory research. The benefit of this added complexity still needs evaluation."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R14",
+        "R15"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-12: Dual imaging architecture. Internal project reference."
+    },
+    {
+      "id": "topic-13",
+      "title": "Updated flagship hardware stack",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Hardware choices depend on the measurement, maintenance and safety needs. Listed components are development references rather than a final product specification."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "S9",
+        "S8",
+        "S10",
+        "S11"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-13: Updated flagship hardware stack. Internal project reference."
+    },
+    {
+      "id": "topic-14",
+      "title": "Jetson AGX Thor / T5000 rationale",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A powerful edge computer is one possible platform for local AI processing. Its value depends on the actual workload, energy use and thermal design."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "S6",
+        "S7"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-14: Jetson AGX Thor / T5000 rationale. Internal project reference."
+    },
+    {
+      "id": "topic-16",
+      "title": "Three-zone Bio-Vault chassis",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "The proposed enclosure separates biological work, instrument hardware and computing. The aim is to reduce interference and make servicing safer."
+      ],
+      "tables": [],
+      "related": [
+        "topic-17",
+        "topic-18",
+        "topic-19"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-16: Three-zone Bio-Vault chassis. Internal project reference."
+    },
+    {
+      "id": "topic-17",
+      "title": "STM32-class Reflex controller",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A small independent controller would handle time-sensitive controls and safety responses. It should not depend on the main AI computer staying responsive."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-18",
+        "topic-19"
+      ],
+      "sourceIds": [
+        "S24"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-17: STM32-class Reflex controller. Internal project reference."
+    },
+    {
+      "id": "topic-18",
+      "title": "Industrial HMI / Interface computer",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "The operator display would help people run a workflow and review results. Clear controls and visible warnings matter more than decorative complexity."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-19"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-18: Industrial HMI / Interface computer. Internal project reference."
+    },
+    {
+      "id": "topic-19",
+      "title": "Jetson Thor / T5000 Cortex",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "The proposed AI computer would process images near the instrument. Production hardware would need a separate engineering and reliability assessment."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S6",
+        "S7"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-19: Jetson Thor / T5000 Cortex. Internal project reference."
+    },
+    {
+      "id": "topic-20",
+      "title": "Clinical metrology camera",
+      "category": "imaging",
+      "status": "Proposed product",
+      "text": [
+        "A measurement camera would capture the whole plate under controlled conditions. Accuracy depends on calibration and optics as well as camera resolution."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S9"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-20: Clinical metrology camera. Internal project reference."
+    },
+    {
+      "id": "topic-21",
+      "title": "Whole-plate telecentric lens",
+      "category": "imaging",
+      "status": "Proposed product",
+      "text": [
+        "A telecentric lens can reduce changes in apparent size when an object’s position varies. It is one optical option to evaluate for reliable measurement."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S8"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-21: Whole-plate telecentric lens. Internal project reference."
+    },
+    {
+      "id": "topic-22",
+      "title": "Research RGB/NIR camera",
+      "category": "imaging",
+      "status": "Proposed product",
+      "text": [
+        "A research camera could study visible and near-infrared light. Such observations would need validation before being used for biological conclusions."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "R46",
+        "R55"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-22: Research RGB/NIR camera. Internal project reference."
+    },
+    {
+      "id": "topic-23",
+      "title": "Multimode illumination",
+      "category": "imaging",
+      "status": "Proposed product",
+      "text": [
+        "Lighting a sample from different directions can reveal different features. Every selected lighting mode needs a defined measurement purpose."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "R14",
+        "R55",
+        "R56"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-23: Multimode illumination. Internal project reference."
+    },
+    {
+      "id": "topic-24",
+      "title": "BME690 VOC array",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A gas-sensor array might detect changes in volatile chemicals near a sample. Those changes are not a standalone organism-identification test."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S10"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-24: BME690 VOC array. Internal project reference."
+    },
+    {
+      "id": "topic-25",
+      "title": "VL53L8CX coarse ToF",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A time-of-flight sensor estimates distance. It may help with positioning, but it is not a substitute for a precise surface-measurement instrument."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S11"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-25: VL53L8CX coarse ToF. Internal project reference."
+    },
+    {
+      "id": "topic-26",
+      "title": "Research 3D profilometer",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "A surface scanner could study the three-dimensional shape of colonies. This remains a research direction with separate calibration and validation needs."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-26: Research 3D profilometer. Internal project reference."
+    },
+    {
+      "id": "topic-27",
+      "title": "Gravimetric load cell",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A load cell measures weight. It could help check liquid delivery or changes in a sample, within a defined accuracy range."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-27: Gravimetric load cell. Internal project reference."
+    },
+    {
+      "id": "topic-28",
+      "title": "Temperature and humidity control",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Temperature and humidity affect both biology and imaging. Proposed controls would record these conditions and flag readings outside the intended range."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "R20",
+        "B13"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-28: Temperature and humidity control. Internal project reference."
+    },
+    {
+      "id": "topic-29",
+      "title": "Gas and atmosphere control",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Some organisms need particular gas conditions. Any controlled-atmosphere module would require a suitable assay, safety design and validation."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-29: Gas and atmosphere control. Internal project reference."
+    },
+    {
+      "id": "topic-30",
+      "title": "Integrated nephelometer",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A nephelometer measures light scattered by a suspension. It could help standardise sample preparation, but its reading depends on the method and calibration."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-30: Integrated nephelometer. Internal project reference."
+    },
+    {
+      "id": "topic-31",
+      "title": "Direct broth microdilution module",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Broth microdilution measures growth at different antibiotic concentrations. Direct minimum inhibitory concentration testing is a separate proposed module, not something inferred from a plate image alone."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "S15"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-31: Direct broth microdilution module. Internal project reference."
+    },
+    {
+      "id": "topic-32",
+      "title": "Robotic plate queue",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A robotic queue could move plates through the instrument. Safe handling and accurate sample identity would need to be proven before routine use."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-32: Robotic plate queue. Internal project reference."
+    },
+    {
+      "id": "topic-33",
+      "title": "Purpose-built liquid handler",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A liquid handler could dispense small volumes consistently. It would need checks for volume accuracy, contamination and failed transfers."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-33: Purpose-built liquid handler. Internal project reference."
+    },
+    {
+      "id": "topic-34",
+      "title": "Power, UPS and protective devices",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Power protection helps a system stop safely or recover after an interruption. It cannot turn missing measurements into completed results."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "B14"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-34: Power, UPS and protective devices. Internal project reference."
+    },
+    {
+      "id": "topic-35",
+      "title": "HEPA, UV-C and chamber hygiene",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Air filtration and decontamination are safety design questions. Ultraviolet light needs shielding and interlocks; no sterilisation performance is claimed."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-35: HEPA, UV-C and chamber hygiene. Internal project reference."
+    },
+    {
+      "id": "topic-36",
+      "title": "Barcode / RFID and identity",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Barcodes or radio tags can help keep each sample linked to the right record. Mismatches and unreadable labels must be caught before review."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-36: Barcode / RFID and identity. Internal project reference."
+    },
+    {
+      "id": "topic-37",
+      "title": "Service and calibration fixtures",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Calibration tools help check whether an instrument still measures correctly. Service procedures would need to be documented and tested."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [
+        "R16",
+        "R64"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-37: Service and calibration fixtures. Internal project reference."
+    },
+    {
+      "id": "topic-38",
+      "title": "Four software layers and BAHU/SaaS architecture",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The proposed software separates device control, analysis, record management and user interaction. Clear boundaries help explain and troubleshoot a result."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-38: Four software layers and BAHU/SaaS architecture. Internal project reference."
+    },
+    {
+      "id": "topic-39",
+      "title": "BAHU · Bio-Automation & Human User Interface",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "BAHU is the proposed operator interface for laboratory automation. It would connect people, instruments and review tasks while keeping responsibility visible."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-39: BAHU - Bio-Automation & Human User Interface. Internal project reference."
+    },
+    {
+      "id": "topic-40",
+      "title": "SaaS / Hive services",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Software services could support updates, standards and multiple instruments. These are a proposed service model, not evidence of paying customers."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-40: SaaS / Hive services. Internal project reference."
+    },
+    {
+      "id": "topic-41",
+      "title": "PIMS and the digital twin",
+      "category": "data",
+      "status": "Proposed product",
+      "text": [
+        "A plate record would link images, conditions and review history. A record is different from a model that predicts future biological behaviour."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R58",
+        "R59"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-41: PIMS and the digital twin. Internal project reference."
+    },
+    {
+      "id": "topic-42",
+      "title": "CLSI/EUCAST structured standards engine",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Antibiotic results depend on the organism, method and correct version of interpretation rules. A standards engine would keep that rule choice traceable."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R03"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-42: CLSI/EUCAST structured standards engine. Internal project reference."
+    },
+    {
+      "id": "topic-43",
+      "title": "LIMS/LIS/HIS and OEM integration",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Laboratory and hospital systems need agreed formats to exchange information. A successful connection must preserve identity, units and result meaning."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-43: LIMS/LIS/HIS and OEM integration. Internal project reference."
+    },
+    {
+      "id": "topic-44",
+      "title": "Human-in-the-loop clinical workflow",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "A qualified laboratory professional reviews the evidence and decides whether to accept or correct a result. AI assistance does not remove that responsibility."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R21",
+        "R22"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-44: Human-in-the-loop clinical workflow. Internal project reference."
+    },
+    {
+      "id": "topic-45",
+      "title": "Offline and edge operation",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Local processing could support work with limited connectivity. Synchronisation would still need to handle interruptions and conflicting updates safely."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R49",
+        "R53"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-45: Offline and edge operation. Internal project reference."
+    },
+    {
+      "id": "topic-46",
+      "title": "Cybersecurity and software lifecycle",
+      "category": "data",
+      "status": "Proposed product",
+      "text": [
+        "Security includes controlling access, managing updates and recording important changes. These protections would need ongoing testing throughout the product’s life."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "R49",
+        "R52",
+        "R53"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-46: Cybersecurity and software lifecycle. Internal project reference."
+    },
+    {
+      "id": "topic-48",
+      "title": "Intended clinical capability set",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Potential clinical functions are development intentions. Each would need a clearly defined use, reference method and appropriate clinical evidence."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [
+        "S15",
+        "S13"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-48: Intended clinical capability set. Internal project reference."
+    },
+    {
+      "id": "topic-49",
+      "title": "Research capability set",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Research uses could explore growth, colony appearance and other measurements. A research observation does not automatically establish a diagnostic result."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-49: Research capability set. Internal project reference."
+    },
+    {
+      "id": "topic-50",
+      "title": "Advanced R&D features",
+      "category": "development",
+      "status": "Future research",
+      "text": [
+        "Advanced sensing and automation are future research tracks. Their value must be shown separately rather than assumed from the platform concept."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-50: Advanced R&D features. Internal project reference."
+    },
+    {
+      "id": "topic-51",
+      "title": "Use Cases · What It Does, Who Uses It, and Why It Matters",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Different users have different laboratory questions. This area connects possible applications with the evidence each would require."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-51: Use Cases - What It Does, Who Uses It, and Why It Matters. Internal project reference."
+    },
+    {
+      "id": "topic-52",
+      "title": "Concise module summary",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "The proposed instrument is organised into modules for imaging, sensing, control and records. Each module should solve a specific workflow need."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-52: Concise module summary. Internal project reference."
+    },
+    {
+      "id": "topic-53",
+      "title": "Hospital clinical microbiology AST",
+      "category": "ast",
+      "status": "Proposed product",
+      "text": [
+        "Hospital laboratories test how bacteria respond to antibiotics. An assisted workflow would need to fit existing quality systems and qualified review."
+      ],
+      "tables": [],
+      "related": [
+        "topic-54",
+        "topic-55",
+        "topic-56"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R03",
+        "R66",
+        "R67"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-53: Hospital clinical microbiology AST. Internal project reference."
+    },
+    {
+      "id": "topic-54",
+      "title": "ICU and sepsis workflows",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Sepsis care depends on timely, reliable clinical information. A proposed laboratory tool must not promise faster treatment decisions without supporting studies."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-55",
+        "topic-56"
+      ],
+      "sourceIds": [
+        "S13"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-54: ICU and sepsis workflows. Internal project reference."
+    },
+    {
+      "id": "topic-55",
+      "title": "Antimicrobial stewardship",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Stewardship teams work to improve antibiotic use. Validated laboratory results may support that work, alongside clinical judgement and other evidence."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-56"
+      ],
+      "sourceIds": [
+        "R06"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-55: Antimicrobial stewardship. Internal project reference."
+    },
+    {
+      "id": "topic-56",
+      "title": "Direct MIC testing",
+      "category": "ast",
+      "status": "Proposed product",
+      "text": [
+        "Minimum inhibitory concentration is the lowest tested concentration that stops visible growth under a defined method. Measuring it directly differs from measuring a clear zone on agar."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "S15",
+        "R01",
+        "R02"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-56: Direct MIC testing. Internal project reference."
+    },
+    {
+      "id": "topic-57",
+      "title": "Teaching and academic laboratories",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Teaching laboratories could use clearly labelled examples to learn measurement, uncertainty and review. Educational demonstrations are not clinical tests."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-57: Teaching and academic laboratories. Internal project reference."
+    },
+    {
+      "id": "topic-58",
+      "title": "Research phenomics",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Phenomics studies observable traits such as growth and appearance. Those traits can be informative, but do not by themselves reveal a genome."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-58: Research phenomics. Internal project reference."
+    },
+    {
+      "id": "topic-59",
+      "title": "Fluorescent reporter studies",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Fluorescent markers can make a biological process easier to observe. Such studies require suitable organisms, equipment and experimental controls."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "R56"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-59: Fluorescent reporter studies. Internal project reference."
+    },
+    {
+      "id": "topic-60",
+      "title": "Heteroresistance and satellite-colony research",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Small colonies inside or near an antibiotic zone may deserve investigation. An image alone cannot confirm heteroresistance or explain its mechanism."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "S26"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-60: Heteroresistance and satellite-colony research. Internal project reference."
+    },
+    {
+      "id": "topic-61",
+      "title": "Anaerobic and microaerophilic research",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Some organisms grow with little or no oxygen. Studying them needs a controlled environment and methods suited to that biology."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-61: Anaerobic and microaerophilic research. Internal project reference."
+    },
+    {
+      "id": "topic-62",
+      "title": "Biofilm and colony-morphology research",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Biofilms and colony shapes are possible research subjects. Their appearance must not be treated as a validated species or resistance diagnosis."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-62: Biofilm and colony-morphology research. Internal project reference."
+    },
+    {
+      "id": "topic-63",
+      "title": "Pharmaceutical QC and sterility monitoring",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Pharmaceutical quality work has strict methods and acceptance criteria. Any proposed automated check would need validation for its specific purpose."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "R64"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-63: Pharmaceutical QC and sterility monitoring. Internal project reference."
+    },
+    {
+      "id": "topic-64",
+      "title": "Environmental monitoring",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Environmental monitoring looks for microbial contamination in places or processes. Sampling methods and quality controls are central to interpreting the result."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-64: Environmental monitoring. Internal project reference."
+    },
+    {
+      "id": "topic-65",
+      "title": "Water and coliform workflows",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Water testing can include coliform and other microbial measurements. These methods have their own requirements and are not interchangeable with antibiotic plate testing."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-65: Water and coliform workflows. Internal project reference."
+    },
+    {
+      "id": "topic-66",
+      "title": "Dairy and food microbiology",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Food and dairy laboratories investigate microbial quality and safety. Potential instrument uses would need to match the relevant sample and test method."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-66: Dairy and food microbiology. Internal project reference."
+    },
+    {
+      "id": "topic-67",
+      "title": "Veterinary and One Health applications",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "One Health connects human, animal and environmental health. Shared research questions do not remove the need to validate each laboratory application."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "R65"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-67: Veterinary and One Health applications. Internal project reference."
+    },
+    {
+      "id": "topic-68",
+      "title": "AMR surveillance network",
+      "category": "development",
+      "status": "Future research",
+      "text": [
+        "A surveillance network could combine suitable laboratory records to study resistance patterns. The website’s map uses fixed synthetic examples, not live public-health data."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "S25",
+        "R33"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-68: AMR surveillance network. Internal project reference."
+    },
+    {
+      "id": "topic-69",
+      "title": "Multi-site enterprise laboratories",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A laboratory group may need consistent records across several sites. Access control, compatible methods and data quality would matter at every location."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-69: Multi-site enterprise laboratories. Internal project reference."
+    },
+    {
+      "id": "topic-70",
+      "title": "Custom lab automation via BAHU",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Laboratory automation could coordinate several instruments and operator steps. This remains a staged development pathway."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-70: Custom lab automation via BAHU. Internal project reference."
+    },
+    {
+      "id": "topic-71",
+      "title": "Remote and offline decentralized laboratories",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Laboratories with unreliable internet may benefit from local processing. Reliable recovery and later synchronisation would need to be tested."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-71: Remote and offline decentralized laboratories. Internal project reference."
+    },
+    {
+      "id": "topic-72",
+      "title": "OEM and instrument integration",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Connecting with other instrument makers requires agreed interfaces and testing. No commercial integration is implied by the concept."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-72: OEM and instrument integration. Internal project reference."
+    },
+    {
+      "id": "topic-73",
+      "title": "Competitor and benchmark context",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Existing instruments provide useful benchmarks for imaging, antibiotic testing and automation. Comparisons must consider intended use and published evidence."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [
+        "S19",
+        "S16",
+        "S17",
+        "S18"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-73: Competitor and benchmark context. Internal project reference."
+    },
+    {
+      "id": "topic-74",
+      "title": "Competitive claim rules",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A fair comparison describes what another system actually does. The project should not claim uniqueness or superiority without evidence."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [
+        "R21",
+        "R35"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-74: Competitive claim rules. Internal project reference."
+    },
+    {
+      "id": "topic-75",
+      "title": "Modular product family",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The proposed product family starts with a simpler reader and considers more capable systems later. Each step adds its own engineering and validation work."
+      ],
+      "tables": [],
+      "related": [
+        "topic-76",
+        "topic-77",
+        "topic-84"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-75: Modular product family. Internal project reference."
+    },
+    {
+      "id": "topic-76",
+      "title": "Why the flagship price differs from Lite/Core/Clinical",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "A complex research workstation needs more hardware and support than a basic reader. This explains a possible cost difference, not a confirmed selling price."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-77",
+        "topic-84"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-76: Why the flagship price differs from Lite/Core/Clinical. Internal project reference."
+    },
+    {
+      "id": "topic-77",
+      "title": "Flagship price statement",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Any proposed instrument price depends on a defined configuration and current supplier quotes. No final commercial price is established here."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-84"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-77: Flagship price statement. Internal project reference."
+    },
+    {
+      "id": "topic-79",
+      "title": "Safety architecture",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Safety design considers failures before they happen. Independent controls, clear warnings and safe stopping behaviour would need practical testing."
+      ],
+      "tables": [],
+      "related": [
+        "topic-80",
+        "topic-81",
+        "topic-82"
+      ],
+      "sourceIds": [
+        "R50",
+        "R51"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-79: Safety architecture. Internal project reference."
+    },
+    {
+      "id": "topic-80",
+      "title": "Validation workstreams",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Validation includes measurement accuracy, repeatability, biological comparisons and usability. The next stage depends on evidence, not the appearance of the prototype."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-81",
+        "topic-82"
+      ],
+      "sourceIds": [
+        "R03",
+        "R16",
+        "R21",
+        "R35"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-80: Validation workstreams. Internal project reference."
+    },
+    {
+      "id": "topic-81",
+      "title": "Regulatory statement",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Regulatory requirements depend on intended use and jurisdiction. This project does not claim diagnostic clearance."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-82"
+      ],
+      "sourceIds": [
+        "S20"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-81: Regulatory statement. Internal project reference."
+    },
+    {
+      "id": "topic-82",
+      "title": "Claims that must not appear without evidence",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Claims about accuracy, speed, clinical use or readiness need specific supporting evidence. Ambitious research should remain labelled as research."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R21",
+        "R35"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-82: Claims that must not appear without evidence. Internal project reference."
+    },
+    {
+      "id": "topic-83",
+      "title": "Development and de-risking sequence",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "A staged plan tests the most important uncertainties before adding complexity. Early milestones include a calibrated prototype, representative data and reference comparisons."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R35",
+        "R51"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-83: Development and de-risking sequence. Internal project reference."
+    },
+    {
+      "id": "topic-84",
+      "title": "Detailed flagship BOM categories and pricing assumptions",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A parts budget groups optics, electronics, mechanics and services. Development estimates need checking against a selected configuration."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-77"
+      ],
+      "sourceIds": [
+        "S9",
+        "S8"
+      ],
+      "referenceLabel": "AMReye.AI technical project record topic-84: Appendix A. Detailed flagship BOM categories and pricing assumptions. Internal project reference."
+    },
+    {
+      "id": "topic-85",
+      "title": "Cost uncertainty and exclusions",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Freight, exchange rates, duties, support and supplier availability can change costs. A preliminary estimate is not a purchase quote."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-77"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-85: A.1 Cost uncertainty and exclusions. Internal project reference."
+    },
+    {
+      "id": "topic-86",
+      "title": "Preliminary commercial price bridge",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A selling price must account for more than parts: manufacturing, testing, support and business costs also matter. The commercial model remains to be validated."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-77"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-86: A.2 Preliminary commercial price bridge. Internal project reference."
+    },
+    {
+      "id": "topic-87",
+      "title": "Critical corrections and design requirements",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Design reviews record assumptions that need correction or testing. Making those limits visible helps prevent an attractive concept from becoming an unsupported claim."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-87: Appendix B. Critical corrections and design requirements. Internal project reference."
+    },
+    {
+      "id": "topic-89",
+      "title": "Final decision summary",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "The immediate priority is evidence for a practical first reader. More ambitious modules can follow when their need and performance are established."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record topic-89: Appendix D. Final decision summary. Internal project reference."
+    },
+    {
+      "id": "research-rtos",
+      "title": "RTOS and independent embedded control",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Time-sensitive instrument controls may need their own real-time operating system. The aim is predictable control even when the main computer is busy."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [
+        "S24"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-rtos: RTOS and independent embedded control. Internal project reference."
+    },
+    {
+      "id": "research-faults",
+      "title": "Watchdogs, interlocks and fault-state recovery",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Watchdogs and interlocks detect faults and help a system stop safely. Recovery must preserve sample identity and the history of unfinished work."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R51",
+        "R52"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-faults: Watchdogs, interlocks and fault-state recovery. Internal project reference."
+    },
+    {
+      "id": "research-gantry",
+      "title": "Multi-plate camera gantry concept",
+      "category": "imaging",
+      "status": "Future research",
+      "text": [
+        "A moving camera might image several plates with one optical system. Positioning accuracy, movement and repeatability would need testing."
+      ],
+      "tables": [],
+      "related": [
+        "topic-16",
+        "topic-17",
+        "topic-18"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-gantry: Multi-plate camera gantry concept. Internal project reference."
+    },
+    {
+      "id": "research-uv",
+      "title": "Decontamination concept and UV safety boundaries",
+      "category": "standards",
+      "status": "Future research",
+      "text": [
+        "Ultraviolet decontamination is a proposed engineering study. Shielding and safety controls are essential, and cleaning effectiveness cannot be assumed."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-uv: Decontamination concept and UV safety boundaries. Internal project reference."
+    },
+    {
+      "id": "research-licensing",
+      "title": "Open hardware, software licensing and commercial services",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "Hardware designs, software and scientific content may have different reuse terms. Commercial services must respect those rights."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-77"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-licensing: Open hardware, software licensing and commercial services. Internal project reference."
+    },
+    {
+      "id": "research-access",
+      "title": "Educational and public-health access model",
+      "category": "applications",
+      "status": "Proposed product",
+      "text": [
+        "Education and public-health access are possible delivery goals. A sustainable model would need to balance affordability, support and quality."
+      ],
+      "tables": [],
+      "related": [
+        "topic-75",
+        "topic-76",
+        "topic-77"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-access: Educational and public-health access model. Internal project reference."
+    },
+    {
+      "id": "research-offline",
+      "title": "Web app, offline reader and instrument application",
+      "category": "hardware",
+      "status": "Proposed product",
+      "text": [
+        "A web interface and a real instrument application have different responsibilities. Offline instrument work would need safe storage, recovery and synchronisation."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-offline: Web app, offline reader and instrument application. Internal project reference."
+    },
+    {
+      "id": "research-spending",
+      "title": "Goa diagnostic capacity and public-spending research framework",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Understanding local laboratory needs can help guide development. Public-spending research does not establish government funding or procurement."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-spending: Goa diagnostic capacity and public-spending research framework. Internal project reference."
+    },
+    {
+      "id": "research-preparedness",
+      "title": "Bacterial-outbreak preparedness scenarios",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Outbreak scenarios can help plan information and laboratory workflows. They are exercises, not predictions of an actual outbreak."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-preparedness: Bacterial-outbreak preparedness scenarios. Internal project reference."
+    },
+    {
+      "id": "research-phenotype",
+      "title": "Growth patterns, phenomics and identity limits",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Growth and appearance are observable traits. They can guide research questions but cannot independently establish genetic identity."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-phenotype: Growth patterns, phenomics and identity limits. Internal project reference."
+    },
+    {
+      "id": "research-models",
+      "title": "Model evaluation and dataset governance",
+      "category": "ai",
+      "status": "Proposed product",
+      "text": [
+        "AI models need representative training data and independent evaluation. Checks should include uncertainty and examples unlike the training set."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R21",
+        "R22",
+        "R23"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-models: Model evaluation and dataset governance. Internal project reference."
+    },
+    {
+      "id": "research-surveillance",
+      "title": "From laboratory records to governed surveillance",
+      "category": "data",
+      "status": "Future research",
+      "text": [
+        "Turning laboratory results into public-health information requires quality checks and appropriate permissions. Aggregation alone does not make data reliable."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "topic-54",
+        "topic-55"
+      ],
+      "sourceIds": [
+        "S25"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-surveillance: From laboratory records to governed surveillance. Internal project reference."
+    },
+    {
+      "id": "research-history",
+      "title": "Project history and source reconciliation",
+      "category": "development",
+      "status": "Project context",
+      "text": [
+        "Project history helps explain how ideas and evidence developed. Older plans should not be mistaken for current completed work."
+      ],
+      "tables": [],
+      "related": [
+        "topic-2",
+        "topic-3",
+        "topic-5"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-history: Project history and source reconciliation. Internal project reference."
+    },
+    {
+      "id": "research-research-roles",
+      "title": "Team roles and responsibilities",
+      "category": "development",
+      "status": "Project context",
+      "text": [
+        "Different team members contribute biology, engineering, software and review. Roles describe responsibility, not proof of a completed capability."
+      ],
+      "tables": [],
+      "related": [
+        "reader-v1",
+        "topic-45",
+        "topic-40"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-research-roles: Team roles and responsibilities. Internal project reference."
+    },
+    {
+      "id": "research-validation-mode",
+      "title": "Validation mode and correction provenance",
+      "category": "data",
+      "status": "Proposed product",
+      "text": [
+        "A validation interface should preserve original observations and corrections. Changing a measurement must make any earlier approval invalid."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R16",
+        "R21"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-validation-mode: Validation mode and correction provenance. Internal project reference."
+    },
+    {
+      "id": "research-readability",
+      "title": "Unreadable images, review and recapture",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "Some images cannot support a reliable measurement. The correct response is to show the limitation and request review or recapture."
+      ],
+      "tables": [],
+      "related": [
+        "topic-79",
+        "topic-80",
+        "topic-81"
+      ],
+      "sourceIds": [
+        "R03",
+        "R14",
+        "R16"
+      ],
+      "referenceLabel": "AMReye.AI technical project record research-readability: Unreadable images, review and recapture. Internal project reference."
+    },
+    {
+      "id": "research-configurations",
+      "title": "Bio-Vault and APEX XR: separate configuration studies",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "Bio-Vault and APEX XR are distinct configuration studies. Their drawings are concepts, not manufacturing-ready engineering files."
+      ],
+      "tables": [],
+      "related": [
+        "topic-9",
+        "topic-10",
+        "topic-11"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record research-configurations: Bio-Vault and APEX XR: separate configuration studies. Internal project reference."
+    },
+    {
+      "id": "reader-v1",
+      "title": "Reader V1: endpoint disk-diffusion reading",
+      "category": "ast",
+      "status": "Early prototype",
+      "text": [
+        "The first reader direction focuses on photographing endpoint disk-diffusion plates and helping people review zone measurements. The website offers a synthetic demonstration; the physical system remains in early development."
+      ],
+      "tables": [],
+      "related": [
+        "topic-80",
+        "research-readability"
+      ],
+      "sourceIds": [
+        "R01",
+        "R02",
+        "R03",
+        "R66",
+        "R67"
+      ],
+      "referenceLabel": "AMReye.AI technical project record reader-v1: Reader V1: endpoint disk-diffusion reading. Internal project reference."
+    },
+    {
+      "id": "campus-audit",
+      "title": "Campus and laboratory audit collaboration",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "A campus laboratory audit would map equipment, routines and unmet needs. It could inform collaboration without assuming a purchase or formal partnership."
+      ],
+      "tables": [],
+      "related": [
+        "topic-57",
+        "topic-70"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record campus-audit: Campus and laboratory audit collaboration. Internal project reference."
+    },
+    {
+      "id": "cell-culture",
+      "title": "Cell-culture workflow research",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Cell-culture research studies cells under controlled conditions. It is a separate future workflow with different methods from antibiotic plate reading."
+      ],
+      "tables": [],
+      "related": [
+        "stem-cells",
+        "organoids",
+        "topic-80"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record cell-culture: Cell-culture workflow research. Internal project reference."
+    },
+    {
+      "id": "stem-cells",
+      "title": "Stem-cell research workflows",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Stem-cell workflows require specialised methods and careful controls. They are an exploratory research direction, not a current instrument capability."
+      ],
+      "tables": [],
+      "related": [
+        "cell-culture",
+        "organoids"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record stem-cells: Stem-cell research workflows. Internal project reference."
+    },
+    {
+      "id": "organoids",
+      "title": "Organoid and tissue-model research",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Organoids are laboratory-grown models that represent some tissue features. Supporting them would require a separate research and validation programme."
+      ],
+      "tables": [],
+      "related": [
+        "cell-culture",
+        "stem-cells"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record organoids: Organoid and tissue-model research. Internal project reference."
+    },
+    {
+      "id": "uti-workflow",
+      "title": "UTI and urine-culture workflow research",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Urine-culture work involves sample handling, growth assessment and clinical interpretation. Potential assistance would need validation within that complete workflow."
+      ],
+      "tables": [],
+      "related": [
+        "topic-53",
+        "molecular-workflow"
+      ],
+      "sourceIds": [
+        "R62"
+      ],
+      "referenceLabel": "AMReye.AI technical project record uti-workflow: UTI and urine-culture workflow research. Internal project reference."
+    },
+    {
+      "id": "molecular-workflow",
+      "title": "MRSA and molecular-result integration",
+      "category": "applications",
+      "status": "Future research",
+      "text": [
+        "Molecular tests can provide information that a plate image cannot. Linking their results requires suitable assays and reliable sample identity."
+      ],
+      "tables": [],
+      "related": [
+        "bioinformatics",
+        "uti-workflow"
+      ],
+      "sourceIds": [
+        "R63"
+      ],
+      "referenceLabel": "AMReye.AI technical project record molecular-workflow: MRSA and molecular-result integration. Internal project reference."
+    },
+    {
+      "id": "bioinformatics",
+      "title": "Bioinformatics and phenotype–genotype research",
+      "category": "data",
+      "status": "Future research",
+      "text": [
+        "Bioinformatics studies biological data, including genetic information. Connecting it to visible growth patterns requires qualified data and careful evaluation."
+      ],
+      "tables": [],
+      "related": [
+        "research-models",
+        "molecular-workflow"
+      ],
+      "sourceIds": [
+        "R24",
+        "R25"
+      ],
+      "referenceLabel": "AMReye.AI technical project record bioinformatics: Bioinformatics and phenotype–genotype research. Internal project reference."
+    },
+    {
+      "id": "plate-provenance",
+      "title": "Measured, derived, imputed and simulated data",
+      "category": "standards",
+      "status": "Proposed product",
+      "text": [
+        "A measured value, a calculated value, a prediction and a simulation are different. A useful record makes the origin of each value clear."
+      ],
+      "tables": [],
+      "related": [
+        "topic-41",
+        "research-validation-mode"
+      ],
+      "sourceIds": [
+        "R16",
+        "R58",
+        "R59"
+      ],
+      "referenceLabel": "AMReye.AI technical project record plate-provenance: Measured, derived, imputed and simulated data. Internal project reference."
+    },
+    {
+      "id": "interoperability",
+      "title": "Interoperability, APIs and audit trails",
+      "category": "data",
+      "status": "Future research",
+      "text": [
+        "Systems need shared meanings as well as a working connection. Sample identity, units, timestamps and review history must survive data exchange."
+      ],
+      "tables": [],
+      "related": [
+        "topic-43",
+        "privacy-governance"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record interoperability: Interoperability, APIs and audit trails. Internal project reference."
+    },
+    {
+      "id": "system-service",
+      "title": "System as a Service delivery model",
+      "category": "development",
+      "status": "Proposed product",
+      "text": [
+        "System as a Service would combine equipment access with calibration, maintenance, training and support. It is a proposed delivery model, separate from a software subscription."
+      ],
+      "tables": [],
+      "related": [
+        "topic-40",
+        "campus-audit"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record system-service: System as a Service delivery model. Internal project reference."
+    },
+    {
+      "id": "privacy-governance",
+      "title": "Privacy and access governance",
+      "category": "data",
+      "status": "Proposed product",
+      "text": [
+        "Laboratory data need appropriate permissions, access limits and retention rules. Private project records should stay separate from public explanations."
+      ],
+      "tables": [],
+      "related": [
+        "topic-68",
+        "interoperability"
+      ],
+      "sourceIds": [
+        "R49",
+        "R53",
+        "R54"
+      ],
+      "referenceLabel": "AMReye.AI technical project record privacy-governance: Privacy and access governance. Internal project reference."
+    },
+    {
+      "id": "automation-glossary",
+      "title": "Automation vocabulary with practical meaning",
+      "category": "development",
+      "status": "Reference guide",
+      "text": [
+        "Edge AI means computing near an instrument; human-in-the-loop means qualified review. These terms describe design choices, not evidence that a whole automated laboratory is built."
+      ],
+      "tables": [],
+      "related": [
+        "topic-39",
+        "plate-provenance",
+        "research-models"
+      ],
+      "sourceIds": [],
+      "referenceLabel": "AMReye.AI technical project record automation-glossary: Automation vocabulary with practical meaning. Internal project reference."
+    }
+  ],
+  "sources": [
+    {
+      "id": "R01",
+      "title": "Performance Standards for Antimicrobial Susceptibility Testing M100 Edition 36 · CLSI (2026)",
+      "url": "https://clsi.org/shop/standards/m100/"
+    },
+    {
+      "id": "R02",
+      "title": "Clinical breakpoint tables version 16.1 · EUCAST (2026)",
+      "url": "https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/"
+    },
+    {
+      "id": "R03",
+      "title": "Disk diffusion and quality control · EUCAST (2026)",
+      "url": "https://www.eucast.org/bacteria/methodology-and-instructions/disk-diffusion-and-quality-control/"
+    },
+    {
+      "id": "R04",
+      "title": "Breakpoints for rapid AST · EUCAST (2026)",
+      "url": "https://www.eucast.org/bacteria/rapid-ast-in-blood-culture/breakpoints-for-rapid-ast/"
+    },
+    {
+      "id": "R05",
+      "title": "Rapid AST methods and quality control · EUCAST (2026)",
+      "url": "https://www.eucast.org/bacteria/rapid-ast-in-blood-culture/methods-and-quality-control/"
+    },
+    {
+      "id": "R06",
+      "title": "Antimicrobial resistance · World Health Organization (2026)",
+      "url": "https://www.who.int/en/news-room/fact-sheets/detail/antimicrobial-resistance"
+    },
+    {
+      "id": "R07",
+      "title": "Antibiotic combinations that exploit heteroresistance to multiple drugs effectively control infection · Band VI, Hufnagel DA, Jaggavarapu S, et al. (2019)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31209306/"
+    },
+    {
+      "id": "R08",
+      "title": "Antibiotic failure mediated by a resistant subpopulation in Enterobacter cloacae · Band VI, Crispell EK, Napier BA, et al. (2016)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/27572838/"
+    },
+    {
+      "id": "R09",
+      "title": "Resolving colistin resistance and heteroresistance in Enterobacter species · Doijad SP, Gisch N, Frantz R, et al. (2023)",
+      "url": "https://www.nature.com/articles/s41467-022-35717-0"
+    },
+    {
+      "id": "R10",
+      "title": "Definitions and guidelines for research on antibiotic persistence · Balaban NQ, Helaine S, Lewis K, et al. (2019)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30980069/"
+    },
+    {
+      "id": "R11",
+      "title": "Antibiotic susceptibility testing in less than 30 min using direct single-cell imaging · Baltekin Ö, Boucharin A, Tano E, Andersson DI, Elf J (2017)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28790187/"
+    },
+    {
+      "id": "R12",
+      "title": "Automatic detection and quantification of antimicrobial inhibition zones using YOLO11n with post-hoc interpretability validation · Ciftci F, Erarslan A, Rahebi J (2026)",
+      "url": "https://www.frontiersin.org/journals/microbiology/articles/10.3389/fmicb.2026.1810754/pdf"
+    },
+    {
+      "id": "R13",
+      "title": "Sources propagation and consequences of stochasticity in cellular growth · Thomas P, Terradot G, Danos V, Weiße AY (2018)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30375377/"
+    },
+    {
+      "id": "R14",
+      "title": "EMVA 1288 Standard for characterization of image sensors and cameras · European Machine Vision Association (2021)",
+      "url": "https://www.emva.org/standards-technology/emva-1288/"
+    },
+    {
+      "id": "R15",
+      "title": "Advantages of telecentricity · Edmund Optics (undated)",
+      "url": "https://www.edmundoptics.com/knowledge-center/application-notes/imaging/advantages-of-telecentricity/"
+    },
+    {
+      "id": "R16",
+      "title": "Evaluation of measurement data Guide to the expression of uncertainty in measurement · JCGM BIPM (2008)",
+      "url": "https://www.bipm.org/en/web/guest/publications/guides"
+    },
+    {
+      "id": "R17",
+      "title": "Gas sensors and application software · Bosch Sensortec (undated)",
+      "url": "https://www.bosch-sensortec.com/en/products/environmental-sensors/gas-sensors"
+    },
+    {
+      "id": "R18",
+      "title": "BME690 data sheet · Bosch Sensortec (undated)",
+      "url": "https://www.bosch-sensortec.com/media/boschsensortec/downloads/datasheets/bst-bme690-ds001.pdf"
+    },
+    {
+      "id": "R19",
+      "title": "VL53L8CX multizone time of flight ranging sensor · STMicroelectronics (undated)",
+      "url": "https://www.st.com/en/imaging-and-photonics-solutions/vl53l8cx.html"
+    },
+    {
+      "id": "R20",
+      "title": "Analog front end design considerations for RTD ratiometric measurements · Analog Devices (undated)",
+      "url": "https://www.analog.com/en/resources/analog-dialogue/articles/afe-design-considerations-rtd-ratiometric.html"
+    },
+    {
+      "id": "R21",
+      "title": "Good machine learning practice for medical device development Guiding principles · US FDA and IMDRF (2025)",
+      "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/good-machine-learning-practice-medical-device-development-guiding-principles"
+    },
+    {
+      "id": "R22",
+      "title": "Transparency for machine learning enabled medical devices Guiding principles · US FDA (2024)",
+      "url": "https://www.fda.gov/medical-devices/software-medical-device-samd/transparency-machine-learning-enabled-medical-devices-guiding-principles"
+    },
+    {
+      "id": "R23",
+      "title": "Artificial Intelligence Risk Management Framework AI RMF 1.0 · NIST (2023)",
+      "url": "https://www.nist.gov/publications/artificial-intelligence-risk-management-framework-ai-rmf-10"
+    },
+    {
+      "id": "R24",
+      "title": "Comprehensive Antibiotic Resistance Database · CARD McMaster University (undated)",
+      "url": "https://card.mcmaster.ca/home"
+    },
+    {
+      "id": "R25",
+      "title": "Pathogen Detection help documentation · NCBI (undated)",
+      "url": "https://www.ncbi.nlm.nih.gov/pathogens/pathogens_help/"
+    },
+    {
+      "id": "R26",
+      "title": "Guidance document on Medical Device Software under MDR 2017 · CDSCO (2026)",
+      "url": "https://cdsco.gov.in/opencms/export/sites/CDSCO_WEB/Pdf-documents/Guidance-document-on-Medical-Device-Software-under-MDR-2017.pdf"
+    },
+    {
+      "id": "R27",
+      "title": "RADIAN disk diffusion automation · COPAN Diagnostics (undated)",
+      "url": "https://www.copanusa.com/laboratory-automation/microbiology-laboratory-automation-ai/radian/"
+    },
+    {
+      "id": "R28",
+      "title": "Laboratory automation brochure · COPAN Diagnostics (2026)",
+      "url": "https://www.copanusa.com/wp-content/uploads/2026/04/Automation-Brochure-040926-digital.pdf"
+    },
+    {
+      "id": "R29",
+      "title": "BIOMIC V3 · Giles Scientific (undated)",
+      "url": "https://www.biomic.com/biomic-v3.html"
+    },
+    {
+      "id": "R30",
+      "title": "VITEK 2 · bioMerieux (undated)",
+      "url": "https://www.biomerieux.com/corp/en/our-offer/clinical-products/vitek-2.html"
+    },
+    {
+      "id": "R31",
+      "title": "BD Phoenix M50 instrument · BD (undated)",
+      "url": "https://www.bd.com/en-ca/products-and-solutions/products/product-families/bd-phoenix-m50-instrument"
+    },
+    {
+      "id": "R32",
+      "title": "510 k review K251511 · US FDA (2026)",
+      "url": "https://www.accessdata.fda.gov/cdrh_docs/reviews/K251511.pdf"
+    },
+    {
+      "id": "R33",
+      "title": "National programme on AMR containment · NCDC Ministry of Health and Family Welfare (undated)",
+      "url": "https://www.ncdc.mohfw.gov.in/includes/About/CentresAndDivision/amr.php"
+    },
+    {
+      "id": "R34",
+      "title": "National Action Plan on Antimicrobial Resistance 2.0 · Government of India NCDC (2025)",
+      "url": "https://ncdc.mohfw.gov.in/wp-content/uploads/2025/11/National-Action-Plan-on-Antimicrobial-Resistance-2.0.pdf"
+    },
+    {
+      "id": "R35",
+      "title": "Guidance document for evaluation of antimicrobial resistance diagnostics · ICMR (2025)",
+      "url": "https://www.icmr.gov.in/icmrobject/uploads/Guidelines/1736941384_guidancedocument_amrdiagnostics_revised.pdf"
+    },
+    {
+      "id": "R36",
+      "title": "Awareness program on antimicrobial resistance by FDA · Government of Goa Department of Information and Publicity (2023)",
+      "url": "https://www.goa.gov.in/wp-content/uploads/2023/11/ANTIMICROBIAL-RESISTANCE.pdf"
+    },
+    {
+      "id": "R37",
+      "title": "Integrated Disease Surveillance Programme · Directorate of Health Services Goa (undated)",
+      "url": "https://dhs.goa.gov.in/pages/details/program/integrated-disease-surveillance-programme"
+    },
+    {
+      "id": "R38",
+      "title": "A fast impedance-based antimicrobial susceptibility test · Spencer DC, Paton TF, Mulroney KT, Inglis TJJ, Sutton JM, Morgan H (2020)",
+      "url": "https://www.nature.com/articles/s41467-020-18902-x"
+    },
+    {
+      "id": "R39",
+      "title": "All-electrical monitoring of bacterial antibiotic susceptibility in a microfluidic device · Yang Y, Gupta K, Ekinci KL (2020)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC7245095/"
+    },
+    {
+      "id": "R40",
+      "title": "Rapid antimicrobial susceptibility profiling using impedance spectroscopy · Swami P, Verma G, Holani A, Kamaraju S, Manchanda V, Sritharan V, Gupta S (2022)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34974262/"
+    },
+    {
+      "id": "R41",
+      "title": "Exploring the fundamental limit of antimicrobial susceptibility by near-single-cell electrical impedance spectroscopy · Pitruzzello G, Johnson S, Krauss TF (2023)",
+      "url": "https://www.sciencedirect.com/science/article/pii/S095656632201096X"
+    },
+    {
+      "id": "R42",
+      "title": "Laser speckle imaging for visualization of hidden effects for early detection of antibacterial susceptibility in disc diffusion tests · Balmages I, Reinis A, Kistkins S, Bliznuks D, Plorina EV, Lihachev A, Lihacova I (2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10340531/"
+    },
+    {
+      "id": "R43",
+      "title": "Light scattering-based screening method for rapid evaluating antibiotic effects on bacteria using laser speckle imaging · Kim D, Moon S, Lee J, Cho K, Lee C, Yoon J (2025)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC12297787/"
+    },
+    {
+      "id": "R44",
+      "title": "Identification of pathogens and detection of antibiotic susceptibility at single-cell resolution by Raman spectroscopy combined with machine learning · Lu W, Li H, Qiu H, Wang L, Feng J, Fu YV (2023)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9846160/"
+    },
+    {
+      "id": "R45",
+      "title": "Antimicrobial susceptibility testing of bone and joint pathogens using isothermal microcalorimetry · Christensen MH, Jakobsen TH, Lichtenberg M, Hertz FB, Dahl B, Bjarnsholt T (2024)",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1111/apm.13470"
+    },
+    {
+      "id": "R46",
+      "title": "Camera hardware documentation · Raspberry Pi (undated)",
+      "url": "https://www.raspberrypi.com/documentation/accessories/camera.html"
+    },
+    {
+      "id": "R47",
+      "title": "Camera software documentation · Raspberry Pi (undated)",
+      "url": "https://www.raspberrypi.com/documentation/computers/camera_software.html"
+    },
+    {
+      "id": "R48",
+      "title": "Raspberry Pi Active Cooler · Raspberry Pi (undated)",
+      "url": "https://www.raspberrypi.com/products/active-cooler/"
+    },
+    {
+      "id": "B01",
+      "title": "Official Raspberry Pi 5 Model 8GB RAM Development Board · Robocraze (2026 snapshot)",
+      "url": "https://robocraze.com/products/raspberry-pi-5-8gb"
+    },
+    {
+      "id": "B02",
+      "title": "Raspberry Pi 16mm High Quality Camera Telephoto Lens · Robocraze (2026 snapshot)",
+      "url": "https://robocraze.com/products/raspberry-pi-16mm-high-quality-camera-telephoto-lens"
+    },
+    {
+      "id": "B03",
+      "title": "Official Raspberry Pi 5 27W USB C PD Power Supply Black · Robocraze (2026 snapshot)",
+      "url": "https://robocraze.com/products/raspberry-pi-5-27w-usb-c-power-supply-black-colour"
+    },
+    {
+      "id": "B04",
+      "title": "Official Raspberry Pi 5 White 27W USB C PD Power Supply · Silverline Electronics (2026 snapshot)",
+      "url": "https://www.silverlineelectronics.in/products/official-raspberry-pi-5-white-27w-usb-c-pd-power-supply-white"
+    },
+    {
+      "id": "B05",
+      "title": "Official Raspberry Pi 5 Active Cooler · Thingbits (2026 snapshot)",
+      "url": "https://www.thingbits.in/products/official-active-cooler-for-raspberry-pi-5"
+    },
+    {
+      "id": "R49",
+      "title": "Cybersecurity in Medical Devices Quality Management System Considerations and Content of Premarket Submissions · US FDA (2026)",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/cybersecurity-medical-devices-quality-management-system-considerations-and-content-premarket"
+    },
+    {
+      "id": "R50",
+      "title": "ISO 13485 2016 Medical devices Quality management systems Requirements for regulatory purposes · ISO (2016)",
+      "url": "https://www.iso.org/standard/59752.html"
+    },
+    {
+      "id": "R51",
+      "title": "ISO 14971 2019 Medical devices Application of risk management to medical devices · ISO (2019)",
+      "url": "https://www.iso.org/standard/72704.html"
+    },
+    {
+      "id": "R52",
+      "title": "IEC 62304 2006 with Amendment 1 2015 Medical device software Software life cycle processes · IEC (2015)",
+      "url": "https://webstore.iec.ch/en/publication/22794"
+    },
+    {
+      "id": "R53",
+      "title": "IEC 81001 5 1 2021 Health software and health IT systems safety effectiveness and security Security activities in the product life cycle · IEC (2021 corrected 2025)",
+      "url": "https://webstore.iec.ch/en/publication/63293"
+    },
+    {
+      "id": "R54",
+      "title": "Digital Personal Data Protection Rules 2025 and enforcement timeline · Ministry of Electronics and Information Technology India (2025)",
+      "url": "https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf"
+    },
+    {
+      "id": "R55",
+      "title": "Hyperspectral and multispectral imaging · Edmund Optics (undated)",
+      "url": "https://www.edmundoptics.com/knowledge-center/application-notes/imaging/hyperspectral-and-multispectral-imaging/"
+    },
+    {
+      "id": "R56",
+      "title": "Fluorescence lifetime imaging microscopy · Hamamatsu Photonics (undated)",
+      "url": "https://www.hamamatsu.com/us/en/applications/life-sciences/fluorescence-imaging/fluorescence-lifetime-imaging-microscopy.html"
+    },
+    {
+      "id": "R57",
+      "title": "Optical coherence tomography tutorial · Thorlabs (undated)",
+      "url": "https://www.thorlabs.com/images/Catalog/Imaging/2_Oct.pdf"
+    },
+    {
+      "id": "B06",
+      "title": "Raspberry Pi High Quality Camera with Interchangeable Lens Base · Robocraze (2026 snapshot)",
+      "url": "https://robocraze.com/products/raspberry-pi-high-quality-camera-with-interchangeable-lens-base"
+    },
+    {
+      "id": "B07",
+      "title": "Raspberry Pi 5 Camera Cable Standard Mini 300mm · Robocraze (2026 snapshot)",
+      "url": "https://robocraze.com/products/raspberry-pi-camera-cable-standard-mini-300mm"
+    },
+    {
+      "id": "R58",
+      "title": "Assessing the Credibility of Computational Modeling and Simulation in Medical Device Submissions · US Food and Drug Administration (2023)",
+      "url": "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/assessing-credibility-computational-modeling-and-simulation-medical-device-submissions"
+    },
+    {
+      "id": "R59",
+      "title": "A probabilistic graphical model foundation for enabling predictive digital twins at scale · Kapteyn MG, Pretorius JVR, Willcox KE (2021)",
+      "url": "https://www.nature.com/articles/s43588-021-00069-0"
+    },
+    {
+      "id": "R60",
+      "title": "Heteroresistance in Enterobacter cloacae complex caused by variation in transient gene amplification events · Kupke J, Brombach J, Fang Y, et al. (2025)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11846870/"
+    },
+    {
+      "id": "R61",
+      "title": "Clinical characteristics, molecular epidemiology and mechanisms of colistin heteroresistance in Enterobacter cloacae complex · Wei C, Wu J, Zhang J, et al. (2025)",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11922889/"
+    },
+    {
+      "id": "R62",
+      "title": "Definition and Facts of Bladder Infection in Adults · US National Institute of Diabetes and Digestive and Kidney Diseases (n.d.)",
+      "url": "https://www.niddk.nih.gov/health-information/urologic-diseases/bladder-infection-uti-in-adults/definition-facts"
+    },
+    {
+      "id": "R63",
+      "title": "Laboratory Testing for Methicillin (oxacillin)-resistant Staphylococcus aureus (MRSA) · US Centers for Disease Control and Prevention (2025)",
+      "url": "https://www.cdc.gov/mrsa/php/laboratories/index.html"
+    },
+    {
+      "id": "R64",
+      "title": "ISO/IEC 17025:2017 General requirements for the competence of testing and calibration laboratories · International Organization for Standardization (2017)",
+      "url": "https://www.iso.org/standard/66912.html"
+    },
+    {
+      "id": "R65",
+      "title": "One Health · World Health Organization (2026)",
+      "url": "https://www.who.int/news-room/fact-sheets/detail/one-health"
+    },
+    {
+      "id": "R66",
+      "title": "Standardisation of disk diffusion results for antibiotic susceptibility testing using the sirscan automated zone reader · Hombach M, Zbinden R, Böttger EC (2013)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/24099061/"
+    },
+    {
+      "id": "R67",
+      "title": "Relative contribution of biological variation and technical variables to zone diameter variations of disc diffusion susceptibility testing · Hombach M, Ochoa C, Maurer FP, et al. (2016)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/26462987/"
+    },
+    {
+      "id": "R68",
+      "title": "Performance of Fully Automated Antimicrobial Disk Diffusion Susceptibility Testing Using Copan WASP Colibri Coupled to the Radian In-Line Carousel and Expert System · Cherkaoui A, Renzi G, Vuilleumier N, Schrenzel J (2021)",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/34160274/"
+    },
+    {
+      "id": "R69",
+      "title": "DxM MicroScan WalkAway System · Beckman Coulter (n.d.)",
+      "url": "https://www.beckmancoulter.com/products/microbiology/dxm-microscan-walkaway-system"
+    },
+    {
+      "id": "R70",
+      "title": "dRAST · QuantaMatrix (n.d.)",
+      "url": "https://www.quantamatrix.com/drast/"
+    },
+    {
+      "id": "R71",
+      "title": "VITEK REVEAL · bioMérieux (n.d.)",
+      "url": "https://www.biomerieux.com/corp/en/our-offer/clinical-products/vitek-reveal.html"
+    },
+    {
+      "id": "R72",
+      "title": "VITEK MS PRIME · bioMérieux (n.d.)",
+      "url": "https://www.biomerieux.com/corp/en/our-offer/clinical-products/vitek-ms-prime.html"
+    },
+    {
+      "id": "R73",
+      "title": "AI-driven operating system for microbiology · Reshape Biotech (2026)",
+      "url": "https://reshapebiotech.com/"
+    },
+    {
+      "id": "R74",
+      "title": "M100 Edition 36 correction notice, Table 2H-1, 9 July 2026 · CLSI (2026)",
+      "url": "https://clsi.org/media/2nepun3a/m100ed36_correction_notice_table_2h_1_electronic_20260709.pdf"
+    },
+    {
+      "id": "R75",
+      "title": "ASTar in the lab · Q-linea (n.d.)",
+      "url": "https://qlinea.com/astar-in-the-lab/"
+    },
+    {
+      "id": "B08",
+      "title": "SanDisk MicroSD Card Class 10, 64 GB, No OS, TH1980 · Thingbits (2026)",
+      "url": "https://www.thingbits.in/products/sandisk-microsd-card-class-10-with-noobs"
+    },
+    {
+      "id": "B09",
+      "title": "Adafruit SHT40 breakout, TH2066 · Thingbits (2026)",
+      "url": "https://www.thingbits.in/products/adafruit-sht40-sensirion-temp-humidity-sensor-stemma-qt-qwiic"
+    },
+    {
+      "id": "B10",
+      "title": "MEAN WELL GST25A12-P1J, order2815879 · element14 India (2026)",
+      "url": "https://in.element14.com/mean-well/gst25a12-p1j/adaptor-ac-dc-12v-2-08a/dp/2815879"
+    },
+    {
+      "id": "B11",
+      "title": "Raspberry Pi 5 Computer, 8 GB, TH0489 · Thingbits (2026)",
+      "url": "https://www.thingbits.in/products/raspberry-pi-5-computer"
+    },
+    {
+      "id": "B12",
+      "title": "Raspberry Pi HQ Camera, C/CS mount, camera only, TH0267 · Thingbits (2026)",
+      "url": "https://www.thingbits.in/products/raspberry-pi-hq-camera"
+    },
+    {
+      "id": "B13",
+      "title": "SHT40 Temperature and Humidity Sensor, product4885 · Adafruit (2026)",
+      "url": "https://www.adafruit.com/product/4885"
+    },
+    {
+      "id": "B14",
+      "title": "GST25A series data sheet · MEAN WELL (2026)",
+      "url": "https://www.farnell.com/datasheets/2547962.pdf"
+    },
+    {
+      "id": "S6",
+      "title": "NVIDIA Jetson Thor product page",
+      "url": "https://www.nvidia.com/en-gb/autonomous-machines/embedded-systems/jetson-thor/"
+    },
+    {
+      "id": "S7",
+      "title": "NVIDIA Jetson FAQ",
+      "url": "https://developer.nvidia.com/embedded/faq"
+    },
+    {
+      "id": "S8",
+      "title": "Edmund Optics 0.238x 35 mm TitanTL telecentric lens",
+      "url": "https://www.edmundoptics.in/p/0238x-35mm-m42-x-10-titantl-telecentric-lens/38726/"
+    },
+    {
+      "id": "S9",
+      "title": "Teledyne FLIR Oryx ORX-10G-310S9",
+      "url": "https://softwareservices.flir.com/ORX-10G-310S9/latest/Model/spec.html"
+    },
+    {
+      "id": "S10",
+      "title": "Bosch Sensortec BME690",
+      "url": "https://www.bosch-sensortec.com/en/products/environmental-sensors/gas-sensors/bme690"
+    },
+    {
+      "id": "S11",
+      "title": "STMicroelectronics VL53L8CX",
+      "url": "https://www.st.com/en/imaging-and-photonics-solutions/vl53l8cx.html"
+    },
+    {
+      "id": "S12",
+      "title": "EUCAST Clinical Breakpoint Tables",
+      "url": "https://www.eucast.org/bacteria/clinical-breakpoints-and-interpretation/clinical-breakpoint-tables/"
+    },
+    {
+      "id": "S13",
+      "title": "EUCAST Breakpoints for Rapid AST",
+      "url": "https://www.eucast.org/bacteria/rapid-ast-in-blood-culture/breakpoints-for-rapid-ast/"
+    },
+    {
+      "id": "S14",
+      "title": "CLSI M100 / Breakpoint Implementation Toolkit",
+      "url": "https://clsi.org/resources/breakpoint-implementation-toolkit/"
+    },
+    {
+      "id": "S15",
+      "title": "ISO 20776-1:2019",
+      "url": "https://www.iso.org/standard/70464.html"
+    },
+    {
+      "id": "S16",
+      "title": "bioMérieux VITEK 2",
+      "url": "https://www.biomerieux.com/corp/en/our-offer/clinical-products/vitek-2.html"
+    },
+    {
+      "id": "S17",
+      "title": "BD Phoenix M50",
+      "url": "https://www.bd.com/en-us/products-and-solutions/products/product-page.443624"
+    },
+    {
+      "id": "S18",
+      "title": "COPAN WASPLab / Colibrí",
+      "url": "https://www.copanusa.com/faqs/colibri-faq/"
+    },
+    {
+      "id": "S19",
+      "title": "Reshape Smart Incubator",
+      "url": "https://reshapebiotech.com/product/smart-incubator"
+    },
+    {
+      "id": "S20",
+      "title": "CDSCO In Vitro Diagnostics",
+      "url": "https://www.cdsco.gov.in/opencms/opencms/en/Medical-Device-Diagnostics/InVitro-Diagnostics/"
+    },
+    {
+      "id": "S24",
+      "title": "FreeRTOS official documentation",
+      "url": "https://docs.freertos.org/"
+    },
+    {
+      "id": "S25",
+      "title": "WHO GLASS surveillance manual, 2023",
+      "url": "https://www.who.int/publications/i/item/9789240076600"
+    },
+    {
+      "id": "S26",
+      "title": "Primary study: dynamic heteroresistance and clinical detection",
+      "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC8099907/"
+    }
+  ]
+}

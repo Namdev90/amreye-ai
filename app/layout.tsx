@@ -9,6 +9,9 @@ import "./precision.css";
 import "./library.css";
 import "./library-fixes.css";
 import "./landing-refinements.css";
+import "./mockup.css";
+import "./knowledge.css";
+import "./interactive-visuals.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://amreye.in"),

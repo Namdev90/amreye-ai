@@ -1,4 +1,3 @@
 "use client";
-import LibraryView from './library-view';
-import data from './dossier.json';
-export default function LibraryScreen(){return <LibraryView data={data}/>}
+import KnowledgeLibrary from './knowledge-library';
+export default function LibraryScreen(){return <KnowledgeLibrary/>}

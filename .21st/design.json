@@ -1,0 +1,222 @@
+{
+  "version": 1,
+  "project": {
+    "name": "amr-eye-ai",
+    "productType": "Research and product explainer",
+    "stack": [
+      "nextjs",
+      "react",
+      "shadcn",
+      "tailwind-v4",
+      "vite"
+    ]
+  },
+  "sources": {
+    "tokens": [
+      "app/globals.css",
+      "app/mockup.css",
+      "app/interactive-visuals.css"
+    ],
+    "components": [
+      "components/ui"
+    ],
+    "assets": [
+      "public/brand"
+    ],
+    "instructions": []
+  },
+  "design": {
+    "colorMode": "dark",
+    "colors": {
+      "--background": {
+        "value": "#031018",
+        "source": "app/globals.css"
+      },
+      "--foreground": {
+        "value": "#edfdfb",
+        "source": "app/globals.css"
+      },
+      "--card-foreground": {
+        "value": "#eefefd",
+        "source": "app/globals.css"
+      },
+      "--popover-foreground": {
+        "value": "#eefefd",
+        "source": "app/globals.css"
+      },
+      "--primary": {
+        "value": "#31e8d5",
+        "source": "app/globals.css"
+      },
+      "--primary-foreground": {
+        "value": "#021217",
+        "source": "app/globals.css"
+      },
+      "--secondary": {
+        "value": "#0d2933",
+        "source": "app/globals.css"
+      },
+      "--secondary-foreground": {
+        "value": "#d9f8f5",
+        "source": "app/globals.css"
+      },
+      "--muted": {
+        "value": "#0b222b",
+        "source": "app/globals.css"
+      },
+      "--muted-foreground": {
+        "value": "#8fb4b7",
+        "source": "app/globals.css"
+      },
+      "--accent": {
+        "value": "#0e3540",
+        "source": "app/globals.css"
+      },
+      "--accent-foreground": {
+        "value": "#dffffb",
+        "source": "app/globals.css"
+      },
+      "--destructive": {
+        "value": "#fb6171",
+        "source": "app/globals.css"
+      },
+      "--border": {
+        "value": "rgba(120,207,208,.18)",
+        "source": "app/globals.css"
+      },
+      "--ring": {
+        "value": "#33ead6",
+        "source": "app/globals.css"
+      }
+    },
+    "typography": {},
+    "spacing": {},
+    "radius": {
+      "--radius": {
+        "value": ".7rem",
+        "source": "app/globals.css"
+      }
+    },
+    "shadows": {},
+    "motion": {},
+    "density": "unknown"
+  },
+  "components": {
+    "installed": [
+      "accordion",
+      "alert",
+      "alert-dialog",
+      "aspect-ratio",
+      "attachment",
+      "avatar",
+      "badge",
+      "breadcrumb",
+      "bubble",
+      "button",
+      "button-group",
+      "calendar",
+      "card",
+      "carousel",
+      "chart",
+      "checkbox",
+      "collapsible",
+      "combobox",
+      "command",
+      "context-menu",
+      "dialog",
+      "direction",
+      "drawer",
+      "dropdown-menu",
+      "empty",
+      "field",
+      "form",
+      "hover-card",
+      "input",
+      "input-group",
+      "input-otp",
+      "item",
+      "kbd",
+      "label",
+      "marker",
+      "menubar",
+      "message",
+      "message-scroller",
+      "native-select",
+      "navigation-menu",
+      "pagination",
+      "popover",
+      "progress",
+      "radio-group",
+      "resizable",
+      "scroll-area",
+      "select",
+      "separator",
+      "sheet",
+      "sidebar",
+      "skeleton",
+      "slider",
+      "sonner",
+      "spinner",
+      "switch",
+      "table",
+      "tabs",
+      "textarea",
+      "toggle",
+      "toggle-group",
+      "tooltip"
+    ],
+    "preferredPrimitives": [],
+    "patterns": []
+  },
+  "constraints": {
+    "must": [
+      "Preserve the supplied dark cyan landing-page mockup.",
+      "Show prototypes, proposals and future research distinctly.",
+      "Use functional diagrams, visual comparisons and direct manipulation, not decorative images alone.",
+      "No internal document hosting or unsupported endorsements."
+    ],
+    "avoid": []
+  },
+  "decisions": [
+    {
+      "date": "2026-09-20",
+      "decision": "Interactive visual explanations across Quick Pitch, synthetic demo and Library; preserve the supplied landing-page composition.",
+      "source": "Direct user request"
+    }
+  ],
+  "evidence": [
+    {
+      "fact": "components.installed",
+      "source": "components/ui"
+    },
+    {
+      "fact": "design.colorMode:light",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "design.tokens",
+      "source": "app/globals.css"
+    },
+    {
+      "fact": "project.stack:nextjs",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:react",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:shadcn",
+      "source": "components.json"
+    },
+    {
+      "fact": "project.stack:tailwind-v4",
+      "source": "package.json"
+    },
+    {
+      "fact": "project.stack:vite",
+      "source": "package.json"
+    }
+  ],
+  "generatedAt": "2026-09-19T18:42:37.387Z"
+}

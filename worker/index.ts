@@ -28,6 +28,11 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    let pathname=url.pathname;
+    try{pathname=decodeURIComponent(pathname)}catch{return new Response('Bad request',{status:400})}
+    if(/^\/(documents|downloads|docs|private)(\/|$)/i.test(pathname)||/^\/library\/.*\.json$/i.test(pathname)||pathname==='/repository.json'||/\.(pdf|docx?|xlsx?|csv|md|txt|map)$/i.test(pathname)&&pathname!=='/robots.txt'){
+      return new Response('This document is no longer publicly hosted. Browse /library for topic summaries.',{status:410,headers:{'Cache-Control':'no-store','X-Robots-Tag':'noindex, noarchive','X-Content-Type-Options':'nosniff'}});
+    }
     if(url.pathname==='/admin'||url.pathname.startsWith('/admin/')){const target=new URL('/library',request.url);const topic=url.searchParams.get('topic');if(topic)target.searchParams.set('topic',topic);return Response.redirect(target,308);}
     const agent=request.headers.get('user-agent')||'';
     if(/GPTBot|ClaudeBot|CCBot|Bytespider|Amazonbot|meta-externalagent|Applebot-Extended/i.test(agent)){

@@ -1,5 +1,5 @@
-const CACHE='amreye-public-v8';
-const OFFLINE=['/offline.html','/repository.json','/amr-eye-icon.png'];
+const CACHE='amreye-public-summaries-v9';
+const OFFLINE=['/offline.html','/amr-eye-icon.png'];
 async function refresh(){const c=await caches.open(CACHE);await Promise.all(OFFLINE.map(async path=>{const r=await fetch(path);if(r.ok)await c.put(path,r)}))}
 self.addEventListener('install',e=>e.waitUntil(refresh().then(()=>self.skipWaiting())));
 self.addEventListener('activate',e=>e.waitUntil(caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('amr')&&k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim())));

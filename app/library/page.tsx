@@ -1,5 +1,5 @@
 import type {Metadata} from 'next';
-import SiteShell from '../site-shell';
+import SiteShell from '../public-site';
 
 export const metadata: Metadata = {
   title: 'Library · AMReye.AI',

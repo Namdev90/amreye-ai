@@ -1,2 +1,2 @@
-import SiteShell from './site-shell';
+import SiteShell from './public-site';
 export default function Home(){return <SiteShell/>}
