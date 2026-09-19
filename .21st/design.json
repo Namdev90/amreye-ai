@@ -180,6 +180,11 @@
   "decisions": [
     {
       "date": "2026-09-20",
+      "decision": "Use the owner's latest portrait reference: cyan glass borders, complete device at right, concept card in the clear left column, five directory cards above 600px and readable 3+2 cards on phones, rounded mobile dock and full-width desktop shell. Preserve verified wording and real assets.",
+      "source": "Direct user selection of Photo 1.jpg"
+    },
+    {
+      "date": "2026-09-20",
       "decision": "Interactive visual explanations across Quick Pitch, synthetic demo and Library; preserve the supplied landing-page composition.",
       "source": "Direct user request"
     }
