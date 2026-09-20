@@ -2,7 +2,7 @@
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="theme-color" content="#090c0e" />
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="/app/connected.css" />
     <link rel="stylesheet" href="/app/precision.css" />
     <link rel="stylesheet" href="/app/library.css" />
-    <link rel="stylesheet" href="/app/app-upgrade.css" />
     <link rel="stylesheet" href="/assets/index-Cl378dqo.css" />
+    <link rel="stylesheet" href="/app/app-upgrade.css" />
   </head>
   <body class="antialiased" style="margin:0;background:#090c0e;color:#eef3f3;">
     
@@ -60,14 +60,14 @@
             <a href="#story">Story</a>
           </nav>
           <div class="header-actions">
-            <div id="app-network-pill" title="Toggle Live Website / Offline mode">
+            <button type="button" id="app-network-pill" title="Bundled content. Open live website" aria-label="Bundled content. Open live website">
               <span class="status-dot green"></span>
-              <span class="status-text">Live Website</span>
-            </div>
+              <span class="status-text">Bundled</span>
+            </button>
             <button class="header-settings-btn" data-action="open-settings" aria-label="Laboratory settings" style="display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:#78ddcc;cursor:pointer;">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path><circle cx="12" cy="12" r="3"></circle></svg>
             </button>
-            <button class="brief-button" data-action="open-pitch">
+            <button class="brief-button" data-action="open-pitch" aria-label="Quick pitch">
               <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-play" aria-hidden="true"><path d="M5 5a2 2 0 0 1 3.008-1.728l11.997 6.998a2 2 0 0 1 .003 3.458l-12 7A2 2 0 0 1 5 19z"></path></svg>
               <span>Quick pitch</span>
             </button>
@@ -173,7 +173,7 @@
         
 <div id="pitch-modal-overlay" class="standalone-modal-overlay" aria-hidden="true">
   <div class="standalone-modal-backdrop pitch-modal-backdrop"></div>
-  <div class="standalone-modal-card">
+  <div class="standalone-modal-card" role="dialog" aria-label="Quick pitch">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
       <div>
         <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:#78ddcc;text-transform:uppercase;">EXECUTIVE BRIEFING</span>
@@ -194,9 +194,9 @@
       <button class="pitch-timer-toggle solid-link" style="padding:6px 14px;font-size:12px;">Start timer</button>
     </div>
     <div style="color:#cbd5e1;font-size:14px;line-height:1.6;display:grid;gap:12px;">
-      <p><b>Problem:</b> Antimicrobial resistance (AMR) kills 1.27M+ people annually. Manual disc diffusion is slow, subjective, and prone to transcription error.</p>
-      <p><b>Solution:</b> AMReye.AI builds calibrated laboratory hardware and edge AI to digitize AST agar plates into traceable, verifiable clinical records in seconds.</p>
-      <p><b>Roadmap:</b> Bio-InnoQuest 2nd place & PU EPIC pre-incubation. Validating synthetic calibration before supervised clinical pilot trials.</p>
+      <p><b>Problem:</b> Plate measurements need a clear record of the image, calibration, uncertainty and reviewer decisions.</p>
+      <p><b>Current demonstration:</b> AMReye.AI demonstrates a synthetic plate-review workflow and a searchable project library. It does not process patient images or establish clinical performance.</p>
+      <p><b>Next steps:</b> Develop and test calibrated imaging, repeatability and correction provenance before any supervised clinical evaluation. Bio-InnoQuest recognition and PU EPIC selection are project milestones, not clinical validation.</p>
     </div>
   </div>
 </div>
@@ -204,7 +204,7 @@
         
 <div id="directory-drawer-overlay" class="standalone-drawer-overlay" aria-hidden="true">
   <div class="standalone-modal-backdrop directory-drawer-backdrop"></div>
-  <div class="standalone-drawer-card">
+  <div class="standalone-drawer-card" role="dialog" aria-label="Site directory">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid rgba(120,221,204,0.2);">
       <div style="display:flex;align-items:center;gap:10px;">
         <img src="/brand/amreye-logo-white.svg" alt="AMReye.AI" style="height:26px;width:auto;" />
@@ -250,99 +250,11 @@
 </div>
 
         
-<div id="record-export-modal" class="standalone-modal-overlay" aria-hidden="true">
-  <div class="standalone-modal-backdrop record-modal-backdrop"></div>
-  <div class="standalone-modal-card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-      <div>
-        <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:#78ddcc;text-transform:uppercase;">QUALIFIED DEMONSTRATION RECORD</span>
-        <h3 style="margin:0;font-size:18px;color:#fff;font-weight:700;">Plate Audit Summary</h3>
-      </div>
-      <button class="record-modal-close text-link" style="background:none;border:none;color:#94a3b8;font-size:20px;cursor:pointer;">✕</button>
-    </div>
-    <p style="font-size:13px;color:#94a3b8;margin-bottom:16px;">
-      Synthetic illustration snapshot generated for laboratory metrology review. Not derived from patient samples.
-    </p>
-    <div style="background:rgba(0,0,0,0.3);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:12px;font-family:monospace;font-size:12px;color:#78ddcc;margin-bottom:16px;max-height:160px;overflow-y:auto;">
-      {<br/>
-      &nbsp;&nbsp;"scenario": "SCN-2026-EUCAST-DEMO",<br/>
-      &nbsp;&nbsp;"profile": "A",<br/>
-      &nbsp;&nbsp;"audit": "INSPECTED_BOUNDARIES_CONFIRMED",<br/>
-      &nbsp;&nbsp;"timestamp": "2026-09-17T08:19:58.226Z"<br/>
-      }
-    </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;">
-      <button class="solid-link" onclick="window.print()" style="padding:8px 16px;font-size:13px;">Print / PDF</button>
-      <button class="record-modal-close text-link" style="padding:8px 16px;font-size:13px;">Close</button>
-    </div>
-  </div>
-</div>
-
-<div id="lab-certificate-modal" class="standalone-modal-overlay" aria-hidden="true">
-  <div class="standalone-modal-backdrop cert-modal-backdrop"></div>
-  <div class="standalone-modal-card cert-card">
-    <div class="cert-header" style="display:flex;justify-content:space-between;align-items:center;">
-      <div>
-        <span style="font-size:10px;font-weight:700;letter-spacing:0.16em;color:#78ddcc;text-transform:uppercase;">OFFICIAL DEMONSTRATION RECORD</span>
-        <h3 style="margin:0;font-size:18px;color:#fff;font-weight:700;">AMReye.AI Laboratory Certificate</h3>
-      </div>
-      <button class="cert-modal-close text-link" style="background:none;border:none;color:#94a3b8;font-size:20px;cursor:pointer;">✕</button>
-    </div>
-    <div style="font-size:12px;color:#94a3b8;margin-bottom:12px;line-height:1.5;">
-      <span style="display:inline-block;padding:2px 6px;border-radius:4px;background:#382410;color:#fcd34d;font-weight:700;font-size:10px;margin-bottom:6px;">SYNTHETIC AST VERIFICATION • NON-CLINICAL</span><br/>
-      <b>Device ID:</b> AMR-CORE-01 (Simulated) · <b>Specimen:</b> Fictional E. coli Reference AST<br/>
-      <b>Standard:</b> EUCAST v14.0 Baseline · <b>Date:</b> 17/9/2026<br/>
-      <b>Status:</b> Inspected &amp; Verified by Human Reviewer
-    </div>
-    <div style="border:1px solid rgba(255,255,255,0.1);border-radius:10px;overflow:hidden;margin-bottom:16px;">
-      <table style="width:100%;font-size:12px;text-align:left;border-collapse:collapse;">
-        <thead style="background:rgba(255,255,255,0.06);color:#78ddcc;">
-          <tr>
-            <th style="padding:6px 10px;">Disc</th>
-            <th style="padding:6px 10px;">Zone (mm)</th>
-            <th style="padding:6px 10px;">EUCAST S/I/R</th>
-            <th style="padding:6px 10px;">Inspection</th>
-          </tr>
-        </thead>
-        <tbody style="color:#eef6f3;">
-          <tr style="border-top:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:6px 10px;">CIP 5µg</td>
-            <td style="padding:6px 10px;">24.0 mm</td>
-            <td style="padding:6px 10px;color:#fbbf24;font-weight:700;">Intermediate</td>
-            <td style="padding:6px 10px;color:#34d399;">Confirmed</td>
-          </tr>
-          <tr style="border-top:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:6px 10px;">AMP 10µg</td>
-            <td style="padding:6px 10px;">6.0 mm</td>
-            <td style="padding:6px 10px;color:#f87171;font-weight:700;">Resistant</td>
-            <td style="padding:6px 10px;color:#34d399;">Confirmed</td>
-          </tr>
-          <tr style="border-top:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:6px 10px;">MEM 10µg</td>
-            <td style="padding:6px 10px;">28.0 mm</td>
-            <td style="padding:6px 10px;color:#34d399;font-weight:700;">Susceptible</td>
-            <td style="padding:6px 10px;color:#34d399;">Confirmed</td>
-          </tr>
-          <tr style="border-top:1px solid rgba(255,255,255,0.06);">
-            <td style="padding:6px 10px;">GEN 10µg</td>
-            <td style="padding:6px 10px;">18.0 mm</td>
-            <td style="padding:6px 10px;color:#34d399;font-weight:700;">Susceptible</td>
-            <td style="padding:6px 10px;color:#34d399;">Confirmed</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-    <div style="display:flex;gap:10px;justify-content:flex-end;">
-      <button id="btn-copy-cert" class="text-link" style="padding:8px 14px;font-size:12px;">Copy Summary</button>
-      <button class="solid-link" onclick="window.print()" style="padding:8px 16px;font-size:12px;">Print Certificate</button>
-      <button class="cert-modal-close text-link" style="padding:8px 14px;font-size:12px;">Close</button>
-    </div>
-  </div>
-</div>
+<!-- Synthetic reports are created from the current run by offline-runtime.js. -->
 
 <div id="settings-modal-overlay" class="standalone-modal-overlay" aria-hidden="true">
   <div class="standalone-modal-backdrop settings-modal-backdrop"></div>
-  <div class="standalone-modal-card">
+  <div class="standalone-modal-card" role="dialog" aria-label="Laboratory preferences">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
       <div>
         <span style="font-size:10px;font-weight:700;letter-spacing:0.14em;color:#78ddcc;text-transform:uppercase;">DIAGNOSTICS &amp; SYSTEM</span>
@@ -355,12 +267,11 @@
         <span style="color:#78ddcc;font-weight:700;display:block;margin-bottom:4px;">OFFLINE ENGINE &amp; CACHE</span>
         <p style="margin:0 0 8px;color:#94a3b8;">Full 300 pages, 76 tables, and 150 research topics bundled offline.</p>
         <div style="display:flex;justify-content:space-between;font-size:12px;">
-          <span>Status: <b style="color:#34d399;">100% Offline Ready</b></span>
-          <span>Storage: <b>~7.4 MB</b></span>
+          <span>Status: <b style="color:#34d399;">Bundled reference content</b></span>
         </div>
       </div>
       <div style="background:rgba(255,255,255,0.04);padding:12px;border-radius:12px;">
-        <span style="color:#78ddcc;font-weight:700;display:block;margin-bottom:4px;">CLOUD SYNCHRONIZATION</span>
+        <span style="color:#78ddcc;font-weight:700;display:block;margin-bottom:4px;">LIVE WEBSITE CONNECTION</span>
         <p style="margin:0 0 8px;color:#94a3b8;">Target server: <code>https://amreye.in</code></p>
         <div style="display:flex;align-items:center;justify-content:space-between;">
           <span id="ping-test-result" style="font-size:12px;color:#94a3b8;">Ready to test</span>
@@ -378,7 +289,7 @@
     </div>
     <div style="display:flex;justify-content:flex-end;">
       <button class="settings-modal-close solid-link" style="padding:8px 16px;font-size:13px;">Done</button>
-      <small style="display:block;text-align:right;color:#64748b;font-size:11px;margin-top:8px;">AMReye.AI v1.5.5</small>
+      <small style="display:block;text-align:right;color:#64748b;font-size:11px;margin-top:8px;">AMReye.AI v1.5.6</small>
     </div>
   </div>
 </div>
@@ -387,6 +298,7 @@
     </div>
 
     <script src="/offline-runtime.js"></script>
-    <script type="module" crossorigin src="/assets/index-FZ7zgcsf.js"></script>
+    <script src="/offline-library.js" defer></script>
+    <script src="/offline-interactions.js" defer></script>
   </body>
 </html>

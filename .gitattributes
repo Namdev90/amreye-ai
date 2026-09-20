@@ -1,0 +1,4 @@
+# Preserve the original byte representation of archived source snapshots.
+historical/** -text
+# Keep the Unix wrapper runnable after Windows checkouts.
+android/gradlew text eol=lf

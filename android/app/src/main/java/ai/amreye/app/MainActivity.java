@@ -53,6 +53,7 @@ import android.widget.Toast;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
@@ -63,6 +64,8 @@ public final class MainActivity extends Activity {
     public static final String LOCAL_URL = "https://appassets.androidplatform.net/index.html#hub";
     public static final String ONLINE_URL = "https://amreye.in/#home";
     private static final long MIN_SPLASH_DURATION_MS = 1500;
+    private static final int SAVE_SYNTHETIC_REPORT = 4301;
+    private byte[] pendingSyntheticReport;
 
     private WebView webView;
     private FrameLayout splashLayout;
@@ -116,8 +119,8 @@ public final class MainActivity extends Activity {
         settings.setJavaScriptEnabled(true);
         settings.setDomStorageEnabled(true);
         settings.setDatabaseEnabled(true);
-        settings.setAllowFileAccess(true);
-        settings.setAllowContentAccess(true);
+        settings.setAllowFileAccess(false);
+        settings.setAllowContentAccess(false);
         settings.setUseWideViewPort(true);
         settings.setLoadWithOverviewMode(true);
         settings.setBuiltInZoomControls(true);
@@ -131,12 +134,12 @@ public final class MainActivity extends Activity {
 
         // Mobile responsive user-agent with AMReye app identifier
         String defaultUa = WebSettings.getDefaultUserAgent(this);
-        settings.setUserAgentString(defaultUa + " AMReyeMobileApp/1.5.3");
+        settings.setUserAgentString(defaultUa + " AMReyeMobileApp/1.5.6");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             settings.setOffscreenPreRaster(true);
         }
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE);
+            settings.setMixedContentMode(WebSettings.MIXED_CONTENT_NEVER_ALLOW);
         }
 
         // Enable cookies
@@ -236,6 +239,58 @@ public final class MainActivity extends Activity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode != SAVE_SYNTHETIC_REPORT) return;
+        final byte[] report = pendingSyntheticReport;
+        pendingSyntheticReport = null;
+        if (resultCode != RESULT_OK || data == null || data.getData() == null) return;
+        if (report == null) {
+            Toast.makeText(this, "Report was not retained. Export it again from the demonstration.", Toast.LENGTH_LONG).show();
+            return;
+        }
+        final Uri destination = data.getData();
+        if (!"content".equals(destination.getScheme())) {
+            Toast.makeText(this, "Choose a document destination in the system save picker", Toast.LENGTH_LONG).show();
+            return;
+        }
+        new Thread(() -> {
+            try {
+                try (OutputStream output = getContentResolver().openOutputStream(destination, "w")) {
+                    if (output == null) throw new java.io.IOException("Document destination unavailable");
+                    output.write(report);
+                    output.flush();
+                }
+                runOnUiThread(() -> Toast.makeText(this, "Synthetic report saved", Toast.LENGTH_SHORT).show());
+            } catch (Exception error) {
+                runOnUiThread(() -> Toast.makeText(this, "Could not save the synthetic report", Toast.LENGTH_LONG).show());
+            }
+        }, "synthetic-report-save").start();
+    }
+
+    private void requestSyntheticReportSave(String format, byte[] report) {
+        if (report == null || !AppUrlPolicy.isTrustedPage(webView.getUrl())) {
+            Toast.makeText(this, "Only JSON or CSV reports up to 1 MiB can be saved", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (pendingSyntheticReport != null) {
+            Toast.makeText(this, "Finish or cancel the current save first", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.setType(SyntheticReportPolicy.mimeType(format));
+        intent.putExtra(Intent.EXTRA_TITLE, SyntheticReportPolicy.fileName(format));
+        pendingSyntheticReport = report;
+        try {
+            startActivityForResult(intent, SAVE_SYNTHETIC_REPORT);
+        } catch (Exception error) {
+            pendingSyntheticReport = null;
+            Toast.makeText(this, "No system document save picker is available", Toast.LENGTH_LONG).show();
+        }
+    }
+
     private void startTelemetryLoop() {
         handler.postDelayed(new Runnable() {
             @Override
@@ -258,13 +313,26 @@ public final class MainActivity extends Activity {
     }
 
     private void startApplication() {
-        loadLiveWebsite();
+        if (isNetworkConnected()) {
+            loadLiveWebsite();
+        } else {
+            loadOfflineApplication();
+        }
     }
 
     private void loadLiveWebsite() {
         if (errorLayout != null) errorLayout.setVisibility(View.GONE);
         isOnlineModeActive = true;
+        hasLoadedSuccessfully = false;
         webView.loadUrl(ONLINE_URL);
+    }
+
+    private void loadOfflineApplication() {
+        if (errorLayout != null) errorLayout.setVisibility(View.GONE);
+        if (statusText != null) statusText.setText("Loading local application...");
+        isOnlineModeActive = false;
+        hasLoadedSuccessfully = false;
+        webView.loadUrl(LOCAL_URL);
     }
 
     private boolean isNetworkConnected() {
@@ -278,7 +346,11 @@ public final class MainActivity extends Activity {
     }
 
     public void openInExternalBrowser(String url) {
-        if (url == null || url.isEmpty()) return;
+        if (AppUrlPolicy.isBundledCompendium(url)) {
+            openBundledCompendium();
+            return;
+        }
+        if (!AppUrlPolicy.isWebUrl(url)) return;
         try {
             Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
             browserIntent.addCategory(Intent.CATEGORY_BROWSABLE);
@@ -295,8 +367,23 @@ public final class MainActivity extends Activity {
         }
     }
 
+    private void openBundledCompendium() {
+        Uri document = Uri.parse(AppUrlPolicy.COMPENDIUM_CONTENT_URI);
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        intent.setDataAndType(document, "application/pdf");
+        intent.setClipData(ClipData.newRawUri("AMReye.AI project compendium", document));
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        try {
+            startActivity(intent);
+        } catch (ActivityNotFoundException error) {
+            Toast.makeText(this, "No PDF viewer is installed. Open the research library to read offline.", Toast.LENGTH_LONG).show();
+        } catch (Exception error) {
+            Toast.makeText(this, "Could not open the packaged compendium", Toast.LENGTH_LONG).show();
+        }
+    }
+
     public void handleMailto(String url) {
-        if (url == null || url.isEmpty()) return;
+        if (url == null || !"mailto".equalsIgnoreCase(Uri.parse(url).getScheme())) return;
         try {
             Intent intent = new Intent(Intent.ACTION_SENDTO);
             intent.setData(Uri.parse(url));
@@ -488,10 +575,7 @@ public final class MainActivity extends Activity {
         btnParams.topMargin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 14, getResources().getDisplayMetrics());
         retryButton.setLayoutParams(btnParams);
         retryButton.setOnClickListener(v -> {
-            errorLayout.setVisibility(View.GONE);
-            statusText.setText("Loading local application...");
-            isOnlineModeActive = false;
-            webView.loadUrl(LOCAL_URL);
+            loadOfflineApplication();
         });
         errorLayout.addView(retryButton);
 
@@ -743,10 +827,11 @@ public final class MainActivity extends Activity {
                     "  var isOpen = !!document.querySelector('[data-slot=\"sheet-content\"][data-state=\"open\"], .atelier-menu[data-state=\"open\"], .standalone-drawer-overlay.is-open, .standalone-drawer-card.is-open, body.menu-open');" +
                     "  if (isOpen) { window.__closeFrontierMenu(); return 'closed_modal'; }" +
                     "}" +
-                    "var openModal = document.querySelector('.standalone-modal-overlay.is-open, .standalone-drawer-overlay.is-open, [data-state=\"open\"]');" +
+                    "var openModal = document.querySelector('dialog[open], .standalone-modal-overlay.is-open, .standalone-drawer-overlay.is-open, [data-state=\"open\"]');" +
                     "if (openModal) {" +
-                    "  var closeBtn = openModal.querySelector('button[class*=\"close\"], button[aria-label*=\"Close\"], .pitch-modal-close, .directory-close-btn, .atelier-menu-close, .atelier-menu-done-btn');" +
+                    "  var closeBtn = openModal.querySelector('[data-report-close], button[class*=\"close\"], button[aria-label*=\"Close\"], .pitch-modal-close, .directory-close-btn, .atelier-menu-close, .atelier-menu-done-btn');" +
                     "  if (closeBtn) { closeBtn.click(); return 'closed_modal'; }" +
+                    "  if (openModal.tagName === 'DIALOG' && typeof openModal.close === 'function') { openModal.close(); return 'closed_modal'; }" +
                     "  openModal.classList.remove('is-open');" +
                     "  return 'closed_modal';" +
                     "}" +
@@ -767,6 +852,12 @@ public final class MainActivity extends Activity {
     }
 
     public final class AndroidBridge {
+        @JavascriptInterface
+        public void saveSyntheticReport(String format, String text) {
+            byte[] report = SyntheticReportPolicy.encode(format, text);
+            runOnUiThread(() -> requestSyntheticReportSave(format, report));
+        }
+
         @JavascriptInterface
         public boolean isNetworkAvailable() {
             return isNetworkConnected();
@@ -819,6 +910,7 @@ public final class MainActivity extends Activity {
         @JavascriptInterface
         public void openPdfDocument(String url) {
             runOnUiThread(() -> {
+                if (url == null || url.isEmpty()) return;
                 String targetUrl = url;
                 if (!url.startsWith("http://") && !url.startsWith("https://")) {
                     targetUrl = "https://amreye.in" + (url.startsWith("/") ? url : "/" + url);
@@ -933,10 +1025,8 @@ public final class MainActivity extends Activity {
                 return true;
             }
 
-            // 4. Handle external domain links -> open in Chrome / system browser
-            Uri uri = Uri.parse(url);
-            String host = uri.getHost();
-            if (host != null && !host.contains("androidplatform.net") && !host.contains("amreye.in") && !host.contains("localhost")) {
+            // Only the live HTTPS origin and packaged HTTPS origin may access this WebView.
+            if (!AppUrlPolicy.isTrustedPage(url)) {
                 openInExternalBrowser(url);
                 return true;
             }
@@ -958,9 +1048,13 @@ public final class MainActivity extends Activity {
         @Override
         public WebResourceResponse shouldInterceptRequest(WebView view, WebResourceRequest request) {
             Uri uri = request.getUrl();
-            String host = uri.getHost();
+            // Main-frame POST requests do not pass through shouldOverrideUrlLoading.
+            if (request.isForMainFrame() && !AppUrlPolicy.isTrustedPage(uri.toString())) {
+                return new WebResourceResponse("text/plain", "UTF-8", 403, "Blocked navigation",
+                        java.util.Collections.emptyMap(), new ByteArrayInputStream(new byte[0]));
+            }
 
-            if ("appassets.androidplatform.net".equals(host)) {
+            if (AppUrlPolicy.isLocalPage(uri.toString())) {
                 String path = uri.getPath();
                 if (path == null || path.isEmpty() || path.equals("/")) {
                     path = "index.html";
@@ -1001,6 +1095,10 @@ public final class MainActivity extends Activity {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
             super.onPageStarted(view, url, favicon);
+            if (AppUrlPolicy.isTrustedPage(url)) {
+                isOnlineModeActive = !AppUrlPolicy.isLocalPage(url);
+                hasLoadedSuccessfully = false;
+            }
             if (topProgressBar != null) {
                 topProgressBar.setVisibility(View.VISIBLE);
                 topProgressBar.setProgress(15);
@@ -1017,6 +1115,10 @@ public final class MainActivity extends Activity {
         @Override
         public void onPageFinished(WebView view, String url) {
             super.onPageFinished(view, url);
+            // Failed live loads can finish after the local fallback has already started.
+            if (!AppUrlPolicy.isTrustedPage(url)
+                    || AppUrlPolicy.isLocalPage(url) == isOnlineModeActive
+                    || !url.equals(view.getUrl())) return;
             hasLoadedSuccessfully = true;
             if (topProgressBar != null) {
                 topProgressBar.setProgress(100);
@@ -1029,10 +1131,17 @@ public final class MainActivity extends Activity {
         @Override
         public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
             super.onReceivedError(view, request, error);
-            if (request.isForMainFrame() && !hasLoadedSuccessfully) {
-                showConnectionError("Live website unreachable. Check internet connection.");
+            if (request.isForMainFrame() && isOnlineModeActive) {
+                loadOfflineApplication();
+            }
+        }
+
+        @Override
+        public void onReceivedHttpError(WebView view, WebResourceRequest request, WebResourceResponse response) {
+            super.onReceivedHttpError(view, request, response);
+            if (request.isForMainFrame() && isOnlineModeActive && response.getStatusCode() >= 400) {
+                loadOfflineApplication();
             }
         }
     }
 }
-

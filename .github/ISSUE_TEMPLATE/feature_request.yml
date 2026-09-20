@@ -1,0 +1,21 @@
+name: Feature proposal
+description: Propose a focused improvement or research requirement.
+title: "[Proposal] "
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and intended user
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence and limitations
+      description: Link sources for scientific claims and distinguish research ideas from verified functionality.

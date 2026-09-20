@@ -1,19 +1,41 @@
 # Changelog
 
-This file records the major project milestones. The complete implementation history is also preserved in Git; use `git log --oneline --decorate` for the commit-level record.
+The [development history](docs/development-history.md) links the dated milestones to their commits. Entries below distinguish tagged release contents from later repository assembly.
+
+## [1.5.6] - 2026-09-20
+
+Corrective Android preview and repository audit. This is a debug build for evaluation, not a production or clinically validated release.
+
+- Corrected the dependency lock so clean GitHub installs succeed.
+- Made `npm test` manage its own built Worker preview.
+- Reworked project navigation, setup/testing instructions, document-edition guidance, security reporting, and contribution templates.
+- Preserved the early Python zone detector and documented historical coverage limits.
+- Corrected Android navigation and offline-fallback handling for a new preview build.
+- Added a read-only provider for opening the bundled PDF without the retired website download.
+- Repaired standalone app interactions that previously depended on unavailable server hydration.
+- Corrected narrow-screen header controls and bundled-versus-live status; restored viewport zoom.
+- Removed pre-filled claims of clinical interpretation and human verification from demonstration reports.
+- Preserved document-generation tooling and added Android build/policy checks to CI.
+- Updated Next.js, React/RSC and build dependencies for security fixes; the production dependency audit is clear, with the optional Drizzle development-tool advisory documented in the final audit.
+
+## Repository assembly - 2026-09-20
+
+These commits occurred **after** the original `v1.5.5` tag:
+
+- `78b6edb`: imported Android source and offline assets, current project documents, and brand assets.
+- `1744028`: preserved pnpm workspace/lock files.
+- `c74cbf2`: introduced contributor/history files and the initial GitHub workflow. The workflow's install failure was discovered and corrected in the final audit.
+- `032c8fb`: repaired the npm lock and managed test preview; GitHub verification passed.
 
 ## [1.5.5] - 2026-09-20
 
-- Reconciled the public repository statistics with the bundled dossier.
-- Added explicit versioning and clarified the offline library boundary.
-- Added the Android application source, project documents, supporting references, and brand assets to the public repository.
-- Published the Android APK as the `v1.5.5` GitHub release asset.
+Tag: `82ac89ba45803bc7003c5d9614464d957cd6bb4c`.
 
-## September 2026 development milestones
+- Reconciled catalogue statistics.
+- Added explicit versioning and offline-library wording.
+- Published the separately built Android APK as a release attachment. It is a debug-signed WebView preview; the original tag's source tree does not include the later Android import.
 
-- Built the public library and synthetic AST measurement workflow.
-- Added responsive cyan-glass layouts, project navigation, product views, research views, and accessibility refinements.
-- Added the Android Trusted Web Activity and offline reader bundle.
-- Prepared the project compendium and supporting technical, scientific, safety, software, hardware, and financial documents.
+See [release provenance](docs/releases.md) for the APK checksum and source relationship.
 
-Earlier visual and workflow milestones remain available in the Git history.
+[1.5.5]: https://github.com/Namdev90/amreye-ai/releases/tag/v1.5.5
+[1.5.6]: https://github.com/Namdev90/amreye-ai/releases/tag/v1.5.6

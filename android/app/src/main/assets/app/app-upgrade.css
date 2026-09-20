@@ -977,6 +977,17 @@ main[data-active-section="research"] > #research {
 }
 
 /* Header Network Status Pill */
+@media (max-width: 600px) {
+  .atelier-header { padding-left: 10px !important; padding-right: 10px !important; gap: 6px !important; }
+  .atelier-header .atelier-brand { width: 76px; min-width: 0; flex: 0 0 76px; }
+  .atelier-header .atelier-brand img { width: 100%; height: auto; }
+  .atelier-header .nav-context { display: none !important; }
+  .atelier-header .header-actions { gap: 4px; margin-left: auto; flex-shrink: 0; }
+  .atelier-header .header-actions button { width: 44px !important; min-width: 44px; height: 44px !important; padding: 0 !important; justify-content: center; flex-shrink: 0; }
+  .atelier-header .brief-button span, .atelier-header #app-network-pill .status-text { display: none; }
+  .atelier-header #app-network-pill .status-dot { width: 10px; height: 10px; }
+}
+
 #app-network-pill {
   display: inline-flex;
   align-items: center;
@@ -1068,6 +1079,11 @@ main[data-active-section="research"] > #research {
 
 .standalone-drawer-overlay.is-open {
   display: flex !important;
+}
+
+.standalone-drawer-overlay.is-open .standalone-drawer-card {
+  display: block !important;
+  pointer-events: auto !important;
 }
 
 .standalone-drawer-card {
@@ -1303,5 +1319,3 @@ body:has([data-slot="sheet-content"][data-state="open"]) .atelier-header {
   padding-bottom: 12px;
   margin-bottom: 14px;
 }
-
-

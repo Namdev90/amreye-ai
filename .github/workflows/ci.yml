@@ -23,3 +23,24 @@ jobs:
         run: npm ci
       - name: Build and test with the local Worker preview
         run: npm test
+
+  android:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Verify native URL and document access policy
+        run: |
+          mkdir -p "$RUNNER_TEMP/amreye-policy"
+          javac -encoding UTF-8 -d "$RUNNER_TEMP/amreye-policy" android/app/src/main/java/ai/amreye/app/AppUrlPolicy.java android/app/src/main/java/ai/amreye/app/SyntheticReportPolicy.java android/tests/ai/amreye/app/AppUrlPolicyTest.java android/tests/ai/amreye/app/SyntheticReportPolicyTest.java
+          java -cp "$RUNNER_TEMP/amreye-policy" ai.amreye.app.AppUrlPolicyTest
+          java -cp "$RUNNER_TEMP/amreye-policy" ai.amreye.app.SyntheticReportPolicyTest
+      - name: Install Android build components
+        run: "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager 'platforms;android-35' 'build-tools;35.0.0'"
+      - name: Build Android preview
+        working-directory: android
+        run: bash gradlew --no-daemon :app:assembleDebug

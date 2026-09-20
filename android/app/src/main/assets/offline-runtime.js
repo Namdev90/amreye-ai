@@ -25,6 +25,7 @@
     roadmap: 'Evidence roadmap'
   };
 
+  // BEGIN OFFLINE FRAGMENT ROUTES
   const routeAlias = {
     home: 'hub',
     library: 'research',
@@ -36,8 +37,20 @@
 
   function normalize(route) {
     const clean = (route || '').replace(/^#\/?/, '').trim();
-    return routeAlias[clean] || clean || 'hub';
+    return (Object.hasOwn(routeAlias, clean) ? routeAlias[clean] : clean) || 'hub';
   }
+
+  function resolveOfflineFragment(fragment) {
+    const route = normalize(fragment);
+    if (route === 'main-content') return { kind: 'skip' };
+    if (['hub', 'products', 'demo', 'research', 'story', 'team', 'recognition', 'guide', 'about'].includes(route)) {
+      return { kind: 'section', route };
+    }
+    const queries = { pathways: 'collaboration', references: 'reference', business: 'business', network: 'surveillance', roadmap: 'validation', 'project-progress': 'development' };
+    if (Object.hasOwn(queries, route)) return { kind: 'library', query: queries[route] };
+    return { kind: 'anchor' };
+  }
+  // END OFFLINE FRAGMENT ROUTES
 
   // --- Toast Notification Helper ---
   function showToast(message) {
@@ -110,28 +123,46 @@
   }
 
   function initNavigation() {
-    window.addEventListener('hashchange', () => {
-      updateActiveSection(location.hash);
-    });
+    const restoreRoute = () => {
+      const destination = resolveOfflineFragment(location.hash);
+      if (destination.kind === 'section') updateActiveSection(destination.route);
+    };
+    window.addEventListener('hashchange', restoreRoute);
+    window.addEventListener('popstate', restoreRoute);
 
     document.addEventListener('click', (e) => {
       const target = e.target.closest('a[href^="#"]');
-      if (target) {
+      if (target && !e.defaultPrevented && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey && target.target !== '_blank') {
         const href = target.getAttribute('href');
         if (href && href.length > 1) {
-          const route = normalize(href);
-          if (route) {
+          const destination = resolveOfflineFragment(href);
+          if (destination.kind === 'skip') {
+            e.preventDefault();
+            const main = document.getElementById('main-content');
+            if (main) {
+              if (!main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+              main.focus();
+              main.scrollIntoView({ block: 'start' });
+            }
+          } else if (destination.kind === 'library') {
+            e.preventDefault();
+            if (window.AmreyeOfflineLibrary?.search) {
+              window.AmreyeOfflineLibrary.search(destination.query).catch(() => showToast('The bundled library could not be opened.'));
+            } else {
+              showToast('The bundled library is still loading. Try this link again.');
+            }
+          } else if (destination.kind === 'section') {
             e.preventDefault();
             if (location.hash !== href) {
               history.pushState(null, '', href);
             }
-            updateActiveSection(route);
+            updateActiveSection(destination.route);
           }
         }
       }
     });
 
-    updateActiveSection(location.hash || 'hub');
+    restoreRoute();
   }
 
   // --- 2. Quick Pitch Modal ---
@@ -249,6 +280,8 @@
       document.body.style.overflow = '';
     }
 
+    window.__closeFrontierMenu = closeDrawer;
+
     document.addEventListener('click', (e) => {
       if (e.target.closest('.index-button, [aria-label="Open site directory"]')) {
         e.preventDefault();
@@ -270,183 +303,284 @@
     });
   }
 
-  // --- 4. Synthetic Caliper & Agar Plate Demo ---
+  // BEGIN SYNTHETIC EXPORT
+  function saveSyntheticReport(format, text, filename) {
+    if (!['json', 'csv'].includes(format) || typeof text !== 'string') {
+      throw new TypeError('Synthetic report export requires JSON or CSV text.');
+    }
+    if (window.AndroidBridge && typeof window.AndroidBridge.saveSyntheticReport === 'function') {
+      window.AndroidBridge.saveSyntheticReport(format, text);
+      return;
+    }
+    const url = URL.createObjectURL(new Blob([text], {
+      type: format === 'json' ? 'application/json' : 'text/csv;charset=utf-8'
+    }));
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+  // END SYNTHETIC EXPORT
+
+  // --- 4. Synthetic demo: standalone adapter for the frozen offline HTML ---
   function initSyntheticDemo() {
+    // Snapshot of the canonical fictional rules and review model; no clinical cutoffs.
+    // BEGIN CANONICAL SYNTHETIC MODEL
+// Deliberately fictional thresholds, never clinical CLSI or EUCAST data.
+const demoDiscs = Object.freeze([
+ {code:"CIP",name:"Ciprofloxacin",potency:"5",mm:25.4},
+ {code:"AMC",name:"Amoxicillin–clavulanate",potency:"20/10",mm:19},
+ {code:"MEM",name:"Meropenem",potency:"10",mm:28},
+ {code:"GEN",name:"Gentamicin",potency:"10",mm:18.6},
+ {code:"SXT",name:"Trimethoprim–sulfamethoxazole",potency:"1.25/23.75",mm:26},
+ {code:"AMP",name:"Ampicillin",potency:"10",mm:6}
+].map(d=>Object.freeze(d)));
+function threshold(code,profile){const i=demoDiscs.findIndex(d=>d.code===code);if(i<0||!["A","B"].includes(profile))return null;const s=[23,22,24,21,23,19][i];const r=[17,16,18,15,17,13][i];return {s:s+(profile==="B"?3:0),r:r+(profile==="B"?2:0)}}
+function classify(mm,code,profile){if(!Number.isFinite(mm)||mm<6||mm>40)return null;const cut=threshold(code,profile);if(!cut)return null;return mm>=cut.s?"S":mm<cut.r?"R":"I"}
+
+
+const REVIEWER = 'BAHU-01 (demo identity)';
+const REFERENCE_ID = 'synthetic-six-disc-reference-v1';
+const REFERENCES = Object.freeze({CIP:24, AMC:23, MEM:28, GEN:18, SXT:26, AMP:14});
+const SCENARIOS = Object.freeze({clean:'Clean demonstration plate', overlap:'Overlapping boundaries', fuzzy:'Fuzzy margins / swarming example', unreadable:'Unreadable / recapture required'});
+const validMm = mm => Number.isFinite(mm) && mm >= 6 && mm <= 40;
+const effectiveMm = record => record?.correctedMm ?? record?.originalMm ?? null;
+const emptyRecords = (review = "pending") => Object.fromEntries(demoDiscs.map(d=>[d.code,{originalMm:null,correctedMm:null,verified:false,review}]));
+function initialReview(){return {scenario:'clean',profile:'A',status:'idle',generation:0,runId:null,records:emptyRecords(),drafts:{},corrections:[],audit:[]};}
+function readability(state){return state.status!=='complete'?'not assessed':state.scenario==='unreadable'?'unreadable':state.scenario==='clean'?'readable':'manual boundary review required';}
+const clearApprovals = records => Object.fromEntries(Object.entries(records).map(([code,r])=>[code,{...r,verified:false,review:'pending'}]));
+const audit = (s,a,message) => [...s.audit,{timestamp:a.at,reviewer:REVIEWER,runId:s.runId,action:message}];
+function reviewReducer(s,a){
+ if(a.code && !demoDiscs.some(d=>d.code===a.code))return s;
+ if(a.type==='reset')return {...initialReview(),generation:s.generation+1};
+ if(a.type==='scenario'){
+  if(!Object.hasOwn(SCENARIOS,a.value)||a.value===s.scenario)return s;
+  return {...initialReview(),profile:s.profile,scenario:a.value,generation:s.generation+1};
+ }
+ if(a.type==='profile'){
+  if(!['A','B'].includes(a.value)||s.profile===a.value)return s;
+  return {...s,profile:a.value,records:clearApprovals(s.records),audit:audit(s,a,`Fictional profile ${s.profile} → ${a.value}; approvals cleared`)};
+ }
+ if(a.type==='run'){
+  const generation=s.generation+1;
+  const next={...initialReview(),scenario:s.scenario,profile:s.profile,generation,runId:`demo-run-${generation}`,status:'processing'};
+  return {...next,audit:audit(next,a,'Synthetic analysis started; new run')};
+ }
+ if(a.type==='complete'){
+  if(s.status!=='processing'||a.generation!==s.generation)return s;
+  const records=s.scenario==='unreadable'?emptyRecords('not applicable'):Object.fromEntries(demoDiscs.map(d=>[d.code,{originalMm:d.mm,correctedMm:null,verified:false,review:'pending'}]));
+  return {...s,status:'complete',records,audit:audit(s,a,s.scenario==='unreadable'?'Unreadable illustration; recapture required; no measurements produced':'Synthetic measurements ready')};
+ }
+ if(s.status!=='complete'||s.scenario==='unreadable'||!a.code)return s;
+ const record=s.records[a.code];
+ if(a.type==='draft')return {...s,drafts:{...s.drafts,[a.code]:{mm:String(effectiveMm(record)),reason:'',...s.drafts[a.code],...a.patch}}};
+ if(a.type==='cancel') {const drafts={...s.drafts};delete drafts[a.code];return {...s,drafts};}
+ if(a.type==='apply'){
+  const draft=s.drafts[a.code];const mm=Number(draft?.mm);
+  if(!draft?.mm?.trim()||!validMm(mm)||!draft.reason.trim())return s;
+  const afterMm=Math.round(mm*10)/10;
+  if(afterMm===effectiveMm(record))return s;
+  const event={runId:s.runId,discCode:a.code,originalMm:record.originalMm,beforeMm:effectiveMm(record),afterMm,reason:draft.reason.trim(),timestamp:a.at,reviewer:REVIEWER};
+  const drafts={...s.drafts};delete drafts[a.code];
+  return {...s,drafts,records:{...s.records,[a.code]:{...record,correctedMm:afterMm,review:'pending',verified:false}},corrections:[...s.corrections,event],audit:audit(s,a,`${a.code} correction applied; approval and boundary verification cleared`)};
+ }
+ if(a.type==='verify')return {...s,records:{...s.records,[a.code]:{...record,verified:!!a.value,review:'pending'}},audit:audit(s,a,`${a.code} boundary verification ${a.value?'checked':'cleared'}`)};
+ if(a.type==='confirm'){
+  if(Object.keys(s.drafts).length||!validMm(effectiveMm(record))||(s.scenario!=='clean'&&!record.verified))return s;
+  return {...s,records:{...s.records,[a.code]:{...record,review:'confirmed'}},audit:audit(s,a,`${a.code} confirmed in demo`)};
+ }
+ if(a.type==='reject')return {...s,records:{...s.records,[a.code]:{...record,review:'rejected',verified:false}},audit:audit(s,a,`${a.code} rejected; repeat required`)};
+ return s;
+}
+function compareMeasurements(records,profile){
+ const rows=demoDiscs.map(d=>{
+  const rawOriginal=records[d.code]?.originalMm, rawEffective=effectiveMm(records[d.code]);
+  const originalMm=validMm(rawOriginal)?rawOriginal:null, mm=validMm(rawEffective)?rawEffective:null, referenceMm=REFERENCES[d.code];
+  const category=classify(mm,d.code,profile),referenceCategory=classify(referenceMm,d.code,profile);
+  const paired=validMm(mm)&&validMm(referenceMm)&&category!==null&&referenceCategory!==null;
+  return {code:d.code,originalMm,mm,referenceMm,difference:paired?Math.round((mm-referenceMm)*100)/100:null,category:paired?category:null,referenceCategory:paired?referenceCategory:null,agreement:paired?category===referenceCategory:null};
+ });
+ const pairs=rows.filter(r=>r.difference!==null),n=pairs.length;
+ return {rows,pairedCount:n,excludedCount:rows.length-n,meanDifference:n?pairs.reduce((s,r)=>s+r.difference,0)/n:null,meanAbsoluteDifference:n?pairs.reduce((s,r)=>s+Math.abs(r.difference),0)/n:null,categoryAgreement:n?pairs.filter(r=>r.agreement).length/n*100:null};
+}
+function freezeDeep(value){if(value&&typeof value==='object'){Object.values(value).forEach(freezeDeep);Object.freeze(value)}return value;}
+function captureReport(state,timestamp){
+ if(state.status!=='complete'||Object.keys(state.drafts).length)throw new Error('Finish the run and apply or cancel pending corrections first.');
+ const results=demoDiscs.map(d=>({...d,...state.records[d.code],originalMm:validMm(state.records[d.code].originalMm)?state.records[d.code].originalMm:null,correctedMm:validMm(state.records[d.code].correctedMm)?state.records[d.code].correctedMm:null,mm:validMm(effectiveMm(state.records[d.code]))?effectiveMm(state.records[d.code]):null,interpretation:classify(effectiveMm(state.records[d.code]),d.code,state.profile),thresholds:validMm(effectiveMm(state.records[d.code]))?threshold(d.code,state.profile):null,referenceMm:REFERENCES[d.code],correctionEvents:state.corrections.filter(e=>e.discCode===d.code)}));
+ return freezeDeep(structuredClone({schemaVersion:'2.0',type:'SYNTHETIC DEMONSTRATION - NOT FOR CLINICAL USE',timestamp,runId:state.runId,reviewer:REVIEWER,scenario:state.scenario,readability:readability(state),outcome:state.scenario==='unreadable'?'Incomplete: unreadable illustration. Recapture required; no measurements or interpretations.':results.every(r=>r.review==='confirmed')?'Demo review complete':'Incomplete: some discs await review or require repeat.',profile:state.profile,ruleVersion:`fictional-${state.profile}-v1`,referenceFixtureId:REFERENCE_ID,results,comparison:compareMeasurements(state.records,state.profile),correctionEvents:state.corrections,audit:state.audit,signature:'No authenticated clinical signature. All review actions are simulated.'}));
+}
+function reportCsv(report){
+ const rows=[['schemaVersion',report.schemaVersion],['type',report.type],['timestamp',report.timestamp],['runId',report.runId],['reviewer',report.reviewer],['scenario',report.scenario],['readability',report.readability],['outcome',report.outcome],['referenceFixtureId',report.referenceFixtureId],['ruleVersion',report.ruleVersion],['pairedCount',report.comparison.pairedCount],['meanDifference',report.comparison.meanDifference],['meanAbsoluteDifference',report.comparison.meanAbsoluteDifference],['categoryAgreement',report.comparison.categoryAgreement],['code','name','potency','originalMm','correctedMm','mm','referenceMm','difference','interpretation','referenceCategory','agreement','review','boundaryVerified','correctionEvents'],...report.results.map((r,i)=>[r.code,r.name,r.potency,r.originalMm,r.correctedMm,r.mm,r.referenceMm,report.comparison.rows[i].difference,r.interpretation,report.comparison.rows[i].referenceCategory,report.comparison.rows[i].agreement,r.review,r.verified,JSON.stringify(r.correctionEvents)]),['audit',JSON.stringify(report.audit)]];
+ // Formula-safe cells matter because correction reasons are visitor-entered text.
+ return rows.map(row=>row.map(v=>{let text=v===null||v===undefined?'Not available':String(v);if(typeof v==='string'&&/^[=+@\-\t\r]/.test(text))text="'"+text;return '"'+text.replaceAll('"','""')+'"'}).join(',')).join('\r\n');
+}
+    // END CANONICAL SYNTHETIC MODEL
+
     const demoSec = document.getElementById('demo');
     if (!demoSec) return;
+    const runButton = demoSec.querySelector('.workbench-visual > button.solid-link');
+    const resetButton = demoSec.querySelector('.workbench-controls > button');
+    const selects = demoSec.querySelectorAll('.workbench-controls select');
+    const results = demoSec.querySelector('.workbench-results');
+    const reportButton = results.querySelector('button.text-link');
+    const hint = results.querySelector('.review-hint');
+    const progress = demoSec.querySelector('.metrology-progress');
+    const plate = demoSec.querySelector('.metrology-plate');
+    const panel = document.createElement('div');
+    panel.className = 'caliper-panel';
+    results.insertBefore(panel, reportButton);
+    let state = initialReview(), selected = 'CIP', overlay = true, step = 0, timer = null;
+    const stages = ['Plate registration', 'Scale reference', 'Disc identification', 'Boundary segmentation', 'Diameter measurement', 'Fictional rules', 'Human review'];
+    const esc = value => String(value ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+    const mm = value => validMm(value) ? value.toFixed(1) : 'Not available';
+    const pending = () => Object.keys(state.drafts).length > 0;
+    const readable = () => state.status === 'complete' && state.scenario !== 'unreadable';
+    const send = action => { state = reviewReducer(state, {...action, at:new Date().toISOString()}); render(); };
+    const stopTimer = () => { if (timer !== null) clearInterval(timer); timer = null; };
+    const rows = [...results.querySelectorAll('.metrology-table tbody tr')];
+    rows.forEach((row, i) => row.querySelector('button').setAttribute('data-select-disc', demoDiscs[i].code));
 
-    let currentDisc = 'CIP';
-    let currentMm = 24.0;
-    let isOverlayVisible = true;
-    let selectedProfile = 'A';
-    let isInspected = false;
-    let currentOpticalMode = 'standard';
-
-    const breakpoints = {
-      AMP: { s: 14, r: 14 },
-      CIP: { s: 25, r: 22 },
-      MEM: { s: 28, r: 22 },
-      GEN: { s: 18, r: 15 },
-      SXT: { s: 16, r: 13 },
-      AMC: { s: 19, r: 19 }
-    };
-
-    function calculateCategory(disc, mm) {
-      const rule = breakpoints[disc] || { s: 20, r: 15 };
-      if (mm >= rule.s) return { cat: 'S', label: 'Susceptible', color: '#34d399' };
-      if (mm < rule.r) return { cat: 'R', label: 'Resistant', color: '#f87171' };
-      return { cat: 'I', label: 'Intermediate', color: '#fbbf24' };
+    function renderPlate() {
+      if (!plate) return;
+      plate.setAttribute('data-plate-view', overlay ? 'overlay' : 'raw');
+      plate.querySelectorAll('[data-offline-overlay]').forEach(el => el.remove());
+      demoDiscs.forEach((disc, i) => {
+        const original = plate.querySelector(`[data-original-zone="${disc.code}"]`);
+        if (!original) return;
+        const group = original.parentElement;
+        group.style.display = state.scenario === 'unreadable' ? 'none' : '';
+        group.setAttribute('transform', state.scenario === 'overlap' && i === 1 ? 'translate(-30 -25)' : 'translate(0 0)');
+        group.setAttribute('data-select-disc', disc.code);
+        group.setAttribute('role', 'button');
+        group.setAttribute('tabindex', readable() ? '0' : '-1');
+        group.setAttribute('aria-disabled', String(!readable()));
+        const effective = effectiveMm(state.records[disc.code]);
+        group.setAttribute('aria-label', `${disc.code} synthetic effective zone ${mm(effective)}${effective === null ? '' : ' millimetres'}`);
+        if (!readable() || !overlay) return;
+        const x = Number(original.getAttribute('cx')), y = Number(original.getAttribute('cy'));
+        const draft = state.drafts[disc.code];
+        const draw = (value, color, dashed) => {
+          if (!validMm(value)) return;
+          const circle = document.createElementNS('http://www.w3.org/2000/svg','circle');
+          circle.setAttribute('data-offline-overlay','true');
+          Object.entries({cx:x,cy:y,r:value / 90 * 160,fill:'none',stroke:color,'stroke-width':disc.code === selected ? 2 : 1,'stroke-dasharray':dashed ? '3 4' : 'none'}).forEach(([k,v]) => circle.setAttribute(k,String(v)));
+          group.appendChild(circle);
+        };
+        draw(effective,disc.code === selected ? '#78ddcc' : '#d8dfae',state.scenario === 'fuzzy');
+        if (draft && draft.mm.trim()) draw(Number(draft.mm),'#e7a1ff',true);
+      });
+      if (state.scenario === 'unreadable') {
+        const text = document.createElementNS('http://www.w3.org/2000/svg','text');
+        Object.entries({'data-offline-overlay':'true',x:180,y:180,'text-anchor':'middle',fill:'#fff','font-size':14}).forEach(([k,v]) => text.setAttribute(k,String(v)));
+        text.textContent = 'Unreadable — recapture required'; plate.appendChild(text);
+      }
     }
 
-    function updateWorkbenchUI() {
-      demoSec.querySelectorAll('.caliper-mm-display, [data-field="current-mm"]').forEach((el) => {
-        el.textContent = `${currentMm.toFixed(1)} mm`;
-      });
-
-      const res = calculateCategory(currentDisc, currentMm);
-      demoSec.querySelectorAll('.caliper-category-badge, [data-field="current-category"]').forEach((el) => {
-        el.textContent = `${res.cat} · ${res.label}`;
-        el.style.borderColor = res.color;
-        el.style.color = res.color;
-      });
-
-      const slider = demoSec.querySelector('input[type="range"].caliper-slider');
-      if (slider && parseFloat(slider.value) !== currentMm) {
-        slider.value = currentMm.toString();
-      }
-
-      const zoneCircle = demoSec.querySelector(`.plate-disc-zone[data-disc="${currentDisc}"], #disc-zone-${currentDisc}`);
-      if (zoneCircle) {
-        const radius = Math.max(12, currentMm * 2.2);
-        zoneCircle.setAttribute('r', radius.toString());
-      }
+    function updateActions() {
+      const draft = state.drafts[selected], current = state.records[selected];
+      const apply = panel.querySelector('[data-demo-action="apply"]');
+      if (apply) apply.disabled = !draft || !draft.mm.trim() || !validMm(Number(draft.mm)) || !draft.reason.trim() || Math.round(Number(draft.mm)*10)/10 === effectiveMm(current);
+      const cancel = panel.querySelector('[data-demo-action="cancel"]');
+      if (cancel) cancel.disabled = !draft;
+      const confirm = panel.querySelector('[data-demo-action="confirm"]');
+      if (confirm) confirm.disabled = pending() || (state.scenario !== 'clean' && !current.verified);
+      const reject = panel.querySelector('[data-demo-action="reject"]');
+      if (reject) reject.disabled = pending();
+      reportButton.disabled = state.status !== 'complete' || pending();
+      const status = panel.querySelector('[data-draft-status]');
+      if (status) status.textContent = pending() ? 'Pending correction: apply or cancel every draft before review or reporting.' : 'No pending correction. Fictional demonstration only.';
     }
 
-    demoSec.addEventListener('input', (e) => {
-      if (e.target.matches('input[type="range"].caliper-slider, input[type="range"]')) {
-        currentMm = parseFloat(e.target.value);
-        updateWorkbenchUI();
+    function render() {
+      const complete = state.status === 'complete', running = state.status === 'processing';
+      selects[0].value = state.profile; selects[1].value = state.scenario;
+      runButton.disabled = running;
+      runButton.textContent = running ? stages[Math.min(step,6)] : complete ? 'Run demonstration again' : 'Run synthetic analysis';
+      progress.textContent = running ? stages[Math.min(step,6)] : complete ? `Run complete · ${readability(state)}` : 'Ready · run analysis to begin';
+      const bar = document.createElement('progress'); bar.max = 7; bar.value = complete ? 7 : running ? step : 0; progress.appendChild(bar);
+      demoSec.querySelectorAll('.preset-chip').forEach(chip => chip.classList.toggle('active',chip.dataset.scenario === state.scenario));
+      rows.forEach((row,i) => {
+        const disc = demoDiscs[i], value = effectiveMm(state.records[disc.code]);
+        row.setAttribute('data-selected',String(selected === disc.code));
+        row.querySelector('button').disabled = !readable();
+        row.children[1].textContent = value === null ? 'Not available' : mm(value) + ' mm';
+        row.children[2].textContent = classify(value,disc.code,state.profile) ?? 'Not available';
+      });
+      panel.hidden = !readable(); hint.hidden = readable();
+      hint.textContent = complete ? 'Recapture required. No measurements or interpretations. An incomplete demonstration report is available.' : 'Run the analysis to enable measurement editing and review.';
+      if (readable()) {
+        const record = state.records[selected], value = effectiveMm(record), draft = state.drafts[selected], cut = threshold(selected,state.profile);
+        panel.innerHTML = `<h3>${selected} · Measurement review</h3><p>Original <b>${mm(record.originalMm)} mm</b> · Effective <b>${mm(value)} mm</b></p>
+          <label>Correction diameter (mm)<input data-demo-field="mm" aria-label="Correction diameter in millimetres" type="number" min="6" max="40" step="0.1" value="${esc(draft?.mm ?? value)}"></label>
+          <input data-demo-field="slider" aria-label="Adjust correction diameter" type="range" min="6" max="40" step="0.1" value="${esc(draft?.mm && validMm(Number(draft.mm)) ? draft.mm : value)}">
+          <label>Correction reason<textarea data-demo-field="reason" placeholder="Explain why this example boundary needs correction">${esc(draft?.reason ?? '')}</textarea></label>
+          <div class="review-actions"><button data-demo-action="apply">Apply correction</button><button data-demo-action="cancel">Cancel draft</button><button data-demo-action="cancel-all">Cancel all drafts</button></div>
+          <p data-draft-status role="status"></p><small>Fictional ${state.profile}: S ≥ ${cut.s} mm · I ${cut.r} to &lt;${cut.s} mm · R &lt;${cut.r} mm. These are not CLSI/EUCAST cutoffs.</small>
+          <label class="verify-boundary"><input type="checkbox" data-demo-field="verified" ${record.verified ? 'checked' : ''}>I inspected this simulated boundary${state.scenario === 'clean' ? '' : ' (required)'}</label>
+          <p>Review: <b>${record.review}</b> · ${REVIEWER}</p><div class="review-actions"><button data-demo-action="confirm">Confirm review</button><button data-demo-action="reject">Reject</button></div>`;
+      }
+      const comparison = compareMeasurements(state.records,state.profile);
+      const metrics = [comparison.pairedCount || 'Not available',comparison.meanDifference === null ? 'Not available' : comparison.meanDifference.toFixed(2)+' mm',comparison.meanAbsoluteDifference === null ? 'Not available' : comparison.meanAbsoluteDifference.toFixed(2)+' mm',comparison.categoryAgreement === null ? 'Not available' : comparison.categoryAgreement.toFixed(1)+'%'];
+      demoSec.querySelectorAll('.comparison-summary b').forEach((el,i) => {el.textContent=metrics[i];});
+      updateActions(); renderPlate();
+    }
+
+    runButton.addEventListener('click', () => {
+      stopTimer(); step=0; send({type:'run'}); const generation=state.generation;
+      timer=setInterval(() => { step++; if (step === 7) {stopTimer();send({type:'complete',generation});} else render(); },200);
+    });
+    resetButton.addEventListener('click', () => {stopTimer();selected='CIP';step=0;send({type:'reset'});});
+    selects[0].addEventListener('change', () => send({type:'profile',value:selects[0].value}));
+    selects[1].addEventListener('change', () => {stopTimer();step=0;send({type:'scenario',value:selects[1].value});});
+    demoSec.addEventListener('input', e => {
+      const field=e.target.dataset.demoField;
+      if (!readable() || !['mm','slider','reason'].includes(field)) return;
+      const patch = field === 'reason' ? {reason:e.target.value} : {mm:e.target.value};
+      state=reviewReducer(state,{type:'draft',code:selected,patch,at:new Date().toISOString()});
+      if (field === 'slider') panel.querySelector('[data-demo-field="mm"]').value=e.target.value;
+      if (field === 'mm' && validMm(Number(e.target.value))) panel.querySelector('[data-demo-field="slider"]').value=e.target.value;
+      updateActions();renderPlate();
+    });
+    demoSec.addEventListener('change', e => {
+      if (e.target.dataset.demoField === 'verified' && readable()) send({type:'verify',code:selected,value:e.target.checked});
+    });
+    demoSec.addEventListener('click', e => {
+      const disc=e.target.closest('[data-select-disc]');
+      if (disc && readable()) { selected=disc.dataset.selectDisc;render(); }
+      const preset=e.target.closest('.preset-chip');
+      if (preset && preset.dataset.scenario !== state.scenario) {stopTimer();step=0;send({type:'scenario',value:preset.dataset.scenario});}
+      const optical=e.target.closest('.optical-chip');
+      if (optical) {demoSec.querySelectorAll('.optical-chip').forEach(el=>el.classList.toggle('active',el===optical));if(plate){plate.setAttribute('data-optical-mode',optical.dataset.optical);['standard','darkfield','edge'].forEach(mode=>plate.classList.toggle('metrology-plate-'+mode,mode===optical.dataset.optical));}}
+      const view=e.target.closest('.view-switch button');
+      if (view) {overlay=view.textContent.includes('Measurement');demoSec.querySelectorAll('.view-switch button').forEach(el=>el.setAttribute('aria-pressed',String(el===view)));renderPlate();}
+      const action=e.target.closest('[data-demo-action]');
+      if (action && !action.disabled && readable()) {
+        if (action.dataset.demoAction === 'cancel-all') {Object.keys(state.drafts).forEach(code=>{state=reviewReducer(state,{type:'cancel',code});});render();}
+        else send({type:action.dataset.demoAction,code:selected});
       }
     });
-
-    demoSec.addEventListener('click', (e) => {
-      // Nudge buttons
-      const nudgeBtn = e.target.closest('[data-nudge], .caliper-nudges button');
-      if (nudgeBtn) {
-        let delta = parseFloat(nudgeBtn.getAttribute('data-nudge') || '0');
-        if (!delta) {
-          const txt = nudgeBtn.textContent || '';
-          if (txt.includes('-1.0')) delta = -1.0;
-          else if (txt.includes('-0.1')) delta = -0.1;
-          else if (txt.includes('+0.1')) delta = 0.1;
-          else if (txt.includes('+1.0')) delta = 1.0;
-        }
-        currentMm = Math.min(35.0, Math.max(6.0, Math.round((currentMm + delta) * 10) / 10));
-        updateWorkbenchUI();
-      }
-
-      // Disc selection
-      const discBtn = e.target.closest('[data-select-disc]');
-      if (discBtn) {
-        currentDisc = discBtn.getAttribute('data-select-disc') || 'CIP';
-        demoSec.querySelectorAll('[data-select-disc]').forEach(b => b.classList.remove('active'));
-        discBtn.classList.add('active');
-        updateWorkbenchUI();
-      }
-
-      // Optical illumination modes
-      const opticalChip = e.target.closest('.optical-chip');
-      if (opticalChip) {
-        const mode = opticalChip.getAttribute('data-optical') || 'standard';
-        currentOpticalMode = mode;
-        demoSec.querySelectorAll('.optical-chip').forEach(c => c.classList.remove('active'));
-        opticalChip.classList.add('active');
-        const plateSvg = demoSec.querySelector('.metrology-plate');
-        if (plateSvg) {
-          plateSvg.setAttribute('data-optical-mode', mode);
-          plateSvg.className.baseVal = `metrology-plate metrology-plate-${mode}`;
-        }
-        showToast(`Optical filter: ${opticalChip.textContent}`);
-      }
-
-      // Scenario presets
-      const presetChip = e.target.closest('.preset-chip');
-      if (presetChip) {
-        const scenario = presetChip.getAttribute('data-scenario') || 'clean';
-        demoSec.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
-        presetChip.classList.add('active');
-        const selectScenario = demoSec.querySelector('select[value]');
-        if (selectScenario) {
-          selectScenario.value = scenario;
-          selectScenario.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        showToast(`QC Scenario: ${presetChip.textContent}`);
-      }
-
-      // Overlay toggle
-      const overlayBtn = e.target.closest('.view-switch button, .plate-toggle-overlay');
-      if (overlayBtn) {
-        const isOverlay = overlayBtn.textContent.includes('overlay') || overlayBtn.textContent.includes('Measurement');
-        isOverlayVisible = isOverlay;
-        demoSec.querySelectorAll('.view-switch button').forEach(b => b.setAttribute('aria-pressed', 'false'));
-        overlayBtn.setAttribute('aria-pressed', 'true');
-        const overlayG = demoSec.querySelector('.plate-svg-overlay');
-        if (overlayG) {
-          overlayG.style.display = isOverlayVisible ? 'block' : 'none';
-        }
-      }
-
-      // Inspection confirmation
-      const inspectCheckbox = e.target.closest('input[type="checkbox"]');
-      if (inspectCheckbox && (inspectCheckbox.id === 'inspect-boundary' || inspectCheckbox.closest('.verify-boundary'))) {
-        isInspected = inspectCheckbox.checked;
-        const confirmBtn = demoSec.querySelector('.btn-confirm-review, .review-actions button');
-        if (confirmBtn) {
-          confirmBtn.disabled = !isInspected;
-        }
-      }
-
-      // Lab certificate modal trigger
-      const certBtn = e.target.closest('.btn-lab-certificate, [data-action="open-certificate"]');
-      if (certBtn) {
-        const modal = document.getElementById('lab-certificate-modal');
-        if (modal) {
-          modal.classList.add('is-open');
-        }
-      }
-
-      // Export report modal
-      const exportBtn = e.target.closest('[data-action="export-record"], .btn-view-record');
-      if (exportBtn) {
-        const modal = document.getElementById('record-export-modal');
-        if (modal) {
-          modal.classList.add('is-open');
-        }
-      }
+    demoSec.addEventListener('keydown', e => {
+      const disc=e.target.closest('.metrology-plate [data-select-disc]');
+      if (disc && readable() && ['Enter',' '].includes(e.key)) {e.preventDefault();selected=disc.dataset.selectDisc;render();}
     });
-
-    // Close certificate & record modals
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.cert-modal-close') || e.target.classList.contains('cert-modal-backdrop')) {
-        const modal = document.getElementById('lab-certificate-modal');
-        if (modal) modal.classList.remove('is-open');
-      }
-      if (e.target.closest('.record-modal-close') || e.target.classList.contains('record-modal-backdrop')) {
-        const modal = document.getElementById('record-export-modal');
-        if (modal) modal.classList.remove('is-open');
-      }
-      // Copy certificate summary
-      if (e.target.closest('#btn-copy-cert')) {
-        const summary = `AMReye.AI AST Metrology Record\nScenario: SCN-2026-EUCAST-DEMO\nCIP 5µg: ${currentMm.toFixed(1)} mm (${calculateCategory(currentDisc, currentMm).cat})\nStatus: Inspected & Verified\nDisclaimer: Synthetic Demonstration Only`;
-        navigator.clipboard.writeText(summary).then(() => {
-          showToast('Certificate summary copied to clipboard!');
-        }).catch(() => {
-          showToast('Copied to clipboard');
-        });
-      }
+    reportButton.addEventListener('click', () => {
+      if (state.status !== 'complete' || pending()) return;
+      const report=captureReport(state,new Date().toISOString());
+      const modal=document.createElement('dialog');
+      modal.className='offline-demo-report';
+      modal.dataset.state='open';
+      modal.style.cssText='max-width:720px;width:calc(100% - 32px);max-height:85vh;overflow:auto;background:#10252b;color:#effffa;border:1px solid #78ddcc;border-radius:16px;padding:20px';
+      modal.innerHTML=`<h2>AST demonstration record</h2><strong>SYNTHETIC · NOT FOR CLINICAL USE</strong><p>${esc(report.timestamp)} · ${esc(report.runId)}</p><p>${esc(report.outcome)}</p><p>Fictional profile ${report.profile} · ${esc(report.readability)}</p><div style="overflow:auto"><table><thead><tr><th>Disc</th><th>Original / effective mm</th><th>Fictional category</th><th>Review</th></tr></thead><tbody>${report.results.map(row=>`<tr><td>${row.code}</td><td>${mm(row.originalMm)} / ${mm(row.mm)}</td><td>${row.interpretation ?? 'Not available'}</td><td>${row.review}</td></tr>`).join('')}</tbody></table></div><p>${esc(report.signature)}</p><p>Correction events: ${report.correctionEvents.length}. No specimen was tested.</p><details><summary>Audit and correction record</summary><pre style="white-space:pre-wrap">${esc(JSON.stringify({corrections:report.correctionEvents,audit:report.audit},null,2))}</pre></details><button data-report-export="json">Export JSON</button> <button data-report-export="csv">Export CSV</button> <button data-report-close aria-label="Close demonstration report">Close report</button>`;
+      modal.addEventListener('click', e => {
+        if(e.target.closest('[data-report-close]')) modal.close();
+        const button=e.target.closest('[data-report-export]');
+        if(button){const format=button.dataset.reportExport;const text=format==='json'?JSON.stringify(report,null,2):reportCsv(report);saveSyntheticReport(format,text,`AMReye.AI-${report.runId}-synthetic-report.${format}`);}
+      });
+      modal.addEventListener('close',()=>{modal.remove();reportButton.focus();});
+      document.body.appendChild(modal);modal.showModal();
     });
-
-    updateWorkbenchUI();
+    render();
   }
 
   // --- 5. Research Compendium Live Search & Bookmarks ---
@@ -644,17 +778,16 @@
   function initConnectivity() {
     function updateOnlineStatus() {
       const isOnline = navigator.onLine;
+      const isLiveOrigin = location.protocol === 'https:' && ['amreye.in', 'www.amreye.in'].includes(location.hostname);
       const statusPill = document.getElementById('app-network-pill');
       if (statusPill) {
-        if (isOnline) {
-          statusPill.innerHTML = '<span class="status-dot green"></span><span class="status-text">Online (Live)</span>';
-          statusPill.classList.add('is-online');
-          statusPill.classList.remove('is-offline');
-        } else {
-          statusPill.innerHTML = '<span class="status-dot amber"></span><span class="status-text">Offline Metrology</span>';
-          statusPill.classList.add('is-offline');
-          statusPill.classList.remove('is-online');
-        }
+        const mode = isLiveOrigin ? (isOnline ? 'Live website' : 'Website offline') : 'Bundled content';
+        statusPill.innerHTML = `<span class="status-dot ${isOnline ? 'green' : 'amber'}"></span><span class="status-text">${mode}</span>`;
+        statusPill.classList.toggle('is-online', isOnline);
+        statusPill.classList.toggle('is-offline', !isOnline);
+        const description = isLiveOrigin ? mode : `Bundled offline library. ${isOnline ? 'Network available; activate to open the live website.' : 'No network connection.'}`;
+        statusPill.title = description;
+        statusPill.setAttribute('aria-label', description);
       }
     }
 
@@ -696,7 +829,6 @@
     initPitchModal();
     initDirectoryDrawer();
     initSyntheticDemo();
-    initResearchLibrary();
     initSettingsModal();
     initPullToRefresh();
     initConnectivity();

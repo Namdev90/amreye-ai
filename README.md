@@ -1,133 +1,85 @@
 # AMReye.AI
 
-Antimicrobial Intelligence: microbiology, frontier instrumentation and AI, with a current AST prototype pathway, proposed product configurations and future research kept distinct.
+<img src="brand/amreye-logo-colour.png" alt="AMReye.AI" width="280">
 
-**Status:** prototype and research platform  ·  **Release:** [v1.5.5](https://github.com/Namdev90/amreye-ai/releases/tag/v1.5.5)  ·  **Live site:** [amreye.in](https://amreye.in)
+[![Verify](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml)
+[Website](https://amreye.in) · [Android downloads](https://github.com/Namdev90/amreye-ai/releases) · [Development history](docs/development-history.md) · [Project documents](project-docs/README.md)
 
-This repository contains the web application, Android offline/TWA project, public research library, project documents, and brand assets. The [development history](CHANGELOG.md) summarizes the major milestones; the full sequence is preserved in the Git commits and release tag.
+AMReye.AI explores image-assisted antimicrobial susceptibility measurement, traceable laboratory records, and microbiology research workflows. This repository brings together the website, Android app, research references, project documents, brand assets, and preserved development work.
 
-## Repository map
+**Stage:** research and prototype. The interactive AST examples use synthetic data and fictional interpretation profiles. Proposed hardware, clinical performance, and future research are not demonstrated product capabilities.
 
-- `app/`, `components/`, `public/`, `tests/` — web application and verification suite
-- `android/` — Android Trusted Web Activity source and packaged offline runtime assets
-- `project-docs/` — Super Document and supporting project references
-- `brand/` — logos, icons, identity directions, and clean visual assets
-- `scripts/` — build and verification helpers
+## Start here
 
-The public app is a prototype and research presentation. It is not clinically validated or cleared and must not be used for patient-care decisions.
+| Goal | Destination |
+| --- | --- |
+| Explore the public project | [amreye.in](https://amreye.in) |
+| Try the Android preview | [Releases and build limitations](docs/releases.md) |
+| Read the project overview and detailed references | [Document guide](project-docs/README.md) |
+| See what changed over time | [Development timeline](docs/development-history.md), [changelog](CHANGELOG.md), [commits](https://github.com/Namdev90/amreye-ai/commits/main/) |
+| Run or contribute to the code | Quick start below, [testing](TESTING.md), [contributing](CONTRIBUTING.md) |
+| Understand future priorities | [Roadmap](docs/roadmap.md) |
+| Report a vulnerability privately | [Security policy](SECURITY.md) |
 
-See [brand language](docs/brand-language.md) for the landing-page copy, product naming and evidence boundaries. The public library is at `/library`; legacy `#apex` links remain supported.
+## What is in this repository?
 
-## Development foundation
+| Path | Contents |
+| --- | --- |
+| `app/`, `components/`, `hooks/`, `lib/` | Web UI, public topic summaries, synthetic measurement and map logic |
+| `public/` | Website assets; document downloads and raw chapter endpoints are retired |
+| `android/` | Native Android **WebView** shell, Java source, and its bundled offline HTML/JavaScript library |
+| `project-docs/` | Current main overview and seven supporting editable documents |
+| `docs/` | Development history, architecture, release provenance, roadmap, and developer guides |
+| `brand/`, `reference/` | Identity assets and concept references |
+| `historical/` | Preserved earlier implementations, explicitly separated from the current app |
+| `private/` | Legacy catalogue/reference inputs excluded from the website build; **publicly readable in this GitHub repository** |
+| `scripts/`, `tests/`, `.github/` | Build helpers, tests, and contribution/verification workflows |
+| `build/`, `worker/`, `db/`, `drizzle/` | Hosting integration source and retained optional database scaffolding |
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+The website and Android offline bundle are separate deliverables. Website changes do not automatically regenerate the APK's bundled content. Publishing documents to this repository also does not restore document hosting on the website.
 
-## Prerequisites
+## Run the website
 
-- Node.js `>=22.13.0`
-- Linux with `flock`, `curl`, and GNU `timeout`
+Use Node.js 22.13 or newer and npm. CI uses Node.js 22 on Linux.
 
-## Sites Lifecycle
-
-The Sites lifecycle CLI runs the locked dependency install before returning this checkout. Edit the source under `app/`, then checkpoint when a coherent milestone is ready to inspect or share. The remote Sites builder runs `npm run build` against the pushed commit. Do not repeat install or build as a normal pre-checkpoint step.
-
-This starter does not use `wrangler.jsonc`.
-
-`install:ci` is intentionally a single, non-retrying `npm ci`. It refuses a concurrent install for the same project, consumes a matching image-seeded npm cache with `--prefer-offline` while retaining registry fallback for a missing cache object, otherwise downloads and verifies the complete vinext tarball recorded in `package-lock.json`, limits npm to one socket, and terminates a stalled install. `build` applies a short timeout. These helpers target Linux and use GNU `timeout`; they are not native macOS scripts.
-
-Scripts that need writable project-scoped home, npm, XDG, and temporary paths use `scripts/sites-env.sh`. The `dev` and `start` scripts honor the caller's runtime environment and keep Wrangler logs inside the checkout. The generated `.sites-runtime/` directory is disposable and ignored by Git.
-
-## Included Shape
-
-- edit site code under `app/`
-- `app/chatgpt-auth.ts` provides optional dispatch-owned ChatGPT sign-in helpers
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/index.ts` reads the D1 binding from the Cloudflare Worker environment
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```sh
+git clone https://github.com/Namdev90/amreye-ai.git
+cd amreye-ai
+npm ci
+npm run dev
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+Open the local address printed by Vite. The anonymous public pages do not require a secret or a production database. Optional integrations are described by `.env.example`; keep real values in ignored local environment files.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```sh
+npm test
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- In a Server Component, start sign-in with
-  `<a href={chatGPTSignInPath(returnTo)} target="_top">`. The auth helper
-  module is server-only; do not import it into a Client Component.
-- Do not use `fetch`, XHR, a client-side router, or a framework link that can
-  prefetch the sign-in route. SIWC must start as a top-level navigation.
-- Never request the AuthAPI authorization endpoint directly. The dispatch-owned
-  `/signin-with-chatgpt` route must start the SIWC flow.
-- Use `chatGPTSignOutPath(returnTo)` for browser sign-out links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+This builds the site, starts a local Cloudflare-compatible preview on an available port, runs the tests, and closes that preview. To rerun the tests against an existing build, use `npm run test:runtime`. See [TESTING.md](TESTING.md) for scope and limits.
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+The canonical dependency installation uses `package-lock.json` and `npm ci`. The imported pnpm files are preserved for provenance; CI does not use them. Avoid mixing package managers in the same checkout.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+For Android, follow [android/README.md](android/README.md). For the existing deployment integration, see [hosting notes](docs/hosting.md). The `build/` directory contains source code and must be retained.
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+## Architecture and evidence
 
-## Diagnostic Commands
+```mermaid
+flowchart LR
+  Records["Project documents and source register"] --> Web["Web UI: public summaries and synthetic demo"]
+  Records --> Bundle["Android offline bundle: versioned snapshot"]
+  Shell["Android WebView shell"] --> Web
+  Shell --> Bundle
+  Git["Git commits and release records"] --> Provenance["Development and artifact provenance"]
+```
 
-- `npm run install:ci`: perform the one bounded lockfile install
-- `npm run dev`: start the Vite/Vinext development server
-- `npm run build`: build the deployable Sites artifact
-- `npm run start`: start the built Vinext application
-- `npm test`: build and verify the rendered development-preview metadata
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+The offline app includes an older 300-page compendium. The current document set contains a short main overview and seven detailed references; these are different editions. Read the [document guide](project-docs/README.md) before comparing their counts.
 
-Use build commands for targeted diagnosis after a remote failure, not as part of the normal checkpoint path.
+The `v1.5.5` Git tag identifies the original web release commit. Android source and the current document set were imported in later commits. The [release record](docs/releases.md) states the exact scope; this repository does not claim to recover edits that were never committed.
 
-The timeout defaults can be overridden for a controlled canary with `SITES_INSTALL_TIMEOUT`, `SITES_INSTALL_KILL_AFTER`, `SITES_BUILD_TIMEOUT`, and `SITES_BUILD_KILL_AFTER`. A timeout fails the command; the helpers never retry an unchanged install or build.
+## Contributing and reuse
 
-## Learn More
+Use [issues](https://github.com/Namdev90/amreye-ai/issues) for reproducible bugs and focused proposals. Pull requests should explain the change and include relevant verification. Scientific or product claims need traceable evidence and an explicit maturity label.
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+A project-wide reuse license has not yet been selected. Public visibility is not an open-source license. Existing third-party notices remain applicable; see [rights and attribution](docs/rights-and-attribution.md).
+
+Maintained under [Namdev90](https://github.com/Namdev90). Project responsibilities and technical context are documented in the project overview.
