@@ -2,6 +2,20 @@
 
 Antimicrobial Intelligence: microbiology, frontier instrumentation and AI, with a current AST prototype pathway, proposed product configurations and future research kept distinct.
 
+**Status:** prototype and research platform  ·  **Release:** [v1.5.5](https://github.com/Namdev90/amreye-ai/releases/tag/v1.5.5)  ·  **Live site:** [amreye.in](https://amreye.in)
+
+This repository contains the web application, Android offline/TWA project, public research library, project documents, and brand assets. The [development history](CHANGELOG.md) summarizes the major milestones; the full sequence is preserved in the Git commits and release tag.
+
+## Repository map
+
+- `app/`, `components/`, `public/`, `tests/` — web application and verification suite
+- `android/` — Android Trusted Web Activity source and packaged offline runtime assets
+- `project-docs/` — Super Document and supporting project references
+- `brand/` — logos, icons, identity directions, and clean visual assets
+- `scripts/` — build and verification helpers
+
+The public app is a prototype and research presentation. It is not clinically validated or cleared and must not be used for patient-care decisions.
+
 See [brand language](docs/brand-language.md) for the landing-page copy, product naming and evidence boundaries. The public library is at `/library`; legacy `#apex` links remain supported.
 
 ## Development foundation
