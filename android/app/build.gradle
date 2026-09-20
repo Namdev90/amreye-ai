@@ -1,0 +1,24 @@
+plugins {
+    id "com.android.application"
+}
+
+android {
+    namespace "ai.amreye.app"
+    compileSdk 35
+    buildToolsVersion "35.0.0"
+
+    defaultConfig {
+        applicationId "ai.amreye.app"
+        minSdk 26
+        targetSdk 35
+        versionCode 12
+        versionName "1.5.5"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+        }
+    }
+}
