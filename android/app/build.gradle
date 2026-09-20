@@ -2,6 +2,23 @@ plugins {
     id "com.android.application"
 }
 
+import java.util.Properties
+
+def signingProperties = new Properties()
+def signingPropertiesPath = System.getenv("AMREYE_SIGNING_PROPERTIES")
+if (signingPropertiesPath) {
+    def signingFile = file(signingPropertiesPath)
+    if (!signingFile.isFile()) {
+        throw new GradleException("AMREYE_SIGNING_PROPERTIES does not point to a file")
+    }
+    signingFile.withInputStream { signingProperties.load(it) }
+    ["storeFile", "storePassword", "keyAlias", "keyPassword"].each { key ->
+        if (!signingProperties.getProperty(key)) {
+            throw new GradleException("Missing ${key} in AMREYE_SIGNING_PROPERTIES")
+        }
+    }
+}
+
 android {
     namespace "ai.amreye.app"
     compileSdk 35
@@ -11,14 +28,28 @@ android {
         applicationId "ai.amreye.app"
         minSdk 26
         targetSdk 35
-        versionCode 13
-        versionName "1.5.6"
+        versionCode 14
+        versionName "1.5.7"
+    }
+
+    signingConfigs {
+        release {
+            if (!signingProperties.isEmpty()) {
+                storeFile file(signingProperties.getProperty("storeFile"))
+                storePassword signingProperties.getProperty("storePassword")
+                keyAlias signingProperties.getProperty("keyAlias")
+                keyPassword signingProperties.getProperty("keyPassword")
+            }
+        }
     }
 
     buildTypes {
         release {
             minifyEnabled false
             shrinkResources false
+            if (!signingProperties.isEmpty()) {
+                signingConfig signingConfigs.release
+            }
         }
     }
 }

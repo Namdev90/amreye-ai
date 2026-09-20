@@ -1,6 +1,6 @@
 # Rights and attribution
 
-No project-wide reuse license has been selected by the owner. This repository's public status should not be described as an MIT, Apache, GPL, or other open-source release. Selecting a license requires an owner decision; this document does not grant a new license.
+The repository's original software is licensed under the [MIT License](../LICENSE). The license applies to source code authored for AMReye.AI. It does not grant rights to the AMReye.AI name or marks, brand assets, supplied research documents, third-party software, papers, logos, illustrations, standards, or other material carrying its own notice.
 
 GitHub explains the distinction between a public repository and a licensed project in its [licensing guide](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/licensing-a-repository).
 

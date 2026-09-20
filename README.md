@@ -80,6 +80,6 @@ The `v1.5.5` Git tag identifies the original web release commit. Android source 
 
 Use [issues](https://github.com/Namdev90/amreye-ai/issues) for reproducible bugs and focused proposals. Pull requests should explain the change and include relevant verification. Scientific or product claims need traceable evidence and an explicit maturity label.
 
-A project-wide reuse license has not yet been selected. Public visibility is not an open-source license. Existing third-party notices remain applicable; see [rights and attribution](docs/rights-and-attribution.md).
+Original software in this repository is available under the [MIT License](LICENSE). Brand assets, research documents, third-party material and other excluded content retain their stated rights; see [rights and attribution](docs/rights-and-attribution.md).
 
 Maintained under [Namdev90](https://github.com/Namdev90). Project responsibilities and technical context are documented in the project overview.

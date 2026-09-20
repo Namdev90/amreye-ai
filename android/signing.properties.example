@@ -1,0 +1,6 @@
+# Copy outside the repository, fill with your private key details, then set
+# AMREYE_SIGNING_PROPERTIES to this file before building :app:assembleRelease.
+storeFile=C:/absolute/path/to/amreye-release.keystore
+storePassword=replace-with-secret
+keyAlias=amreye-release
+keyPassword=replace-with-secret

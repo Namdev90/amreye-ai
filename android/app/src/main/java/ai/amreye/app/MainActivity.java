@@ -134,7 +134,7 @@ public final class MainActivity extends Activity {
 
         // Mobile responsive user-agent with AMReye app identifier
         String defaultUa = WebSettings.getDefaultUserAgent(this);
-        settings.setUserAgentString(defaultUa + " AMReyeMobileApp/1.5.6");
+        settings.setUserAgentString(defaultUa + " AMReyeMobileApp/1.5.7");
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
             settings.setOffscreenPreRaster(true);
         }

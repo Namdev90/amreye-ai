@@ -14,13 +14,13 @@ From the repository root on Windows:
 .\android\gradlew.bat -p android :app:assembleDebug
 ```
 
-On Linux or macOS, use `./android/gradlew -p android :app:assembleDebug`. The installable development APK is `android/app/build/outputs/apk/debug/app-debug.apk`. The current Android version is 1.5.6, version code 13. Debug builds are previews: they are debuggable and use an Android debug certificate. The published v1.5.5 APK was verified as a debug build, not a production-signed release.
+On Linux or macOS, use `./android/gradlew -p android :app:assembleDebug`. The installable development APK is `android/app/build/outputs/apk/debug/app-debug.apk`. The current Android version is 1.5.7, version code 14. Debug builds are previews: they are debuggable and use an Android debug certificate. The published v1.5.5 APK was verified as a debug build, not a production-signed release.
 
 ```text
 .\android\gradlew.bat -p android :app:assembleRelease
 ```
 
-The release task produces an unsigned APK because release signing is not configured. A production release requires an owner-controlled signing key, a secure signing process and a version code greater than the previously distributed version. A different signing certificate cannot update an existing installation in place. Never commit signing keys or passwords.
+Production signing is configured through an external properties file. Copy [`signing.properties.example`](signing.properties.example) to a private location, set `AMREYE_SIGNING_PROPERTIES` to its absolute path, then run the release task. The signing key and passwords must never be committed. The current release candidate is version 1.5.7, version code 14. A different signing certificate cannot update an existing debug-signed installation in place.
 
 ## Offline behavior
 

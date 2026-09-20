@@ -2,7 +2,7 @@
   "name": "AMReye.AI",
   "short_name": "AMReye.AI",
   "description": "AI-assisted antimicrobial susceptibility testing and modular bio-automation prototype.",
-  "version": "1.5.6",
+  "version": "1.5.7",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0b0c0e",
