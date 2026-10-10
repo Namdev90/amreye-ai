@@ -1,2 +1,0 @@
-const paths=new Set(['hardware/apex-concept.webp','hardware/apex-exploded.webp','reference/isometric.jpeg','reference/wireframe.jpeg','reference/orthographic.jpeg']);
-export async function GET(request:Request){const name=new URL(request.url).searchParams.get('name');if(!name||!paths.has(name))return new Response('Not found',{status:404});return Response.redirect(new URL('/'+name,request.url),308)}

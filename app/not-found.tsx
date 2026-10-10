@@ -1,2 +1,0 @@
-import {ArrowRight,Home,Search} from 'lucide-react';
-export default function NotFound(){return <main className="amr-not-found"><a className="amr-error-brand" href="/">AMReye.<span>AI</span></a><div className="amr-error-code" aria-hidden="true">4<span>0</span>4</div><h1>This page isn’t here.</h1><p>The link may have changed. Return home or search the 150 project topics.</p><div className="amr-error-actions"><a className="solid-link" href="/"><Home size={18}/>Return home<ArrowRight size={18}/></a><a href="/library"><Search size={18}/>Search the library</a></div></main>}

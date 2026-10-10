@@ -1,0 +1,98 @@
+name: OpenAI Device Manager verification
+on:
+  push:
+    branches: [openai-device-manager]
+  create:
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: openai-device-manager-verification
+  cancel-in-progress: true
+jobs:
+  verify:
+    if: github.ref == 'refs/heads/openai-device-manager'
+    runs-on: windows-latest
+    timeout-minutes: 12
+    steps:
+      - name: Retrieve immutable source
+        id: source
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $root = Join-Path $env:RUNNER_TEMP 'ODM'
+          $src = Join-Path $root 'src'
+          New-Item -ItemType Directory $src -Force | Out-Null
+          $api = "https://api.github.com/repos/$env:GITHUB_REPOSITORY"
+          $h = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'User-Agent' = 'ODM-verification' }
+          $initial = Invoke-RestMethod "$api/git/commits/$env:GITHUB_SHA" -Headers $h
+          $tree = Invoke-RestMethod "$api/git/trees/$($initial.tree.sha)?recursive=1" -Headers $h
+          $bootstrap = @($tree.tree | Where-Object path -eq '.bootstrap/part1.bin').Count -eq 1
+          if ($bootstrap) {
+            $zip = Join-Path $root 'source.zip'
+            $stream = [IO.File]::Create($zip)
+            try {
+              foreach ($name in @('part1','part2','part3','part4a','part4b','part5')) {
+                $entry = @($tree.tree | Where-Object path -eq ".bootstrap/$name.bin")
+                if ($entry.Count -ne 1) { throw "Missing source segment: $name" }
+                $blob = Invoke-RestMethod "$api/git/blobs/$($entry[0].sha)" -Headers $h
+                $bytes = [Convert]::FromBase64String($blob.content)
+                $stream.Write($bytes,0,$bytes.Length)
+              }
+            } finally { $stream.Dispose() }
+            if ((Get-FileHash $zip -Algorithm SHA256).Hash -ne '65588e10bf6cbb4ba5960c1da705cf887c6726d401abe4fe0906a87a520c065a') { throw 'Source archive integrity failure' }
+            Expand-Archive $zip $src -Force
+            'bootstrap=true' | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+          } else {
+            foreach ($name in @('Manager.ps1','Install.ps1','tests.ps1')) {
+              Invoke-WebRequest "https://raw.githubusercontent.com/$env:GITHUB_REPOSITORY/$env:GITHUB_SHA/$name" -OutFile (Join-Path $src $name)
+            }
+            'bootstrap=false' | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
+          }
+      - name: Windows PowerShell 5.1 regression tests
+        shell: powershell
+        run: |
+          $PSVersionTable
+          & "$env:RUNNER_TEMP\ODM\src\tests.ps1"
+      - name: PowerShell 7 regression tests
+        shell: pwsh
+        run: |
+          $PSVersionTable
+          & "$env:RUNNER_TEMP\ODM\src\tests.ps1"
+      - name: WinForms construction smoke test
+        shell: powershell
+        run: |
+          & "$env:RUNNER_TEMP\ODM\src\Manager.ps1" -GuiSmoke -DataRoot "$env:RUNNER_TEMP\ODM-GUI"
+          if (!(Test-Path "$env:RUNNER_TEMP\ODM-GUI\GUI-preview.png")) { throw 'GUI snapshot missing' }
+          Write-Output 'PASS: GUI constructed and rendered; no installation or model usage.'
+      - name: Publish verified readable source on isolated branch
+        if: steps.source.outputs.bootstrap == 'true'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $api = "https://api.github.com/repos/$env:GITHUB_REPOSITORY"
+          $h = @{ Authorization = "Bearer $env:GH_TOKEN"; Accept = 'application/vnd.github+json'; 'User-Agent' = 'ODM-verification' }
+          $ref = Invoke-RestMethod "$api/git/ref/heads/openai-device-manager" -Headers $h
+          if ($ref.object.sha -ne $env:GITHUB_SHA) { throw 'Branch advanced during verification; refusing to overwrite' }
+          $commit = Invoke-RestMethod "$api/git/commits/$env:GITHUB_SHA" -Headers $h
+          $entries = [Collections.Generic.List[object]]::new()
+          Get-ChildItem "$env:RUNNER_TEMP\ODM\src" -File | ForEach-Object {
+            $entries.Add(@{path=$_.Name; mode='100644'; type='blob'; content=[IO.File]::ReadAllText($_.FullName)})
+          }
+          foreach ($name in @('part1','part2','part3','part4a','part4b','part5')) {
+            $entries.Add(@{path=".bootstrap/$name.bin"; mode='100644'; type='blob'; sha=$null})
+          }
+          $image = [Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:RUNNER_TEMP\ODM-GUI\GUI-preview.png"))
+          $b = Invoke-RestMethod "$api/git/blobs" -Method Post -Headers $h -ContentType 'application/json' -Body (@{content=$image;encoding='base64'} | ConvertTo-Json)
+          $entries.Add(@{path='docs/GUI-preview.png'; mode='100644'; type='blob'; sha=$b.sha})
+          $body = @{base_tree=$commit.tree.sha;tree=$entries.ToArray()} | ConvertTo-Json -Depth 8
+          $t = Invoke-RestMethod "$api/git/trees" -Method Post -Headers $h -ContentType 'application/json' -Body $body
+          $body = @{message='Publish verified OpenAI Device Manager source';tree=$t.sha;parents=@($env:GITHUB_SHA)} | ConvertTo-Json
+          $c = Invoke-RestMethod "$api/git/commits" -Method Post -Headers $h -ContentType 'application/json' -Body $body
+          $body = @{sha=$c.sha;force=$false} | ConvertTo-Json
+          Invoke-RestMethod "$api/git/refs/heads/openai-device-manager" -Method Patch -Headers $h -ContentType 'application/json' -Body $body | Out-Null
+          Write-Output "Verified source published: $($c.sha)"

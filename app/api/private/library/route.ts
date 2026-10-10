@@ -1,1 +1,0 @@
-export async function GET(){return new Response('This raw document endpoint has been retired. Browse /library for public topic summaries.',{status:410,headers:{'Cache-Control':'no-store','X-Robots-Tag':'noindex'}})}
