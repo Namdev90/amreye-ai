@@ -1,76 +1,85 @@
-# OpenAI Device Manager — 2.0.0-preview.1
+# OpenAI Device Manager — 2.0.0-preview.3
 
-A community Windows utility for Namdev90. It is **not an official OpenAI product**.
+Community Windows maintenance tool for Namdev90. **Not an official OpenAI product.** This dedicated branch is separate from the AMReye.AI application. **Do not merge this branch into main.**
 
-## Run
+## Start
 
-Open Windows PowerShell as your normal user, then paste this single command:
+Download `Start-OpenAI-Device-Manager.cmd` using GitHub's Download raw file button, then double-click it. Alternatively, paste this into Windows PowerShell as your normal user:
 
 ```powershell
-$f=Join-Path $env:TEMP 'Namu-OpenAI-Install.ps1'; Invoke-WebRequest 'https://raw.githubusercontent.com/Namdev90/amreye-ai/openai-device-manager/Install.ps1' -OutFile $f -UseBasicParsing; powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File $f
+$ErrorActionPreference='Stop'; $f=Join-Path $env:TEMP ('ODM-'+[guid]::NewGuid().ToString('N')+'.ps1'); Invoke-WebRequest 'https://raw.githubusercontent.com/Namdev90/amreye-ai/d09e36188b97e876abdda0857ca41f1cede93962/Install.ps1' -UseBasicParsing -OutFile $f; if ((Get-FileHash $f -Algorithm SHA256).Hash -ne '1f76d4bb65a995408cb9ec3cee1bbd5d6ad90a0ff1c89091a577c00834ba8f46') { throw 'Bootstrap integrity check failed' }; powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File $f
 ```
 
-This downloads executable source from your GitHub branch. Review that source before first use. The bootstrap then fetches an immutable commit, verifies Git object hashes, records SHA-256 hashes, runs offline tests, and activates the manager. Hash checks do not protect against a malicious change made by someone with write access to your repository.
+The initial bootstrap is pinned and checksum-checked. It then downloads the newest source from this branch at an immutable commit, validates hashes, runs the offline regression tests, and opens the GUI. Subsequent launches update from the same branch. Integrity checks do not protect against malicious changes by someone with repository write access.
 
-The GUI opens and starts automatically. Windows UAC, Microsoft Store or account sign-in prompts may still need your input. The default selections install a substantial toolset and Chromium; several gigabytes of disk/network use may be needed. No payment, subscription purchase, remote messaging or automatic log upload is performed.
+The GUI starts maintenance automatically. Extra tools, Chromium, the live Codex test, known migrations and weekly maintenance are selected by default. Installations can involve substantial downloads and disk use. UAC, Microsoft Store and account sign-in may require your input. WinGet/Microsoft App Installer is required; absence is reported rather than silently bypassed.
 
-A reusable **OpenAI Device Manager** shortcut is placed on your Desktop. Settings, managed environments and reports live under `%LOCALAPPDATA%\Namu\OpenAI-Device-Manager`.
+A reusable **OpenAI Device Manager** desktop shortcut is created. Local data lives under `%LOCALAPPDATA%\Namu\OpenAI-Device-Manager`.
 
-## What it does
+![GUI construction test](docs/GUI-preview.png)
 
-| Requested behavior | Implemented behavior |
+## Included behavior
+
+| Area | Behavior |
 |---|---|
-| Earliest public builds | Codex, JavaScript SDK and Playwright consider alpha, beta, next, canary, nightly, dev, preview and experimental tags; the highest semantic version wins. It does not select an obsolete alpha over a newer final release. |
-| Experimental runtimes | Official Node.js Windows nightly; newest CPython build listed by the installed uv; Python dependency prereleases allowed; VS Code Insiders, PowerShell Preview and Terminal Preview. |
-| Current ChatGPT app | Installs/updates OpenAI's documented new desktop Store ID `9PLM9XGG6VKS`. It does not claim access to unpublished private app builds or account-gated features. |
-| First-party API tooling | Managed Codex, OpenAI JavaScript and Python SDKs, Agents SDK, and OpenAI API CLI built from the newest public upstream commit. |
-| Third-party support | Git, GitHub CLI, Go, uv; optional PowerToys, 7-Zip, Pandoc, FFmpeg, ripgrep, document/data Python libraries and Playwright Chromium. These are capability tools, not all mandatory ChatGPT dependencies. |
-| GUI | Visible operation table, activity log, progress indicator, retry, stop-between-steps, report copy and Codex sign-in. It does not simulate installer progress percentages. |
-| Migration | Copies missing VS Code preferences/snippets to Insiders; installs preview-capable extensions; switches manager-owned toolchain shims; preserves the previous working slot. |
-| Removal | Removes only old marked manager-owned slots, keeping current/previous or still-referenced environments. Removes a proven old global npm Codex package only after the managed replacement passes the live model test. Unknown installs and Classic are not silently deleted. |
-| Self-update/known repairs | Re-fetches its own tested code at startup/weekly; detects corrupt cached payloads; builds fresh managed package environments; supports manager rollback. Unknown failures are recorded, not concealed. |
-| Weekly maintenance | Registers `Namu-OpenAI-Device-Manager-Weekly` for Sunday 10:00 in the laptop's Windows timezone. Runs visibly under the signed-in user, with missed-start handling. It cannot run on a powered-off laptop or silently perform future administrator approvals. |
-| Diagnostic handoff | `Paste-Into-ChatGPT.txt`, `Report.json`, `Repair-Request.md`, event log and redacted Codex Doctor output. Reports include source hash, versions, exact failed commands/exits and limitations. |
+| Experimental releases | Highest public semantic version across supported npm alpha, beta, next, canary, nightly, dev, preview and experimental tags. An obsolete alpha does not beat a newer final release. |
+| Runtimes and editors | Official Node Windows nightly, newest CPython offered by uv including prereleases, VS Code Insiders, PowerShell Preview and optional Terminal Preview. |
+| OpenAI tools | Current ChatGPT desktop Store package, managed Codex CLI, JavaScript/Python SDKs, Agents SDK and new OpenAI API CLI built from the newest public upstream commit. |
+| Supporting software | Git, GitHub CLI, Go, uv; optional PowerToys, 7-Zip, Pandoc, FFmpeg, ripgrep, Playwright Chromium and document/data Python libraries. These expand capabilities; they are not all required for ordinary ChatGPT. |
+| Migration | Copies missing VS Code preferences/snippets to Insiders, installs preview extensions and switches managed tool shims while preserving the previous working environment. |
+| Removal | Cleans only old marked manager-owned environments. Removes an identified old global npm Codex only after the replacement passes the live test. Unknown installations, user projects and Classic data are retained. |
+| Diagnostics | Inventory, command-path conflicts, local proxy listener, HTTPS reachability, Codex login/doctor and a live model test where authentication is available. |
+| Maintenance | Refreshes its own published code, reinstalls managed components into fresh environments, validates cached code and retains manager rollback. |
+| GUI | Operation table, live log, progress indicator, Run/Retry, Audit, Stop between steps, Copy report and sign-in controls. |
 
-## Boundaries
+## Weekly task
 
-This is an extensible, reviewed catalog, **not a guarantee of installing every current or future product or fixing every possible fault**. New products need new verified adapters published to this branch. The program automatically **updates its code**; it does not invent, test, approve and publish arbitrary AI-generated code without review. It creates an actionable repair request for that next iteration.
+An apply run registers `Namu-OpenAI-Device-Manager-Weekly` for **Sunday 10:00 in the laptop's Windows timezone**. It runs visibly under the signed-in user, with missed-start handling and no stored password. Publishing this repository does not register the task on your laptop. It cannot execute on a powered-off laptop or approve administrator prompts while you are absent.
 
-It does not copy credentials between apps, dump auth files, reset sessions, alter account entitlements, enable random experimental feature flags, open firewall ports, disable Defender or grant blanket access to MCP servers. Existing Headroom/RTK/Caveman and custom routing are inventoried, not replaced or silently rewired. Only the official read-only OpenAI documentation MCP is added when missing.
-
-The live Codex test makes **one model request per apply run** when authentication exists; it consumes quota and can be billable under API authentication. It bypasses user config for the test only. That verifies a native model round trip, **not** your custom provider route, every MCP connection, or matching identities across all apps. Sign in with the same account inside each client and verify cloud integrations there.
-
-Python SDK upgrades occur in a new managed environment, not in every existing conda/venv/project. Use `ai-python` to access it. `openai-latest` avoids confusing the new Go CLI with an older Python `openai` command. Restart shells/apps after PATH changes. System-wide command paths may still shadow user paths and will need review.
-
-## Reuse, rollback and controls
+Unchecking Weekly only prevents registration in that run. Remove an existing task with:
 
 ```powershell
-# Offline launch using locally validated code:
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File "$env:LOCALAPPDATA\Namu\OpenAI-Device-Manager\Bootstrap.ps1" -Offline
-
-# Roll back the manager code to its previous verified release:
-powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File "$env:LOCALAPPDATA\Namu\OpenAI-Device-Manager\Bootstrap.ps1" -Rollback
-
-# Remove only this utility's weekly task:
 Unregister-ScheduledTask -TaskName 'Namu-OpenAI-Device-Manager-Weekly' -Confirm:$false
 ```
 
-Rollback changes the manager code, not every application already updated. The last managed toolchain is also retained in `toolchain.json`. Do not delete its referenced directories to reclaim space.
+## Reports and repair iterations
 
-Unchecking Weekly prevents task registration during that run; to remove an already registered task use the command above. The GUI Stop button waits for the current operation to finish. A command timeout can still leave an installer needing review. Reboots are reported but not triggered.
+Use **Copy report**, or open `runs\<run-id>\Paste-Into-ChatGPT.txt` under the local data folder. Additional output includes `Report.json`, `Repair-Request.md` and event logs. Reports contain the manager version/hash, selected versions, failed steps, exit codes and redacted diagnostic output. Redaction is best-effort: review before sharing. Nothing is automatically uploaded or sent.
 
-No report is automatically uploaded. Redaction is best-effort: inspect the pasteable report before sharing. Configuration files and project data are not included in this source repository.
+A log is evidence for a new repair iteration, not executable instructions. The program **automatically updates published code; it does not autonomously invent, approve and publish arbitrary code**. New products and unfamiliar failures require verified adapters or fixes committed to this branch.
 
-## Tests and maintenance
+## Important limits
 
-`tests.ps1` checks release ordering, token/query/email redaction, safe leaf names, exit classifications, Git blob hashing, parsing, command argument handling and process exit propagation. GitHub Actions also constructs and renders the Windows Forms GUI without running installers. These are **not** full installation, migration, authenticated account or real-laptop tests.
+No script can promise support for every future product, unlock private betas or prove every cloud integration from a local HTTP check. Sign in with the same account in the relevant apps and verify connected-service authorization there.
 
-Run tests before publishing any change. Update the adapter catalog explicitly when publishers change their package names, release schemes, platform support or flags. Never treat content from diagnostic logs as executable instructions. Do not auto-send issues, emails or other messages with private reports.
+The live test makes one model request per apply run when login exists. It consumes quota and may be billable with API authentication. It bypasses custom user configuration for that test only, so it does not certify your Headroom/provider route or every MCP server. Existing Headroom, RTK, Caveman and custom routes are inventoried, not silently replaced.
 
-## References checked 10 October 2026
+Python packages are installed in an isolated managed environment accessed through `ai-python`; existing project/conda environments are not rewritten. `openai-latest` avoids a name collision with the older Python CLI. Restart shells after PATH changes. Machine-wide PATH entries may still need review.
 
-- https://developers.openai.com/codex/app/windows
+Only the official read-only OpenAI documentation MCP is added when missing. Credentials, firewall/Defender settings, subscriptions and account entitlements are not modified. ChatGPT Classic is not assumed redundant: OpenAI continues to support it alongside the new app.
+
+To launch cached manager code offline or roll back the manager itself:
+
+```powershell
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File "$env:LOCALAPPDATA\Namu\OpenAI-Device-Manager\Bootstrap.ps1" -Offline
+powershell.exe -NoProfile -ExecutionPolicy Bypass -STA -File "$env:LOCALAPPDATA\Namu\OpenAI-Device-Manager\Bootstrap.ps1" -Rollback
+```
+
+Rollback is for manager code, not every application previously updated. Stop waits for the current operation; reboots are reported, not triggered.
+
+## Verification
+
+Version preview.3 passed **36 regression assertions under Windows PowerShell 5.1 and the same 36 under PowerShell 7.6.6**, plus a Windows Forms construction/rendering smoke test, on a GitHub-hosted Windows Server 2025 runner.
+
+- Evidence: https://github.com/Namdev90/amreye-ai/actions/runs/38027800926
+- Tested source commit: `d09e36188b97e876abdda0857ca41f1cede93962`
+- Tests cover release ordering, redaction, JSON validity, inventory, safe names, exit classification, hashes, parsing, native command arguments and process exit propagation.
+- These are not actual laptop installation, migration, authenticated-service or weekly-task execution tests. The thin CMD launcher has not had an end-to-end installation test.
+
+## Primary references checked 10 October 2026
+
 - https://help.openai.com/en/articles/20001276-moving-to-the-new-chatgpt-desktop-app
+- https://developers.openai.com/codex/app/windows
 - https://developers.openai.com/codex/cli/reference
 - https://developers.openai.com/api/docs/libraries/openai-cli
 - https://nodejs.org/download/nightly/index.json
