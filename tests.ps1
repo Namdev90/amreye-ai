@@ -54,4 +54,25 @@ if ($env:OS -eq 'Windows_NT') {
         Assert ($r.Output.Contains('quote and spaces OK')) 'Command arguments preserved'
     } finally { Remove-Item -LiteralPath $tmp -Recurse -Force }
 }
+$fixture=[ordered]@{url='https://example.test/?token=PRIVATE';next='preserved';nested=@('test@example.com','plain')}
+$clean=Protect-Object $fixture
+$roundtrip=($clean | ConvertTo-Json -Depth 8) | ConvertFrom-Json
+Assert ($roundtrip.next -eq 'preserved') 'Redaction preserves adjacent JSON fields'
+Assert ($roundtrip.url -notmatch 'PRIVATE') 'Nested URL secret removed before serialization'
+Assert ($roundtrip.nested.Count -eq 2) 'Redaction preserves array structure'
+if ($env:OS -eq 'Windows_NT') {
+    $tmp=Join-Path $env:TEMP ('odm-inventory-'+[guid]::NewGuid().ToString('N'))
+    New-Item -ItemType Directory $tmp | Out-Null
+    $script:RunDir=$tmp; $script:Inventory=[ordered]@{}; $script:Commands=New-Object Collections.ArrayList
+    try {
+        Get-Inventory | Out-Null
+        Assert ($script:Inventory.Contains('codexConfigExists')) 'Inventory does not overwrite the read-only HOME variable'
+        $DataRoot=$tmp; $RunId='test'; $script:IsAudit=$true
+        $script:Inventory=$fixture; $script:Results=@(); $script:Endpoints=@(); $script:Selected=@()
+        Save-Report 'TEST'
+        $report=Get-Content (Join-Path $tmp 'Report.json') -Raw | ConvertFrom-Json
+        Assert ($report.inventory.next -eq 'preserved') 'Complete report JSON round trip'
+        Assert ($report.inventory.url -notmatch 'PRIVATE') 'Complete report token redaction'
+    } finally { Remove-Item -LiteralPath $tmp -Recurse -Force }
+}
 Write-Output "PASS: $n offline tests; no installers, credentials, model calls or Windows settings touched."
