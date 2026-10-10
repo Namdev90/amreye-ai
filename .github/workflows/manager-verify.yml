@@ -44,6 +44,9 @@ jobs:
             } finally { $stream.Dispose() }
             if ((Get-FileHash $zip -Algorithm SHA256).Hash -ne '65588e10bf6cbb4ba5960c1da705cf887c6726d401abe4fe0906a87a520c065a') { throw 'Source archive integrity failure' }
             Expand-Archive $zip $src -Force
+            $patch = Join-Path $root 'repair.ps1'
+            Invoke-WebRequest "https://raw.githubusercontent.com/$env:GITHUB_REPOSITORY/$env:GITHUB_SHA/.bootstrap/repair.ps1" -OutFile $patch
+            & $patch -SourceRoot $src
             'bootstrap=true' | Out-File $env:GITHUB_OUTPUT -Append -Encoding utf8
           } else {
             foreach ($name in @('Manager.ps1','Install.ps1','tests.ps1')) {
@@ -86,6 +89,7 @@ jobs:
           foreach ($name in @('part1','part2','part3','part4a','part4b','part5')) {
             $entries.Add(@{path=".bootstrap/$name.bin"; mode='100644'; type='blob'; sha=$null})
           }
+          $entries.Add(@{path='.bootstrap/repair.ps1'; mode='100644'; type='blob'; sha=$null})
           $image = [Convert]::ToBase64String([IO.File]::ReadAllBytes("$env:RUNNER_TEMP\ODM-GUI\GUI-preview.png"))
           $b = Invoke-RestMethod "$api/git/blobs" -Method Post -Headers $h -ContentType 'application/json' -Body (@{content=$image;encoding='base64'} | ConvertTo-Json)
           $entries.Add(@{path='docs/GUI-preview.png'; mode='100644'; type='blob'; sha=$b.sha})
