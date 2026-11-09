@@ -37,7 +37,7 @@
       node.href = url.href;
       node.target = '_blank';
       node.rel = 'noopener noreferrer';
-    } catch (_) { return element('span', '', text); }
+    } catch { return element('span', '', text); }
     return node;
   };
 
@@ -267,7 +267,7 @@
           if (window.AndroidBridge && typeof window.AndroidBridge.copyToClipboard === 'function') window.AndroidBridge.copyToClipboard(shareURL.href);
           else await navigator.clipboard.writeText(shareURL.href);
           notice.textContent = 'Link copied';
-        } catch (_) { notice.textContent = 'Link: ' + shareURL.href; }
+        } catch { notice.textContent = 'Link: ' + shareURL.href; }
       }));
       if (topic.pageStart) {
         const pdf = element('a', '', 'Source pages ' + topic.pageStart + '\u2013' + (topic.pageEnd || topic.pageStart));

@@ -7,6 +7,7 @@ Requirements: Node.js 22.13 or newer, npm, and the locked dependencies.
 ```sh
 npm ci
 npm run typecheck
+npm run lint
 npm audit --audit-level=high
 npm test
 ```
@@ -44,10 +45,12 @@ For command/configuration details and common failures, see [operations and troub
 
 ## Quality-check limits
 
-`npm run lint` excludes generated Android JavaScript bundles and local build caches, but still reports existing source-level React, navigation and typing findings. It is not currently a passing CI gate. Do not interpret a green Verify workflow as a clean lint report.
+`npm run lint` excludes generated Android JavaScript bundles and local build caches, and rejects source-level lint errors in CI. This remediation reports zero errors and 22 warnings: 19 existing image-optimization warnings, one retained legacy Android function warning, and two generated declaration suppression warnings. No lint rules were weakened. A green Verify workflow does not mean zero warnings.
 
-The dependency gate rejects high and critical advisories. Moderate advisories can remain in transitive tooling; review `npm audit` rather than assuming zero vulnerabilities. Dependabot proposes weekly npm and workflow updates for review.
+The dependency gate rejects high and critical advisories. Moderate advisories can remain in transitive tooling; review `npm audit` rather than assuming zero vulnerabilities. See [remaining dependency paths](docs/dependency-review.md) for the three root advisory paths behind the current 15 affected package entries. Dependabot proposes weekly npm and workflow updates for review.
 
 The build wrapper returns failure (124) when its three-minute deadline expires, even if the child handles termination by exiting zero. It allows five seconds for graceful termination before forcing the child to stop. These are process checks, not proof of browser or device behavior.
 
 Public pages currently expose no Server Actions. `worker/page-method-policy.mjs` explicitly limits their page/RSC URLs to GET, HEAD and OPTIONS, without changing API routes or database bindings. Revisit this policy before intentionally introducing a server-side form action. Local regression success does not establish that an older saved Site deployment runs this source.
+
+The state/navigation regression tests execute URL/history decisions, menu-handler composition, timer pause/resume/completion/restart, cancelled chapter decoding, storage fallback and React server rendering. They are not a substitute for browser hydration and focus testing. Local Chromium verification in this cloud task could not start because socket creation was denied by the runtime; hydrated menu dismissal, Back/Forward, pitch controls and restored map state remain a browser-validation requirement before merge.

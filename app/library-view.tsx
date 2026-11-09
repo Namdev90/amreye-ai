@@ -1,20 +1,39 @@
 "use client";
+import SiteLink from './site-link';
 import {useEffect,useMemo,useRef,useState} from 'react';
 import {ArrowUpRight,ArrowLeft,ArrowRight,BookOpen,Search,X,Copy} from 'lucide-react';
 import {Dialog,DialogContent,DialogHeader,DialogTitle} from '@/components/ui/dialog';
+import {loadChapter} from './chapter-resource.mjs';
+import {useFilterLimit} from './use-filter-limit';
 import {searchTopics,relatedTopics} from './search-core.mjs';
 export type Topic={id:string;title:string;category:string;status:string;text:string[];tables:string[][][];related?:string[];pageStart?:number;pageEnd?:number;pages?:{page:number;title:string;text:string[];tables:string[][][]}[];sourceIds?:string[]};
 export type Library={topics:Topic[];sources:{id:string;title:string;url?:string|null}[]};
 const clean=(s:string)=>s.replace(/\*\*/g,'').replace(/—/g,', ').replace(/\s{2,}/g,' ').trim();
 const cache=new Map<string,Topic>();
 export default function LibraryView({data}:{data:Library}){
- const [query,setQuery]=useState(''),[category,setCategory]=useState('All'),[maturity,setMaturity]=useState('All'),[id,setId]=useState<string|null>(null),[notice,setNotice]=useState(''),[limit,setLimit]=useState(12),[detail,setDetail]=useState<Topic|null>(null),[loading,setLoading]=useState(false),[error,setError]=useState(''),[retry,setRetry]=useState(0),[page,setPage]=useState(0);
+ const [query,setQuery]=useState(''),[category,setCategory]=useState('All'),[maturity,setMaturity]=useState('All'),[id,setId]=useState<string|null>(null),[notice,setNotice]=useState(''),[retry,setRetry]=useState(0),[page,setPage]=useState(0);
  const body=useRef<HTMLDivElement>(null);
  useEffect(()=>{const read=()=>{const p=new URLSearchParams(location.search);setId(p.get('topic'));setQuery(p.get('q')||'');setCategory(p.get('category')||'All');setMaturity(p.get('maturity')||'All')};read();addEventListener('popstate',read);addEventListener('hashchange',read);return()=>{removeEventListener('popstate',read);removeEventListener('hashchange',read)}},[]);
  useEffect(()=>{const timer=setTimeout(()=>{const u=new URL(location.href);for(const [key,value] of [['q',query],['category',category],['maturity',maturity]]){if(value&&value!=='All')u.searchParams.set(key,value);else u.searchParams.delete(key)}history.replaceState({},'',u)},180);return()=>clearTimeout(timer)},[query,category,maturity]);
  const pick=(next:string|null)=>{setId(next);setNotice('');const u=new URL(location.href);if(next)u.searchParams.set('topic',next);else u.searchParams.delete('topic');u.pathname='/library';u.hash='';history.pushState({},'',u)};
- useEffect(()=>{setPage(0);setError('');setDetail(null);if(!id)return;const saved=cache.get(id);if(saved){setDetail(saved);setLoading(false);return}const controller=new AbortController();setLoading(true);fetch('/library/'+encodeURIComponent(id)+'.json',{signal:controller.signal}).then(r=>{if(!r.ok)throw Error('Unavailable');return r.json() as Promise<Topic>}).then(t=>{cache.set(id,t);setDetail(t)}).catch(e=>{if(e.name!=='AbortError')setError('This chapter could not be loaded. Check your connection and try again.')}).finally(()=>{if(!controller.signal.aborted)setLoading(false)});return()=>controller.abort()},[id,retry]);
- useEffect(()=>setLimit(12),[query,category,maturity]);
+ const key=JSON.stringify([id,retry]);
+ const [resource,setResource]=useState<{key:string;detail:Topic|null;error:string}|null>(null);
+ const [pageTopic,setPageTopic]=useState(id);
+ if(pageTopic!==id){setPageTopic(id);setPage(0)}
+ const cached=id?cache.get(id):null;
+ const current=resource?.key===key?resource:null;
+ const detail=current?.detail??cached??null,error=current?.error??'',loading=!!id&&!current&&!cached;
+ useEffect(()=>{
+  if(!id||cached)return;
+  const controller=new AbortController();
+  loadChapter(id,controller.signal).then(result=>{
+   if(!result||controller.signal.aborted)return;
+   if(result.detail)cache.set(id,result.detail);
+   setResource({key,...result});
+  });
+  return()=>controller.abort();
+ },[id,key,cached]);
+ const {limit,showMore}=useFilterLimit(JSON.stringify([query,category,maturity]));
  const selected=data.topics.find(t=>t.id===id);
  const filtered=useMemo(()=>{const candidates=query.trim()?searchTopics(data.topics,query).map(x=>x.topic):data.topics;return candidates.filter(t=>(category==='All'||t.category===category)&&(maturity==='All'||t.status===maturity))},[query,category,maturity,data]);
  const content=detail?.pages?.[page],paragraphs=content?.text??detail?.text??[],tables=content?.tables??detail?.tables??[];
@@ -27,9 +46,9 @@ export default function LibraryView({data}:{data:Library}){
  <div className="library-result-meta"><p role="status">{filtered.length} topics <span>/ {data.topics.length} in the library</span></p>{(query||category!=='All'||maturity!=='All')&&<button onClick={reset}>Clear filters<X size={14}/></button>}</div>
  {id&&!selected&&<aside className="offline-card"><h2>Topic not found</h2><p>This link may be out of date. Search a subject or browse the library below.</p><button onClick={()=>pick(null)}>Back to the library</button></aside>}
  <div className="topic-grid">{filtered.slice(0,limit).map(t=><button className="topic-card" key={t.id} onClick={()=>pick(t.id)}><span>{t.category}<ArrowUpRight size={16}/></span><h2>{clean(t.title)}</h2><p>{clean(t.text[0]||'Explore the evidence and connected topics.')}</p><div className="topic-card-meta"><small>{t.status}</small>{t.pageStart&&<small>pp. {t.pageStart}–{t.pageEnd}</small>}</div></button>)}</div>
- {filtered.length>limit&&<button className="secondary-action library-more" onClick={()=>setLimit(n=>n+12)}>Show more <span>{filtered.length-limit} remaining</span></button>}
+ {filtered.length>limit&&<button className="secondary-action library-more" onClick={showMore}>Show more <span>{filtered.length-limit} remaining</span></button>}
  {!filtered.length&&<div className="offline-card"><h2>No matching topics</h2><p>Try a broader subject or clear the filters.</p><button className="secondary-action" onClick={reset}>Reset search</button></div>}
- <div className="library-bottom-links"><a href="/offline.html">Offline library<ArrowUpRight size={15}/></a><a href="/#references">Concept references<ArrowUpRight size={15}/></a></div>
+ <div className="library-bottom-links"><a href="/offline.html">Offline library<ArrowUpRight size={15}/></a><SiteLink href="/#references">Concept references<ArrowUpRight size={15}/></SiteLink></div>
  <details id="sources" className="source-register"><summary>Evidence and further reading · {data.sources.length} references</summary>{data.sources.map(s=><p id={'source-'+s.id} key={s.id}>{s.url?<a target="_blank" rel="noreferrer" href={s.url}>{s.id} · {clean(s.title)}<ArrowUpRight size={14}/></a>:<span>{s.id} · {clean(s.title)} · Internal project input</span>}</p>)}</details>
  <Dialog open={!!selected} onOpenChange={open=>!open&&pick(null)}><DialogContent className="apex-dialog library-dialog" aria-describedby={undefined}><DialogHeader><span className="eyebrow">{selected?.category} · {selected?.status}</span><DialogTitle>{selected&&clean(selected.title)}</DialogTitle></DialogHeader>
  {selected&&<><div className="topic-actions"><button onClick={async()=>{try{await navigator.clipboard.writeText(location.href);setNotice('Link copied')}catch{setNotice('Copy the address from your browser')}}}><Copy size={15}/>Copy link</button>{selected.pageStart&&<a href={'/documents/amreye-compendium.pdf#page='+selected.pageStart} target="_blank" rel="noreferrer">Source pages {selected.pageStart}–{selected.pageEnd}<ArrowUpRight size={15}/></a>}<span role="status">{notice}</span></div>

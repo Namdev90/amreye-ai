@@ -1,6 +1,6 @@
 "use client";
 import {useState} from 'react';
-import {ArrowUpRight,BrainCircuit,Camera,Database,FlaskConical,Layers3,LockKeyhole,Ruler,ShieldCheck,Users} from 'lucide-react';
+import {ArrowUpRight,BrainCircuit,Camera,Database,FlaskConical,Layers3,Ruler,ShieldCheck,Users} from 'lucide-react';
 import knowledge from './public-knowledge.json';
 type Area='ast'|'imaging'|'ai'|'standards'|'hardware'|'data'|'applications'|'development';
 type Step=[string,string,string];

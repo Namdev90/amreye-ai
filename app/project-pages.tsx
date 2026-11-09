@@ -1,6 +1,6 @@
 "use client";
 import {useState,useMemo,useEffect} from "react";
-import {ArrowUpRight,ArrowRight,Mail,Search,Check,Copy,ShieldCheck} from "lucide-react";
+import {ArrowUpRight,ArrowRight,Mail,Search,Check,Copy,} from "lucide-react";
 import dossier from "./public-knowledge.json";
 import {questions,searchTopics} from "./search-core.mjs";
 
