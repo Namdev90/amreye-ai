@@ -5,6 +5,9 @@ import { preview } from 'vite';
 
 // Runtime tests need the Cloudflare-compatible preview, not a plain Node import.
 const root = fileURLToPath(new URL('..', import.meta.url));
+// The synthetic suite does not use IP/geolocation metadata. Avoid an external
+// Cloudflare metadata fetch when starting a local test preview.
+process.env.CLOUDFLARE_CF_FETCH_ENABLED ??= 'false';
 let server;
 try {
   let base = process.env.TEST_SITE_URL;

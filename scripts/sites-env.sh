@@ -19,6 +19,7 @@ export TMPDIR="${runtime_root}/tmp"
 export WRANGLER_WRITE_LOGS=false
 export WRANGLER_LOG_PATH="${runtime_root}/wrangler/logs"
 export MINIFLARE_REGISTRY_PATH="${runtime_root}/wrangler/registry"
+export CLOUDFLARE_DEV_REGISTRY_PATH="${runtime_root}/wrangler/dev-registry"
 
 # The runtime may provide a global npm cache. Keep the image's read-only Sites
 # seed separate and make this project's writable cache authoritative.

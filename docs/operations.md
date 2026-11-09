@@ -25,6 +25,8 @@ Open the address Vite prints. Anonymous public pages require neither a real data
 | `npm test` | Builds, then runs every Node test through the managed Worker-compatible preview |
 | `npm run test:runtime` | Tests an existing build; does not rebuild stale output |
 | `npm run start` | Starts the built Vinext application with a local Wrangler log path |
+| `npm run typecheck` | Checks TypeScript contracts without emitting files |
+| `npm audit --audit-level=high` | Fails for high/critical dependency advisories; lower severities still need review |
 | `npm run lint` | Runs ESLint through the Bash environment helper |
 | `npm run db:generate` | Generates optional Drizzle migrations; not needed for public-page setup |
 | `npm run install:ci` | Uses the bounded platform install helper; normal repository CI uses `npm ci` |

@@ -21,6 +21,10 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
+      - name: Check TypeScript contracts
+        run: npm run typecheck
+      - name: Check high and critical dependency advisories
+        run: npm audit --audit-level=high
       - name: Build and test with the local Worker preview
         run: npm test
 
