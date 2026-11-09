@@ -79,3 +79,29 @@ test("renders sidebar skeletons deterministically", async () => {
   assert.equal(first, second);
   assert.match(first, /--skeleton-width:70%/);
 });
+
+test("hardware preview renders its safe loading state without starting a browser scene", async () => {
+  const { default: Hardware3D } = await vite.ssrLoadModule("/app/hardware-3d.tsx");
+  const html = renderToStaticMarkup(React.createElement(Hardware3D, { active: 0, onSelect() {} }));
+  assert.match(html, /Opening the 3D assembly/);
+  assert.match(html, /SCHEMATIC · NOT PRODUCTION CAD/);
+  assert.match(html, /tabindex="-1"/);
+  assert.doesNotMatch(html, /Retry 3D/);
+});
+
+test("product concept keeps its loading and nonproduction labels during server rendering", async () => {
+  const { default: Product3D } = await vite.ssrLoadModule("/app/product-3d.tsx");
+  const html = renderToStaticMarkup(React.createElement(Product3D, { productId: "lite", name: "Reader concept", label: "Proposed hardware" }));
+  assert.match(html, /Loading 3D model/);
+  assert.match(html, /INTERACTIVE CONCEPT MODEL/);
+  assert.match(html, /Proposed hardware/);
+});
+
+test("synthetic workbench starts idle and does not imply completed measurements", async () => {
+  const { default: AnalysisWorkbench } = await vite.ssrLoadModule("/app/analysis-workbench.tsx");
+  const html = renderToStaticMarkup(React.createElement(AnalysisWorkbench));
+  assert.match(html, /Ready · run analysis to begin/);
+  assert.match(html, /Run synthetic analysis/);
+  assert.match(html, /No patient-image processing/);
+  assert.match(html, /<progress value="0" max="7"/);
+});
