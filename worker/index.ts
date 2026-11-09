@@ -1,6 +1,7 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
 import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import { pageMethodResponse } from "./page-method-policy.mjs";
 
 interface Env {
   ASSETS: Fetcher;
@@ -49,6 +50,9 @@ const worker = {
         },
       }, allowedWidths);
     }
+
+    const methodResponse = pageMethodResponse(pathname, request.method);
+    if (methodResponse) return methodResponse;
 
     const response=await handler.fetch(request, env, ctx);
     const secured=new Response(response.body,response);

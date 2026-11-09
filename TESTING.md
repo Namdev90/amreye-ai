@@ -21,6 +21,7 @@ For a built checkout, run `npm run test:runtime`. Set `TEST_SITE_URL` only when 
 - Synthetic measurement bounds, unknown identifiers, unreadable/abstained values, review invalidation, correction provenance, and JSON/CSV agreement.
 - Deterministic example maps and missing-data behavior.
 - Library routing, canonical metadata, legacy bookmarks, and retired administrative endpoints.
+- Read-only page methods: ordinary and unknown/progressive action POSTs return 405 before decoding; GET/HEAD, OPTIONS and API retirement contracts remain distinct.
 - Website build exclusion of raw chapter data and hosted document files.
 - Offline website cache refresh/removal and selected component accessibility contracts.
 - Invalid/fractional pitch links, interrupted Android pull gestures, truncating native export source contracts, and bounded build-process failure propagation.
@@ -48,3 +49,5 @@ For command/configuration details and common failures, see [operations and troub
 The dependency gate rejects high and critical advisories. Moderate advisories can remain in transitive tooling; review `npm audit` rather than assuming zero vulnerabilities. Dependabot proposes weekly npm and workflow updates for review.
 
 The build wrapper returns failure (124) when its three-minute deadline expires, even if the child handles termination by exiting zero. It allows five seconds for graceful termination before forcing the child to stop. These are process checks, not proof of browser or device behavior.
+
+Public pages currently expose no Server Actions. `worker/page-method-policy.mjs` explicitly limits their page/RSC URLs to GET, HEAD and OPTIONS, without changing API routes or database bindings. Revisit this policy before intentionally introducing a server-side form action. Local regression success does not establish that an older saved Site deployment runs this source.
