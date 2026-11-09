@@ -2,6 +2,10 @@
 
 This audit checked the supplied app, project handovers, current repository, recovered source files, documents, Git history and GitHub presentation. It distinguishes actual checks from remaining work. It does not certify clinical performance or an exhaustive archive of every past conversation.
 
+## Later source and release changes
+
+This is the historical corrective-preview audit, preserved with its original results and limits. Later on 20 September, [`6e9b0ab`](https://github.com/Namdev90/amreye-ai/commit/6e9b0ab6b7d60e3721340ab63dc66b3b84240ece) added Android v1.5.7 external signing support and the MIT license for original software; a signed v1.5.7 APK was subsequently published. The statements below about production signing and an unselected license describe the earlier audit baseline. See [current release provenance](releases.md) and [rights and attribution](rights-and-attribution.md). This note does not rerun the audit or extend its device/clinical evidence.
+
 ## Requirements and outcomes
 
 | Requirement | Outcome |

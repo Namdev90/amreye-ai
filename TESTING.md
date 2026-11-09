@@ -35,3 +35,5 @@ See [Android build instructions](android/README.md) and [release provenance](doc
 Browser checks should cover navigation, library search, topic dialogs, pitch opening/closing, focus behavior, synthetic unreadable handling, export, and narrow-screen overflow. Name tested viewport sizes and distinguish browser simulation from actual Android testing. Do not interpret build success as all-device validation.
 
 The [final audit](docs/final-audit-2026-09-20.md) records checks actually performed and remaining limits.
+
+For command/configuration details and common failures, see [operations and troubleshooting](docs/operations.md). Historical test totals in the September audit are evidence for that audit baseline, not a substitute for running checks on the exact commit under review.

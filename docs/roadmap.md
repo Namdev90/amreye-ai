@@ -4,10 +4,10 @@ This is a list of remaining development and verification work, not a schedule or
 
 ## Release engineering
 
-- Establish a production signing process and ownership of the Android release key.
+- Maintain the external Android signing process introduced for v1.5.7, including owner-controlled key custody, backup and release-artifact verification. The published signed APK does not replace device acceptance testing.
 - Test installation, upgrades, back navigation, system insets, downloads, PDF opening, connectivity loss, and the offline library on physical Android devices.
 - Keep the Android offline content and website intentionally versioned; document a reproducible content-generation process before assuming they update together.
-- Select a project reuse license and review third-party attribution.
+- Maintain the existing MIT software-license notices and review third-party/document/brand attribution separately.
 
 ## Product and research
 

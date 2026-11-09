@@ -20,7 +20,7 @@ On Linux or macOS, use `./android/gradlew -p android :app:assembleDebug`. The in
 .\android\gradlew.bat -p android :app:assembleRelease
 ```
 
-Production signing is configured through an external properties file. Copy [`signing.properties.example`](signing.properties.example) to a private location, set `AMREYE_SIGNING_PROPERTIES` to its absolute path, then run the release task. The signing key and passwords must never be committed. The current release candidate is version 1.5.7, version code 14. A different signing certificate cannot update an existing debug-signed installation in place.
+Production signing is configured through an external properties file. Copy [`signing.properties.example`](signing.properties.example) to a private location, set `AMREYE_SIGNING_PROPERTIES` to its absolute path, then run the release task. The signing key and passwords must never be committed. The published signed release is version 1.5.7, version code 14; see [artifact provenance](../docs/releases.md). Without the external signing configuration, do not assume `assembleRelease` produced a signed APK. A different signing certificate cannot update an existing debug-signed installation in place.
 
 ## Offline behavior
 
