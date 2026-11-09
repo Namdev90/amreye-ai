@@ -33,9 +33,9 @@ function ValidationComparison({comparison,profile}:{comparison:Comparison;profil
 }
 export default function AnalysisWorkbench(){
  const [state,dispatch]=useReducer(reviewReducer,undefined,initialReview);const [selected,setSelected]=useState("CIP");const [overlay,setOverlay]=useState(true);const [step,setStep]=useState(0);const [report,setReport]=useState<Report|null>(null);
- const send=(action:Parameters<typeof reviewReducer>[1])=>dispatch({...action,at:new Date().toISOString()});
+ const send=(action:Parameters<typeof reviewReducer>[1])=>{if(action.type==="run")setStep(0);dispatch({...action,at:new Date().toISOString()})};
  const running=state.status==="processing",complete=state.status==="complete",readable=complete&&state.scenario!=="unreadable";
- useEffect(()=>{if(!running)return;setStep(0);const token=state.generation;let n=0;const timer=setInterval(()=>{n++;setStep(n);if(n===7){clearInterval(timer);dispatch({type:"complete",generation:token,at:new Date().toISOString()})}},500);return()=>clearInterval(timer)},[running,state.generation]);
+ useEffect(()=>{if(!running)return;const token=state.generation;let n=0;const timer=setInterval(()=>{n++;setStep(n);if(n===7){clearInterval(timer);dispatch({type:"complete",generation:token,at:new Date().toISOString()})}},500);return()=>clearInterval(timer)},[running,state.generation]);
  const current=state.records[selected],effective=effectiveMm(current),draft=state.drafts[selected],pending=Object.keys(state.drafts).length>0;
  const cut=threshold(selected,state.profile);const comparison=compareMeasurements(state.records,state.profile);
  const confirmed=Object.values(state.records).filter(r=>r.review==='confirmed').length;

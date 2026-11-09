@@ -19,7 +19,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
   const [spinning, setSpinning] = useState(false);
   const [motion, setMotion] = useState(false);
   const settings = useRef<SceneSettings>({ active, isolated, exploded, spinning });
-  selectRef.current = onSelect;
+  useEffect(() => { selectRef.current = onSelect; }, [onSelect]);
 
   useEffect(() => {
     settings.current = { active, isolated, exploded, spinning };
@@ -40,7 +40,6 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
 
   useEffect(() => {
     let cancelled = false;
-    setReady(false); setError(false);
     const failed = () => { if (!cancelled) { scene.current?.dispose(); scene.current = null; setReady(false); setError(true); } };
     // Three.js is only requested when the user opens the 3D tab.
     import("./hardware-scene").then(({ createHardwareScene }) => {
@@ -64,7 +63,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         if (event.key === "-" || event.key === "ArrowDown") scene.current?.zoom(1);
         if (event.key === "Home") scene.current?.reset();
       }} tabIndex={ready ? 0 : -1} />
-      {!ready && <div className="three-loading" role="status">{error ? <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly illustration" /><span>3D is unavailable on this device. The assembled and exploded views still work.</span><button type="button" onClick={() => setAttempt(value => value + 1)}>Retry 3D</button></> : <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly preview while the interactive model loads" /><LoaderCircle size={26} /><span>Opening the 3D assembly…</span></>}</div>}
+      {!ready && <div className="three-loading" role="status">{error ? <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly illustration" /><span>3D is unavailable on this device. The assembled and exploded views still work.</span><button type="button" onClick={() => { setReady(false); setError(false); setAttempt(value => value + 1); }}>Retry 3D</button></> : <><img src="/hardware/apex-exploded.webp" alt="Hardware assembly preview while the interactive model loads" /><LoaderCircle size={26} /><span>Opening the 3D assembly…</span></>}</div>}
       {ready && <button className="inspect-3d" onClick={()=>setInspecting(v=>!v)}>{inspecting?"Finish 3D interaction":"Tap to inspect 3D model"}</button>}
       {ready && <div className="three-selection"><span>SELECTED PART</span><b>{names[active]}</b></div>}
       <span className="three-schematic-label">SCHEMATIC · NOT PRODUCTION CAD</span>
@@ -79,7 +78,7 @@ export default function Hardware3D({ active, onSelect }: { active: number; onSel
         <button type="button" disabled={!ready} onClick={() => scene.current?.top()} aria-label="Toggle top view" title="Toggle top view"><ArrowUp /></button>
         <button type="button" disabled={!ready} onClick={() => { scene.current?.reset(); setExploded(true); setIsolated(false); setSpinning(false); }} aria-label="Reset 3D view" title="Reset 3D view"><RotateCcw /></button>
       </div>
-      {!motion && <p className="three-motion-hint">Auto rotate follows your device's reduced-motion preference. You can still rotate the model manually.</p>}
+      {!motion && <p className="three-motion-hint">Auto rotate follows your device’s reduced-motion preference. You can still rotate the model manually.</p>}
       <p><Expand size={14} /> Drag sideways to rotate · Tap a part to select · Scroll vertically to continue</p>
     </div>
   </div>;
