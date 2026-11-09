@@ -3,7 +3,7 @@
 <img src="brand/amreye-logo-colour.png" alt="AMReye.AI" width="280">
 
 [![Verify](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml/badge.svg)](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml)
-[Website](https://amreye.in) · [Android downloads](https://github.com/Namdev90/amreye-ai/releases) · [Development history](docs/development-history.md) · [Project documents](project-docs/README.md)
+[Website](https://amreye.in) · [Android downloads](https://github.com/Namdev90/amreye-ai/releases) · [Development history](docs/development-history.md) · [Project documents](project-docs/README.md) · [Documentation index](docs/README.md)
 
 AMReye.AI explores image-assisted antimicrobial susceptibility measurement, traceable laboratory records, and microbiology research workflows. This repository brings together the website, Android app, research references, project documents, brand assets, and preserved development work.
 
@@ -14,7 +14,7 @@ AMReye.AI explores image-assisted antimicrobial susceptibility measurement, trac
 | Goal | Destination |
 | --- | --- |
 | Explore the public project | [amreye.in](https://amreye.in) |
-| Try the Android preview | [Releases and build limitations](docs/releases.md) |
+| Evaluate the Android app | [Releases and build limitations](docs/releases.md) |
 | Read the project overview and detailed references | [Document guide](project-docs/README.md) |
 | See what changed over time | [Development timeline](docs/development-history.md), [changelog](CHANGELOG.md), [commits](https://github.com/Namdev90/amreye-ai/commits/main/) |
 | Run or contribute to the code | Quick start below, [testing](TESTING.md), [contributing](CONTRIBUTING.md) |
@@ -60,6 +60,10 @@ This builds the site, starts a local Cloudflare-compatible preview on an availab
 The canonical dependency installation uses `package-lock.json` and `npm ci`. The imported pnpm files are preserved for provenance; CI does not use them. Avoid mixing package managers in the same checkout.
 
 For Android, follow [android/README.md](android/README.md). For the existing deployment integration, see [hosting notes](docs/hosting.md). The `build/` directory contains source code and must be retained.
+
+See [architecture and data boundaries](docs/architecture.md) for implemented routes, synthetic data flows and retained scaffolding. [Operations and troubleshooting](docs/operations.md) covers configuration, command behavior and release checks.
+
+Current source versions: website package **1.5.6**; Android **1.5.7**, version code **14**. The published Android release is signed; the project remains a non-clinical prototype. See [release provenance](docs/releases.md) for exact tag and artifact details.
 
 ## Architecture and evidence
 

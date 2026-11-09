@@ -4,7 +4,7 @@ AMReye.AI is a research and prototype project. Keep current behavior, proposed p
 
 ## Development
 
-1. Read the [README](README.md) and [testing guide](TESTING.md).
+1. Read the [README](README.md), [documentation index](docs/README.md), and [testing guide](TESTING.md).
 2. Create a focused branch from `main` and install with `npm ci`.
 3. Make the smallest coherent change, preserving existing source records and unrelated edits.
 4. Run the relevant checks. Before submitting a broad web change, run `npm test`.
@@ -26,4 +26,10 @@ Do not commit credentials, confidential records, signing keys, local toolchains,
 
 ## Reuse
 
-A project-wide license is awaiting an owner decision. Do not introduce a license or claim unrestricted reuse on the owner's behalf. Preserve third-party notices and attribution; see [rights and attribution](docs/rights-and-attribution.md).
+Original software is licensed under the existing [MIT License](LICENSE). Do not extend that grant to brand assets, supplied documents or third-party material with separate rights. Preserve notices and attribution; see [rights and attribution](docs/rights-and-attribution.md).
+
+## Documentation changes
+
+Check claims against the exact source, release or document edition being described. Link evidence, keep reported historical checks separate from checks rerun for the PR, and state gaps rather than reconstructing missing history. Verify relative links and command names. Documentation-only PRs must not silently change code, dependencies, signing, deployments or licensing.
+
+The `openai-device-manager` branch is an independent Windows project whose README says not to merge it into `main`. Create AMReye branches from `main` and keep that branch untouched.
