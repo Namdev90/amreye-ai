@@ -3,15 +3,16 @@ import {useEffect,useMemo,useState} from 'react';
 import {ArrowUpRight, ArrowLeft, BookOpen, Search, X, Copy} from 'lucide-react';
 import {Dialog,DialogContent,DialogHeader,DialogTitle} from '@/components/ui/dialog';
 import data from './public-knowledge.json';
+import {useFilterLimit} from './use-filter-limit';
 import {searchTopics,relatedTopics} from './search-core.mjs';
 import VisualExplainer from './visual-explainer';
 
 export default function KnowledgeLibrary(){
- const [query,setQuery]=useState(''),[area,setArea]=useState(''),[id,setId]=useState<string|null>(null),[notice,setNotice]=useState(''),[limit,setLimit]=useState(12),[ready,setReady]=useState(false);
+ const [query,setQuery]=useState(''),[area,setArea]=useState(''),[id,setId]=useState<string|null>(null),[notice,setNotice]=useState(''),[ready,setReady]=useState(false);
  useEffect(()=>{const read=()=>{const p=new URLSearchParams(location.search);setId(p.get('topic'));setQuery(p.get('q')||'');const next=p.get('area')||p.get('category')||'';setArea(data.areas.some(a=>a.id===next)?next:next==='all'?'all':'');setReady(true)};read();addEventListener('popstate',read);addEventListener('hashchange',read);return()=>{removeEventListener('popstate',read);removeEventListener('hashchange',read)}},[]);
- useEffect(()=>{if(!ready)return;const timer=setTimeout(()=>{const u=new URL(location.href);if(u.pathname!=='/library')return;query?u.searchParams.set('q',query):u.searchParams.delete('q');area?u.searchParams.set('area',area):u.searchParams.delete('area');u.searchParams.delete('category');history.replaceState({},'',u)},180);return()=>clearTimeout(timer)},[query,area,ready]);
- useEffect(()=>setLimit(12),[query,area]);
- const pick=(next:string|null)=>{if(next===id)return;setId(next);setNotice('');const u=new URL(location.href);u.pathname='/library';u.hash='';next?u.searchParams.set('topic',next):u.searchParams.delete('topic');history.pushState({},'',u)};
+ useEffect(()=>{if(!ready)return;const timer=setTimeout(()=>{const u=new URL(location.href);if(u.pathname!=='/library')return;if(query)u.searchParams.set('q',query);else u.searchParams.delete('q');if(area)u.searchParams.set('area',area);else u.searchParams.delete('area');u.searchParams.delete('category');history.replaceState({},'',u)},180);return()=>clearTimeout(timer)},[query,area,ready]);
+ const {limit,showMore}=useFilterLimit(JSON.stringify([query,area]));
+ const pick=(next:string|null)=>{if(next===id)return;setId(next);setNotice('');const u=new URL(location.href);u.pathname='/library';u.hash='';if(next)u.searchParams.set('topic',next);else u.searchParams.delete('topic');history.pushState({},'',u)};
  const filtered=useMemo(()=>{const list=query.trim()?searchTopics(data.topics,query).map(x=>x.topic):data.topics;return list.filter(t=>!area||area==='all'||t.category===area)},[query,area]);
  const topic=data.topics.find(t=>t.id===id),expanded=!!(query.trim()||area);
  const group=data.areas.find(a=>a.id===area);
@@ -25,7 +26,7 @@ export default function KnowledgeLibrary(){
   {id&&!topic&&<aside className="offline-card" role="status"><h2>Topic not found</h2><p>This bookmark may be out of date. Search a subject above.</p><button onClick={()=>pick(null)}>Close this topic</button></aside>}
   {expanded&&<div className="knowledge-topics">{filtered.slice(0,limit).map(t=><button key={t.id} onClick={()=>pick(t.id)}><span className="knowledge-stage">{t.status}</span><h3>{t.title}</h3><p>{t.text[0]}</p><span className="knowledge-read">Understand this topic<ArrowUpRight size={17}/></span></button>)}</div>}
   {expanded&&!filtered.length&&<div className="offline-card"><h3>No matching topics</h3><p>Try a shorter term, such as “AST”, “camera” or “privacy”.</p><button className="secondary-action" onClick={reset}>Reset search</button></div>}
-  {expanded&&filtered.length>limit&&<button className="secondary-action library-more" onClick={()=>setLimit(n=>n+12)}>Show more topics ({filtered.length-limit} remaining)</button>}
+  {expanded&&filtered.length>limit&&<button className="secondary-action library-more" onClick={showMore}>Show more topics ({filtered.length-limit} remaining)</button>}
   <aside className="knowledge-guide"><BookOpen aria-hidden="true"/><p>These are short introductions to project research. “Proposed” and “future research” describe work to be developed and tested. A reference explains the background; it does not validate AMReye.AI’s product.</p></aside>
   <Dialog open={!!topic} onOpenChange={open=>!open&&pick(null)}><DialogContent className="knowledge-dialog" aria-describedby="knowledge-description"><DialogHeader><span className="eyebrow">{data.areas.find(a=>a.id===topic?.category)?.title} · {topic?.status}</span><DialogTitle>{topic?.title}</DialogTitle></DialogHeader>
    {topic&&<><p id="knowledge-description" className="knowledge-meaning">{topic.text[0]}</p><div className="knowledge-reference"><h3>Project reference</h3><p>{topic.referenceLabel}</p><small>Summarised from the project’s consolidated research and technical records. Documents are not hosted on this website; published editions are available in the <a href="https://github.com/Namdev90/amreye-ai/tree/main/project-docs" target="_blank" rel="noopener noreferrer">project repository</a>.</small></div>

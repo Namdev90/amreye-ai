@@ -1,14 +1,25 @@
 "use client";
-import {useEffect,useState} from 'react';
-import {regions,organisms,antibiotics,periods,defaultMapState,restoreMapState,regionMetric} from './network-data.mjs';
+import {useEffect,useState,useSyncExternalStore} from 'react';
+import {regions,organisms,antibiotics,periods,defaultMapState,regionMetric} from './network-data.mjs';
+import {readMapSession} from './map-session.mjs';
+const subscribeHydration=()=>()=>{};
+const clientHydration=()=>true;
+const serverHydration=()=>false;
 type View='india'|'global';
 const SYNTHETIC='Synthetic demonstration, not live surveillance';
 // Schematic outlines locate selectable regions. They are not jurisdictional boundaries.
 const indiaPath='M241 38 L280 54 303 44 318 69 303 89 321 111 336 144 377 167 422 157 467 177 459 199 426 188 408 211 376 225 355 254 325 271 310 313 287 350 273 402 253 419 235 387 215 340 197 301 185 265 162 239 145 220 166 206 191 217 195 193 215 174 219 140 199 120 216 103 208 76 Z';
 const worldPaths=['M45 78 L100 51 150 59 180 88 157 122 172 157 146 183 121 169 98 135 69 119 Z','M163 210 L202 216 236 258 221 312 193 374 172 326 161 277 145 236 Z','M265 83 L300 64 344 87 350 121 325 148 284 131 Z','M280 157 L327 154 363 190 366 234 335 297 314 319 290 274 268 230 262 192 Z','M349 72 L415 51 476 63 547 92 568 139 525 173 501 209 455 188 439 236 415 242 394 200 379 164 347 144 Z','M461 290 L501 278 538 307 528 345 489 352 460 322 Z','M555 340 L568 322 574 330 565 353 Z'];
 export default function NetworkExplorer(){
- const [state,setState]=useState<{view:string;selection:Record<View,string>;organism:string;antibiotic:string;period:string}>(defaultMapState);const [restored,setRestored]=useState(false);
- useEffect(()=>{try{setState(()=>{const saved=restoreMapState(JSON.parse(sessionStorage.getItem('amr-map-v1')||'null'));return {...saved,selection:{india:saved.selection.india,global:saved.selection.global}}})}catch{}setRestored(true)},[]);
+ const hydrated=useSyncExternalStore(subscribeHydration,clientHydration,serverHydration);
+ return <NetworkMap key={String(hydrated)} restored={hydrated}/>;
+}
+function NetworkMap({restored}:{restored:boolean}){
+ const [state,setState]=useState<{view:string;selection:Record<View,string>;organism:string;antibiotic:string;period:string}>(()=>{
+  let saved:ReturnType<typeof readMapSession>=defaultMapState;
+  if(restored)try{saved=readMapSession(sessionStorage)}catch{}
+  return {...saved,selection:{india:saved.selection.india,global:saved.selection.global}};
+ });
  useEffect(()=>{if(restored)try{sessionStorage.setItem('amr-map-v1',JSON.stringify(state))}catch{}},[state,restored]);
  const view=state.view as View;const list=regions[view];const selected=state.selection[view];const current=list.find(r=>r.id===selected)!;const metric=regionMetric(selected,state);
  const choose=(id:string)=>setState(s=>({...s,selection:{...s.selection,[view]:id}}));

@@ -21,10 +21,10 @@ test('fractional, missing, nonnumeric and out-of-range slide links safely show t
   }
 });
 
-test('both pitch components use the shared resolver and their actual deck length', () => {
+test('both pitch components share URL and timer controls with their actual deck length', () => {
   for (const name of ['visual-pitch.tsx', 'discovery.tsx']) {
     const source = fs.readFileSync(new URL(`../app/${name}`, import.meta.url), 'utf8');
-    assert.match(source, /import \{resolvePitchSlideIndex\} from '\.\/pitch-navigation\.mjs'/);
-    assert.match(source, /setIndex\(resolvePitchSlideIndex\(new URLSearchParams\(location.search\).get\('slide'\),slides.length\)\)/);
+    assert.match(source, /usePitchSlide\(slides.length\)/);
+    assert.match(source, /usePitchTimer\(\)/);
   }
 });

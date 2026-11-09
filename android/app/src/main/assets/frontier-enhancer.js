@@ -772,7 +772,7 @@
       try {
         window.AndroidBridge.showPageTransition(sectionName || 'NAVIGATING');
         return;
-      } catch(e) {}
+      } catch {}
     }
 
     // 2. Web DOM overlay transition fallback
@@ -814,14 +814,14 @@
   function showLoadingIndicator() {
     if (webLoader) webLoader.classList.add('is-active');
     if (window.AndroidBridge && window.AndroidBridge.onSectionLoading) {
-      try { window.AndroidBridge.onSectionLoading(true); } catch(e) {}
+      try { window.AndroidBridge.onSectionLoading(true); } catch {}
     }
   }
 
   function hideLoadingIndicator() {
     if (webLoader) webLoader.classList.remove('is-active');
     if (window.AndroidBridge && window.AndroidBridge.onSectionLoading) {
-      try { window.AndroidBridge.onSectionLoading(false); } catch(e) {}
+      try { window.AndroidBridge.onSectionLoading(false); } catch {}
     }
   }
 
@@ -900,7 +900,7 @@
           var subject = mailUrl.searchParams.get('subject') || 'AMReye.AI Contact';
           var body = mailUrl.searchParams.get('body') || '';
           window.AndroidBridge.openEmailDraft(to, subject, body);
-        } catch(err) {
+        } catch {
           window.AndroidBridge.openEmailLink(href);
         }
       } else {
@@ -970,7 +970,7 @@
       origCloses.forEach(function(btn) {
         btn.click();
       });
-    } catch(e) {}
+    } catch {}
 
     // 2. Click any Radix SheetClose inside the menu
     try {
@@ -978,7 +978,7 @@
       sheetClosers.forEach(function(sc) {
         sc.click();
       });
-    } catch(e) {}
+    } catch {}
 
     // 3. Dispatch Escape key to dismiss Radix Sheet
     try {
@@ -994,7 +994,7 @@
       if (document.activeElement) document.activeElement.dispatchEvent(escEvt);
       document.dispatchEvent(escEvt);
       window.dispatchEvent(escEvt);
-    } catch(e) {}
+    } catch {}
 
     // 4. Click backdrop overlay to trigger dismissal
     try {
@@ -1003,7 +1003,7 @@
         overlay.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }));
         overlay.click();
       }
-    } catch(e) {}
+    } catch {}
 
     // 5. Dismiss offline drawer if present
     try {
@@ -1013,7 +1013,7 @@
         drawer.setAttribute('aria-hidden', 'true');
         document.body.style.overflow = '';
       }
-    } catch(e) {}
+    } catch {}
 
     // 6. Force state attribute closed as fallback
     try {
@@ -1028,7 +1028,7 @@
         o.setAttribute('data-state', 'closed');
         o.classList.remove('is-open');
       });
-    } catch(e) {}
+    } catch {}
 
     // 7. Force body state and restore header & dock
     document.body.classList.remove('menu-open');

@@ -227,7 +227,7 @@
             await navigator.clipboard.writeText(text);
             if (status) status.textContent = 'Draft copied. Nothing has been sent.';
           }
-        } catch (_) {
+        } catch {
           let fallback = form.querySelector('.offline-copy-fallback');
           if (!fallback) { fallback = element('textarea', 'offline-copy-fallback'); fallback.readOnly = true; fallback.rows = 8; fallback.setAttribute('aria-label', 'Email draft to copy'); form.append(fallback); }
           fallback.value = text; fallback.focus(); fallback.select();

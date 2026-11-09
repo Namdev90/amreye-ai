@@ -23,6 +23,8 @@ jobs:
         run: npm ci
       - name: Check TypeScript contracts
         run: npm run typecheck
+      - name: Check source lint errors
+        run: npm run lint
       - name: Check high and critical dependency advisories
         run: npm audit --audit-level=high
       - name: Build and test with the local Worker preview
