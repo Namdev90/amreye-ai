@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from 'react';
+import {resolvePitchSlideIndex} from './pitch-navigation.mjs';
 import {ArrowLeft,ArrowRight,Camera,Check,ChevronRight,Cloud,Database,FlaskConical,GraduationCap,Layers3,LockKeyhole,Microscope,Play,Ruler,ShieldCheck,Users,X} from 'lucide-react';
 import {demoDiscs} from './demo-rules.mjs';
 
@@ -36,7 +37,7 @@ function PitchAudience(){const [choice,setChoice]=useState(0);const choices=[['L
 
 export default function VisualPitch({onExit,onNavigate}:{onExit:()=>void;onNavigate:(id:string)=>void}){
  const [index,setIndex]=useState(0),[duration,setDuration]=useState(4),[seconds,setSeconds]=useState(0),[running,setRunning]=useState(false);
- useEffect(()=>{const n=Number(new URLSearchParams(location.search).get('slide'));if(n>=1&&n<=6)setIndex(n-1)},[]);
+ useEffect(()=>{setIndex(resolvePitchSlideIndex(new URLSearchParams(location.search).get('slide'),slides.length))},[]);
  const choose=(n:number)=>{setIndex(n);const u=new URL(location.href);u.searchParams.set('slide',String(n+1));history.replaceState({},'',u)};
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if((e.target as HTMLElement).closest('input,select,textarea,[role=button]'))return;if(e.key==='ArrowRight'){e.preventDefault();choose(Math.min(5,index+1))}if(e.key==='ArrowLeft'){e.preventDefault();choose(Math.max(0,index-1))}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key)},[index]);
  useEffect(()=>{if(!running)return;const start=Date.now()-seconds*1000;const timer=setInterval(()=>setSeconds(Math.floor((Date.now()-start)/1000)),1000);return()=>clearInterval(timer)},[running]);

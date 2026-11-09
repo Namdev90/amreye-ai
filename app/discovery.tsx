@@ -1,5 +1,6 @@
 "use client";
 import {useEffect,useState} from "react";
+import {resolvePitchSlideIndex} from './pitch-navigation.mjs';
 import {ArrowUpRight,ArrowRight,ArrowLeft,ChevronRight,Search,Menu,Play,X,BookOpen,Layers3,Microscope,Users,Compass} from "lucide-react";
 import {Sheet,SheetContent,SheetHeader,SheetTitle,SheetTrigger} from "@/components/ui/sheet";
 import {sectionHref} from './site-routes.mjs';
@@ -41,7 +42,7 @@ const slides=[
  {title:"Help shape what comes next.",copy:"We welcome laboratories for workflow discovery, colleges and researchers for evidence building, and investors and public-health partners for the path from prototype to responsible deployment.",line:"Explore the project. Start a conversation.",image:"flagship",status:"Collaboration invitation",links:[["Contact the team","about"],["Review the roadmap","roadmap"]]}
 ];
 export function GuidedPitch({onExit,onNavigate}:{onExit:()=>void;onNavigate:(hash:string)=>void}){
- const [index,setIndex]=useState(0);useEffect(()=>{const n=Number(new URLSearchParams(location.search).get('slide'));if(n>=1&&n<=slides.length)setIndex(n-1)},[]);const choose=(n:number)=>{setIndex(n);const u=new URL(location.href);u.searchParams.set('slide',String(n+1));history.replaceState({},'',u)};const [duration,setDuration]=useState(4);const [seconds,setSeconds]=useState(0);const [running,setRunning]=useState(false);
+ const [index,setIndex]=useState(0);useEffect(()=>{setIndex(resolvePitchSlideIndex(new URLSearchParams(location.search).get('slide'),slides.length))},[]);const choose=(n:number)=>{setIndex(n);const u=new URL(location.href);u.searchParams.set('slide',String(n+1));history.replaceState({},'',u)};const [duration,setDuration]=useState(4);const [seconds,setSeconds]=useState(0);const [running,setRunning]=useState(false);
  useEffect(()=>{const key=(e:KeyboardEvent)=>{if((e.target as HTMLElement).closest('input,select,textarea,[contenteditable=true]'))return;if(e.key==='Escape'){onExit();return}if(e.key==='ArrowRight'){e.preventDefault();choose(Math.min(slides.length-1,index+1))}if(e.key==='ArrowLeft'){e.preventDefault();choose(Math.max(0,index-1))}};window.addEventListener('keydown',key);return()=>window.removeEventListener('keydown',key)},[index,onExit]);
  useEffect(()=>{if(!running)return;const start=Date.now()-seconds*1000;const timer=setInterval(()=>setSeconds(Math.floor((Date.now()-start)/1000)),1000);return()=>clearInterval(timer)},[running]);
  useEffect(()=>{if(running&&seconds>=duration*60)setRunning(false)},[running,seconds,duration]);

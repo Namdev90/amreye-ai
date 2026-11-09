@@ -257,7 +257,7 @@ public final class MainActivity extends Activity {
         }
         new Thread(() -> {
             try {
-                try (OutputStream output = getContentResolver().openOutputStream(destination, "w")) {
+                try (OutputStream output = getContentResolver().openOutputStream(destination, "wt")) {
                     if (output == null) throw new java.io.IOException("Document destination unavailable");
                     output.write(report);
                     output.flush();

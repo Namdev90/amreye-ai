@@ -736,8 +736,10 @@ function reportCsv(report){
     }
 
     window.addEventListener('touchstart', (e) => {
+      isPulling = false;
       if (window.scrollY === 0) {
         startY = e.touches[0].clientY;
+        currentY = startY;
         isPulling = true;
       }
     }, { passive: true });
@@ -750,6 +752,12 @@ function reportCsv(report){
         indicator.style.top = `${Math.min(84, distance - 20)}px`;
         indicator.style.transform = `translateX(-50%) rotate(${distance * 2}deg)`;
       }
+    }, { passive: true });
+
+    window.addEventListener('touchcancel', () => {
+      isPulling = false;
+      currentY = startY;
+      indicator.style.top = '-60px';
     }, { passive: true });
 
     window.addEventListener('touchend', () => {

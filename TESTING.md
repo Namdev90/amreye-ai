@@ -6,10 +6,12 @@ Requirements: Node.js 22.13 or newer, npm, and the locked dependencies.
 
 ```sh
 npm ci
+npm run typecheck
+npm audit --audit-level=high
 npm test
 ```
 
-`npm test` builds the website, starts the built Cloudflare-compatible Vite preview on an available loopback port, runs every `tests/*.test.mjs` file, and closes the preview. A failed install, build, preview startup, or assertion must fail CI. The [Verify workflow](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml) runs the same command on Linux for pushes and pull requests.
+`npm test` builds the website, starts the built Cloudflare-compatible Vite preview on an available loopback port, runs every `tests/*.test.mjs` file, and closes the preview. A failed install, build, preview startup, or assertion must fail CI. The [Verify workflow](https://github.com/Namdev90/amreye-ai/actions/workflows/ci.yml) runs these checks on Linux for pushes and pull requests.
 
 For a built checkout, run `npm run test:runtime`. Set `TEST_SITE_URL` only when you intentionally want to test an already-running preview. That server is then your responsibility. The individual runtime test files default to port 5179; the managed runner always supplies its actual port.
 
@@ -21,6 +23,7 @@ For a built checkout, run `npm run test:runtime`. Set `TEST_SITE_URL` only when 
 - Library routing, canonical metadata, legacy bookmarks, and retired administrative endpoints.
 - Website build exclusion of raw chapter data and hosted document files.
 - Offline website cache refresh/removal and selected component accessibility contracts.
+- Invalid/fractional pitch links, interrupted Android pull gestures, truncating native export source contracts, and bounded build-process failure propagation.
 
 The website has 150 topic summaries and 107 public HTTPS references. The internal catalogue and historical Android bundle have 150 topics and 121 source records. Their scopes differ; counts should name the dataset being counted.
 
@@ -37,3 +40,11 @@ Browser checks should cover navigation, library search, topic dialogs, pitch ope
 The [final audit](docs/final-audit-2026-09-20.md) records checks actually performed and remaining limits.
 
 For command/configuration details and common failures, see [operations and troubleshooting](docs/operations.md). Historical test totals in the September audit are evidence for that audit baseline, not a substitute for running checks on the exact commit under review.
+
+## Quality-check limits
+
+`npm run lint` excludes generated Android JavaScript bundles and local build caches, but still reports existing source-level React, navigation and typing findings. It is not currently a passing CI gate. Do not interpret a green Verify workflow as a clean lint report.
+
+The dependency gate rejects high and critical advisories. Moderate advisories can remain in transitive tooling; review `npm audit` rather than assuming zero vulnerabilities. Dependabot proposes weekly npm and workflow updates for review.
+
+The build wrapper returns failure (124) when its three-minute deadline expires, even if the child handles termination by exiting zero. It allows five seconds for graceful termination before forcing the child to stop. These are process checks, not proof of browser or device behavior.
